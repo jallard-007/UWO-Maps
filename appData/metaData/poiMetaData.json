@@ -1,0 +1,137 @@
+{
+  "buildings": [
+    {
+      "buildingName": "Middlesex College",
+      "floors": [
+        {
+          "level": 2,
+          "levelName": "Ground",
+          "pois": [
+            {
+              "roomNum": "MC 17",
+              "type": "classroom",
+              "capacity": 48,
+              "information": "Seating Type: Tab Arm; Fixed\nLectern: Portable\nWriting Surface: 16-ft Sliding Chalkboard\nProjection Screen: 8-ft Motorized\nWindow Treatment: Manual Blinds\n",
+              "position": [13, 67]
+            },
+            {
+              "roomNum": "MC 19",
+              "type": "recreation",
+              "information": "Grad Club, exits 6, 7, and 8 lead to the grad club patio",
+              "position": [23, 34]
+            }
+          ]
+        },
+        {
+          "level": 3,
+          "levelName": "First",
+          "pois": [
+            {
+              "roomNum": "MC 105B",
+              "type": "classroom",
+              "capacity": 144,
+              "information": "Seating Type: Tab Arm; Fixed\nLectern: Portable\nWriting Surface: 20-ft Fixed Whiteboard\nProjection Screen(s): 8-ft Motorized (2)\nWindow Treatment: Manual Blinds\n",
+              "position": [45, 99]
+            },
+            {
+              "roomNum": "MC 110",
+              "type": "classroom",
+              "capacity": 380,
+              "information": "Seating Type: Theatre Tab Arm\nLectern: Portable\nWriting Surfaces: 24-ft Horizontal Sliding Chalkboard; 8-ft Movable Chalkboard\nProjection Screen(s): 10-ft Motorized (2)\nWindow Treatment: Manual Curtains; Manual Blinds\n",
+              "position": [110, 62]
+            }
+          ]
+        },
+        {
+          "level": 4,
+          "levelName": "Second",
+          "pois": [
+            {
+              "roomNum": "MC 220",
+              "type": "collaboration",
+              "capacity": 8,
+              "information": "Conference table, whiteboard",
+              "position": [13, 67]
+            },
+            {
+              "roomNum": "MC 230",
+              "type": "lab",
+              "capacity": 24,
+              "information": "Workstations:  Intel Core i5; 16 GB RAM; SSD  \n\nSoftware: Windows 10, Microsoft Office 2016, Adobe CS 6, Audacity, Kompozer\n\nFacilities: Network printer, Projector, Whiteboard, RFID room access\n",
+              "position": [23, 34]
+            },
+            {
+              "roomNum": "MC 235",
+              "type": "lab",
+              "capacity": 24,
+              "information": "Workstations:  Intel Core i5; 16 GB RAM; SSD     \n\nSoftware: Windows 10, Microsoft Office 2016, Audacity, Kompozer\n\nFacilities: Network printer, Projector, Whiteboard, RFID room access\n",
+              "position": [13, 67]
+            },
+            {
+              "roomNum": "MC 239",
+              "type": "collaboration",
+              "capacity": 4,
+              "information": "Conference table, whiteboard",
+              "position": [13, 67]
+            },
+            {
+              "roomNum": "MC 240",
+              "type": "lab",
+              "capacity": 27,
+              "information": "Workstations:  Intel Core i5; 8 GB RAM; HDD     \n\nSoftware: Windows 10, Microsoft Office 2016, Audacity, Kompozer\n\nFacilities: Network printer, Whiteboard, RFID room access\n",
+              "position": [13, 67]
+            },
+            {
+              "roomNum": "MC 244",
+              "type": "lab",
+              "capacity": 30,
+              "information": "Workstations: \n28 general-purpose workstations-- Intel Core i5; 16 GB RAM; SSD\n2 GPU workstations-- Intel Core i7; 16 GB RAM; SSD\nNVIDIA GeForce GTX 1060 (6 GB DDR)\n\nSoftware: Fedora 28, LibreOffice, GIMP\n\nFacilities: Network printer, Projector (A/V Instructions), Wireless connectivity, HDMI connectivity, Motorized projection screen, Whiteboard, RFID room access\n",
+              "position": [13, 67]
+            }
+          ]
+        },
+        {
+          "level": 5,
+          "levelName": "Third",
+          "pois": [
+            {
+              "roomNum": "MC 300",
+              "type": "classroom",
+              "capacity": 16,
+              "information": "Reconfigurable Tables\nMotorized projection screen\nMobile Whiteboard\nA projector may be borrowed from the CS main office if required\n",
+              "position": [13, 67]
+            },
+            {
+              "roomNum": "MC 316",
+              "type": "classroom",
+              "capacity": 30,
+              "information": "PC (Windows)\nProjector\nVGA / HDMI connectivity\nAudio speakers\nMotorized projection screen\nWhiteboards\n",
+              "position": [23, 34]
+            },
+            {
+              "roomNum": "MC 320",
+              "type": "classroom",
+              "capacity": 40,
+              "information": "PC (Windows)\nProjector\nVGA / HDMI connectivity\nAudio speakers\nMotorized projection screen\nWhiteboards\n",
+              "position": [23, 34]
+            },
+            {
+              "roomNum": "MC 325",
+              "type": "collaboration",
+              "capacity": 30,
+              "information": "3 x collaboration pods with 6 seats each\n3 x 50\" NEC TVs\nMulti-HDMI connectivity\nPower connectivity\nRFID room access\n",
+              "position": [23, 34]
+            },
+            {
+              "roomNum": "MC 342",
+              "type": "lab",
+              "capacity": 20,
+              "information": "Workstations: \n16 Windows 10 PCs-- Intel Core i5; 16 GB RAM; SSD\n2 Mac Minis-- macOS High Sierra \nIntel Core i7; 16 GB RAM; SSD\n1 IoT Station-- HDMI connectivity to monitor, USB keyboard/mouse, USB and power outlets to power devices, Network switch\n\nSoftware: Microsoft Office 2016, Audacity, Kompozer\n\nFacilities: Network printer, RFID room access\n",
+              "position": [23, 34]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
