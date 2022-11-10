@@ -7,32 +7,28 @@ public class Floor {
   int level;
   String name;
   String imagePath;
-  List<POI> pois;
+  List<POI>[] pois ;
 
+  @SuppressWarnings("unchecked")
   Floor(int level, String name) {
     this.level = level;
     this.name = name;
     this.imagePath = "";
-    this.pois = new ArrayList<>();
+    this.pois = (ArrayList<POI>[]) new ArrayList[POIType.values().length];
+    for (int i = 0 ; i < POIType.values().length; ++i) {
+      this.pois[i] = new ArrayList<POI>();
+    }
   }
 
   Floor(int level, String name, String imagePath) {
-    this.level = level;
-    this.name = name;
+    this(level, name);
     this.imagePath = imagePath;
-    this.pois = new ArrayList<>();
-  }
-
-  Floor(int level, String name, String imagePath, List<POI> POIs) {
-    this.level = level;
-    this.name = name;
-    this.imagePath = imagePath;
-    this.pois = POIs;
   }
 
   public String toString() {
     StringBuilder str = new StringBuilder(this.name);
-    for (POI poi : this.pois) {
+    for (List<POI> poiList : this.pois) {
+      for (POI poi : poiList)
       str.append("\n\t\tPOIRoomNum: ").append(poi.toString());
     }
     return str.toString();

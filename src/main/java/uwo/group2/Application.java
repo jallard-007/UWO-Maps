@@ -60,7 +60,7 @@ public class Application {
           JSONArray jsonPosition = jsonPOI.getJSONArray("position");
           Pair position = new Pair(jsonPosition.getInt(0), jsonPosition.getInt(1));
           POI javaPOI = new POI(jsonPOI.getString("roomNum"), POIType.valueOf(jsonPOI.getString("type")), position);
-          javaFloor.pois.add(javaPOI);
+          javaFloor.pois[javaPOI.type.ordinal()].add(javaPOI);
           POILocation poiLocation = new POILocation(javaBuilding, javaFloor, javaPOI);
           this.poiLocations.add(poiLocation);
         }
