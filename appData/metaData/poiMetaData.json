@@ -230,8 +230,8 @@
               "position": [23, 34]
             },
             {
-              "roomNum": "NSC 151",
-              "type": "Allyn & Betty Taylor Library",
+              "roomNum": "Allyn & Betty Taylor Library",
+              "type": "library",
               "hours": "Mon - Fri: 9:00am-8pm\nSat - Sun: 10:00am-5:00pm\n\nOperating hours extended during finals\n",
               "information": "Books, public computers, study & media rooms",
               "position": [23, 34]
