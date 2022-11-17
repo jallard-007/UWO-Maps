@@ -6,6 +6,7 @@
         {
           "level": 2,
           "levelName": "Ground",
+          "map": "/appData/maps/middlesexFloor2.png",
           "pois": [
             {
               "roomNum": "MC 17",
@@ -25,6 +26,7 @@
         {
           "level": 3,
           "levelName": "First",
+          "map": "/appData/maps/middlesexFloor3.png",
           "pois": [
             {
               "roomNum": "MC 105B",
@@ -45,6 +47,7 @@
         {
           "level": 4,
           "levelName": "Second",
+          "map": "/appData/maps/middlesexFloor4.png",
           "pois": [
             {
               "roomNum": "MC 220",
@@ -92,6 +95,7 @@
         },
         {
           "level": 5,
+          "map": "/appData/maps/middlesexFloor5.png",
           "levelName": "Third",
           "pois": [
             {
@@ -130,6 +134,273 @@
               "position": [23, 34]
             }
           ]
+        },
+        {
+          "level": 6,
+          "map": "/appData/maps/middlesexFloor6.png",
+          "levelName": "Fourth",
+          "pois": []
+        }
+      ]
+    },
+    {
+
+      "buildingName": "Natural Science",
+      "floors": [
+        {
+          "level": 1,
+          "levelName": "Ground",
+          "map": "/appData/maps/natsciFloor1.png",
+          "pois": [
+            {
+              "roomNum": "NSC 1",
+              "type": "classroom",
+              "capacity": 384,
+              "information": "Seating Type: Double Table; Fixed\nLectern: Portable\nWriting Surface: 14-ft Fixed Chalkboard\nProjection Screens: 12-ft Motorized (2)\n",
+              "position": [13, 67]
+            },
+            {
+              "roomNum": "NSC 7",
+              "type": "classroom",
+              "capacity": 158,
+              "information": "Seating Type: Double Table; Fixed\nLectern: Portable\nWriting Surface: 24-ft Fixed Whiteboard\nProjection Screen(s): 12-ft Motorized (2)\nWindow Treatment: No Windows\n",
+              "position": [23, 34]
+            }
+          ]
+        },
+        {
+          "level": 2,
+          "levelName": "First",
+          "map": "/appData/maps/natsciFloor2.png",
+          "pois": [
+            {
+              "roomNum": "NSC 106A",
+              "type": "restaurant",
+              "hours": "Mon - Fri: 8am-4pm\nSat - Sun: Closed\n",
+              "information": "Fire roasted coffee, FRESH\nONEcard, Debit, Visa, Mastercard accepted\n",
+              "position": [45, 99]
+            },
+            {
+              "roomNum": "Einsteins",
+              "type": "restaurant",
+              "hours": "Mon - Fri: 8am-4pm\nSat - Sun: Closed\n",
+              "information": "Fire roasted coffee, FRESH\nONEcard, Debit, Visa, Mastercard accepted\n",
+              "position": [45, 99]
+            },
+            {
+              "roomNum": "NSC 111",
+              "type": "restaurant",
+              "hours": "Mon - Fri: 7:30am-3pm\nSat - Sun: Closed\n",
+              "information": "For drinks, baked goods, soups.\nONEcard; Debit, Visa, Mastercard accepted\n",
+              "position": [110, 62]
+            },
+            {
+              "roomNum": "Tim Hortons",
+              "type": "restaurant",
+              "hours": "Mon - Fri: 7:30am-3pm\nSat - Sun: Closed\n",
+              "information": "For drinks, baked goods, soups.\nONEcard; Debit, Visa, Mastercard accepted\n",
+              "position": [110, 62]
+            },
+            {
+              "roomNum": "NSC 111A",
+              "type": "restaurant",
+              "hours": "Mon - Thu: 11am-5pm\nFri: 10am-3pm\nSat - Sun: Closed\n",
+              "information": "Teriyaki, Pizza Pizza, FRESH, Casa Burrito\nONEcard; Debit, Visa, Mastercard accepted\n",
+              "position": [110, 62]
+            },
+            {
+              "roomNum": "Nucleus",
+              "type": "restaurant",
+              "hours": "Mon - Thu: 11am-5pm\nFri: 10am-3pm\nSat - Sun: Closed\n",
+              "information": "Teriyaki, Pizza Pizza, FRESH, Casa Burrito\nONEcard; Debit, Visa, Mastercard accepted\n",
+              "position": [110, 62]
+            },
+            {
+              "roomNum": "NSC 145",
+              "type": "classroom",
+              "capacity": 690,
+              "information": "Seating Type: Theatre Style Tab Arms\nLectern: Portable\nWriting Surface: None\nProjection Screen(s): 18-ft Rear Projection (2)\nWindow Treatment: No Windows\n",
+              "position": [23, 34]
+            },
+            {
+              "roomNum": "NSC 151",
+              "type": "library",
+              "hours": "Mon - Fri: 9:00am-8pm\nSat - Sun: 10:00am-5:00pm\n\nOperating hours extended during finals\n",
+              "information": "Books, public computers, study & media rooms",
+              "position": [23, 34]
+            },
+            {
+              "roomNum": "NSC 151",
+              "type": "Allyn & Betty Taylor Library",
+              "hours": "Mon - Fri: 9:00am-8pm\nSat - Sun: 10:00am-5:00pm\n\nOperating hours extended during finals\n",
+              "information": "Books, public computers, study & media rooms",
+              "position": [23, 34]
+            }
+          ]
+        },
+        {
+          "level": 3,
+          "levelName": "Second",
+          "map": "/appData/maps/natsciFloor3.png",
+          "pois": []
+        }
+      ]
+    },
+    {
+      "buildingName": "Middlesex College",
+      "floors": [
+        {
+          "level": 2,
+          "levelName": "First",
+          "map": "/appData/maps/talbotFloor2.png",
+          "pois": [
+            {
+              "roomNum": "Talbot Eatery",
+              "type": "restaurant",
+              "hours": "Mon - Fri: 8 AM - 3 PM\nSat - Sun: Closed\n",
+              "information": "Fire Roasted Coffee\nFRESH\nPizza Pizza\n",
+              "position": [13,67]
+            },
+            {
+              "roomNum": "TC 130",
+              "type": "restaurant",
+              "hours": "Mon - Fri: 7:30 AM - 7:00 PM \nSat - Sun: Closed\n",
+              "information": "Dine-in restaurant",
+              "position": [23,34]
+            },
+            {
+              "roomNum": "Encore Cafe",
+              "type": "restaurant",
+              "hours": "Mon - Fri: 7:30 AM - 7:00 PM \nSat - Sun: Closed\n",
+              "information": "Dine-in restaurant",
+              "position": [23,34]
+            },
+            {
+              "roomNum": "TC 134",
+              "type": "library",
+              "hours": "Mon - Fri: 7:30 AM - 7:00 PM \nSat - Sun: Closed\n",
+              "information": "Library",
+              "position": [23,34]
+            },
+            {
+              "roomNum": "TC 141",
+              "type": "classroom",
+              "capacity": 238,
+              "information": "Seating Type:Theatre Tab Arm\nLectern: Portable\nWriting Surface: 28-ft Vertical Sliding Whiteboard\nProjection Screen(s): 10-ft Motorized (2)\nWindow Treatment: None\n",
+              "position": [23,34]
+            }
+          ]
+        },
+        {
+          "level": 3,
+          "levelName": "Second",
+          "map": "/appData/maps/talbotFloor3.png",
+          "pois": [
+            {
+              "roomNum": "TC 201",
+              "type": "classroom",
+              "capacity": 56,
+              "information": "Seating Type: Double Table; Fixed\nLectern: Portable\nWriting Surface: 20-ft (with 8-ft lined) sliding Whiteboard\nProjection Screen: 8-ft Motorized\nWindow Treatment: Manual Blinds\n",
+              "position": [45,99]
+            },
+            {
+              "roomNum": "TC 202",
+              "type": "classroom",
+              "capacity": 56,
+              "information": "Seating Type: Theatre Tab Arm\nLectern: Portable\nWriting Surfaces: 24-ft Horizontal Sliding Chalkboard; 8-ft Movable Chalkboard\nProjection Screen(s): 10-ft Motorized (2)\nWindow Treatment: Manual Curtains; Manual Blinds\n",
+              "position": [110,62]
+            },
+            {
+              "roomNum": "TC 203",
+              "type": "classroom",
+              "capacity": 84,
+              "information": "Seating Type: Double Table; Fixed\nLectern: Portable\nWriting Surface: 20-ft (with 8-ft lined) Sliding Whiteboard\nProjection Screen: 8-ft Motorized\nWindow Treatment: Manual Blinds\n",
+              "position": [110,62]
+            },
+            {
+              "roomNum": "TC 204",
+              "type": "classroom",
+              "capacity": 84,
+              "information": "Seating Type: Double Table; Fixed\nLectern: Portable\nWriting Surface: 20-ft (with 8-ft lined) Sliding Whiteboard\nProjection Screen: 8-ft Motorized\nWindow Treatment: Manual Blinds\n",
+              "position": [110,62]
+            },
+            {
+              "roomNum": "TC 205",
+              "type": "classroom",
+              "capacity": 84,
+              "information": "Seating Type: Double Table; Fixed\nLectern: Portable\nWriting Surface: 20-ft (with 8-ft lined) Sliding Whiteboards\nProjection Screen: 8-ft Motorized\nWindow Treatment: Manual Blinds\n",
+              "position": [110,62]
+            },
+            {
+              "roomNum": "TC 234",
+              "type": "library",
+              "hours": "Mon - Thurs: 9 AM - 7 PM\nFri: 9 AM - 5 PM\nSat - Sun: Closed\n",
+              "information": "Services: research help, study space, pianos (2), CD players, turntable, headphones, TVs, microfilm services, equipment loans, chargers, metronomes, recording equipment\n",
+              "position": [110,62]
+            },
+            {
+              "roomNum": "Music Library",
+              "type": "library",
+              "hours": "Mon - Thurs: 9 AM - 7 PM\nFri: 9 AM - 5 PM\nSat - Sun: Closed\n",
+              "information": "Services: research help, study space, pianos (2), CD players, turntable, headphones, TVs, microfilm services, equipment loans, chargers, metronomes, recording equipment\n",
+              "position": [110,62]
+            }
+          ]
+        },
+        {
+          "level": 4,
+          "levelName": "Third",
+          "map": "/appData/maps/talbotFloor4.png",
+          "pois": [
+            {
+              "roomNum": "TC 303",
+              "type": "classroom",
+              "capacity": 54,
+              "information": "Seating Type: Double Table; Fixed\nLectern: Portable\nWriting Surface: 12-ft fixed Chalkboards; 8-ft lined Chalkboards\nProjection Screen: 8-ft Motorized\nWindow Treatment: Manual Blinds\n",
+              "position": [13,67]
+            },
+            {
+              "roomNum": "TC 304",
+              "type": "classroom",
+              "capacity": 54,
+              "information": "Seating Type: Double Table; Fixed\nLectern: Portable\nWriting Surface: 12-ft Fixed Chalkboard; 8-ft Lined Chalkboard\nProjection Screen: 8-ft Motorized\nWindow Treatment: Manaual Blinds\n",
+              "position": [23,34]
+            },
+            {
+              "roomNum": "TC 309",
+              "type": "classroom",
+              "capacity": 82,
+              "information": "Seating Type: Double Table; Fixed\nLectern: Portable\nWriting Surface: 20-ft Sliding Whiteboard\nProjection Screen(s): 8-ft Motorized (2)\nWindow Treatment: Manual Blinds\n",
+              "position": [13,67]
+            },
+            {
+              "roomNum": "TC 341",
+              "type": "classroom",
+              "capacity": 78,
+              "information": "Seating Type: Double Table; Fixed\nLectern: Portable\nWriting Surface: 20-ft Sliding Whiteboard\nProjection Screen: 8-ft Motorized\nWindow Treatment: Manual Blinds\n",
+              "position": [13,67]
+            },
+            {
+              "roomNum": "TC 342",
+              "type": "classroom",
+              "capacity": 78,
+              "information": "Seating Type: Double Table; Fixed\nLectern: Portable\nWriting Surface: 20-ft Sliding Whiteboard\nProjection Screen: 8-ft Motorized\nWindow Treatment: Manual Blinds\n",
+              "position": [13,67]
+            },
+            {
+              "roomNum": "TC 343",
+              "type": "classroom",
+              "capacity": 78,
+              "information": "Seating Type: Double Table; Fixed\nLectern: Portable\nWriting Surface: 20-ft Sliding Whiteboard\nProjection Screen: 8-ft Motorized\nWindow Treatment: Manual Blinds\n",
+              "position": [13,67]
+            }
+          ]
+        },
+        {
+          "level": 5,
+          "levelName": "Forth",
+          "map": "/appData/maps/talbotFloor5.png",
+          "pois": []
         }
       ]
     }

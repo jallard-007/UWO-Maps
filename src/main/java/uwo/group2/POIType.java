@@ -8,6 +8,7 @@ public enum POIType {
   accessibility,
   restaurant,
   washroom,
+  library,
   custom
 }
 
