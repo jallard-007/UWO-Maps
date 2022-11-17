@@ -175,13 +175,7 @@
           "pois": [
             {
               "roomNum": "NSC 106A",
-              "type": "restaurant",
-              "hours": "Mon - Fri: 8am-4pm\nSat - Sun: Closed\n",
-              "information": "Fire roasted coffee, FRESH\nONEcard, Debit, Visa, Mastercard accepted\n",
-              "position": [45, 99]
-            },
-            {
-              "roomNum": "Einsteins",
+              "name": "Einsteins",
               "type": "restaurant",
               "hours": "Mon - Fri: 8am-4pm\nSat - Sun: Closed\n",
               "information": "Fire roasted coffee, FRESH\nONEcard, Debit, Visa, Mastercard accepted\n",
@@ -189,13 +183,7 @@
             },
             {
               "roomNum": "NSC 111",
-              "type": "restaurant",
-              "hours": "Mon - Fri: 7:30am-3pm\nSat - Sun: Closed\n",
-              "information": "For drinks, baked goods, soups.\nONEcard; Debit, Visa, Mastercard accepted\n",
-              "position": [110, 62]
-            },
-            {
-              "roomNum": "Tim Hortons",
+              "name": "Tim Hortons",
               "type": "restaurant",
               "hours": "Mon - Fri: 7:30am-3pm\nSat - Sun: Closed\n",
               "information": "For drinks, baked goods, soups.\nONEcard; Debit, Visa, Mastercard accepted\n",
@@ -203,13 +191,7 @@
             },
             {
               "roomNum": "NSC 111A",
-              "type": "restaurant",
-              "hours": "Mon - Thu: 11am-5pm\nFri: 10am-3pm\nSat - Sun: Closed\n",
-              "information": "Teriyaki, Pizza Pizza, FRESH, Casa Burrito\nONEcard; Debit, Visa, Mastercard accepted\n",
-              "position": [110, 62]
-            },
-            {
-              "roomNum": "Nucleus",
+              "name": "Nucleus",
               "type": "restaurant",
               "hours": "Mon - Thu: 11am-5pm\nFri: 10am-3pm\nSat - Sun: Closed\n",
               "information": "Teriyaki, Pizza Pizza, FRESH, Casa Burrito\nONEcard; Debit, Visa, Mastercard accepted\n",
@@ -224,13 +206,7 @@
             },
             {
               "roomNum": "NSC 151",
-              "type": "library",
-              "hours": "Mon - Fri: 9:00am-8pm\nSat - Sun: 10:00am-5:00pm\n\nOperating hours extended during finals\n",
-              "information": "Books, public computers, study & media rooms",
-              "position": [23, 34]
-            },
-            {
-              "roomNum": "Allyn & Betty Taylor Library",
+              "name": "Allyn & Betty Taylor Library",
               "type": "library",
               "hours": "Mon - Fri: 9:00am-8pm\nSat - Sun: 10:00am-5:00pm\n\nOperating hours extended during finals\n",
               "information": "Books, public computers, study & media rooms",
@@ -263,13 +239,7 @@
             },
             {
               "roomNum": "TC 130",
-              "type": "restaurant",
-              "hours": "Mon - Fri: 7:30 AM - 7:00 PM \nSat - Sun: Closed\n",
-              "information": "Dine-in restaurant",
-              "position": [23,34]
-            },
-            {
-              "roomNum": "Encore Cafe",
+              "name" : "Encored Cafe",
               "type": "restaurant",
               "hours": "Mon - Fri: 7:30 AM - 7:00 PM \nSat - Sun: Closed\n",
               "information": "Dine-in restaurant",
@@ -333,13 +303,7 @@
             },
             {
               "roomNum": "TC 234",
-              "type": "library",
-              "hours": "Mon - Thurs: 9 AM - 7 PM\nFri: 9 AM - 5 PM\nSat - Sun: Closed\n",
-              "information": "Services: research help, study space, pianos (2), CD players, turntable, headphones, TVs, microfilm services, equipment loans, chargers, metronomes, recording equipment\n",
-              "position": [110,62]
-            },
-            {
-              "roomNum": "Music Library",
+              "name" : "Music Library",
               "type": "library",
               "hours": "Mon - Thurs: 9 AM - 7 PM\nFri: 9 AM - 5 PM\nSat - Sun: Closed\n",
               "information": "Services: research help, study space, pianos (2), CD players, turntable, headphones, TVs, microfilm services, equipment loans, chargers, metronomes, recording equipment\n",
