@@ -1,4 +1,4 @@
-package uwo.group2;
+package maps;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,11 +11,19 @@ public class Application {
   ArrayList<Building> buildings;
   ArrayList<POILocation> poiLocations;
 
-  Application() {
+  public Application() {
     user = new User();
     editMode = false;
     buildings = new ArrayList<>();
     poiLocations = new ArrayList<>();
+  }
+
+  public ArrayList<POILocation> getPoiLocations() {
+    return poiLocations;
+  }
+
+  public void setPoiLocations(ArrayList<POILocation> poiLocations) {
+    this.poiLocations = poiLocations;
   }
 
   public void loadData() throws IOException {
@@ -101,13 +109,11 @@ public class Application {
     editMode = false;
   }
 
-  // this is inefficiently coping references,
-  // maybe sorting 'this.POIs' will allow for a matching subsection to be returned?
-  // not a high priority issue
   public List<POILocation> searchForPOI(String searchText) {
+    searchText = searchText.toLowerCase();
     List<POILocation> matchingPOIs = new ArrayList<>();
     for (POILocation poiLocation: this.poiLocations) {
-      if (poiLocation.poi.name.contains(searchText) || poiLocation.poi.roomNumber.contains(searchText) ) {
+      if (poiLocation.toString().toLowerCase().contains(searchText)) {
         matchingPOIs.add(poiLocation);
       }
     }

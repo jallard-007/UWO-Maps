@@ -1,4 +1,4 @@
-package uwo.group2;
+package maps;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,7 @@ public class Floor {
   int level;
   String name;
   String imagePath;
-  List<POI>[] pois ;
+  List<POI>[] pois;
 
   @SuppressWarnings("unchecked")
   Floor(int level, String name) {
@@ -15,8 +15,8 @@ public class Floor {
     this.name = name;
     this.imagePath = "";
     this.pois = (ArrayList<POI>[]) new ArrayList[POIType.values().length];
-    for (int i = 0 ; i < POIType.values().length; ++i) {
-      this.pois[i] = new ArrayList<POI>();
+    for (int i = 0; i < POIType.values().length; ++i) {
+      this.pois[i] = new ArrayList<>();
     }
   }
 
@@ -29,9 +29,8 @@ public class Floor {
     StringBuilder str = new StringBuilder(this.name);
     for (List<POI> poiList : this.pois) {
       for (POI poi : poiList)
-      str.append("\n\t\tPOIRoomNum: ").append(poi.toString());
+        str.append("\n\t\tPOIRoomNum: ").append(poi.toString());
     }
     return str.toString();
   }
-
 }

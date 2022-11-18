@@ -1,4 +1,4 @@
-package uwo.group2;
+package maps;
 
 public class POI {
   //private int ID;
@@ -7,7 +7,6 @@ public class POI {
   POIType type;
   Pair position;
 
-  // might change type of metaData to a custom 'MetaData' type
   POI(String roomNumber, POIType poiType, Pair position) {
     this.roomNumber = roomNumber;
     this.name = "";

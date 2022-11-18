@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapsJavaFX.SearchPOIController">
+   <top>
+      <TextField fx:id="searchInput" alignment="CENTER" onKeyTyped="#onSearchInputKeyPress" promptText="Search For POI:" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+   </top>
+   <center>
+      <Label fx:id="myLabel" text="Results:" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+   </center>
+   <bottom>
+      <ListView fx:id="matchingPOIList" BorderPane.alignment="CENTER" onMouseClicked="#onPOIListMouseClick" onKeyReleased="#onPOIListKeyPress"/>
+   </bottom>
+</BorderPane>

@@ -1,4 +1,4 @@
-package uwo.group2;
+package maps;
 
 public class POILocation {
   Building building;
