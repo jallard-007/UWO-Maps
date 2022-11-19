@@ -8,7 +8,7 @@
 
 <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapsJavaFX.SearchPOIController">
    <top>
-      <TextField fx:id="searchInput" alignment="CENTER" onKeyTyped="#onSearchInputKeyPress" promptText="Search For POI:" BorderPane.alignment="CENTER">
+      <TextField fx:id="searchInput" alignment="CENTER" focusTraversable="false" onKeyTyped="#onSearchInputKeyPress" promptText="Search For POI:" BorderPane.alignment="CENTER">
          <font>
             <Font size="16.0" />
          </font>
@@ -22,6 +22,6 @@
       </Label>
    </center>
    <bottom>
-      <ListView fx:id="matchingPOIList" BorderPane.alignment="CENTER" onMouseClicked="#onPOIListMouseClick" onKeyReleased="#onPOIListKeyPress"/>
+      <ListView fx:id="matchingPOIList" onKeyReleased="#onPOIListKeyPress" onMouseClicked="#onPOIListMouseClick" BorderPane.alignment="CENTER" />
    </bottom>
 </BorderPane>
