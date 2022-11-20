@@ -1,34 +1,28 @@
 package mapsJavaFX;
 
+import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
+import javafx.scene.Parent;
 import javafx.stage.Stage;
-import maps.Application;
+import javafx.scene.Group;
+import javafx.scene.Scene;
 
-import java.io.IOException;
-
-public class WesternMaps extends javafx.application.Application {
-  @Override
-  public void start(Stage stage)throws IOException {
-    FXMLLoader fxmlLoader = new FXMLLoader(WesternMaps.class.getResource("/searchPOI.fxml"));
-    Scene scene = new Scene(fxmlLoader.load());
-    SearchPOIController controller = fxmlLoader.getController();
-    Application app = new Application();
-    try {
-      app.loadData();
-    }
-    catch(IOException e) {
-      System.out.println(e.getMessage());
-      e.printStackTrace();
-      System.exit(12);
-    }
-    controller.setData(app);
-    stage.setTitle("Western Maps");
-    stage.setScene(scene);
-    stage.show();
-  }
+public class WesternMaps extends Application {
 
   public static void main(String[] args) {
-    launch();
+    launch(args);
+  }
+
+  @Override
+  public void start(Stage stage) throws Exception {
+
+    Parent root = FXMLLoader.load(getClass().getResource("/login.fxml"));
+    // Group root = new Group();
+    Scene scene = new Scene(root);
+    stage.setTitle("Western Maps");
+    stage.setResizable(false);
+
+    stage.setScene(scene);
+    stage.show();
   }
 }
