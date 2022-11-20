@@ -12,6 +12,14 @@ public class Building {
     this.floors = new ArrayList<>();
   }
 
+  public String getName() {
+    return this.name;
+  }
+
+  public List<Floor> getFloors() {
+    return floors;
+  }
+
   public String toString() {
     StringBuilder str = new StringBuilder("\nBuildingName: " + this.name);
     for (Floor floor : this.floors) {

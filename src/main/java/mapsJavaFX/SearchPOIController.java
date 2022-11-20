@@ -9,24 +9,36 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import maps.POILocation;
-import maps.Application;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SearchPOIController {
-  public Application app;
-
+  private ArrayList<POILocation> poiLocations;
   @FXML private Label myLabel;
-  @FXML private ListView <POILocation> matchingPOIList;
+  @FXML private ListView<POILocation> matchingPOIList;
   @FXML private TextField searchInput;
 
-  public void setData(Application app) {
+  private List<POILocation> searchForPOI(String searchText) {
+    searchText = searchText.toLowerCase();
+    List<POILocation> matchingPOIs = new ArrayList<>();
+    for (POILocation poiLocation : this.poiLocations) {
+      if (poiLocation.toString().toLowerCase().contains(searchText)) {
+        matchingPOIs.add(poiLocation);
+      }
+    }
+    return matchingPOIs;
+  }
+
+  public void addPOIs(ArrayList<POILocation> poiLocations) {
     matchingPOIList.setPlaceholder(new Label("No Matching POIs"));
-    this.app = app;
-    matchingPOIList.getItems().addAll(app.getPoiLocations());
+    this.poiLocations = poiLocations;
+    matchingPOIList.getItems().addAll(this.poiLocations);
   }
 
   public void onSearchInputKeyPress() {
     matchingPOIList.getItems().clear();
-    matchingPOIList.getItems().addAll(app.searchForPOI(searchInput.getText()));
+    matchingPOIList.getItems().addAll(searchForPOI(searchInput.getText()));
   }
 
   public void onPOIListMouseClick(MouseEvent mouseEvent) {
@@ -47,8 +59,7 @@ public class SearchPOIController {
     return matchingPOIList.getSelectionModel().getSelectedItem();
   }
 
-  public void navigateToPOI(POILocation poi) {
-    System.out.println("clicked on " + poi);
-    // navigate to selectedPOI;
+  public void navigateToPOI(POILocation poiLocation) {
+    ControllerMediator.getInstance().mapViewControllerGoToPOI(poiLocation);
   }
 }

@@ -33,4 +33,12 @@ public class Floor {
     }
     return str.toString();
   }
+
+  public String getName() {
+    return name;
+  }
+
+  public String getImagePath() {
+    return imagePath;
+  }
 }
