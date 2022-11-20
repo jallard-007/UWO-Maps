@@ -1,6 +1,7 @@
 package mapsJavaFX;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.ImageView;
@@ -32,13 +33,18 @@ public class MapViewController {
       for (Floor floor : building.getFloors()) {
         Tab floorTab = new Tab(floor.getName());
         Image image = new Image(new File(floor.getImagePath()).toURI().toString());
+        double imagewidth = image.getWidth();
+        double imageheight = image.getHeight();
         ImageView imageView = new ImageView(image);
 
-        // you can change these values to change the size of the image
-        imageView.setFitHeight(450);
-        imageView.setFitWidth(900);
+        // Add floor PNGs into a scrollpane so users can pan through the maps; set dimensions to half the original image size
+        imageView.setFitHeight(imageheight/2);
+        imageView.setFitWidth(imagewidth/2);
+        ScrollPane scrollpane = new ScrollPane();
+        scrollpane.setContent(imageView);
 
-        floorTab.setContent(imageView);
+        //Add scrollpane to the tab of each floor
+        floorTab.setContent(scrollpane);
         floorTab.setClosable(false);
         buildingTabPane.getTabs().add(floorTab);
       }
