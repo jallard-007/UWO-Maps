@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="650.0" prefWidth="1287.0" xmlns="http://javafx.com/javafx/19"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapsJavaFX.NavigationController">
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapsJavaFX.NavigationController" fx:id="menuBar">
     <fx:include source="menuBar.fxml"/>
     <Text layoutX="20.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Frequently Asked Questions:"
           underline="true">
