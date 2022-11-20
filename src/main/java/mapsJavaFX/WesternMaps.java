@@ -10,7 +10,7 @@ import java.io.IOException;
 public class WesternMaps extends javafx.application.Application {
   @Override
   public void start(Stage stage)throws IOException {
-    FXMLLoader fxmlLoader = new FXMLLoader(WesternMaps.class.getResource("/searchPOI.fxml"));
+    FXMLLoader fxmlLoader = new FXMLLoader(WesternMaps.class.getResource("/mapsJavaFX/searchPOI.fxml"));
     Scene scene = new Scene(fxmlLoader.load());
     SearchPOIController controller = fxmlLoader.getController();
     Application app = new Application();
