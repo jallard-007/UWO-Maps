@@ -23,4 +23,7 @@ public class POI {
   public String toString() {
     return roomNumber;
   }
+  public String getRoomNumber() {
+    return toString();
+  }
 }

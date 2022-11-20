@@ -10,9 +10,9 @@ import java.io.IOException;
 public class WesternMaps extends javafx.application.Application {
   @Override
   public void start(Stage stage)throws IOException {
-    FXMLLoader fxmlLoader = new FXMLLoader(WesternMaps.class.getResource("/searchPOI.fxml"));
+    FXMLLoader fxmlLoader = new FXMLLoader(WesternMaps.class.getResource("/main.fxml"));
     Scene scene = new Scene(fxmlLoader.load());
-    SearchPOIController controller = fxmlLoader.getController();
+    MainController controller = fxmlLoader.getController();
     Application app = new Application();
     try {
       app.loadData();
@@ -22,7 +22,9 @@ public class WesternMaps extends javafx.application.Application {
       e.printStackTrace();
       System.exit(12);
     }
-    controller.setData(app);
+    ControllerMediator.getInstance().registerMapViewController(controller.getMapViewController());
+    controller.getSearchPOIController().addPOIs(app.getPoiLocations());
+    controller.getMapViewController().addBuildings(app.getBuildings());
     stage.setTitle("Western Maps");
     stage.setScene(scene);
     stage.show();

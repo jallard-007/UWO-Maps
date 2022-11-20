@@ -4,12 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Building {
-  String name;
+  private String name;
   List<Floor> floors;
 
   Building(String name) {
     this.name = name;
     this.floors = new ArrayList<>();
+  }
+
+  public String getName() {
+    return this.name;
   }
 
   public String toString() {

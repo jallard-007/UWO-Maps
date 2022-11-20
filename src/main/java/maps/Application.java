@@ -9,7 +9,8 @@ public class Application {
   User user;
   boolean editMode;
   ArrayList<Building> buildings;
-  ArrayList<POILocation> poiLocations;
+
+  private ArrayList<POILocation> poiLocations;
 
   public Application() {
     user = new User();
@@ -118,5 +119,9 @@ public class Application {
       }
     }
     return matchingPOIs;
+  }
+
+  public ArrayList<Building> getBuildings() {
+    return this.buildings;
   }
 }
