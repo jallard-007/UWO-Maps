@@ -8,29 +8,32 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane prefHeight="330.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapsJavaFX.SignupController">
-   <children>
-      <Text layoutX="122.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign up here to create a Western Maps account!" textAlignment="CENTER" wrappingWidth="356.138671875">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Text>
-      <TextField layoutX="250.0" layoutY="128.0" prefHeight="25.0" prefWidth="173.0" promptText="e.g., mapLover10" />
-      <Text layoutX="169.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:" wrappingWidth="71.892578125">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Text>
-      <Text layoutX="172.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password:" wrappingWidth="64.892578125">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Text>
-      <PasswordField layoutX="250.0" layoutY="170.0" prefHeight="25.0" prefWidth="173.0" promptText="Pick a strong password!" />
-      <Button layoutX="250.0" layoutY="225.0" mnemonicParsing="false" onAction="#goToApplication" text="Sign Up">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Button>
-   </children>
+<AnchorPane prefHeight="330.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="mapsJavaFX.SignupController" fx:id="signUp">
+    <Text layoutX="122.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0"
+          text="Sign up here to create a Western Maps account!" textAlignment="CENTER" wrappingWidth="356.138671875">
+        <font>
+            <Font size="24.0"/>
+        </font>
+    </Text>
+    <TextField layoutX="250.0" layoutY="128.0" prefHeight="25.0" prefWidth="173.0" promptText="e.g., mapLover10"/>
+    <Text layoutX="169.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:"
+          wrappingWidth="71.892578125">
+        <font>
+            <Font size="14.0"/>
+        </font>
+    </Text>
+    <Text layoutX="172.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password:"
+          wrappingWidth="64.892578125">
+        <font>
+            <Font size="14.0"/>
+        </font>
+    </Text>
+    <PasswordField layoutX="250.0" layoutY="170.0" prefHeight="25.0" prefWidth="173.0"
+                   promptText="Pick a strong password!"/>
+    <Button layoutX="250.0" layoutY="225.0" mnemonicParsing="false" onAction="#goToApplication" text="Sign Up">
+        <font>
+            <Font size="14.0"/>
+        </font>
+    </Button>
 </AnchorPane>

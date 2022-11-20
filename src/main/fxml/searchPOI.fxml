@@ -16,13 +16,6 @@
             </font>
         </TextField>
     </top>
-    <center>
-        <Label fx:id="myLabel" text="Results:" BorderPane.alignment="CENTER">
-            <font>
-                <Font size="16.0"/>
-            </font>
-        </Label>
-    </center>
     <bottom>
         <ListView fx:id="matchingPOIList" onKeyReleased="#onPOIListKeyPress" onMouseClicked="#onPOIListMouseClick"
                   BorderPane.alignment="CENTER"/>

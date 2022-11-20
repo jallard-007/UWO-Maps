@@ -9,15 +9,17 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import maps.POILocation;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class SearchPOIController {
   private ArrayList<POILocation> poiLocations;
-  @FXML private Label myLabel;
-  @FXML private ListView<POILocation> matchingPOIList;
-  @FXML private TextField searchInput;
+  @FXML
+  private Label myLabel;
+  @FXML
+  private ListView<POILocation> matchingPOIList;
+  @FXML
+  private TextField searchInput;
 
   private List<POILocation> searchForPOI(String searchText) {
     searchText = searchText.toLowerCase();
