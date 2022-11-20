@@ -4,16 +4,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.Image;
 import maps.Building;
 import maps.Floor;
 import maps.POILocation;
-import java.io.File;
 import java.util.List;
 
-
 public class MapViewController {
-  @FXML private TabPane tabPane;
+  @FXML
+  private TabPane tabPane;
   List<Building> buildings;
 
   public void addBuildings(List<Building> buildings) {
@@ -31,8 +29,7 @@ public class MapViewController {
       // creates a new tab for each floor within the building tab
       for (Floor floor : building.getFloors()) {
         Tab floorTab = new Tab(floor.getName());
-        Image image = new Image(new File(floor.getImagePath()).toURI().toString());
-        ImageView imageView = new ImageView(image);
+        ImageView imageView = new ImageView(floor.getImage());
 
         // you can change these values to change the size of the image
         imageView.setFitHeight(450);
@@ -48,12 +45,11 @@ public class MapViewController {
   public void goToPOI(POILocation poiLocation) {
     System.out.println("go to " + poiLocation);
 
-    Tab floorTab = goToTab(
-      (TabPane) goToTab(this.tabPane, poiLocation.getBuilding().getName()).getContent(),
-      poiLocation.getFloor().getName()
-    );
+    Tab floorTab =
+        goToTab((TabPane) goToTab(this.tabPane, poiLocation.getBuilding().getName()).getContent(),
+            poiLocation.getFloor().getName());
 
-    // need to somehow highlight the POI and focus on it. 
+    // need to somehow highlight the POI and focus on it.
     // example: highlightPOI(poILocation, floorTab?)
   }
 

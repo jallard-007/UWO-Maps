@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import maps.Application;
 import java.io.IOException;
 
 public class NavigationController {
@@ -29,6 +30,11 @@ public class NavigationController {
   public void goBack(ActionEvent event) throws IOException {
     FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/mainView.fxml"));
     Scene scene = new Scene(fxmlLoader.load());
+    MainController controller = fxmlLoader.getController();
+    Application app = ControllerMediator.getInstance().getApplication();
+    ControllerMediator.getInstance().registerMapViewController(controller.getMapViewController());
+    controller.getSearchPOIController().addPOIs(app.getPoiLocations());
+    controller.getMapViewController().addBuildings(app.getBuildings());
     changeScene(scene, event);
   }
 
@@ -37,5 +43,6 @@ public class NavigationController {
     stage.setScene(scene);
     stage.show();
     stage.centerOnScreen();
+
   }
 }

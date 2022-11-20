@@ -9,8 +9,7 @@ public class Application {
   User user;
   boolean editMode;
   ArrayList<Building> buildings;
-
-  private ArrayList<POILocation> poiLocations;
+  ArrayList<POILocation> poiLocations;
 
   public Application() {
     user = new User();
@@ -58,7 +57,8 @@ public class Application {
       // add floors of current building
       for (int floorIndex = 0; floorIndex < floors.length(); ++floorIndex) {
         JSONObject jsonFloor = floors.getJSONObject(floorIndex);
-        Floor javaFloor = new Floor(jsonFloor.getInt("level"), jsonFloor.getString("levelName"), rootPath + jsonFloor.getString("map"));
+        Floor javaFloor = new Floor(jsonFloor.getInt("level"), jsonFloor.getString("levelName"),
+            rootPath + jsonFloor.getString("map"));
         javaBuilding.floors.add(javaFloor);
 
         JSONArray pois = jsonFloor.getJSONArray("pois");
@@ -67,7 +67,8 @@ public class Application {
           JSONObject jsonPOI = pois.getJSONObject(poiIndex);
           JSONArray jsonPosition = jsonPOI.getJSONArray("position");
           Pair position = new Pair(jsonPosition.getInt(0), jsonPosition.getInt(1));
-          POI javaPOI = new POI(jsonPOI.getString("roomNum"), POIType.valueOf(jsonPOI.getString("type")), position);
+          POI javaPOI = new POI(jsonPOI.getString("roomNum"),
+              POIType.valueOf(jsonPOI.getString("type")), position);
           javaFloor.pois[javaPOI.type.ordinal()].add(javaPOI);
           POILocation poiLocation = new POILocation(javaBuilding, javaFloor, javaPOI);
           this.poiLocations.add(poiLocation);

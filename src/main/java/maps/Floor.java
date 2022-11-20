@@ -1,12 +1,15 @@
 package maps;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.image.Image;
 
 public class Floor {
   int level;
   String name;
   String imagePath;
+  Image image;
   List<POI>[] pois;
 
   @SuppressWarnings("unchecked")
@@ -14,6 +17,7 @@ public class Floor {
     this.level = level;
     this.name = name;
     this.imagePath = "";
+    this.image = null;
     this.pois = (ArrayList<POI>[]) new ArrayList[POIType.values().length];
     for (int i = 0; i < POIType.values().length; ++i) {
       this.pois[i] = new ArrayList<>();
@@ -23,6 +27,7 @@ public class Floor {
   Floor(int level, String name, String imagePath) {
     this(level, name);
     this.imagePath = imagePath;
+    this.image = new Image(new File(imagePath).toURI().toString());;
   }
 
   public String toString() {
@@ -40,5 +45,9 @@ public class Floor {
 
   public String getImagePath() {
     return imagePath;
+  }
+
+  public Image getImage() {
+    return image;
   }
 }
