@@ -9,15 +9,14 @@ import java.io.IOException;
 
 public class WesternMaps extends javafx.application.Application {
   @Override
-  public void start(Stage stage)throws IOException {
+  public void start(Stage stage) throws IOException {
     FXMLLoader fxmlLoader = new FXMLLoader(WesternMaps.class.getResource("/main.fxml"));
     Scene scene = new Scene(fxmlLoader.load());
     MainController controller = fxmlLoader.getController();
     Application app = new Application();
     try {
       app.loadData();
-    }
-    catch(IOException e) {
+    } catch (IOException e) {
       System.out.println(e.getMessage());
       e.printStackTrace();
       System.exit(12);

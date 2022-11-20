@@ -3,10 +3,12 @@
 <?import javafx.scene.layout.BorderPane?>
 
 
-<BorderPane fx:controller="mapsJavaFX.MainController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
-   <left>
-       <fx:include source="searchPOI.fxml" fx:id="searchPOI"/>
-   </left>
+<BorderPane fx:controller="mapsJavaFX.MainController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+            minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19"
+            xmlns:fx="http://javafx.com/fxml/1">
+    <left>
+        <fx:include source="searchPOI.fxml" fx:id="searchPOI"/>
+    </left>
     <right>
         <fx:include source="mapView.fxml" fx:id="mapView"/>
     </right>

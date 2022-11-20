@@ -47,7 +47,6 @@ public class Application {
     fileScanner.close();
 
     JSONObject jsonObject = new JSONObject(fileContent.toString());
-
     JSONArray buildings = jsonObject.getJSONArray("buildings");
     // add buildings
     for (int buildingIndex = 0; buildingIndex < buildings.length(); ++buildingIndex) {
@@ -59,7 +58,7 @@ public class Application {
       // add floors of current building
       for (int floorIndex = 0; floorIndex < floors.length(); ++floorIndex) {
         JSONObject jsonFloor = floors.getJSONObject(floorIndex);
-        Floor javaFloor = new Floor(jsonFloor.getInt("level"), jsonFloor.getString("levelName"));
+        Floor javaFloor = new Floor(jsonFloor.getInt("level"), jsonFloor.getString("levelName"), rootPath + jsonFloor.getString("map"));
         javaBuilding.floors.add(javaFloor);
 
         JSONArray pois = jsonFloor.getJSONArray("pois");
@@ -113,7 +112,7 @@ public class Application {
   public List<POILocation> searchForPOI(String searchText) {
     searchText = searchText.toLowerCase();
     List<POILocation> matchingPOIs = new ArrayList<>();
-    for (POILocation poiLocation: this.poiLocations) {
+    for (POILocation poiLocation : this.poiLocations) {
       if (poiLocation.toString().toLowerCase().contains(searchText)) {
         matchingPOIs.add(poiLocation);
       }

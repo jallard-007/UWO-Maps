@@ -15,14 +15,14 @@ import java.util.List;
 
 public class SearchPOIController {
   private ArrayList<POILocation> poiLocations;
-
-  @FXML private ListView <POILocation> matchingPOIList;
+  @FXML private Label myLabel;
+  @FXML private ListView<POILocation> matchingPOIList;
   @FXML private TextField searchInput;
 
   private List<POILocation> searchForPOI(String searchText) {
     searchText = searchText.toLowerCase();
     List<POILocation> matchingPOIs = new ArrayList<>();
-    for (POILocation poiLocation: this.poiLocations) {
+    for (POILocation poiLocation : this.poiLocations) {
       if (poiLocation.toString().toLowerCase().contains(searchText)) {
         matchingPOIs.add(poiLocation);
       }

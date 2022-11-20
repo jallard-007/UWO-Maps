@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Building {
-  private String name;
+  String name;
   List<Floor> floors;
 
   Building(String name) {
@@ -14,6 +14,10 @@ public class Building {
 
   public String getName() {
     return this.name;
+  }
+
+  public List<Floor> getFloors() {
+    return floors;
   }
 
   public String toString() {

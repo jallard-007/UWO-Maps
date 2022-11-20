@@ -37,4 +37,8 @@ public class Floor {
   public String getName() {
     return name;
   }
+
+  public String getImagePath() {
+    return imagePath;
+  }
 }

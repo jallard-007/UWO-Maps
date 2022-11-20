@@ -9,7 +9,7 @@ public class Pair {
     this.y = y;
   }
 
-  public Pair(int [] pair){
+  public Pair(int[] pair) {
     this.x = pair[0];
     this.y = pair[1];
   }

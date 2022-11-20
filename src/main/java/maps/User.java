@@ -1,6 +1,6 @@
 package maps;
 
-public class User{
+public class User {
   int id;
   String username;
   String password;
