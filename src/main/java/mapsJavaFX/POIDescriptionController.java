@@ -1,6 +1,8 @@
 package mapsJavaFX;
 
+import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
@@ -16,37 +18,46 @@ public class POIDescriptionController {
   Integer capacity;
   String hours;
   String information;
+  String POIDescription;
   public void getPOIDescription (POILocation poiLocation) {
     type = poiLocation.getPOI().getPOIType();
     roomNum = poiLocation.getPOI().getRoomNumber();
     information = poiLocation.getPOI().getInformation();
-    System.out.println(type);
-    System.out.println(roomNum);
+    POIDescription = "Room Number: " + roomNum + "\n";
 
     if (poiLocation.getPOI().getName() != null){
       name = poiLocation.getPOI().getName();
-      System.out.println(name);
+      POIDescription += "Name: " + name + "\n";
     }
+
+    POIDescription += "Type: " + type + "\n";
+
     if (poiLocation.getPOI().getCapacity() != null){
       capacity = poiLocation.getPOI().getCapacity();
-      System.out.println(capacity);
+      POIDescription += "Room Capacity: " + capacity + "\n";
     }
     if (poiLocation.getPOI().getHoursOfOperation() != null){
       hours = poiLocation.getPOI().getHoursOfOperation();
-      System.out.println(hours);
+      POIDescription += "Hours of Operation: \n" + hours + "\n";
     }
     if (poiLocation.getPOI().getInformation() != null){
       information = poiLocation.getPOI().getInformation();
-      System.out.println(information);
+      POIDescription += "Information: \n" + information + "\n";
     }
 
 
-    FlowPane flowPane = new FlowPane();
-    Scene scene = new Scene(flowPane, 400, 500);
+    Group group = new Group();
+    Label label = new Label();
+    label.setText(POIDescription);
+    label.setWrapText(true);
+    group.getChildren().add(label);
+
+    Scene scene = new Scene(group, 595, 150);
     Stage stage = new Stage();
     stage.setScene(scene);
+    stage.setMinHeight(200);
+    stage.setMinWidth(300);
 
-    Text text = new Text();
 
     //Indicate that the stage should be a popup
     stage.initModality(Modality.APPLICATION_MODAL);

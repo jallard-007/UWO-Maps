@@ -11,7 +11,6 @@ public class POI {
 
   POI(String roomNumber, POIType poiType, Pair position) {
     this.roomNumber = roomNumber;
-    this.name = "";
     this.position = position;
     this.type = poiType;
   }
