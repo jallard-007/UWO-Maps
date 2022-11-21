@@ -62,12 +62,27 @@ public class Application {
         javaBuilding.floors.add(javaFloor);
 
         JSONArray pois = jsonFloor.getJSONArray("pois");
+
         // add POIs of current floor
         for (int poiIndex = 0; poiIndex < pois.length(); ++poiIndex) {
           JSONObject jsonPOI = pois.getJSONObject(poiIndex);
           JSONArray jsonPosition = jsonPOI.getJSONArray("position");
           Pair position = new Pair(jsonPosition.getInt(0), jsonPosition.getInt(1));
+          //TODO: make POI including HoursOfOperation, Information, Name
           POI javaPOI = new POI(jsonPOI.getString("roomNum"), POIType.valueOf(jsonPOI.getString("type")), position);
+          //Add capacity, hours of operation, information, and common name if it exists.
+          if (jsonPOI.has("name")){
+            javaPOI.setName(jsonPOI.getString("name"));
+          }
+          if (jsonPOI.has("capacity")){
+            javaPOI.setCapacity(jsonPOI.getInt("capacity"));
+          }
+          if (jsonPOI.has("hours")){
+            javaPOI.setHoursOfOperation(jsonPOI.getString("hours"));
+          }
+          if (jsonPOI.has("information")){
+            javaPOI.setInformation(jsonPOI.getString("information"));
+          }
           javaFloor.pois[javaPOI.type.ordinal()].add(javaPOI);
           POILocation poiLocation = new POILocation(javaBuilding, javaFloor, javaPOI);
           this.poiLocations.add(poiLocation);

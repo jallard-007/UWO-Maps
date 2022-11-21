@@ -1,14 +1,21 @@
 package mapsJavaFX;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.FlowPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import maps.POILocation;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +27,6 @@ public class SearchPOIController {
   private ListView<POILocation> matchingPOIList;
   @FXML
   private TextField searchInput;
-
   private List<POILocation> searchForPOI(String searchText) {
     searchText = searchText.toLowerCase();
     List<POILocation> matchingPOIs = new ArrayList<>();
@@ -43,10 +49,12 @@ public class SearchPOIController {
     matchingPOIList.getItems().addAll(searchForPOI(searchInput.getText()));
   }
 
-  public void onPOIListMouseClick(MouseEvent mouseEvent) {
+  public void onPOIListMouseClick(MouseEvent mouseEvent) throws IOException {
     if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
       if (mouseEvent.getClickCount() == 2) {
         navigateToPOI(getSelectedPOI());
+        POIDescriptionController displayPOIDescription = new POIDescriptionController();
+        displayPOIDescription.getPOIDescription(getSelectedPOI());
       }
     }
   }
