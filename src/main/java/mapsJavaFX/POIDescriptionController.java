@@ -1,8 +1,10 @@
 package mapsJavaFX;
 
+import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
@@ -38,21 +40,22 @@ public class POIDescriptionController {
     }
     if (poiLocation.getPOI().getHoursOfOperation() != null){
       hours = poiLocation.getPOI().getHoursOfOperation();
-      POIDescription += "Hours of Operation: \n" + hours + "\n";
+      POIDescription += "\nHours of Operation: \n" + hours;
     }
     if (poiLocation.getPOI().getInformation() != null){
       information = poiLocation.getPOI().getInformation();
-      POIDescription += "Information: \n" + information + "\n";
+      POIDescription += "\nInformation: \n" + information;
     }
 
 
-    Group group = new Group();
+    ScrollPane scrollPane = new ScrollPane();
     Label label = new Label();
     label.setText(POIDescription);
+    label.setPadding(new Insets(10));
     label.setWrapText(true);
-    group.getChildren().add(label);
-
-    Scene scene = new Scene(group, 595, 150);
+    scrollPane.setContent(label);
+    scrollPane.setFitToWidth(true);
+    Scene scene = new Scene(scrollPane, 200, 300);
     Stage stage = new Stage();
     stage.setScene(scene);
     stage.setMinHeight(200);
