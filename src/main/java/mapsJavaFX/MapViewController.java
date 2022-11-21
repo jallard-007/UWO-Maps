@@ -7,6 +7,7 @@ import javafx.scene.image.ImageView;
 import maps.Building;
 import maps.Floor;
 import maps.POILocation;
+
 import java.util.List;
 
 public class MapViewController {

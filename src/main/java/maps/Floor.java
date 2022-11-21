@@ -3,6 +3,7 @@ package maps;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
 import javafx.scene.image.Image;
 
 public class Floor {
@@ -27,14 +28,15 @@ public class Floor {
   Floor(int level, String name, String imagePath) {
     this(level, name);
     this.imagePath = imagePath;
-    this.image = new Image(new File(imagePath).toURI().toString());;
+    this.image = new Image(new File(imagePath).toURI().toString());
   }
 
   public String toString() {
     StringBuilder str = new StringBuilder(this.name);
     for (List<POI> poiList : this.pois) {
-      for (POI poi : poiList)
+      for (POI poi : poiList) {
         str.append("\n\t\tPOIRoomNum: ").append(poi.toString());
+      }
     }
     return str.toString();
   }

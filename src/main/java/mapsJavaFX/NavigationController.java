@@ -6,6 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import maps.Application;
+
 import java.io.IOException;
 
 public class NavigationController {

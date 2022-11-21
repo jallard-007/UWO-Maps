@@ -3,7 +3,9 @@ package mapsJavaFX;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
+
 import java.io.IOException;
+
 import maps.Application;
 
 public class WesternMaps extends javafx.application.Application {

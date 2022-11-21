@@ -6,6 +6,5 @@ public class User {
   String password;
   UserType type;
 
-  User() {
-  }
+  User() {}
 }
