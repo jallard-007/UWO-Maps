@@ -7,7 +7,7 @@ public class Floor {
   int level;
   String name;
   String imagePath;
-  List<POI>[] pois ;
+  List<POI>[] pois;
 
   @SuppressWarnings("unchecked")
   Floor(int level, String name) {
@@ -32,6 +32,12 @@ public class Floor {
       str.append("\n\t\tPOIRoomNum: ").append(poi.toString());
     }
     return str.toString();
+  }
+  public List<POI>[] getPOIS(){
+    return this.pois;
+  }
+  public void setPOIS(List<POI>[] pois){
+    this.pois = pois;
   }
 
 }
