@@ -33,6 +33,12 @@ public class Floor {
     }
     return str.toString();
   }
+  public List<POI>[] getPOIS(){
+    return this.pois;
+  }
+  public void setPOIS(List<POI>[] pois){
+    this.pois = pois;
+  }
 
   public String getName() {
     return name;

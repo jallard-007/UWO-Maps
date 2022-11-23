@@ -1,6 +1,22 @@
 {
-  "username": "Person123",
-  "password": "12345",
-  "customPOIs": {
-  }
+  "users": [
+    {
+      "password": "12345",
+      "customPOIs": [],
+      "username": "Person123",
+      "favourites": []
+    },
+    {
+      "password": "ish",
+      "userType": "base",
+      "customPOIs": [],
+      "username": "gibber"
+    },
+    {
+      "password": "ish",
+      "userType": "base",
+      "customPOIs": [],
+      "username": "gibber"
+    }
+  ]
 }
