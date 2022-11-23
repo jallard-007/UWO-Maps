@@ -5,15 +5,124 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.geometry.Insets?>
 <AnchorPane prefHeight="650.0" prefWidth="1287.0" xmlns="http://javafx.com/javafx/19"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapsJavaFX.NavigationController">
     <fx:include source="menuBar.fxml"/>
-    <Text layoutX="20.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Frequently Asked Questions:"
-          underline="true">
-        <font>
-            <Font size="24.0"/>
-        </font>
-    </Text>
+    <ScrollPane layoutY="47.0" prefHeight="536.0" prefWidth="1287.0">
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="915.0" prefWidth="1274.0">
+            <Text layoutX="17.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Guide"
+                  underline="true">
+                <font>
+                    <Font size="24.0"/>
+                </font>
+            </Text>
+            <Label alignment="TOP_LEFT" layoutX="17.0" layoutY="62.0" prefHeight="54.0" prefWidth="1247.0"
+                   text="The Western Maps app provides a clear way for the user to select and access the maps of the buildings included in the application (Middlesex College, Natural Science, Talbot College)."
+                   wrapText="true">
+                <padding>
+                    <Insets left="10.0" right="10.0"/>
+                </padding>
+                <font>
+                    <Font size="16.0"/>
+                </font>
+            </Label>
+            <Text layoutX="17.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Browsing Maps">
+                <font>
+                    <Font size="20.0"/>
+                </font>
+            </Text>
+            <Label alignment="TOP_LEFT" layoutX="13.0" layoutY="144.0" prefHeight="88.0" prefWidth="1247.0"
+                   text="All available building catalogues and their respective floors can be accessed through the main tabs of the app. By clicking on a certain floor in a certain building, the map corresponding to the interior of that floor will be displayed in the main window.&#xD;The map will display all POIs of that floor, at which point, you can click on a POI to see a popup describing the POI"
+                   wrapText="true">
+                <padding>
+                    <Insets left="10.0" right="10.0"/>
+                </padding>
+                <font>
+                    <Font size="16.0"/>
+                </font>
+            </Label>
+            <Text layoutX="17.0" layoutY="247.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filtering POIs">
+                <font>
+                    <Font size="20.0"/>
+                </font>
+            </Text>
+            <Label alignment="TOP_LEFT" layoutX="13.0" layoutY="255.0" prefHeight="60.0" prefWidth="1247.0"
+                   text="From the bottom right [Point of Interest Types] pane in the app, you can select specific POI types by which to filter. For example, if you wanted to see only classroom POIs on a floor, check the [classroom] option in the checklist within the pane and click the [update] button."
+                   wrapText="true">
+                <padding>
+                    <Insets left="10.0" right="10.0"/>
+                </padding>
+                <font>
+                    <Font size="16.0"/>
+                </font>
+            </Label>
+            <Text layoutX="17.0" layoutY="337.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Searching Maps">
+                <font>
+                    <Font size="20.0"/>
+                </font>
+            </Text>
+            <Label alignment="TOP_LEFT" layoutX="13.0" layoutY="345.0" prefHeight="86.0" prefWidth="1247.0"
+                   text="From the [Search] tab on the top right pane, you can search for any POIs by their room number or common name (if they have one, like “Tim Hortons”). Search results will be displayed below the search bar, upon clicking on a POI in the search results, you will be taken to where it is located on the map. A description of the POI you just selected will also pop up, where you will be able to see information about its room number, type (ex. restaurant), and additional information like seating capacity or hours of operation."
+                   wrapText="true">
+                <padding>
+                    <Insets left="10.0" right="10.0"/>
+                </padding>
+                <font>
+                    <Font size="16.0"/>
+                </font>
+            </Label>
+            <Text layoutX="17.0" layoutY="453.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Favourites">
+                <font>
+                    <Font size="20.0"/>
+                </font>
+            </Text>
+            <Label alignment="TOP_LEFT" layoutX="13.0" layoutY="461.0" prefHeight="86.0" prefWidth="1247.0"
+                   text="Within the POI description that pops up when you select a POI, you can choose to [Favourite] that POI for easy access later. Upon favouriting, that POI will now show up in the [Favourites] tab in the top right pane. Like the [search] tab, you can select a POI from that list, where you will then be taken to its corresponding location on the map.&#xD;You may unfavourite the POI by re-clicking the [Favourite] button in the POI description popup. "
+                   wrapText="true">
+                <padding>
+                    <Insets left="10.0" right="10.0"/>
+                </padding>
+                <font>
+                    <Font size="16.0"/>
+                </font>
+            </Label>
+            <Text layoutX="17.0" layoutY="569.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                  text="User Created Points of Interest (POI)">
+                <font>
+                    <Font size="20.0"/>
+                </font>
+            </Text>
+            <Label alignment="TOP_LEFT" layoutX="13.0" layoutY="577.0" prefHeight="150.0" prefWidth="1247.0"
+                   text="By clicking on the [Add POI] button in the bottom right pane, you will be able to create custom POIs for yourself. Once you select a location you want to mark as a new POI, you will be prompted to provide the app for the room number, POI type, and additional information about the POI. After filling out that information, you can finalize the creation of this new POI by clicking on the [Done] button.&#xD;Like built-in POIs, you can favourite and unfavourite the POIs you created.&#xD;Unlike built-in POIs, you will also be able to edit and delete these created POIs through the POI description pop-up that appears when you click into a POI through the map, the search bar, or the favourites bar (the same place that you favourite POIs)."
+                   wrapText="true">
+                <padding>
+                    <Insets left="10.0" right="10.0"/>
+                </padding>
+                <font>
+                    <Font size="16.0"/>
+                </font>
+            </Label>
+            <Text layoutX="17.0" layoutY="760.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                  text="Administrator Functions">
+                <font>
+                    <Font size="20.0"/>
+                </font>
+            </Text>
+            <Label alignment="TOP_LEFT" layoutX="13.0" layoutY="768.0" prefHeight="86.0" prefWidth="1247.0"
+                   text="Administrators have the additional options to create, modify, and delete buildings, floors, and built-in POIs.&#xD;When adding floors, admins will be prompted to give the floor number/name and upload a new Map."
+                   wrapText="true">
+                <padding>
+                    <Insets left="10.0" right="10.0"/>
+                </padding>
+                <font>
+                    <Font size="16.0"/>
+                </font>
+            </Label>
+        </AnchorPane>
+    </ScrollPane>
     <Button layoutX="25.0" layoutY="594.0" mnemonicParsing="false" onAction="#goBack" text="Back">
         <font>
             <Font size="14.0"/>
