@@ -14,9 +14,12 @@ public class POI {
     this.position = position;
     this.type = poiType;
   }
-
-
-
+  POI(String roomNumber, String name, POIType poiType, Pair position) {
+    this.roomNumber = roomNumber;
+    this.name = name;
+    this.position = position;
+    this.type = poiType;
+  }
 
   /**
    * SETTERS
