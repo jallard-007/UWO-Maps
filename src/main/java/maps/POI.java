@@ -65,4 +65,8 @@ public class POI {
   public String getHoursOfOperation() {
     return hoursOfOperation;
   }
+
+  public Pair getPosition() {
+    return position;
+  }
 }

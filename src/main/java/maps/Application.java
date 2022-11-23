@@ -68,7 +68,6 @@ public class Application {
           JSONObject jsonPOI = pois.getJSONObject(poiIndex);
           JSONArray jsonPosition = jsonPOI.getJSONArray("position");
           Pair position = new Pair(jsonPosition.getInt(0), jsonPosition.getInt(1));
-          //TODO: make POI including HoursOfOperation, Information, Name
           POI javaPOI = new POI(jsonPOI.getString("roomNum"), POIType.valueOf(jsonPOI.getString("type")), position);
           //Add capacity, hours of operation, information, and common name if it exists.
           if (jsonPOI.has("name")){

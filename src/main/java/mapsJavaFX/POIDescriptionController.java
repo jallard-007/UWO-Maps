@@ -11,6 +11,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import maps.POILocation;
 
+import java.io.IOException;
+
 public class POIDescriptionController {
   //  @FXML private Label label;
 //  @FXML private ScrollPane scrollPane;
@@ -71,6 +73,15 @@ public class POIDescriptionController {
     buttonBar.getButtons().addAll(btnEditPOI, btnFavouritePOI, btnDeletePOI);
     buttonBar.setPadding(new Insets(5));
     borderPane.setBottom(buttonBar);
+
+    btnFavouritePOI.setOnAction(event -> {
+      FavouritesController favouritesController = new FavouritesController();
+      try {
+        favouritesController.setFavourites(poiLocation);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    });
 
     Scene scene = new Scene(borderPane, 200, 300);
     Stage stage = new Stage();
