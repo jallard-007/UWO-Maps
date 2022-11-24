@@ -1,9 +1,10 @@
 {
-  "username": "example",
-  "password": "12345",
+  "username": "user",
+  "password": "123",
+  "userType": "base",
   "customPOIs": [
     {
-      "building" : "Middlesex College",
+      "building": "Middlesex College",
       "floor": "Ground",
       "roomNum": "custom POI example",
       "type": "classroom",

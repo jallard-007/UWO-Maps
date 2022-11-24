@@ -2,8 +2,8 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-appData/users/
-!appData/users/example.json
+appData/users/*.json
+!appData/users/user.json
 
 ### IntelliJ IDEA ###
 .idea/modules.xml

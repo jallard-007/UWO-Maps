@@ -15,19 +15,12 @@ public class User {
     this.username = name;
     this.password = password;
     this.type = type;
+    this.favorites = new ArrayList<>();
   }
 
   public User(JSONObject jsonUser) {
-    this.username = jsonUser.getString("username");
-    this.password = jsonUser.getString("password");
-    if (jsonUser.getString("userType").equals("admin")) {
-      this.type = UserType.admin;
-    } else if (jsonUser.getString("userType").equals("base")) {
-      this.type = UserType.base;
-    } else {
-      System.out.println("undefined user");
-      System.exit(15);
-    }
+    this(jsonUser.getString("username"), jsonUser.getString("password"),
+        UserType.valueOf(jsonUser.getString("userType")));
   }
 
   public String getUserName() {
@@ -42,7 +35,11 @@ public class User {
     favorites.add(poi);
   }
 
-  public boolean passwordMatch(String password) {
-    return this.password.equals(password);
+  public void setPassword(String newPassword) {
+    this.password = newPassword;
+  }
+
+  public String getPassword() {
+    return this.password;
   }
 }
