@@ -1,5 +1,8 @@
 package maps;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 public class POI {
   String roomNumber;
   POIType type;
@@ -9,11 +12,28 @@ public class POI {
   String information;
   String hoursOfOperation;
 
-  POI(String roomNumber, POIType poiType, Pair position) {
-    this.roomNumber = roomNumber;
-    this.position = position;
-    this.type = poiType;
+  POI(JSONObject jsonPOI) {
+    JSONArray jsonPosition = jsonPOI.getJSONArray("position");
+    this.position = new Pair(jsonPosition.getInt(0), jsonPosition.getInt(1));
+    this.roomNumber = jsonPOI.getString("roomNum");
+    this.type = POIType.valueOf(jsonPOI.getString("type"));
+    // TODO: make POI including HoursOfOperation, Information, Name
+
+    // Add capacity, hours of operation, information, and common name if it exists.
+    if (jsonPOI.has("name")) {
+      this.name = jsonPOI.getString("name");
+    }
+    if (jsonPOI.has("capacity")) {
+      this.capacity = jsonPOI.getInt("capacity");
+    }
+    if (jsonPOI.has("hours")) {
+     this.hoursOfOperation = jsonPOI.getString("hours");
+    }
+    if (jsonPOI.has("information")) {
+      this.information = jsonPOI.getString("information");
+    }
   }
+
   POI(String roomNumber, String name, POIType poiType, Pair position) {
     this.roomNumber = roomNumber;
     this.name = name;

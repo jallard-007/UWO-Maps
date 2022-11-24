@@ -1,5 +1,7 @@
 package maps;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class User {
@@ -16,6 +18,19 @@ public class User {
     this.type = type;
   }
 
+  public User(JSONObject jsonUser) {
+    this.username = jsonUser.getString("username");
+    this.password = jsonUser.getString("password");
+    if (jsonUser.getString("userType").equals("admin")) {
+      this.type = UserType.admin;
+    } else if (jsonUser.getString("userType").equals("base")) {
+      this.type = UserType.base;
+    } else {
+      System.out.println("undefined user");
+      System.exit(15);
+    }
+  }
+
   public String getUserName() {
     return username;
   }
@@ -24,7 +39,11 @@ public class User {
     return type;
   }
 
-  public void addFav(POILocation poi) {
+  public void addFavourite(POILocation poi) {
     favorites.add(poi);
+  }
+
+  public boolean passwordMatch(String password) {
+    return this.password.equals(password);
   }
 }

@@ -5,6 +5,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
+
 import java.io.IOException;
 
 public class WesternMaps extends javafx.application.Application {

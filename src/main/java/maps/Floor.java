@@ -33,6 +33,8 @@ public class Floor {
     }
     return str.toString();
   }
+
+
   public List<POI>[] getPOIS(){
     return this.pois;
   }
