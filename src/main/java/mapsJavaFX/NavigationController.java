@@ -32,23 +32,12 @@ public class NavigationController {
   public void goBack(ActionEvent event) throws IOException {
     FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/mainView.fxml"));
     Scene scene = new Scene(fxmlLoader.load());
-    Stage stage = (Stage) menuBar.getScene().getWindow();
-    stage.setX(23);
-    stage.setY(20);
-    stage.setScene(scene);
-    stage.show();
     MainController controller = fxmlLoader.getController();
-    Application app = new Application();
-    try {
-      app.loadData();
-    } catch (IOException e) {
-      System.out.println(e.getMessage());
-      e.printStackTrace();
-      System.exit(12);
-    }
+    Application app = ControllerMediator.getInstance().getApplication();
     ControllerMediator.getInstance().registerMapViewController(controller.getMapViewController());
     controller.getSearchPOIController().addPOIs(app.getPoiLocations());
     controller.getMapViewController().addBuildings(app.getBuildings());
+    changeScene(scene, event);
   }
 
 
@@ -69,5 +58,6 @@ public class NavigationController {
     stage.setScene(scene);
     stage.show();
     stage.centerOnScreen();
+
   }
 }

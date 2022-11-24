@@ -1,6 +1,7 @@
 package mapsJavaFX;
 
 import java.io.IOException;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -20,19 +21,13 @@ public class SignupController {
     stage.setX(23);
     stage.setY(20);
     stage.setScene(scene);
-    stage.show();
 
+    Application app = ControllerMediator.getInstance().getApplication();
     MainController controller = fxmlLoader.getController();
-    Application app = new Application();
-    try {
-      app.loadData();
-    } catch (IOException e) {
-      System.out.println(e.getMessage());
-      e.printStackTrace();
-      System.exit(12);
-    }
     ControllerMediator.getInstance().registerMapViewController(controller.getMapViewController());
     controller.getSearchPOIController().addPOIs(app.getPoiLocations());
     controller.getMapViewController().addBuildings(app.getBuildings());
+
+    stage.show();
   }
 }
