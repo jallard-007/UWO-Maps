@@ -42,10 +42,11 @@ public class Floor {
   }
 
 
-  public List<POI>[] getPOIS(){
+  public List<POI>[] getPOIS() {
     return this.pois;
   }
-  public void setPOIS(List<POI>[] pois){
+
+  public void setPOIS(List<POI>[] pois) {
     this.pois = pois;
   }
 

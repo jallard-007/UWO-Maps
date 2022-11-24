@@ -13,6 +13,7 @@ public class Util {
   public static String getRootPath() throws IOException {
     return new File(".").getCanonicalPath();
   }
+
   public static String getJSONFileContents(String absolutePath) {
     File metaDataFile = new File(absolutePath);
     if (!metaDataFile.exists()) {

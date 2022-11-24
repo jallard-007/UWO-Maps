@@ -11,8 +11,8 @@ import maps.POILocation;
 import java.io.IOException;
 
 public class POIDescriptionController {
-  //  @FXML private Label label;
-//  @FXML private ScrollPane scrollPane;
+  // @FXML private Label label;
+  // @FXML private ScrollPane scrollPane;
   String roomNum;
   String name;
   String type;
@@ -24,7 +24,7 @@ public class POIDescriptionController {
   public void getPOIDescription(POILocation poiLocation) throws IOException {
     BorderPane borderPane = new BorderPane();
 
-    //Concatenate variables to form a string Label containing the description of the selected POI
+    // Concatenate variables to form a string Label containing the description of the selected POI
 
     type = poiLocation.getPOI().getPOIType();
     roomNum = poiLocation.getPOI().getRoomNumber();
@@ -61,7 +61,7 @@ public class POIDescriptionController {
     borderPane.setCenter(scrollPane);
 
 
-    //Create button bar to hold POI options (delete, edit, favourite)
+    // Create button bar to hold POI options (delete, edit, favourite)
 
     Button btnDeletePOI = new Button("Delete");
     ToggleButton btnFavouritePOI = new ToggleButton("Favourite");
@@ -72,22 +72,22 @@ public class POIDescriptionController {
     buttonBar.setPadding(new Insets(5));
     borderPane.setBottom(buttonBar);
 
-    //Handling favouriting POIs
+    // Handling favouriting POIs
     FavouritesController favouritesController = new FavouritesController();
-    //check if POI is already favourited
-    if (favouritesController.searchFavourites(poiLocation) != -1){
+    // check if POI is already favourited
+    if (favouritesController.searchFavourites(poiLocation) != -1) {
       btnFavouritePOI.setSelected(true);
       btnFavouritePOI.setText("Unfavourite");
     }
     btnFavouritePOI.setOnAction(event -> {
-      if (btnFavouritePOI.isSelected()){
+      if (btnFavouritePOI.isSelected()) {
         btnFavouritePOI.setText("Unfavourite");
         try {
           favouritesController.setFavourites(poiLocation);
         } catch (IOException e) {
           e.printStackTrace();
         }
-      }else{
+      } else {
         btnFavouritePOI.setText("Favourite");
         try {
           favouritesController.removeFavourites(poiLocation);
@@ -103,7 +103,7 @@ public class POIDescriptionController {
     stage.setTitle(roomNum);
     stage.setMinHeight(200);
     stage.setMinWidth(300);
-    //Indicate that the stage should be a popup
+    // Indicate that the stage should be a popup
     stage.initModality(Modality.APPLICATION_MODAL);
     stage.showAndWait();
     stage.centerOnScreen();

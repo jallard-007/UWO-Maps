@@ -27,7 +27,7 @@ public class POI {
       this.capacity = jsonPOI.getInt("capacity");
     }
     if (jsonPOI.has("hours")) {
-     this.hoursOfOperation = jsonPOI.getString("hours");
+      this.hoursOfOperation = jsonPOI.getString("hours");
     }
     if (jsonPOI.has("information")) {
       this.information = jsonPOI.getString("information");
@@ -73,9 +73,13 @@ public class POI {
     return toString();
   }
 
-  public String getName(){return name;}
+  public String getName() {
+    return name;
+  }
 
-  public String getPOIType(){return type.toString();}
+  public String getPOIType() {
+    return type.toString();
+  }
 
   public String getInformation() {
     return information;

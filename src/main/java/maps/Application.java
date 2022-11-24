@@ -12,7 +12,7 @@ public class Application {
   User user;
   boolean editMode;
   ArrayList<Building> buildings;
-  ArrayList<POILocation> poiLocations;
+  List<POILocation> poiLocations;
 
   public Application() {
     user = null;
@@ -37,7 +37,7 @@ public class Application {
       for (int floorIndex = 0; floorIndex < floors.length(); ++floorIndex) {
         JSONObject jsonFloor = floors.getJSONObject(floorIndex);
         Floor javaFloor = new Floor(jsonFloor.getInt("level"), jsonFloor.getString("levelName"),
-          rootPath + jsonFloor.getString("map"));
+            rootPath + jsonFloor.getString("map"));
         javaBuilding.floors.add(javaFloor);
 
         JSONArray pois = jsonFloor.getJSONArray("pois");
@@ -59,15 +59,16 @@ public class Application {
       // username does not exist;
       return false;
     }
-    String fileContent = Util.getJSONFileContents(rootPath + "/appData/users/" + username + ".json");
+    String fileContent =
+        Util.getJSONFileContents(rootPath + "/appData/users/" + username + ".json");
     JSONObject jsonObject = new JSONObject(fileContent);
-    User javaUser = new User(jsonObject);
-    if (!javaUser.passwordMatch(password)) {
+    if (!password.equals(jsonObject.getString("password"))) {
       // password does not match
       return false;
     }
-    this.user = javaUser;
+    this.user = new User(jsonObject);
     loadUserPOIs();
+    sortPOIs();
 
     // add favourites to User object
     JSONArray favourites = jsonObject.getJSONArray("favourites");
@@ -79,16 +80,17 @@ public class Application {
         // need to remove it
         continue;
       }
-      javaUser.addFavourite(poiFav.get((0)));
+      this.user.addFavourite(poiFav.get(0));
     }
 
     // indicate login was successful
     return true;
   }
 
-  public void loadUserPOIs() throws IOException {
+  private void loadUserPOIs() throws IOException {
     String rootPath = Util.getRootPath();
-    String fileContent = Util.getJSONFileContents(rootPath + "/appData/users/" + this.user.getUserName() + ".json");
+    String fileContent =
+        Util.getJSONFileContents(rootPath + "/appData/users/" + this.user.getUserName() + ".json");
     JSONObject jsonUser = new JSONObject(fileContent);
 
     JSONArray customPOIs = jsonUser.getJSONArray("customPOIs");
@@ -108,9 +110,26 @@ public class Application {
       }
 
       floor.pois[javaPOI.type.ordinal()].add(javaPOI);
-      POILocation poiLocation = new POILocation(building, floor, javaPOI);
-      this.poiLocations.add(poiLocation);
+      this.poiLocations.add(new POILocation(building, floor, javaPOI));
     }
+  }
+
+  private void sortPOIs() {
+    Collections.sort(this.poiLocations, new Comparator<POILocation>() {
+      @Override
+      public int compare(POILocation lhs, POILocation rhs) {
+        // -1 - less than, 1 - greater than, 0 - equal, all inversed for descending
+        int buildingCompare = lhs.building.getName().compareTo(rhs.building.getName());
+        if (buildingCompare != 0) {
+          return buildingCompare;
+        }
+        int floorCompare = ((Integer) lhs.floor.level).compareTo(rhs.floor.level);
+        if (floorCompare != 0) {
+          return floorCompare;
+        }
+        return lhs.poi.toString().compareTo(rhs.poi.toString());
+      }
+    });
   }
 
   public void logout() {
@@ -145,7 +164,7 @@ public class Application {
     return matchingPOIs;
   }
 
-  public ArrayList<POILocation> getPoiLocations() {
+  public List<POILocation> getPoiLocations() {
     return poiLocations;
   }
 

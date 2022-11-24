@@ -13,13 +13,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearchPOIController {
-  private ArrayList<POILocation> poiLocations;
+  private List<POILocation> poiLocations;
   @FXML
   private Label myLabel;
   @FXML
   private ListView<POILocation> matchingPOIList;
   @FXML
   private TextField searchInput;
+
   private List<POILocation> searchForPOI(String searchText) {
     searchText = searchText.toLowerCase();
     List<POILocation> matchingPOIs = new ArrayList<>();
@@ -31,7 +32,7 @@ public class SearchPOIController {
     return matchingPOIs;
   }
 
-  public void addPOIs(ArrayList<POILocation> poiLocations) {
+  public void addPOIs(List<POILocation> poiLocations) {
     matchingPOIList.setPlaceholder(new Label("No Matching POIs"));
     this.poiLocations = poiLocations;
     matchingPOIList.getItems().addAll(this.poiLocations);

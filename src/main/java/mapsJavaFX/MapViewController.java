@@ -35,13 +35,14 @@ public class MapViewController {
         Image image = floor.getImage();
         ImageView imageView = new ImageView(image);
 
-        // Add floor PNGs into a scrollpane so users can pan through the maps; set dimensions to half the original image size
-        imageView.setFitHeight(image.getHeight()/2);
-        imageView.setFitWidth(image.getWidth()/2);
+        // Add floor PNGs into a scrollpane so users can pan through the maps; set dimensions to
+        // half the original image size
+        imageView.setFitHeight(image.getHeight() / 2);
+        imageView.setFitWidth(image.getWidth() / 2);
         ScrollPane scrollpane = new ScrollPane();
         scrollpane.setContent(imageView);
 
-        //Add scrollpane to the tab of each floor
+        // Add scrollpane to the tab of each floor
         floorTab.setContent(scrollpane);
         floorTab.setClosable(false);
         buildingTabPane.getTabs().add(floorTab);

@@ -15,7 +15,8 @@ import java.io.IOException;
 
 public class NavigationController {
 
-  @FXML  private AnchorPane menuBar;
+  @FXML
+  private AnchorPane menuBar;
 
   public void goToProfile(ActionEvent event) throws IOException {
     FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/profile.fxml"));
@@ -47,17 +48,19 @@ public class NavigationController {
     alert.setHeaderText("You're about to log out");
     alert.setContentText("Are you sure?");
 
-    if (alert.showAndWait().get() == ButtonType.OK){
-      FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/login.fxml"));
-      Scene scene = new Scene(fxmlLoader.load());
-      changeScene(scene, event);
+    if (alert.showAndWait().get() != ButtonType.OK) {
+      return;
     }
+    FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/login.fxml"));
+    Scene scene = new Scene(fxmlLoader.load());
+    ControllerMediator.getInstance().getApplication().logout();
+    changeScene(scene, event);
   }
+
   private void changeScene(Scene scene, ActionEvent event) {
     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
     stage.setScene(scene);
     stage.show();
     stage.centerOnScreen();
-
   }
 }

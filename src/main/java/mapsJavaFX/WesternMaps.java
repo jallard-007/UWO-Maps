@@ -50,7 +50,7 @@ public class WesternMaps extends javafx.application.Application {
     alert.setHeaderText("You're about to exit from the program");
     alert.setContentText("Are you sure?");
 
-    if (alert.showAndWait().get() == ButtonType.OK){
+    if (alert.showAndWait().get() == ButtonType.OK) {
       System.out.println("The program was exited successfully.");
       stage.close();
     }

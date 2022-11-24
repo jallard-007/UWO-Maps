@@ -1,8 +1,8 @@
 package maps;
 
 public class Pair {
-  private int x; //first member of pair
-  private int y; //second member of pair
+  private int x; // first member of pair
+  private int y; // second member of pair
 
   public Pair(int x, int y) {
     this.x = x;
