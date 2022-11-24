@@ -1,8 +1,5 @@
 package mapsJavaFX;
 
-import maps.Building;
-import maps.Floor;
-import maps.POI;
 import maps.POILocation;
 import org.json.JSONArray;
 import org.json.JSONObject;
