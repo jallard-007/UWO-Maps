@@ -2,11 +2,12 @@
   "password": "12345",
   "favourites": [
     "Middlesex College | Ground | custom POI example",
-    "Talbot College | Third | TC 303",
     "Natural Science | First | NSC 106A",
     "Talbot College | Second | TC 201",
     "Talbot College | Third | TC 342",
-    "Middlesex College | First | MC 105B"
+    "Middlesex College | First | MC 105B",
+    "Middlesex College | Second | MC 220",
+    "Talbot College | Third | TC 303"
   ],
   "customPOIs": [
     {

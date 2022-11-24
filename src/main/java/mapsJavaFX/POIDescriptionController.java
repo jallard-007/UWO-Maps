@@ -65,6 +65,7 @@ public class POIDescriptionController {
 
     Button btnDeletePOI = new Button("Delete");
     ToggleButton btnFavouritePOI = new ToggleButton("Favourite");
+    btnFavouritePOI.setPrefWidth(100);
     Button btnEditPOI = new Button("Edit");
     ButtonBar buttonBar = new ButtonBar();
     buttonBar.getButtons().addAll(btnEditPOI, btnFavouritePOI, btnDeletePOI);
