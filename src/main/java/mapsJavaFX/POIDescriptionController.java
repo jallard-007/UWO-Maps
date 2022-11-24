@@ -2,10 +2,7 @@ package mapsJavaFX;
 
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -24,7 +21,7 @@ public class POIDescriptionController {
   String information;
   String POIDescription;
 
-  public void getPOIDescription(POILocation poiLocation) {
+  public void getPOIDescription(POILocation poiLocation) throws IOException {
     BorderPane borderPane = new BorderPane();
 
     //Concatenate variables to form a string Label containing the description of the selected POI
@@ -67,19 +64,35 @@ public class POIDescriptionController {
     //Create button bar to hold POI options (delete, edit, favourite)
 
     Button btnDeletePOI = new Button("Delete");
-    Button btnFavouritePOI = new Button("Favourite");
+    ToggleButton btnFavouritePOI = new ToggleButton("Favourite");
     Button btnEditPOI = new Button("Edit");
     ButtonBar buttonBar = new ButtonBar();
     buttonBar.getButtons().addAll(btnEditPOI, btnFavouritePOI, btnDeletePOI);
     buttonBar.setPadding(new Insets(5));
     borderPane.setBottom(buttonBar);
 
+    //Handling favouriting POIs
+    FavouritesController favouritesController = new FavouritesController();
+    //check if POI is already favourited
+    if (favouritesController.searchFavourites(poiLocation) != -1){
+      btnFavouritePOI.setSelected(true);
+      btnFavouritePOI.setText("Unfavourite");
+    }
     btnFavouritePOI.setOnAction(event -> {
-      FavouritesController favouritesController = new FavouritesController();
-      try {
-        favouritesController.setFavourites(poiLocation);
-      } catch (IOException e) {
-        e.printStackTrace();
+      if (btnFavouritePOI.isSelected()){
+        btnFavouritePOI.setText("Unfavourite");
+        try {
+          favouritesController.setFavourites(poiLocation);
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+      }else{
+        btnFavouritePOI.setText("Favourite");
+        try {
+          favouritesController.removeFavourites(poiLocation);
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
       }
     });
 
