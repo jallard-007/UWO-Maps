@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+  xmlns="http://javafx.com/javafx/19"
+  xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapsJavaFX.FavouritesController">
+  <top>
+  </top>
+  <bottom>
+    <ListView fx:id="favouritePOIList" onMouseClicked="#onPOIListMouseClick" BorderPane.alignment="CENTER"/>
+  </bottom>
+</BorderPane>

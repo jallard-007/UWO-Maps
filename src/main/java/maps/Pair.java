@@ -29,4 +29,8 @@ public class Pair {
   public int getY() {
     return y;
   }
+
+  public int[] getPair() {
+    return new int[]{x, y};
+  }
 }

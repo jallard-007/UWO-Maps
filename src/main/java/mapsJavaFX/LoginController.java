@@ -41,9 +41,7 @@ public class LoginController {
     FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/mainView.fxml"));
     Scene scene = new Scene(fxmlLoader.load());
     MainController controller = fxmlLoader.getController();
-    ControllerMediator.getInstance().registerMapViewController(controller.getMapViewController());
-    controller.getSearchPOIController().addPOIs(app.getPoiLocations());
-    controller.getMapViewController().addBuildings(app.getBuildings());
+    Util.setControllers(controller, app);
 
     Stage stage = (Stage) logIn.getScene().getWindow();
     stage.setX(23);

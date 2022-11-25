@@ -1,7 +1,6 @@
 package maps;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.*;
 
 import org.json.*;
@@ -10,18 +9,16 @@ import java.lang.String;
 
 public class Application {
   User user;
-  boolean editMode;
-  ArrayList<Building> buildings;
+  List<Building> buildings;
   List<POILocation> poiLocations;
 
   public Application() {
     user = null;
-    editMode = false;
     buildings = new ArrayList<>();
     poiLocations = new ArrayList<>();
   }
 
-  public void loadData() throws IOException {
+  public void loadData() {
     String rootPath = Util.getRootPath(); // gets root folder of application
     String fileContent = Util.getJSONFileContents(rootPath + "/appData/metaData/poiMetaData.json");
     JSONObject jsonObject = new JSONObject(fileContent);
@@ -53,7 +50,13 @@ public class Application {
     }
   }
 
-  public boolean login(String username, String password) throws IOException {
+  public boolean signup(String username, String password) {
+    if (!Util.createUserFile(username, password)) {
+      return false;
+    }
+    return login(username, password);
+  }
+  public boolean login(String username, String password) {
     String rootPath = Util.getRootPath();
     if (!new File(rootPath + "/appData/users/" + username + ".json").exists()) {
       // username does not exist;
@@ -87,7 +90,7 @@ public class Application {
     return true;
   }
 
-  private void loadUserPOIs() throws IOException {
+  private void loadUserPOIs() {
     String rootPath = Util.getRootPath();
     String fileContent =
         Util.getJSONFileContents(rootPath + "/appData/users/" + this.user.getUserName() + ".json");
@@ -115,20 +118,16 @@ public class Application {
   }
 
   private void sortPOIs() {
-    Collections.sort(this.poiLocations, new Comparator<POILocation>() {
-      @Override
-      public int compare(POILocation lhs, POILocation rhs) {
-        // -1 - less than, 1 - greater than, 0 - equal, all inversed for descending
-        int buildingCompare = lhs.building.getName().compareTo(rhs.building.getName());
-        if (buildingCompare != 0) {
-          return buildingCompare;
-        }
-        int floorCompare = ((Integer) lhs.floor.level).compareTo(rhs.floor.level);
-        if (floorCompare != 0) {
-          return floorCompare;
-        }
-        return lhs.poi.toString().compareTo(rhs.poi.toString());
+    this.poiLocations.sort((lhs, rhs) -> {
+      int buildingCompare = lhs.building.getName().compareTo(rhs.building.getName());
+      if (buildingCompare != 0) {
+        return buildingCompare;
       }
+      int floorCompare = Integer.compare(lhs.floor.level, rhs.floor.level);
+      if (floorCompare != 0) {
+        return floorCompare;
+      }
+      return lhs.poi.toString().compareTo(rhs.poi.toString());
     });
   }
 
@@ -140,6 +139,7 @@ public class Application {
         poiLocationsToRemove.add(currentPOI);
       }
     }
+    user.saveToFile(poiLocationsToRemove);
     this.poiLocations.removeAll(poiLocationsToRemove);
     this.user = null;
   }
@@ -168,7 +168,28 @@ public class Application {
     return poiLocations;
   }
 
-  public ArrayList<Building> getBuildings() {
+  public List<Building> getBuildings() {
     return this.buildings;
+  }
+
+  public void save() {
+    if (user == null){
+      return;
+    }
+    if (user.getUserType().equals(UserType.admin)) {
+      JSONObject jsonApplication = createJSONObjectOfApplication();
+      // if changes were made, update poimetadata file.
+    }
+    logout();
+  }
+
+  private JSONObject createJSONObjectOfApplication() {
+    JSONObject jsonApplication = new JSONObject();
+    // create jsonApplication
+    return jsonApplication;
+  }
+
+  public User getUser() {
+    return this.user;
   }
 }

@@ -17,7 +17,7 @@ public class MapViewController {
   private TabPane tabPane;
   List<Building> buildings;
 
-  public void addBuildings(List<Building> buildings) {
+  public void setBuildings(List<Building> buildings) {
     this.buildings = buildings;
 
     // creates a new tab for each building

@@ -10,8 +10,20 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Util {
-  public static String getRootPath() throws IOException {
-    return new File(".").getCanonicalPath();
+  private static final String rootPath;
+
+  static {
+    String tmp = null;
+    try {
+      tmp = new File(".").getCanonicalPath();
+    } catch (IOException e) {
+      // Handle exception.
+    }
+    rootPath = tmp;
+  }
+
+  public static String getRootPath() {
+    return rootPath;
   }
 
   public static String getJSONFileContents(String absolutePath) {
@@ -38,7 +50,7 @@ public class Util {
     return fileContent.toString();
   }
 
-  public static boolean createUserFile(String username, String password) throws IOException {
+  public static boolean createUserFile(String username, String password) {
     // search users folder within the application folder for username
     String rootPath = getRootPath();
     System.out.println("Hello");
@@ -52,12 +64,19 @@ public class Util {
     newUserJSON.put("password", password);
     newUserJSON.put("userType", "base");
     newUserJSON.put("customPOIs", new JSONArray());
+    newUserJSON.put("favourites", new JSONArray());
 
-    FileWriter file = new FileWriter(rootPath + "/appData/users/" + username + ".json");
-    file.write(newUserJSON.toString());
-    file.flush();
-    file.close();
-    System.out.println(getJSONFileContents(rootPath + "/appData/users/" + username + ".json"));
+    writeToFile(newUserJSON, "/appData/users/" + username + ".json");
     return true;
+  }
+
+  public static void writeToFile(JSONObject json, String relativePath) {
+    try {
+      FileWriter file = new FileWriter(rootPath + relativePath);
+      file.write(json.toString());
+      file.flush();
+      file.close();
+    } catch (IOException ignored) {
+    }
   }
 }

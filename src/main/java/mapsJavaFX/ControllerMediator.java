@@ -5,10 +5,15 @@ import maps.POILocation;
 
 public class ControllerMediator {
   private MapViewController mapViewController;
+  private FavouritesController favouritesController;
   private Application app;
 
   void registerMapViewController(MapViewController controller) {
     mapViewController = controller;
+  }
+
+  void registerFavouritesController(FavouritesController controller) {
+    favouritesController = controller;
   }
 
   void registerApplication(Application app) {
@@ -21,6 +26,14 @@ public class ControllerMediator {
 
   void mapViewControllerGoToPOI(POILocation poiLocation) {
     mapViewController.goToPOI(poiLocation);
+  }
+
+  void addFavourite(POILocation poiLocation) {
+    favouritesController.addFavourite(poiLocation);
+  }
+
+  void removeFavourite(POILocation poiLocation) {
+    favouritesController.removeFavourite(poiLocation);
   }
 
   private ControllerMediator() {}

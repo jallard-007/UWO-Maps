@@ -64,6 +64,24 @@ public class POI {
   /**
    * GETTERS
    */
+  public JSONObject createJSONObjectOfCustomPOI(POILocation poiLocation) {
+    JSONObject jsonPOI = new JSONObject();
+    jsonPOI.put("building", poiLocation.building.getName());
+    jsonPOI.put("floor", poiLocation.floor.getName());
+    jsonPOI.put("roomNum", poiLocation.poi.getRoomNumber());
+    jsonPOI.put("type", "custom");
+    jsonPOI.put("position", position.getPair());
+    if (capacity != null) {
+      jsonPOI.put("capacity", capacity);
+    }
+    if (information != null) {
+      jsonPOI.put("information", information);
+    }
+    if (hoursOfOperation != null) {
+      jsonPOI.put("capacity", hoursOfOperation);
+    }
+    return jsonPOI;
+  }
 
   public String toString() {
     return roomNumber;

@@ -24,33 +24,24 @@ public class WesternMaps extends javafx.application.Application {
     stage.setResizable(false);
     stage.setScene(scene);
     Application app = new Application();
-    try {
-      app.loadData();
-    } catch (IOException e) {
-      System.out.println(e.getMessage());
-      e.printStackTrace();
-      System.exit(12);
-    }
+    app.loadData();
     ControllerMediator.getInstance().registerApplication(app);
     stage.show();
 
     stage.setOnCloseRequest(event -> {
       event.consume();
-      try {
-        exit(stage);
-      } catch (IOException e) {
-        throw new RuntimeException(e);
-      }
+      exit(stage);
     });
   }
 
-  public void exit(Stage stage) throws IOException {
+  public void exit(Stage stage) {
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
     alert.setTitle("Logout");
     alert.setHeaderText("You're about to exit from the program");
     alert.setContentText("Are you sure?");
 
     if (alert.showAndWait().get() == ButtonType.OK) {
+      ControllerMediator.getInstance().getApplication().save();
       System.out.println("The program was exited successfully.");
       stage.close();
     }

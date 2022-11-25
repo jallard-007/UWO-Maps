@@ -9,7 +9,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import maps.Application;
 
 import java.io.IOException;
 
@@ -34,10 +33,7 @@ public class NavigationController {
     FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/mainView.fxml"));
     Scene scene = new Scene(fxmlLoader.load());
     MainController controller = fxmlLoader.getController();
-    Application app = ControllerMediator.getInstance().getApplication();
-    ControllerMediator.getInstance().registerMapViewController(controller.getMapViewController());
-    controller.getSearchPOIController().addPOIs(app.getPoiLocations());
-    controller.getMapViewController().addBuildings(app.getBuildings());
+    Util.setControllers(controller, ControllerMediator.getInstance().getApplication());
     changeScene(scene, event);
   }
 
