@@ -50,6 +50,11 @@ public class POI {
     this.type = poiType;
   }
 
+  public void setPosition(double x, double y) {
+    this.position.setX(x);
+    this.position.setY(y);
+  }
+
   /**
    * @param name name of POI
    */
@@ -84,7 +89,7 @@ public class POI {
   public JSONObject toJSON() {
     JSONObject jsonPOI = new JSONObject();
     jsonPOI.put("roomNum", roomNumber);
-    jsonPOI.put("type", "custom");
+    jsonPOI.put("type", type.name());
     jsonPOI.put("position", position.getPair());
     if (name != null) {
       jsonPOI.put("name", name);
@@ -96,7 +101,7 @@ public class POI {
       jsonPOI.put("information", information);
     }
     if (hoursOfOperation != null) {
-      jsonPOI.put("capacity", hoursOfOperation);
+      jsonPOI.put("hours", hoursOfOperation);
     }
     return jsonPOI;
   }

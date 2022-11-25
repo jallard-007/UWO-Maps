@@ -218,8 +218,7 @@ public class Application {
     List<POILocation> matchingPOIs = new ArrayList<>();
     for (POILocation poiLocation : this.poiLocations) {
       if (poiLocation.toString().toLowerCase().contains(searchText)
-          || (poiLocation.poi.getName() != null
-              && poiLocation.poi.getName().toLowerCase().contains(searchText))) {
+          || poiLocation.poi.getRoomNumber().toLowerCase().contains(searchText)) {
         matchingPOIs.add(poiLocation);
       }
     }
@@ -350,7 +349,7 @@ public class Application {
     JSONObject jsonApplication = new JSONObject();
     JSONArray jsonBuildings = new JSONArray();
     jsonApplication.put("buildings", jsonBuildings);
-    for (Building building : buildings) {
+    for (Building building : this.buildings) {
       jsonBuildings.put(building.toJSON());
     }
     return jsonApplication;
