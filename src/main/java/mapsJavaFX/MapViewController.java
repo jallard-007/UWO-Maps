@@ -6,22 +6,21 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import maps.Application;
 import maps.Building;
 import maps.Floor;
 import maps.POILocation;
 
-import java.util.List;
-
 public class MapViewController {
   @FXML
   private TabPane tabPane;
-  List<Building> buildings;
+  Application app;
 
-  public void setBuildings(List<Building> buildings) {
-    this.buildings = buildings;
+  public void setApp(Application app) {
+    this.app = app;
 
     // creates a new tab for each building
-    for (Building building : this.buildings) {
+    for (Building building : this.app.getBuildings()) {
       Tab buildingTab = new Tab(building.getName());
       buildingTab.setClosable(false); // prevents the user from closing the tab
       this.tabPane.getTabs().add(buildingTab);

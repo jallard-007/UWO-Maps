@@ -7,9 +7,8 @@ public class Util {
     ControllerMediator.getInstance().registerMapViewController(controller.getMapViewController());
     ControllerMediator.getInstance()
         .registerFavouritesController(controller.getFavouritesController());
-    controller.getSearchPOIController().setPOIs(app.getPoiLocations());
-    controller.getSearchPOIController().setUser(app.getUser());
-    controller.getMapViewController().setBuildings(app.getBuildings());
-    controller.getFavouritesController().setUser(app.getUser());
+    controller.getSearchPOIController().setApp(app);
+    controller.getMapViewController().setApp(app);
+    controller.getFavouritesController().setApp(app);
   }
 }

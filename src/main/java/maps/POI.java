@@ -17,7 +17,6 @@ public class POI {
     this.position = new Pair(jsonPosition.getInt(0), jsonPosition.getInt(1));
     this.roomNumber = jsonPOI.getString("roomNum");
     this.type = POIType.valueOf(jsonPOI.getString("type"));
-    // TODO: make POI including HoursOfOperation, Information, Name
 
     // Add capacity, hours of operation, information, and common name if it exists.
     if (jsonPOI.has("name")) {
@@ -88,7 +87,14 @@ public class POI {
   }
 
   public String getRoomNumber() {
-    return toString();
+    return roomNumber;
+  }
+
+  public String getRoomNameOrNumber() {
+    if (this.name != null) {
+      return this.name;
+    }
+    return this.roomNumber;
   }
 
   public String getName() {

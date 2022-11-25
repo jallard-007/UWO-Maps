@@ -4,18 +4,22 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import maps.User;
 import maps.POILocation;
+import maps.Application;
 
 public class FavouritesController {
-  public User user;
+  public Application app;
 
   @FXML
   private ListView<POILocation> favouritePOIList;
 
-  public void setUser(User user) {
-    this.user = user;
-    favouritePOIList.getItems().addAll(user.getFavourites());
+  public void setApp(Application app) {
+    this.app = app;
+    favouritePOIList.getItems().setAll(app.getUser().getFavourites());
+  }
+
+  public void refreshList() {
+    favouritePOIList.getItems().setAll(app.getUser().getFavourites());
   }
 
   public void addFavourite(POILocation poiLocation) {
@@ -30,7 +34,7 @@ public class FavouritesController {
     if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
       if (mouseEvent.getClickCount() == 2) {
         navigateToPOI(getSelectedPOI());
-        new POIDescriptionController(user, getSelectedPOI());
+        new POIDescriptionController(app.getUser(), getSelectedPOI());
       }
     }
   }

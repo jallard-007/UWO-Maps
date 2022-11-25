@@ -12,7 +12,7 @@ public class POILocation {
   }
 
   public String toString() {
-    return building.getName() + " | " + floor.getName() + " | " + poi.getRoomNumber();
+    return building.getName() + " | " + floor.getName() + " | " + poi.getRoomNameOrNumber();
   }
 
   public Building getBuilding() {

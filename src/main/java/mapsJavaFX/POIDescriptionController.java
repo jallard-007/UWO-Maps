@@ -64,11 +64,11 @@ public class POIDescriptionController {
       if (btnFavouritePOI.isSelected()) {
         btnFavouritePOI.setText("Unfavourite");
         user.addFavourite(poiLocation);
-        ControllerMediator.getInstance().addFavourite(poiLocation);
+        ControllerMediator.getInstance().refreshFavouritesList();
       } else {
         btnFavouritePOI.setText("Favourite");
         user.removeFavourites(poiLocation);
-        ControllerMediator.getInstance().removeFavourite(poiLocation);
+        ControllerMediator.getInstance().refreshFavouritesList();
 
       }
     });

@@ -56,6 +56,7 @@ public class Application {
     }
     return login(username, password);
   }
+
   public boolean login(String username, String password) {
     String rootPath = Util.getRootPath();
     if (!new File(rootPath + "/appData/users/" + username + ".json").exists()) {
@@ -157,7 +158,9 @@ public class Application {
     searchText = searchText.toLowerCase();
     List<POILocation> matchingPOIs = new ArrayList<>();
     for (POILocation poiLocation : this.poiLocations) {
-      if (poiLocation.toString().toLowerCase().contains(searchText)) {
+      if (poiLocation.toString().toLowerCase().contains(searchText)
+          || (poiLocation.poi.getName() != null
+              && poiLocation.poi.getName().toLowerCase().contains(searchText))) {
         matchingPOIs.add(poiLocation);
       }
     }
@@ -173,7 +176,7 @@ public class Application {
   }
 
   public void save() {
-    if (user == null){
+    if (user == null) {
       return;
     }
     if (user.getUserType().equals(UserType.admin)) {

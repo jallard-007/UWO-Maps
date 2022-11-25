@@ -28,12 +28,8 @@ public class ControllerMediator {
     mapViewController.goToPOI(poiLocation);
   }
 
-  void addFavourite(POILocation poiLocation) {
-    favouritesController.addFavourite(poiLocation);
-  }
-
-  void removeFavourite(POILocation poiLocation) {
-    favouritesController.removeFavourite(poiLocation);
+  void refreshFavouritesList() {
+    favouritesController.refreshList();
   }
 
   private ControllerMediator() {}
