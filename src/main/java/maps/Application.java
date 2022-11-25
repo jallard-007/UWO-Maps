@@ -51,7 +51,7 @@ public class Application {
         // add POIs of current floor
         for (int poiIndex = 0; poiIndex < pois.length(); ++poiIndex) {
           POI javaPOI = new POI(pois.getJSONObject(poiIndex));
-          javaFloor.pois[javaPOI.type.ordinal()].add(javaPOI);
+          javaFloor.addPOI(javaPOI);
           POILocation poiLocation = new POILocation(javaBuilding, javaFloor, javaPOI);
           this.poiLocations.add(poiLocation);
         }
@@ -116,6 +116,13 @@ public class Application {
   }
 
   /**
+   * @return the logged-in user
+   */
+  public User getUser() {
+    return this.user;
+  }
+
+  /**
    * Loads custom POIs
    * 
    * @param jsonUser the json representation of the user
@@ -137,7 +144,7 @@ public class Application {
         continue;
       }
 
-      floor.pois[javaPOI.type.ordinal()].add(javaPOI);
+      floor.addPOI(javaPOI);
       this.poiLocations.add(new POILocation(building, floor, javaPOI));
     }
   }
@@ -179,6 +186,13 @@ public class Application {
   }
 
   /**
+   * @return a list of buildings
+   */
+  public List<Building> getBuildings() {
+    return this.buildings;
+  }
+
+  /**
    * Gets the building object with name attribute matching buildingName
    * 
    * @param buildingName the name of the building to find
@@ -217,13 +231,6 @@ public class Application {
    */
   public List<POILocation> getPoiLocations() {
     return poiLocations;
-  }
-
-  /**
-   * @return a list of buildings
-   */
-  public List<Building> getBuildings() {
-    return this.buildings;
   }
 
   /**
@@ -288,6 +295,37 @@ public class Application {
   }
 
   /**
+   * Adds a building to the application
+   * 
+   * @param building the building to add
+   */
+  public void addBuilding(Building building) {
+    this.buildings.add(building);
+  }
+
+  /**
+   * Adds a floor to the building
+   * 
+   * @param floor the floor to add
+   */
+  public void addFloor(Building building, Floor floor) {
+    building.floors.add(floor);
+  }
+
+  /**
+   * Creates a POILocation object for the poi, adds it to the list, and adds the poi to the floor
+   * 
+   * @param building the building that the floor is in
+   * @param floor the floor that the poi is on
+   * @param poi the poi to add
+   */
+  public void addPOI(Building building, Floor floor, POI poi) {
+    this.poiLocations.add(new POILocation(building, floor, poi));
+    this.sortPOIs();
+    floor.addPOI(poi);
+  }
+
+  /**
    * Used to save all changes made by the current user for both user types
    */
   public void save() {
@@ -316,12 +354,5 @@ public class Application {
       jsonBuildings.put(building.toJSON());
     }
     return jsonApplication;
-  }
-
-  /**
-   * @return the logged-in user
-   */
-  public User getUser() {
-    return this.user;
   }
 }

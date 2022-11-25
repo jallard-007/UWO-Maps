@@ -63,6 +63,10 @@ public class Floor {
     return str.toString();
   }
 
+  public void addPOI(POI poi) {
+    this.pois[poi.type.ordinal()].add(poi);
+  }
+
   /**
    * @return a json object representation of this floor
    */
