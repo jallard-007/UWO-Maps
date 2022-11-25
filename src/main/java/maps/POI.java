@@ -78,24 +78,17 @@ public class POI {
     this.hoursOfOperation = hoursOfOperation;
   }
 
-
   /**
-   * Creates a json representation of a poi
-   * 
-   * @param building the building that this poi resides in
-   * @param floor the floor that this poi is on
-   * @return a json object representation of this POI to be stored in a users file
+   * @return a json object representation of this POI
    */
-  public JSONObject createJSONObjectOfCustomPOI(Building building, Floor floor) {
-    if (type != POIType.custom) {
-      return null;
-    }
+  public JSONObject toJSON() {
     JSONObject jsonPOI = new JSONObject();
-    jsonPOI.put("building", building.getName());
-    jsonPOI.put("floor", floor.getName());
     jsonPOI.put("roomNum", roomNumber);
     jsonPOI.put("type", "custom");
     jsonPOI.put("position", position.getPair());
+    if (name != null) {
+      jsonPOI.put("name", name);
+    }
     if (capacity != null) {
       jsonPOI.put("capacity", capacity);
     }
@@ -105,6 +98,23 @@ public class POI {
     if (hoursOfOperation != null) {
       jsonPOI.put("capacity", hoursOfOperation);
     }
+    return jsonPOI;
+  }
+
+  /**
+   * Creates a json representation of a poi with custom type
+   * 
+   * @param building the building that this poi resides in
+   * @param floor the floor that this poi is on
+   * @return a json object representation of this POI to be stored in a users file
+   */
+  public JSONObject createJSONObjectOfCustomPOI(Building building, Floor floor) {
+    if (type != POIType.custom) {
+      return null;
+    }
+    JSONObject jsonPOI = this.toJSON();
+    jsonPOI.put("building", building.getName());
+    jsonPOI.put("floor", floor.getName());
     return jsonPOI;
   }
 

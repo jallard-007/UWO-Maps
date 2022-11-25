@@ -43,7 +43,7 @@ public class Application {
       for (int floorIndex = 0; floorIndex < floors.length(); ++floorIndex) {
         JSONObject jsonFloor = floors.getJSONObject(floorIndex);
         Floor javaFloor = new Floor(jsonFloor.getInt("level"), jsonFloor.getString("levelName"),
-            rootPath + jsonFloor.getString("map"));
+            jsonFloor.getString("map"));
         javaBuilding.floors.add(javaFloor);
 
         JSONArray pois = jsonFloor.getJSONArray("pois");
@@ -163,7 +163,7 @@ public class Application {
    * Logs out the current user, removing the user's custom POIs and saving any changes such as
    * favourites, and custom POIs to the user's file
    */
-  private void logout() {
+  private UserType logout() {
     List<POILocation> poiLocationsToRemove = new ArrayList<>();
     for (POILocation currentPOI : this.poiLocations) {
       if (currentPOI.poi.type == POIType.custom) {
@@ -173,7 +173,9 @@ public class Application {
     }
     user.saveUser(poiLocationsToRemove);
     this.poiLocations.removeAll(poiLocationsToRemove);
+    UserType userType = user.getUserType();
     this.user = null;
+    return userType;
   }
 
   /**
@@ -225,6 +227,67 @@ public class Application {
   }
 
   /**
+   * Deletes a building from the application
+   * 
+   * @param building the building to delete
+   * @return true if successful, false otherwise
+   */
+  public boolean deleteBuilding(Building building) {
+    if (user.getUserType() != UserType.admin) {
+      return false;
+    }
+    List<POILocation> found = new ArrayList<>();
+    for (POILocation poiLocation : this.poiLocations) {
+      if (poiLocation.building.equals(building)) {
+        found.add(poiLocation);
+      }
+    }
+    this.poiLocations.removeAll(found);
+    return this.buildings.remove(building);
+  }
+
+  /**
+   * Deletes a floor from the application
+   * 
+   * @param building the building that the floor is in
+   * @param floor the floor to delete
+   * @return true if successful, false otherwise
+   */
+  public boolean deleteFloor(Building building, Floor floor) {
+    if (user.getUserType() != UserType.admin) {
+      return false;
+    }
+    List<POILocation> found = new ArrayList<>();
+    for (POILocation poiLocation : this.poiLocations) {
+      if (poiLocation.floor.equals(floor)) {
+        found.add(poiLocation);
+      }
+    }
+    this.poiLocations.removeAll(found);
+    return building.floors.remove(floor);
+  }
+
+  /**
+   * Deletes a POI from the application
+   * 
+   * @param floor the floor that the POI is on
+   * @param poi the POI to delete
+   * @return true if successful, false otherwise
+   */
+  public boolean deletePOI(Floor floor, POI poi) {
+    if (user.getUserType() != UserType.admin) {
+      return false;
+    }
+    for (POILocation poiLocation : this.poiLocations) {
+      if (poiLocation.poi.equals(poi)) {
+        this.poiLocations.remove(poiLocation);
+        return poiLocation.removePOI();
+      }
+    }
+    return false;
+  }
+
+  /**
    * Used to save all changes made by the current user for both user types
    */
   public void save() {
@@ -232,11 +295,11 @@ public class Application {
     if (user == null) {
       return;
     }
-    if (user.getUserType().equals(UserType.admin)) {
+    UserType type = logout();
+    if (type.equals(UserType.admin)) {
       JSONObject jsonApplication = createJSONObjectOfApplication();
-      // if changes were made, update poi meta data file.
+      Util.writeToFile(jsonApplication, "/appData/metaData/poiMetaData.json");
     }
-    logout();
   }
 
   /**
@@ -247,7 +310,11 @@ public class Application {
   private JSONObject createJSONObjectOfApplication() {
     // TODO:
     JSONObject jsonApplication = new JSONObject();
-    // create jsonApplication
+    JSONArray jsonBuildings = new JSONArray();
+    jsonApplication.put("buildings", jsonBuildings);
+    for (Building building : buildings) {
+      jsonBuildings.put(building.toJSON());
+    }
     return jsonApplication;
   }
 

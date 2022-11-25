@@ -2,6 +2,8 @@ package maps;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  * Stores information regrading the building
@@ -40,6 +42,20 @@ public class Building {
       str.append("\n\tFloorName: ").append(floor.toString());
     }
     return str.toString();
+  }
+
+  /**
+   * @return a json object representation of this building
+   */
+  public JSONObject toJSON() {
+    JSONObject jsonBuilding = new JSONObject();
+    jsonBuilding.put("buildingName", this.name);
+    JSONArray jsonFloors = new JSONArray();
+    for (Floor floor : floors) {
+      jsonFloors.put(floor.toJSON());
+    }
+    jsonBuilding.put("floors", jsonFloors);
+    return jsonBuilding;
   }
 
   /**

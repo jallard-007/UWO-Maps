@@ -103,6 +103,7 @@ public class Util {
       file.flush();
       file.close();
     } catch (IOException ignored) {
+      System.out.println("Could not write to file: " + rootPath + relativePath);
     }
   }
 }
