@@ -1,22 +1,23 @@
 package mapsJavaFX;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import maps.Building;
 import maps.Floor;
 import maps.POILocation;
-import java.io.File;
+
 import java.util.List;
 
-
 public class MapViewController {
-  @FXML private TabPane tabPane;
+  @FXML
+  private TabPane tabPane;
   List<Building> buildings;
 
-  public void addBuildings(List<Building> buildings) {
+  public void setBuildings(List<Building> buildings) {
     this.buildings = buildings;
 
     // creates a new tab for each building
@@ -31,14 +32,18 @@ public class MapViewController {
       // creates a new tab for each floor within the building tab
       for (Floor floor : building.getFloors()) {
         Tab floorTab = new Tab(floor.getName());
-        Image image = new Image(new File(floor.getImagePath()).toURI().toString());
+        Image image = floor.getImage();
         ImageView imageView = new ImageView(image);
 
-        // you can change these values to change the size of the image
-        imageView.setFitHeight(450);
-        imageView.setFitWidth(900);
+        // Add floor PNGs into a scrollpane so users can pan through the maps; set dimensions to
+        // half the original image size
+        imageView.setFitHeight(image.getHeight() / 2);
+        imageView.setFitWidth(image.getWidth() / 2);
+        ScrollPane scrollpane = new ScrollPane();
+        scrollpane.setContent(imageView);
 
-        floorTab.setContent(imageView);
+        // Add scrollpane to the tab of each floor
+        floorTab.setContent(scrollpane);
         floorTab.setClosable(false);
         buildingTabPane.getTabs().add(floorTab);
       }
@@ -48,12 +53,11 @@ public class MapViewController {
   public void goToPOI(POILocation poiLocation) {
     System.out.println("go to " + poiLocation);
 
-    Tab floorTab = goToTab(
-      (TabPane) goToTab(this.tabPane, poiLocation.getBuilding().getName()).getContent(),
-      poiLocation.getFloor().getName()
-    );
+    Tab floorTab =
+        goToTab((TabPane) goToTab(this.tabPane, poiLocation.getBuilding().getName()).getContent(),
+            poiLocation.getFloor().getName());
 
-    // need to somehow highlight the POI and focus on it. 
+    // need to somehow highlight the POI and focus on it.
     // example: highlightPOI(poILocation, floorTab?)
   }
 

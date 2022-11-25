@@ -1,6 +1,7 @@
 package mapsJavaFX;
 
 import java.io.IOException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,26 +25,29 @@ public class LoginController {
   private AnchorPane logIn;
 
   public void goToApplication(ActionEvent event) throws IOException {
-    System.out.println("switched");
+    if (username.getText().equals("")) {
+      // ask user to input username
+      return;
+    }
+    if (password.getText().equals("")) {
+      // ask user to input password
+      return;
+    }
+    Application app = ControllerMediator.getInstance().getApplication();
+    if (!app.login(username.getText(), password.getText())) {
+      // username / password incorrect
+      return;
+    }
     FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/mainView.fxml"));
     Scene scene = new Scene(fxmlLoader.load());
+    MainController controller = fxmlLoader.getController();
+    Util.setControllers(controller, app);
+
     Stage stage = (Stage) logIn.getScene().getWindow();
     stage.setX(23);
     stage.setY(20);
     stage.setScene(scene);
     stage.show();
-    MainController controller = fxmlLoader.getController();
-    Application app = new Application();
-    try {
-      app.loadData();
-    } catch (IOException e) {
-      System.out.println(e.getMessage());
-      e.printStackTrace();
-      System.exit(12);
-    }
-    ControllerMediator.getInstance().registerMapViewController(controller.getMapViewController());
-    controller.getSearchPOIController().addPOIs(app.getPoiLocations());
-    controller.getMapViewController().addBuildings(app.getBuildings());
   }
 
   public void goToSignUp(ActionEvent event) throws IOException {

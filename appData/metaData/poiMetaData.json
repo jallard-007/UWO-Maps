@@ -60,14 +60,14 @@
               "roomNum": "MC 230",
               "type": "lab",
               "capacity": 24,
-              "information": "Workstations:  Intel Core i5; 16 GB RAM; SSD  \n\nSoftware: Windows 10, Microsoft Office 2016, Adobe CS 6, Audacity, Kompozer\n\nFacilities: Network printer, Projector, Whiteboard, RFID room access\n",
+              "information": "Workstations:  Intel Core i5; 16 GB RAM; SSD\nSoftware: Windows 10, Microsoft Office 2016, Adobe CS 6, Audacity, Kompozer\nFacilities: Network printer, Projector, Whiteboard, RFID room access\n",
               "position": [23, 34]
             },
             {
               "roomNum": "MC 235",
               "type": "lab",
               "capacity": 24,
-              "information": "Workstations:  Intel Core i5; 16 GB RAM; SSD     \n\nSoftware: Windows 10, Microsoft Office 2016, Audacity, Kompozer\n\nFacilities: Network printer, Projector, Whiteboard, RFID room access\n",
+              "information": "Workstations:  Intel Core i5; 16 GB RAM; SSD\nSoftware: Windows 10, Microsoft Office 2016, Audacity, Kompozer\nFacilities: Network printer, Projector, Whiteboard, RFID room access\n",
               "position": [13, 67]
             },
             {
@@ -81,14 +81,14 @@
               "roomNum": "MC 240",
               "type": "lab",
               "capacity": 27,
-              "information": "Workstations:  Intel Core i5; 8 GB RAM; HDD     \n\nSoftware: Windows 10, Microsoft Office 2016, Audacity, Kompozer\n\nFacilities: Network printer, Whiteboard, RFID room access\n",
+              "information": "Workstations:  Intel Core i5; 8 GB RAM; HDD\nSoftware: Windows 10, Microsoft Office 2016, Audacity, Kompozer\nFacilities: Network printer, Whiteboard, RFID room access\n",
               "position": [13, 67]
             },
             {
               "roomNum": "MC 244",
               "type": "lab",
               "capacity": 30,
-              "information": "Workstations: \n28 general-purpose workstations-- Intel Core i5; 16 GB RAM; SSD\n2 GPU workstations-- Intel Core i7; 16 GB RAM; SSD\nNVIDIA GeForce GTX 1060 (6 GB DDR)\n\nSoftware: Fedora 28, LibreOffice, GIMP\n\nFacilities: Network printer, Projector (A/V Instructions), Wireless connectivity, HDMI connectivity, Motorized projection screen, Whiteboard, RFID room access\n",
+              "information": "Workstations: \n28 general-purpose workstations-- Intel Core i5; 16 GB RAM; SSD\n2 GPU workstations-- Intel Core i7; 16 GB RAM; SSD\nNVIDIA GeForce GTX 1060 (6 GB DDR)\nSoftware: Fedora 28, LibreOffice, GIMP\nFacilities: Network printer, Projector (A/V Instructions), Wireless connectivity, HDMI connectivity, Motorized projection screen, Whiteboard, RFID room access\n",
               "position": [13, 67]
             }
           ]
@@ -130,7 +130,7 @@
               "roomNum": "MC 342",
               "type": "lab",
               "capacity": 20,
-              "information": "Workstations: \n16 Windows 10 PCs-- Intel Core i5; 16 GB RAM; SSD\n2 Mac Minis-- macOS High Sierra \nIntel Core i7; 16 GB RAM; SSD\n1 IoT Station-- HDMI connectivity to monitor, USB keyboard/mouse, USB and power outlets to power devices, Network switch\n\nSoftware: Microsoft Office 2016, Audacity, Kompozer\n\nFacilities: Network printer, RFID room access\n",
+              "information": "Workstations: \n16 Windows 10 PCs-- Intel Core i5; 16 GB RAM; SSD\n2 Mac Minis-- macOS High Sierra \nIntel Core i7; 16 GB RAM; SSD\n1 IoT Station-- HDMI connectivity to monitor, USB keyboard/mouse, USB and power outlets to power devices, Network switch\nSoftware: Microsoft Office 2016, Audacity, Kompozer\nFacilities: Network printer, RFID room access\n",
               "position": [23, 34]
             }
           ]
@@ -207,7 +207,7 @@
               "roomNum": "NSC 151",
               "name": "Allyn & Betty Taylor Library",
               "type": "library",
-              "hours": "Mon - Fri: 9:00am-8pm\nSat - Sun: 10:00am-5:00pm\n\nOperating hours extended during finals\n",
+              "hours": "Mon - Fri: 9:00am-8pm\nSat - Sun: 10:00am-5:00pm\nOperating hours extended during finals\n",
               "information": "Books, public computers, study & media rooms",
               "position": [23, 34]
             }

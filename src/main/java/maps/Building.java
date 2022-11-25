@@ -27,4 +27,13 @@ public class Building {
     }
     return str.toString();
   }
+
+  public Floor getMatchingFloor(String floorName) {
+    for (Floor floor : this.floors) {
+      if (floor.getName().equals(floorName)) {
+        return floor;
+      }
+    }
+    return null;
+  }
 }

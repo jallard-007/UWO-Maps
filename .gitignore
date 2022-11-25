@@ -2,6 +2,9 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+appData/users/*.json
+!appData/users/user.json
+!appData/users/example.json
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
@@ -34,6 +37,7 @@ build/
 
 ### VS Code ###
 .vscode/
+!.vscode/extensions.json
 
 ### Mac OS ###
 .DS_Store

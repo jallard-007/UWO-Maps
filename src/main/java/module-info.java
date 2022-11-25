@@ -5,6 +5,7 @@ module mapsJavaFX {
   requires org.json;
 
   opens mapsJavaFX to javafx.fxml;
+
   exports mapsJavaFX;
   exports maps;
 }

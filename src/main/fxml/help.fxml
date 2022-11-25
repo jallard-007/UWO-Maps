@@ -9,7 +9,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.geometry.Insets?>
 <AnchorPane prefHeight="650.0" prefWidth="1287.0" xmlns="http://javafx.com/javafx/19"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapsJavaFX.NavigationController">
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapsJavaFX.NavigationController" fx:id="menuBar">
     <fx:include source="menuBar.fxml"/>
     <ScrollPane layoutY="47.0" prefHeight="536.0" prefWidth="1287.0">
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="915.0" prefWidth="1274.0">
