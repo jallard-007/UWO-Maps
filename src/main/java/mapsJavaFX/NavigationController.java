@@ -49,7 +49,7 @@ public class NavigationController {
     }
     FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/login.fxml"));
     Scene scene = new Scene(fxmlLoader.load());
-    ControllerMediator.getInstance().getApplication().logout();
+    ControllerMediator.getInstance().getApplication().save();
     changeScene(scene, event);
   }
 

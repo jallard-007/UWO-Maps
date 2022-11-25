@@ -3,52 +3,82 @@ package maps;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * Represents a user
+ */
 public class User {
   private String username;
   private String password;
   private UserType type;
   private List<POILocation> favourites;
 
-  public User(String name, String password, UserType type) {
-    this.username = name;
+  /**
+   * @param username username
+   * @param password password
+   * @param type type of user
+   */
+  public User(String username, String password, UserType type) {
+    this.username = username;
     this.password = password;
     this.type = type;
     this.favourites = new ArrayList<>();
   }
 
+  /**
+   * @param jsonUser json object representation of a user
+   */
   public User(JSONObject jsonUser) {
     this(jsonUser.getString("username"), jsonUser.getString("password"),
         UserType.valueOf(jsonUser.getString("userType")));
   }
 
-  public void addFavourite(POILocation poi) {
-    favourites.add(poi);
+  /**
+   * Adds a poi to favourites
+   * 
+   * @param poiLocation poi location to add to favourites
+   */
+  public void addFavourite(POILocation poiLocation) {
+    favourites.add(poiLocation);
   }
 
+  /**
+   * Removes a poi from favourites
+   * 
+   * @param poiLocation poi location to remove from favourites
+   */
   public void removeFavourites(POILocation poiLocation) {
     favourites.remove(poiLocation);
   }
 
-  public int searchFavourites(POILocation poiLocation) {
+  /**
+   * Finds the index of a favourite poi
+   * 
+   * @param poiLocation object to search for
+   * @return index of poiLocation in favourites, -1 if it is not in the list
+   */
+  public int indexOfFavourite(POILocation poiLocation) {
     return favourites.indexOf(poiLocation);
   }
 
-  public void saveToFile(List<POILocation> customPOIs) {
+  /**
+   * Saves the user object to disk as json
+   * 
+   * @param customPOIs a list of custom POIs created by the user
+   */
+  public void saveUser(List<POILocation> customPOIs) {
     JSONObject jsonUser = createJSONObjectOfUser(customPOIs);
-    try (FileWriter file =
-        new FileWriter(Util.getRootPath() + "/appData/users/" + this.username + ".json")) {
-      file.write(jsonUser.toString());
-      file.flush();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+    Util.writeToFile(jsonUser, "/appData/users/" + this.username + ".json");
   }
 
+  /**
+   * Creates the json representation of the user
+   * 
+   * @param customPOIs a list of custom POIs created by the user
+   * @return json representation of the user
+   */
   private JSONObject createJSONObjectOfUser(List<POILocation> customPOIs) {
     JSONObject jsonUser = new JSONObject();
     jsonUser.put("username", this.username);
@@ -63,36 +93,58 @@ public class User {
     // custom to json
     JSONArray customJsonArray = new JSONArray();
     for (POILocation poiLocation : customPOIs) {
-      customJsonArray.put(poiLocation.poi.createJSONObjectOfCustomPOI(poiLocation));
+      customJsonArray.put(
+          poiLocation.poi.createJSONObjectOfCustomPOI(poiLocation.building, poiLocation.floor));
     }
     jsonUser.put("customPOIs", customJsonArray);
     return jsonUser;
   }
 
+  /**
+   * @return username
+   */
   public String getUserName() {
     return username;
   }
 
+  /**
+   * @param username username
+   */
   public void setUsername(String username) {
     this.username = username;
   }
 
+  /**
+   * @param type user type
+   */
   public void setUserType(UserType type) {
     this.type = type;
   }
 
+  /**
+   * @return user type
+   */
   public UserType getUserType() {
     return type;
   }
 
+  /**
+   * @return list of favourites
+   */
   public List<POILocation> getFavourites() {
     return this.favourites;
   }
 
+  /**
+   * @param newPassword new password
+   */
   public void setPassword(String newPassword) {
     this.password = newPassword;
   }
 
+  /**
+   * @return password
+   */
   public String getPassword() {
     return this.password;
   }

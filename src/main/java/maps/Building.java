@@ -3,19 +3,33 @@ package maps;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Stores information regrading the building
+ */
 public class Building {
   String name;
   List<Floor> floors;
 
+  /**
+   * Default constructor
+   * 
+   * @param name The name of the building
+   */
   Building(String name) {
     this.name = name;
     this.floors = new ArrayList<>();
   }
 
+  /**
+   * @return name of the building
+   */
   public String getName() {
     return this.name;
   }
 
+  /**
+   * @return floors in the building
+   */
   public List<Floor> getFloors() {
     return floors;
   }
@@ -28,6 +42,12 @@ public class Building {
     return str.toString();
   }
 
+  /**
+   * Gets the floor matching the input string
+   * 
+   * @param floorName the name of the floor
+   * @return floor object with name matching floorName
+   */
   public Floor getMatchingFloor(String floorName) {
     for (Floor floor : this.floors) {
       if (floor.getName().equals(floorName)) {

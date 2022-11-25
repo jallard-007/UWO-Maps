@@ -7,17 +7,26 @@ import org.json.*;
 
 import java.lang.String;
 
+/**
+ * The Application class is the top level class for the application
+ */
 public class Application {
   User user;
   List<Building> buildings;
   List<POILocation> poiLocations;
 
+  /**
+   * Default constructor
+   */
   public Application() {
     user = null;
     buildings = new ArrayList<>();
     poiLocations = new ArrayList<>();
   }
 
+  /**
+   * Reads the main poi meta-data file on disk and loads all data into their respective classes
+   */
   public void loadData() {
     String rootPath = Util.getRootPath(); // gets root folder of application
     String fileContent = Util.getJSONFileContents(rootPath + "/appData/metaData/poiMetaData.json");
@@ -50,6 +59,14 @@ public class Application {
     }
   }
 
+  /**
+   * Signs up a user and then logs in
+   * 
+   * @param username The username to use when creating the user
+   * @param password The password for the user
+   * @return true if the signup was successful, false otherwise
+   * 
+   */
   public boolean signup(String username, String password) {
     if (!Util.createUserFile(username, password)) {
       return false;
@@ -57,6 +74,13 @@ public class Application {
     return login(username, password);
   }
 
+  /**
+   * Logs in the user
+   * 
+   * @param username The username to use when logging in
+   * @param password The password for the user
+   * @return true if the login was successful, false otherwise
+   */
   public boolean login(String username, String password) {
     String rootPath = Util.getRootPath();
     if (!new File(rootPath + "/appData/users/" + username + ".json").exists()) {
@@ -71,7 +95,7 @@ public class Application {
       return false;
     }
     this.user = new User(jsonObject);
-    loadUserPOIs();
+    loadUserPOIs(jsonObject);
     sortPOIs();
 
     // add favourites to User object
@@ -91,12 +115,12 @@ public class Application {
     return true;
   }
 
-  private void loadUserPOIs() {
-    String rootPath = Util.getRootPath();
-    String fileContent =
-        Util.getJSONFileContents(rootPath + "/appData/users/" + this.user.getUserName() + ".json");
-    JSONObject jsonUser = new JSONObject(fileContent);
-
+  /**
+   * Loads custom POIs
+   * 
+   * @param jsonUser the json representation of the user
+   */
+  private void loadUserPOIs(JSONObject jsonUser) {
     JSONArray customPOIs = jsonUser.getJSONArray("customPOIs");
     for (int poiIndex = 0; poiIndex < customPOIs.length(); ++poiIndex) {
       JSONObject jsonPOI = customPOIs.getJSONObject(poiIndex);
@@ -118,6 +142,9 @@ public class Application {
     }
   }
 
+  /**
+   * Sorts the poiLocations list in ascending order
+   */
   private void sortPOIs() {
     this.poiLocations.sort((lhs, rhs) -> {
       int buildingCompare = lhs.building.getName().compareTo(rhs.building.getName());
@@ -132,7 +159,11 @@ public class Application {
     });
   }
 
-  public void logout() {
+  /**
+   * Logs out the current user, removing the user's custom POIs and saving any changes such as
+   * favourites, and custom POIs to the user's file
+   */
+  private void logout() {
     List<POILocation> poiLocationsToRemove = new ArrayList<>();
     for (POILocation currentPOI : this.poiLocations) {
       if (currentPOI.poi.type == POIType.custom) {
@@ -140,11 +171,17 @@ public class Application {
         poiLocationsToRemove.add(currentPOI);
       }
     }
-    user.saveToFile(poiLocationsToRemove);
+    user.saveUser(poiLocationsToRemove);
     this.poiLocations.removeAll(poiLocationsToRemove);
     this.user = null;
   }
 
+  /**
+   * Gets the building object with name attribute matching buildingName
+   * 
+   * @param buildingName the name of the building to find
+   * @return the matching building object
+   */
   private Building getMatchingBuilding(String buildingName) {
     for (Building building : this.buildings) {
       if (building.getName().equals(buildingName)) {
@@ -154,6 +191,12 @@ public class Application {
     return null;
   }
 
+  /**
+   * Searches for POIs with buildingName, floorName, or POIName/POINum containing the searchText
+   * 
+   * @param searchText the text to search for a POI
+   * @return all poi location objects with partial match
+   */
   public List<POILocation> searchForPOI(String searchText) {
     searchText = searchText.toLowerCase();
     List<POILocation> matchingPOIs = new ArrayList<>();
@@ -167,31 +210,50 @@ public class Application {
     return matchingPOIs;
   }
 
+  /**
+   * @return a list of poi locations
+   */
   public List<POILocation> getPoiLocations() {
     return poiLocations;
   }
 
+  /**
+   * @return a list of buildings
+   */
   public List<Building> getBuildings() {
     return this.buildings;
   }
 
+  /**
+   * Used to save all changes made by the current user for both user types
+   */
   public void save() {
+    // TODO:
     if (user == null) {
       return;
     }
     if (user.getUserType().equals(UserType.admin)) {
       JSONObject jsonApplication = createJSONObjectOfApplication();
-      // if changes were made, update poimetadata file.
+      // if changes were made, update poi meta data file.
     }
     logout();
   }
 
+  /**
+   * Creates a JSONObject representation of the application object
+   * 
+   * @return json representation the application object
+   */
   private JSONObject createJSONObjectOfApplication() {
+    // TODO:
     JSONObject jsonApplication = new JSONObject();
     // create jsonApplication
     return jsonApplication;
   }
 
+  /**
+   * @return the logged-in user
+   */
   public User getUser() {
     return this.user;
   }

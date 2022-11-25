@@ -56,7 +56,7 @@ public class POIDescriptionController {
 
     // Handling favouriting POIs
     // check if POI is already favourited
-    if (user.searchFavourites(poiLocation) != -1) {
+    if (user.indexOfFavourite(poiLocation) != -1) {
       btnFavouritePOI.setSelected(true);
       btnFavouritePOI.setText("Unfavourite");
     }

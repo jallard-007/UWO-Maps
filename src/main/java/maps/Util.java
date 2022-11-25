@@ -9,6 +9,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Utility class. This class contains useful static methods
+ */
 public class Util {
   private static final String rootPath;
 
@@ -17,15 +20,25 @@ public class Util {
     try {
       tmp = new File(".").getCanonicalPath();
     } catch (IOException e) {
-      // Handle exception.
+      e.printStackTrace();
+      System.exit(e.hashCode());
     }
     rootPath = tmp;
   }
 
+  /**
+   * @return the absolute path of the root directory
+   */
   public static String getRootPath() {
     return rootPath;
   }
 
+  /**
+   * Gets the contents of a file
+   *
+   * @param absolutePath the absolute path of the file to read from
+   * @return the contents of the file
+   */
   public static String getJSONFileContents(String absolutePath) {
     File metaDataFile = new File(absolutePath);
     if (!metaDataFile.exists()) {
@@ -50,6 +63,13 @@ public class Util {
     return fileContent.toString();
   }
 
+  /**
+   * Creates a user file
+   *
+   * @param username username of the new user
+   * @param password password
+   * @return true if the user creation was successful, false otherwise
+   */
   public static boolean createUserFile(String username, String password) {
     // search users folder within the application folder for username
     String rootPath = getRootPath();
@@ -70,6 +90,12 @@ public class Util {
     return true;
   }
 
+  /**
+   * Writes a json object to a file
+   *
+   * @param json the json object to write
+   * @param relativePath the relative path
+   */
   public static void writeToFile(JSONObject json, String relativePath) {
     try {
       FileWriter file = new FileWriter(rootPath + relativePath);

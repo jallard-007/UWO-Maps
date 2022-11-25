@@ -3,6 +3,9 @@ package maps;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+/**
+ * Represents a POI. Room number, type, and position are the minimum required to create a poi
+ */
 public class POI {
   String roomNumber;
   POIType type;
@@ -12,6 +15,9 @@ public class POI {
   String information;
   String hoursOfOperation;
 
+  /**
+   * @param jsonPOI the json representation of a poi
+   */
   POI(JSONObject jsonPOI) {
     JSONArray jsonPosition = jsonPOI.getJSONArray("position");
     this.position = new Pair(jsonPosition.getInt(0), jsonPosition.getInt(1));
@@ -33,41 +39,61 @@ public class POI {
     }
   }
 
-  POI(String roomNumber, String name, POIType poiType, Pair position) {
+  /**
+   * @param roomNumber room number
+   * @param poiType poi type
+   * @param position coordinates of poi
+   */
+  POI(String roomNumber, POIType poiType, Pair position) {
     this.roomNumber = roomNumber;
-    this.name = name;
     this.position = position;
     this.type = poiType;
   }
 
   /**
-   * SETTERS
+   * @param name name of POI
    */
-
   public void setName(String name) {
     this.name = name;
   }
 
+  /**
+   * @param information information about the POI
+   */
   public void setInformation(String information) {
     this.information = information;
   }
 
+  /**
+   * @param capacity capacity of the POI
+   */
   public void setCapacity(Integer capacity) {
     this.capacity = capacity;
   }
 
+  /**
+   * @param hoursOfOperation hours of operation
+   */
   public void setHoursOfOperation(String hoursOfOperation) {
     this.hoursOfOperation = hoursOfOperation;
   }
 
+
   /**
-   * GETTERS
+   * Creates a json representation of a poi
+   * 
+   * @param building the building that this poi resides in
+   * @param floor the floor that this poi is on
+   * @return a json object representation of this POI to be stored in a users file
    */
-  public JSONObject createJSONObjectOfCustomPOI(POILocation poiLocation) {
+  public JSONObject createJSONObjectOfCustomPOI(Building building, Floor floor) {
+    if (type != POIType.custom) {
+      return null;
+    }
     JSONObject jsonPOI = new JSONObject();
-    jsonPOI.put("building", poiLocation.building.getName());
-    jsonPOI.put("floor", poiLocation.floor.getName());
-    jsonPOI.put("roomNum", poiLocation.poi.getRoomNumber());
+    jsonPOI.put("building", building.getName());
+    jsonPOI.put("floor", floor.getName());
+    jsonPOI.put("roomNum", roomNumber);
     jsonPOI.put("type", "custom");
     jsonPOI.put("position", position.getPair());
     if (capacity != null) {
@@ -86,10 +112,16 @@ public class POI {
     return roomNumber;
   }
 
+  /**
+   * @return the room number
+   */
   public String getRoomNumber() {
     return roomNumber;
   }
 
+  /**
+   * @return the name of the room if its set, otherwise the room number
+   */
   public String getRoomNameOrNumber() {
     if (this.name != null) {
       return this.name;
@@ -97,26 +129,44 @@ public class POI {
     return this.roomNumber;
   }
 
+  /**
+   * @return the name of the room
+   */
   public String getName() {
     return name;
   }
 
-  public String getPOIType() {
-    return type.toString();
+  /**
+   * @return the enum value of this POI's type
+   */
+  public POIType getPOIType() {
+    return type;
   }
 
+  /**
+   * @return information regarding the POI
+   */
   public String getInformation() {
     return information;
   }
 
+  /**
+   * @return capacity of the POI
+   */
   public Integer getCapacity() {
     return capacity;
   }
 
+  /**
+   * @return hours of operation
+   */
   public String getHoursOfOperation() {
     return hoursOfOperation;
   }
 
+  /**
+   * @return coordinates of the POI
+   */
   public Pair getPosition() {
     return position;
   }
