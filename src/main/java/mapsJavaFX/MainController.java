@@ -17,6 +17,12 @@ public class MainController {
   private SearchPOIController searchPOIController;
   @FXML
   private FavouritesController favouritesController;
+  @FXML
+  private POIDescriptionController poiDescripController;
+
+  public POIDescriptionController getPOIDescriptionController() {
+    return poiDescripController;
+  }
 
   public SearchPOIController getSearchPOIController() {
     return searchPOIController;

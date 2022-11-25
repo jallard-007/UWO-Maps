@@ -2,14 +2,20 @@ package mapsJavaFX;
 
 import maps.Application;
 import maps.POILocation;
+import maps.User;
 
 public class ControllerMediator {
   private MapViewController mapViewController;
   private FavouritesController favouritesController;
+  private POIDescriptionController poiDescripController;
   private Application app;
 
   void registerMapViewController(MapViewController controller) {
     mapViewController = controller;
+  }
+
+  void registerPOIDescriptionController(POIDescriptionController controller) {
+    poiDescripController = controller;
   }
 
   void registerFavouritesController(FavouritesController controller) {

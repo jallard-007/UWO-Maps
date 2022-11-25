@@ -13,13 +13,13 @@
               "type": "classroom",
               "capacity": 48,
               "information": "Seating Type: Tab Arm; Fixed\nLectern: Portable\nWriting Surface: 16-ft Sliding Chalkboard\nProjection Screen: 8-ft Motorized\nWindow Treatment: Manual Blinds\n",
-              "position": [13, 67]
+              "position": [27, 33]
             },
             {
               "roomNum": "MC 19",
               "type": "recreation",
               "information": "Grad Club, exits 6, 7, and 8 lead to the grad club patio",
-              "position": [23, 34]
+              "position": [49, 27]
             }
           ]
         },
