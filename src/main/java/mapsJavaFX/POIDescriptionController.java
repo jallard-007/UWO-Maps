@@ -49,6 +49,7 @@ public class POIDescriptionController {
     ToggleButton btnFavouritePOI = new ToggleButton("Favourite");
     btnFavouritePOI.setPrefWidth(100);
     Button btnEditPOI = new Button("Edit");
+
     ButtonBar buttonBar = new ButtonBar();
     buttonBar.getButtons().addAll(btnEditPOI, btnFavouritePOI, btnDeletePOI);
     buttonBar.setPadding(new Insets(5));
