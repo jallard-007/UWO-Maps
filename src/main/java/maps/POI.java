@@ -50,6 +50,11 @@ public class POI {
     this.type = poiType;
   }
 
+  public void setPosition(double x, double y) {
+    this.position.setX(x);
+    this.position.setY(y);
+  }
+
   /**
    * @param name name of POI
    */
@@ -78,9 +83,31 @@ public class POI {
     this.hoursOfOperation = hoursOfOperation;
   }
 
+  /**
+   * @return a json object representation of this POI
+   */
+  public JSONObject toJSON() {
+    JSONObject jsonPOI = new JSONObject();
+    jsonPOI.put("roomNum", roomNumber);
+    jsonPOI.put("type", type.name());
+    jsonPOI.put("position", position.getPair());
+    if (name != null) {
+      jsonPOI.put("name", name);
+    }
+    if (capacity != null) {
+      jsonPOI.put("capacity", capacity);
+    }
+    if (information != null) {
+      jsonPOI.put("information", information);
+    }
+    if (hoursOfOperation != null) {
+      jsonPOI.put("hours", hoursOfOperation);
+    }
+    return jsonPOI;
+  }
 
   /**
-   * Creates a json representation of a poi
+   * Creates a json representation of a poi with custom type
    * 
    * @param building the building that this poi resides in
    * @param floor the floor that this poi is on
@@ -90,21 +117,9 @@ public class POI {
     if (type != POIType.custom) {
       return null;
     }
-    JSONObject jsonPOI = new JSONObject();
+    JSONObject jsonPOI = this.toJSON();
     jsonPOI.put("building", building.getName());
     jsonPOI.put("floor", floor.getName());
-    jsonPOI.put("roomNum", roomNumber);
-    jsonPOI.put("type", "custom");
-    jsonPOI.put("position", position.getPair());
-    if (capacity != null) {
-      jsonPOI.put("capacity", capacity);
-    }
-    if (information != null) {
-      jsonPOI.put("information", information);
-    }
-    if (hoursOfOperation != null) {
-      jsonPOI.put("capacity", hoursOfOperation);
-    }
     return jsonPOI;
   }
 

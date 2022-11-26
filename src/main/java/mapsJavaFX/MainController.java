@@ -1,12 +1,12 @@
 package mapsJavaFX;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 
 public class MainController {
   @FXML
-  private TabPane mapView;
+  private StackPane mapView;
   @FXML
   private BorderPane searchPOI;
   @FXML

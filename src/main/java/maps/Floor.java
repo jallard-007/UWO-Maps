@@ -3,7 +3,8 @@ package maps;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
+import org.json.JSONArray;
+import org.json.JSONObject;
 import javafx.scene.image.Image;
 
 /**
@@ -49,7 +50,7 @@ public class Floor {
   Floor(int level, String name, String imagePath) {
     this(level, name);
     this.imagePath = imagePath;
-    this.image = new Image(new File(imagePath).toURI().toString());
+    this.image = new Image(new File(Util.getRootPath() + imagePath).toURI().toString());
   }
 
   public String toString() {
@@ -62,6 +63,27 @@ public class Floor {
     return str.toString();
   }
 
+  public void addPOI(POI poi) {
+    this.pois[poi.type.ordinal()].add(poi);
+  }
+
+  /**
+   * @return a json object representation of this floor
+   */
+  public JSONObject toJSON() {
+    JSONObject jsonFloor = new JSONObject();
+    jsonFloor.put("map", this.imagePath);
+    jsonFloor.put("levelName", this.name);
+    jsonFloor.put("level", this.level);
+    JSONArray jsonPOIs = new JSONArray();
+    for (List<POI> poiList : this.pois) {
+      for (POI poi : poiList) {
+        jsonPOIs.put(poi.toJSON());
+      }
+    }
+    jsonFloor.put("pois", jsonPOIs);
+    return jsonFloor;
+  }
 
   /**
    * @return pois on the floor

@@ -1,30 +1,27 @@
 package mapsJavaFX;
 
+import java.util.List;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import maps.Application;
 import maps.Building;
 import maps.Floor;
 import maps.POI;
 import maps.POILocation;
-import maps.User;
 
 public class MapViewController {
   @FXML
+  private StackPane stackPane;
+  @FXML
   private TabPane tabPane;
-  private POIDescriptionController poiDescriptionController;
   Application app;
-
 
   public void setApp(Application app) {
     this.app = app;
@@ -44,43 +41,6 @@ public class MapViewController {
         Image image = floor.getImage();
         ImageView imageView = new ImageView(image);
 
-        // Create the GridPane
-        GridPane grid = new GridPane();
-        grid.setGridLinesVisible(true);
-
-        // Create empty grid to allow POIs to be placed on map
-        for (int i = 0; i < image.getWidth() / 25 / 2; i++) {
-          ColumnConstraints column = new ColumnConstraints(25);
-          grid.getColumnConstraints().add(column);
-
-        }
-        for (int j = 0; j < image.getHeight() / 25 / 2; j++) {
-          RowConstraints row = new RowConstraints(25);
-          grid.getRowConstraints().add(row);
-        }
-
-        // Add the POIs to the gridPane
-        for (POILocation poiLocation : app.getPoiLocations()) {
-          if (poiLocation.getFloor().getName() == floor.getName()
-              && poiLocation.getBuilding().getName() == building.getName()) {
-            Button btn = new Button("P");
-            btn.setOnAction(actionEvent -> {
-              // temporary callback function, will trigger the POPUP when clicked
-
-              // poiDescriptionController(app.getUser(),poiLocation);
-              System.out.println(poiLocation.getPOI().getInformation());
-              System.out.println("X coordinate is:" + poiLocation.getPOI().getPosition().getX());
-            });
-            btn.setWrapText(true);
-            // btn.setMaxSize(25, 25);
-            // btn.setMinSize(25, 25);
-            GridPane.setConstraints(btn, poiLocation.getPOI().getPosition().getX(),
-                poiLocation.getPOI().getPosition().getY());
-            grid.getChildren().add(btn);
-          } ;
-        }
-
-
         // Add floor PNGs into a scrollPane so users can pan through the maps; set dimensions to
         // half the original image size
         StackPane stackPane = new StackPane(); // Stack to hold both the imageview and gridpane
@@ -89,17 +49,73 @@ public class MapViewController {
         imageView.setFitHeight(image.getHeight() / 2);
         imageView.setFitWidth(image.getWidth() / 2);
 
-        scrollPane.setContent(imageView);
+        Pane poiPane = new Pane();
+        scrollPane.setContent(imageView); // set image for scroll pane
+
+        // Add POIs to the Map
+        for (List<POI> poiList : floor.getPOIS()) {
+          for (POI poi : poiList) {
+            Button poiButton = new Button("POI");
+            makeDraggable(poiButton, poi);
+            poiButton.setOnAction(actionEvent -> {
+              // temporary callback function, will trigger the POPUP when clicked
+              new POIDescriptionController(app.getUser(), null, poi);
+            });
+            poiButton.setLayoutX(poi.getPosition().getX());
+            poiButton.setLayoutY(poi.getPosition().getY());
+            poiPane.getChildren().add(poiButton);
+          }
+        }
+
+        // Add image and POI pane to the stackpane
         stackPane.getChildren().add(imageView);
-        stackPane.getChildren().add(grid);
+        stackPane.getChildren().add(poiPane);
+        // put stackpane into scrollpane
         scrollPane.setContent(stackPane);
 
-        // Add scrollPane to the tab of each floor
+        // Add content to Tab
         floorTab.setContent(scrollPane);
         floorTab.setClosable(false);
         buildingTabPane.getTabs().add(floorTab);
       }
     }
+
+  }
+
+  private double startX;
+  private double startY;
+
+  private void makeDraggable(Button node, POI poi) {
+    node.setOnMousePressed(e -> {
+      if (app.getEditMode()) {
+        startX = e.getScreenX();
+        startY = e.getScreenY();
+      }
+    });
+
+    //
+    node.setOnMouseClicked(e -> {
+      System.out.println(startX + " : " + startY);
+    });
+
+    node.setOnMouseDragged(e -> {
+      if (app.getEditMode()) {
+        node.setTranslateX(e.getScreenX() - startX);
+        node.setTranslateY(e.getScreenY() - startY);
+      }
+    });
+
+    node.setOnMouseReleased(e -> {
+      if (app.getEditMode()) {
+        poi.setPosition(poi.getPosition().getX() + (e.getScreenX() - startX),
+            poi.getPosition().getY() + (e.getScreenY() - startY));
+        node.setLayoutX(poi.getPosition().getX());
+        node.setTranslateX(0);
+        node.setLayoutY(poi.getPosition().getY());
+        node.setTranslateY(0);
+      }
+
+    });
   }
 
   public void goToPOI(POILocation poiLocation) {
@@ -112,7 +128,6 @@ public class MapViewController {
     // need to somehow highlight the POI and focus on it.
     // example: highlightPOI(poILocation, floorTab?)
   }
-
 
   private Tab goToTab(TabPane tabPane, String tabName) {
     if (tabPane == null) {

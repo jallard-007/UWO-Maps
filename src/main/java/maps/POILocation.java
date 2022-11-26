@@ -19,6 +19,15 @@ public class POILocation {
     this.poi = poi;
   }
 
+  /**
+   * Removes a POI from its floor. The POI itself is not deleted
+   * 
+   * @return true if the removal was successful, false otherwise
+   */
+  public boolean removePOI() {
+    return floor.pois[poi.type.ordinal()].remove(poi);
+  }
+
   public String toString() {
     return building.getName() + " | " + floor.getName() + " | " + poi.getRoomNameOrNumber();
   }

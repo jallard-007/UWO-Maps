@@ -12,6 +12,7 @@ import java.lang.String;
  */
 public class Application {
   User user;
+  boolean editMode;
   List<Building> buildings;
   List<POILocation> poiLocations;
 
@@ -20,6 +21,7 @@ public class Application {
    */
   public Application() {
     user = null;
+    editMode = false;
     buildings = new ArrayList<>();
     poiLocations = new ArrayList<>();
   }
@@ -43,7 +45,7 @@ public class Application {
       for (int floorIndex = 0; floorIndex < floors.length(); ++floorIndex) {
         JSONObject jsonFloor = floors.getJSONObject(floorIndex);
         Floor javaFloor = new Floor(jsonFloor.getInt("level"), jsonFloor.getString("levelName"),
-            rootPath + jsonFloor.getString("map"));
+            jsonFloor.getString("map"));
         javaBuilding.floors.add(javaFloor);
 
         JSONArray pois = jsonFloor.getJSONArray("pois");
@@ -51,7 +53,7 @@ public class Application {
         // add POIs of current floor
         for (int poiIndex = 0; poiIndex < pois.length(); ++poiIndex) {
           POI javaPOI = new POI(pois.getJSONObject(poiIndex));
-          javaFloor.pois[javaPOI.type.ordinal()].add(javaPOI);
+          javaFloor.addPOI(javaPOI);
           POILocation poiLocation = new POILocation(javaBuilding, javaFloor, javaPOI);
           this.poiLocations.add(poiLocation);
         }
@@ -95,6 +97,15 @@ public class Application {
       return false;
     }
     this.user = new User(jsonObject);
+
+    // Just to test restricting edit mode. will need to be changed.
+    // Signing in as 'user' allows you to move the buttons freely, and
+    // the new position is stored added to the json file and current application state.
+    // Signing in as 'example' the buttons cannot be moved.
+    if (this.user.getUserType() == UserType.admin) {
+      this.editMode = true;
+    }
+
     loadUserPOIs(jsonObject);
     sortPOIs();
 
@@ -113,6 +124,13 @@ public class Application {
 
     // indicate login was successful
     return true;
+  }
+
+  /**
+   * @return the logged-in user
+   */
+  public User getUser() {
+    return this.user;
   }
 
   /**
@@ -137,9 +155,13 @@ public class Application {
         continue;
       }
 
-      floor.pois[javaPOI.type.ordinal()].add(javaPOI);
+      floor.addPOI(javaPOI);
       this.poiLocations.add(new POILocation(building, floor, javaPOI));
     }
+  }
+
+  public boolean getEditMode() {
+    return this.editMode;
   }
 
   /**
@@ -163,7 +185,7 @@ public class Application {
    * Logs out the current user, removing the user's custom POIs and saving any changes such as
    * favourites, and custom POIs to the user's file
    */
-  private void logout() {
+  private UserType logout() {
     List<POILocation> poiLocationsToRemove = new ArrayList<>();
     for (POILocation currentPOI : this.poiLocations) {
       if (currentPOI.poi.type == POIType.custom) {
@@ -173,7 +195,16 @@ public class Application {
     }
     user.saveUser(poiLocationsToRemove);
     this.poiLocations.removeAll(poiLocationsToRemove);
+    UserType userType = user.getUserType();
     this.user = null;
+    return userType;
+  }
+
+  /**
+   * @return a list of buildings
+   */
+  public List<Building> getBuildings() {
+    return this.buildings;
   }
 
   /**
@@ -202,8 +233,7 @@ public class Application {
     List<POILocation> matchingPOIs = new ArrayList<>();
     for (POILocation poiLocation : this.poiLocations) {
       if (poiLocation.toString().toLowerCase().contains(searchText)
-          || (poiLocation.poi.getName() != null
-              && poiLocation.poi.getName().toLowerCase().contains(searchText))) {
+          || poiLocation.poi.getRoomNumber().toLowerCase().contains(searchText)) {
         matchingPOIs.add(poiLocation);
       }
     }
@@ -218,10 +248,95 @@ public class Application {
   }
 
   /**
-   * @return a list of buildings
+   * Deletes a building from the application
+   * 
+   * @param building the building to delete
+   * @return true if successful, false otherwise
    */
-  public List<Building> getBuildings() {
-    return this.buildings;
+  public boolean deleteBuilding(Building building) {
+    if (user.getUserType() != UserType.admin) {
+      return false;
+    }
+    List<POILocation> found = new ArrayList<>();
+    for (POILocation poiLocation : this.poiLocations) {
+      if (poiLocation.building.equals(building)) {
+        found.add(poiLocation);
+      }
+    }
+    this.poiLocations.removeAll(found);
+    return this.buildings.remove(building);
+  }
+
+  /**
+   * Deletes a floor from the application
+   * 
+   * @param building the building that the floor is in
+   * @param floor the floor to delete
+   * @return true if successful, false otherwise
+   */
+  public boolean deleteFloor(Building building, Floor floor) {
+    if (user.getUserType() != UserType.admin) {
+      return false;
+    }
+    List<POILocation> found = new ArrayList<>();
+    for (POILocation poiLocation : this.poiLocations) {
+      if (poiLocation.floor.equals(floor)) {
+        found.add(poiLocation);
+      }
+    }
+    this.poiLocations.removeAll(found);
+    return building.floors.remove(floor);
+  }
+
+  /**
+   * Deletes a POI from the application
+   * 
+   * @param floor the floor that the POI is on
+   * @param poi the POI to delete
+   * @return true if successful, false otherwise
+   */
+  public boolean deletePOI(Floor floor, POI poi) {
+    if (user.getUserType() != UserType.admin) {
+      return false;
+    }
+    for (POILocation poiLocation : this.poiLocations) {
+      if (poiLocation.poi.equals(poi)) {
+        this.poiLocations.remove(poiLocation);
+        return poiLocation.removePOI();
+      }
+    }
+    return false;
+  }
+
+  /**
+   * Adds a building to the application
+   * 
+   * @param building the building to add
+   */
+  public void addBuilding(Building building) {
+    this.buildings.add(building);
+  }
+
+  /**
+   * Adds a floor to the building
+   * 
+   * @param floor the floor to add
+   */
+  public void addFloor(Building building, Floor floor) {
+    building.floors.add(floor);
+  }
+
+  /**
+   * Creates a POILocation object for the poi, adds it to the list, and adds the poi to the floor
+   * 
+   * @param building the building that the floor is in
+   * @param floor the floor that the poi is on
+   * @param poi the poi to add
+   */
+  public void addPOI(Building building, Floor floor, POI poi) {
+    this.poiLocations.add(new POILocation(building, floor, poi));
+    this.sortPOIs();
+    floor.addPOI(poi);
   }
 
   /**
@@ -232,11 +347,11 @@ public class Application {
     if (user == null) {
       return;
     }
-    if (user.getUserType().equals(UserType.admin)) {
+    UserType type = logout();
+    if (type.equals(UserType.admin)) {
       JSONObject jsonApplication = createJSONObjectOfApplication();
-      // if changes were made, update poi meta data file.
+      Util.writeToFile(jsonApplication, "/appData/metaData/poiMetaData.json");
     }
-    logout();
   }
 
   /**
@@ -247,14 +362,11 @@ public class Application {
   private JSONObject createJSONObjectOfApplication() {
     // TODO:
     JSONObject jsonApplication = new JSONObject();
-    // create jsonApplication
+    JSONArray jsonBuildings = new JSONArray();
+    jsonApplication.put("buildings", jsonBuildings);
+    for (Building building : this.buildings) {
+      jsonBuildings.put(building.toJSON());
+    }
     return jsonApplication;
-  }
-
-  /**
-   * @return the logged-in user
-   */
-  public User getUser() {
-    return this.user;
   }
 }

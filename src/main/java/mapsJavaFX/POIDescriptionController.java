@@ -11,27 +11,32 @@ import maps.POILocation;
 import maps.User;
 
 public class POIDescriptionController {
-  public POIDescriptionController(User user, POILocation poiLocation) {
+  public POIDescriptionController(User user, POILocation poiLocation, POI POI) {
     BorderPane borderPane = new BorderPane();
 
     // Concatenate variables to form a string Label containing the description of the selected POI
-    POI poi = poiLocation.getPOI();
+    POI poi;
+    if (poiLocation != null) {
+      poi = poiLocation.getPOI();
+    } else {
+      poi = POI;
+    }
 
     String description = "ROOM NUMBER: " + poi.getRoomNumber() + "\n";
 
-    if (poiLocation.getPOI().getName() != null) {
+    if (poi.getName() != null) {
       description += "NAME: " + poi.getName() + "\n";
     }
 
     description += "TYPE: " + poi.getPOIType() + "\n";
 
-    if (poiLocation.getPOI().getCapacity() != null) {
+    if (poi.getCapacity() != null) {
       description += "ROOM CAPACITY: " + poi.getCapacity() + "\n";
     }
-    if (poiLocation.getPOI().getHoursOfOperation() != null) {
+    if (poi.getHoursOfOperation() != null) {
       description += "\nHOURS OF OPERATION: \n" + poi.getHoursOfOperation();
     }
-    if (poiLocation.getPOI().getInformation() != null) {
+    if (poi.getInformation() != null) {
       description += "\nADDITIONAL INFORMATION: \n" + poi.getInformation();
     }
 
@@ -49,6 +54,7 @@ public class POIDescriptionController {
     ToggleButton btnFavouritePOI = new ToggleButton("Favourite");
     btnFavouritePOI.setPrefWidth(100);
     Button btnEditPOI = new Button("Edit");
+
     ButtonBar buttonBar = new ButtonBar();
     buttonBar.getButtons().addAll(btnEditPOI, btnFavouritePOI, btnDeletePOI);
     buttonBar.setPadding(new Insets(5));
@@ -56,7 +62,7 @@ public class POIDescriptionController {
 
     // Handling favouriting POIs
     // check if POI is already favourited
-    if (user.indexOfFavourite(poiLocation) != -1) {
+    if (user.indexOfFavourite(poiLocation) != -1 && poiLocation != null) {
       btnFavouritePOI.setSelected(true);
       btnFavouritePOI.setText("Unfavourite");
     }
