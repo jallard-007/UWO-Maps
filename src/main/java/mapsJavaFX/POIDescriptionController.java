@@ -53,12 +53,38 @@ public class POIDescriptionController {
     Button btnDeletePOI = new Button("Delete");
     ToggleButton btnFavouritePOI = new ToggleButton("Favourite");
     btnFavouritePOI.setPrefWidth(100);
-    Button btnEditPOI = new Button("Edit");
+    ToggleButton btnEditPOI = new ToggleButton("Edit");
 
     ButtonBar buttonBar = new ButtonBar();
     buttonBar.getButtons().addAll(btnEditPOI, btnFavouritePOI, btnDeletePOI);
     buttonBar.setPadding(new Insets(5));
     borderPane.setBottom(buttonBar);
+
+
+    // btnEditPOI.setOnAction(event -> {
+    // if (btnEditPOI.isSelected()) {
+    // btnEditPOI.setText("Cancel");
+
+    // TextField rmNum = new TextField("Room Number: ");
+    // TextField name = new TextField("Room Name: ");
+    // scrollPane.setContent(rmNum);
+    // borderPane.setCenter(scrollPane);
+    // // user.addFavourite(poiLocation);
+    // // ControllerMediator.getInstance().refreshFavouritesList();
+    // } else {
+    // btnEditPOI.setText("Edit");
+    // scrollPane.setContent(label);
+    // scrollPane.setFitToWidth(true);
+    // borderPane.setCenter(scrollPane);
+    // }
+    // });
+
+    btnDeletePOI.setOnAction(event -> {
+      if (btnDeletePOI.isPressed() && poiLocation != null) {
+        poiLocation.removePOI();
+        ControllerMediator.getInstance().refreshPOIList();
+      }
+    });
 
     // Handling favouriting POIs
     // check if POI is already favourited
@@ -66,6 +92,8 @@ public class POIDescriptionController {
       btnFavouritePOI.setSelected(true);
       btnFavouritePOI.setText("Unfavourite");
     }
+
+
     btnFavouritePOI.setOnAction(event -> {
       if (btnFavouritePOI.isSelected()) {
         btnFavouritePOI.setText("Unfavourite");

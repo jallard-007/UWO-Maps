@@ -37,6 +37,10 @@ public class ControllerMediator {
     favouritesController.refreshList();
   }
 
+  void refreshPOIList() {
+    mapViewController.refreshPOIs();
+  }
+
   private ControllerMediator() {}
 
   public static ControllerMediator getInstance() {
@@ -46,4 +50,5 @@ public class ControllerMediator {
   private static class ControllerMediatorHolder {
     private static final ControllerMediator INSTANCE = new ControllerMediator();
   }
+
 }

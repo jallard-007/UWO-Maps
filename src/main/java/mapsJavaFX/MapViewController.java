@@ -3,6 +3,7 @@ package mapsJavaFX;
 import java.util.List;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -22,6 +23,8 @@ public class MapViewController {
   @FXML
   private TabPane tabPane;
   Application app;
+  @FXML
+  private ListView<POILocation> POIList;
 
   public void setApp(Application app) {
     this.app = app;
@@ -79,7 +82,6 @@ public class MapViewController {
         buildingTabPane.getTabs().add(floorTab);
       }
     }
-
   }
 
   private double startX;
@@ -142,5 +144,9 @@ public class MapViewController {
       }
     }
     return null;
+  }
+
+  public void refreshPOIs() {
+    POIList.getItems().setAll(app.getPoiLocations());
   }
 }

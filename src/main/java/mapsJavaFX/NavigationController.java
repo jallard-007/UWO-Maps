@@ -37,7 +37,6 @@ public class NavigationController {
     changeScene(scene, event);
   }
 
-
   public void logout(ActionEvent event) throws IOException {
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
     alert.setTitle("Logout");
