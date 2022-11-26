@@ -12,6 +12,7 @@ import java.lang.String;
  */
 public class Application {
   User user;
+  boolean editMode;
   List<Building> buildings;
   List<POILocation> poiLocations;
 
@@ -20,6 +21,7 @@ public class Application {
    */
   public Application() {
     user = null;
+    editMode = false;
     buildings = new ArrayList<>();
     poiLocations = new ArrayList<>();
   }
@@ -95,6 +97,15 @@ public class Application {
       return false;
     }
     this.user = new User(jsonObject);
+
+    // Just to test restricting edit mode. will need to be changed.
+    // Signing in as 'user' allows you to move the buttons freely, and
+    // the new position is stored added to the json file and current application state.
+    // Signing in as 'example' the buttons cannot be moved.
+    if (this.user.getUserType() == UserType.admin) {
+      this.editMode = true;
+    }
+
     loadUserPOIs(jsonObject);
     sortPOIs();
 
@@ -147,6 +158,10 @@ public class Application {
       floor.addPOI(javaPOI);
       this.poiLocations.add(new POILocation(building, floor, javaPOI));
     }
+  }
+
+  public boolean getEditMode() {
+    return this.editMode;
   }
 
   /**

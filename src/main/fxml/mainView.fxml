@@ -9,7 +9,7 @@
 <AnchorPane prefHeight="650.0" prefWidth="1287.0" xmlns="http://javafx.com/javafx/19"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapsJavaFX.MainController">
     <fx:include source="mapView.fxml" layoutX="14.0" layoutY="62.0" prefHeight="575.0" prefWidth="1004.0"
-                tabClosingPolicy="UNAVAILABLE" fx:id="mapView"/>
+                fx:id="mapView"/>
     <TabPane layoutX="1038.0" layoutY="62.0" prefHeight="267.0" prefWidth="237.0" tabClosingPolicy="UNAVAILABLE">
         <Tab text="Search">
             <fx:include source="searchPOI.fxml" minHeight="0.0" minWidth="0.0" prefHeight="278.0" prefWidth="221.0"
