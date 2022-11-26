@@ -8,19 +8,23 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import maps.POI;
 import maps.POILocation;
-import maps.User;
+import maps.Application;
 
 public class POIDescriptionController {
-  public POIDescriptionController(User user, POILocation poiLocation, POI POI) {
+  static Application app;
+
+  public static void setApp(Application newApp) {
+    app = newApp;
+  }
+
+  public POIDescriptionController(POILocation poiLocation) {
+    if (app == null) {
+      return;
+    }
     BorderPane borderPane = new BorderPane();
 
     // Concatenate variables to form a string Label containing the description of the selected POI
-    POI poi;
-    if (poiLocation != null) {
-      poi = poiLocation.getPOI();
-    } else {
-      poi = POI;
-    }
+    POI poi = poiLocation.getPOI();
 
     String description = "ROOM NUMBER: " + poi.getRoomNumber() + "\n";
 
@@ -63,13 +67,13 @@ public class POIDescriptionController {
     btnDeletePOI.setOnAction(event -> {
       if (btnDeletePOI.isPressed() && poiLocation != null) {
         poiLocation.removePOI();
-        ControllerMediator.getInstance().refreshPOIList();
+        // ControllerMediator.getInstance().refreshPOIList();
       }
     });
 
     // Handling favouriting POIs
     // check if POI is already favourited
-    if (user.indexOfFavourite(poiLocation) != -1 && poiLocation != null) {
+    if (app.getUser().indexOfFavourite(poiLocation) != -1) {
       btnFavouritePOI.setSelected(true);
       btnFavouritePOI.setText("Unfavourite");
     }
@@ -77,11 +81,11 @@ public class POIDescriptionController {
     btnFavouritePOI.setOnAction(event -> {
       if (btnFavouritePOI.isSelected()) {
         btnFavouritePOI.setText("Unfavourite");
-        user.addFavourite(poiLocation);
+        app.getUser().addFavourite(poiLocation);
         ControllerMediator.getInstance().refreshFavouritesList();
       } else {
         btnFavouritePOI.setText("Favourite");
-        user.removeFavourites(poiLocation);
+        app.getUser().removeFavourites(poiLocation);
         ControllerMediator.getInstance().refreshFavouritesList();
 
       }

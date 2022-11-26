@@ -1,6 +1,5 @@
 package mapsJavaFX;
 
-import java.util.List;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -53,41 +52,44 @@ public class MapViewController {
         imageView.setFitWidth(image.getWidth() / 2);
 
         Pane poiPane = new Pane();
-        scrollPane.setContent(imageView); // set image for scroll pane
-
-        // Add POIs to the Map
-        for (List<POI> poiList : floor.getPOIS()) {
-          for (POI poi : poiList) {
-            Button poiButton = new Button("POI");
-            makeDraggable(poiButton, poi);
-            poiButton.setOnAction(actionEvent -> {
-              // temporary callback function, will trigger the POPUP when clicked
-              new POIDescriptionController(app.getUser(), null, poi);
-            });
-            poiButton.setLayoutX(poi.getPosition().getX());
-            poiButton.setLayoutY(poi.getPosition().getY());
-            poiPane.getChildren().add(poiButton);
-          }
-        }
-
-        // Add image and POI pane to the stackpane
         stackPane.getChildren().add(imageView);
         stackPane.getChildren().add(poiPane);
-        // put stackpane into scrollpane
         scrollPane.setContent(stackPane);
-
-        // Add content to Tab
         floorTab.setContent(scrollPane);
         floorTab.setClosable(false);
         buildingTabPane.getTabs().add(floorTab);
       }
+    }
+
+    String buildingName = "";;
+    String floorName = "";
+    Pane currPane = null;
+    for (POILocation poiLocation : this.app.getPoiLocations()) {
+
+      Button poiButton = new Button();
+      addButtonFeatures(poiButton, poiLocation);
+      poiButton.setLayoutX(poiLocation.getPOI().getPosition().getX());
+      poiButton.setLayoutY(poiLocation.getPOI().getPosition().getY());
+      if (!buildingName.equals(poiLocation.getBuilding().getName())
+          || !floorName.equals(poiLocation.getFloor().getName())) {
+        currPane = getPane(poiLocation);
+        if (currPane == null) {
+          System.out
+              .print("Error: Could not find the specified Pane | in MapViewController.setApp");
+          System.exit(55);
+        }
+      }
+      currPane.getChildren().add(poiButton);
     }
   }
 
   private double startX;
   private double startY;
 
-  private void makeDraggable(Button node, POI poi) {
+  private void addButtonFeatures(Button node, POILocation poiLocation) {
+    node.setOnMouseClicked(e -> {
+    });
+
     node.setOnMousePressed(e -> {
       if (app.getEditMode()) {
         startX = e.getScreenX();
@@ -109,12 +111,15 @@ public class MapViewController {
 
     node.setOnMouseReleased(e -> {
       if (app.getEditMode()) {
+        POI poi = poiLocation.getPOI();
         poi.setPosition(poi.getPosition().getX() + (e.getScreenX() - startX),
             poi.getPosition().getY() + (e.getScreenY() - startY));
         node.setLayoutX(poi.getPosition().getX());
         node.setTranslateX(0);
         node.setLayoutY(poi.getPosition().getY());
         node.setTranslateY(0);
+      } else {
+        new POIDescriptionController(poiLocation);
       }
 
     });
@@ -146,7 +151,18 @@ public class MapViewController {
     return null;
   }
 
-  public void refreshPOIs() {
-    POIList.getItems().setAll(app.getPoiLocations());
+  private Pane getPane(POILocation poiLocation) {
+    for (Tab buildingTab : this.tabPane.getTabs()) {
+      if (buildingTab.getText().equals(poiLocation.getBuilding().getName())) {
+        TabPane buildingTabPane = (TabPane) buildingTab.getContent();
+        for (Tab floorTab : buildingTabPane.getTabs()) {
+          if (floorTab.getText().equals(poiLocation.getFloor().getName())) {
+            StackPane stak = (StackPane) ((ScrollPane) floorTab.getContent()).getContent();
+            return (Pane) stak.getChildren().get(1);
+          }
+        }
+      }
+    }
+    return null;
   }
 }

@@ -12,5 +12,6 @@ public class Util {
     controller.getSearchPOIController().setApp(app);
     controller.getMapViewController().setApp(app);
     controller.getFavouritesController().setApp(app);
+    POIDescriptionController.setApp(app);
   }
 }

@@ -37,9 +37,9 @@ public class ControllerMediator {
     favouritesController.refreshList();
   }
 
-  void refreshPOIList() {
-    mapViewController.refreshPOIs();
-  }
+  // void refreshPOIList() {
+  // mapViewController.refreshPOIs();
+  // }
 
   private ControllerMediator() {}
 
