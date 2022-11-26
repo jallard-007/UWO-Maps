@@ -7,6 +7,6 @@
 
 <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/19"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapsJavaFX.TypesPOIController">
-        <ListView fx:id="types"
+        <ListView fx:id="poiTypeList"
                   BorderPane.alignment="CENTER"/>
 </BorderPane>

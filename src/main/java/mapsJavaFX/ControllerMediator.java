@@ -27,10 +27,6 @@ public class ControllerMediator {
     poiTypesController = controller;
   }
 
-  // void registerPOITypesController(TypesPOIController controller) {
-  // poiTypesController = controller;
-  // }
-
   void registerApplication(Application app) {
     this.app = app;
   }
