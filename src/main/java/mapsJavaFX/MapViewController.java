@@ -75,6 +75,12 @@ public class MapViewController {
     Pane currPane = null;
     for (POILocation poiLocation : this.app.getPoiLocations()) {
 
+
+      // you can now use this to make the button. currently the colour is different based on type
+      // Button poiButton = new POIButton(poiLocation);
+      // buttons can be set to movable using POIButton.
+
+
       Button poiButton = new Button("P");
       addButtonFeatures(poiButton, poiLocation);
       poiButton.setOnAction(event -> {
