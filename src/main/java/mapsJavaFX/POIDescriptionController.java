@@ -60,25 +60,6 @@ public class POIDescriptionController {
     buttonBar.setPadding(new Insets(5));
     borderPane.setBottom(buttonBar);
 
-
-    // btnEditPOI.setOnAction(event -> {
-    // if (btnEditPOI.isSelected()) {
-    // btnEditPOI.setText("Cancel");
-
-    // TextField rmNum = new TextField("Room Number: ");
-    // TextField name = new TextField("Room Name: ");
-    // scrollPane.setContent(rmNum);
-    // borderPane.setCenter(scrollPane);
-    // // user.addFavourite(poiLocation);
-    // // ControllerMediator.getInstance().refreshFavouritesList();
-    // } else {
-    // btnEditPOI.setText("Edit");
-    // scrollPane.setContent(label);
-    // scrollPane.setFitToWidth(true);
-    // borderPane.setCenter(scrollPane);
-    // }
-    // });
-
     btnDeletePOI.setOnAction(event -> {
       if (btnDeletePOI.isPressed() && poiLocation != null) {
         poiLocation.removePOI();
@@ -92,7 +73,6 @@ public class POIDescriptionController {
       btnFavouritePOI.setSelected(true);
       btnFavouritePOI.setText("Unfavourite");
     }
-
 
     btnFavouritePOI.setOnAction(event -> {
       if (btnFavouritePOI.isSelected()) {
