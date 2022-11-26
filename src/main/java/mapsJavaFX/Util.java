@@ -10,6 +10,7 @@ public class Util {
     ControllerMediator.getInstance()
         .registerPOIDescriptionController(controller.getPOIDescriptionController());
     ControllerMediator.getInstance().registerPOITypesController(controller.getPOITypesController());
+    POIButton.setApp(app);
     controller.getSearchPOIController().setApp(app);
     controller.getMapViewController().setApp(app);
     controller.getFavouritesController().setApp(app);
