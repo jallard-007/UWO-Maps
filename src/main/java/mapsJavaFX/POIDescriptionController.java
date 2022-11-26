@@ -64,13 +64,6 @@ public class POIDescriptionController {
     buttonBar.setPadding(new Insets(5));
     borderPane.setBottom(buttonBar);
 
-    btnDeletePOI.setOnAction(event -> {
-      if (btnDeletePOI.isPressed() && poiLocation != null) {
-        poiLocation.removePOI();
-        // ControllerMediator.getInstance().refreshPOIList();
-      }
-    });
-
     // Handling favouriting POIs
     // check if POI is already favourited
     if (app.getUser().indexOfFavourite(poiLocation) != -1) {

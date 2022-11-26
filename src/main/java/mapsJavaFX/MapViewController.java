@@ -2,6 +2,7 @@ package mapsJavaFX;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
@@ -15,6 +16,7 @@ import maps.Building;
 import maps.Floor;
 import maps.POI;
 import maps.POILocation;
+import maps.POIType;
 
 public class MapViewController {
   @FXML
@@ -24,9 +26,18 @@ public class MapViewController {
   Application app;
   @FXML
   private ListView<POILocation> POIList;
+  @FXML
+  private ListView<POIType> types;
 
   public void setApp(Application app) {
     this.app = app;
+    // error is here
+    types.getItems().setAll(maps.POIType.values());
+
+    // this is just printing out the POI types
+    // for (POIType type : maps.POIType.values()) {
+    // System.out.println(type);
+    // }
 
     // creates a new tab for each building
     for (Building building : this.app.getBuildings()) {
@@ -66,8 +77,11 @@ public class MapViewController {
     Pane currPane = null;
     for (POILocation poiLocation : this.app.getPoiLocations()) {
 
-      Button poiButton = new Button();
+      Button poiButton = new Button("P");
       addButtonFeatures(poiButton, poiLocation);
+      poiButton.setOnAction(event -> {
+        new POIDescriptionController(poiLocation);
+      });
       poiButton.setLayoutX(poiLocation.getPOI().getPosition().getX());
       poiButton.setLayoutY(poiLocation.getPOI().getPosition().getY());
       if (!buildingName.equals(poiLocation.getBuilding().getName())
