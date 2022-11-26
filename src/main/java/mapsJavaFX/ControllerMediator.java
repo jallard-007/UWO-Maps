@@ -2,7 +2,6 @@ package mapsJavaFX;
 
 import maps.Application;
 import maps.POILocation;
-import maps.User;
 
 public class ControllerMediator {
   private MapViewController mapViewController;
