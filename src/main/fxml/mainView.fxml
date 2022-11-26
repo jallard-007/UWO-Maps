@@ -24,7 +24,7 @@
     <TitledPane animated="false" layoutX="1039.0" layoutY="354.0" prefHeight="283.0" prefWidth="237.0"
                 text="Point of Interest Types" >
                 <!-- Trying to put the POI Types here to be displayed -->
-                <ListView fx:id="types"/>
+                <fx:include source="typePOI.fxml" minHeight="0.0" minWidth="0.0" prefHeight="238.0" prefWidth="228.0" fx:id="types"/>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="263.0" prefWidth="225.0">
             <Button layoutX="96.0" layoutY="222.0" mnemonicParsing="false" text="Update"/>
             <Button layoutX="160.0" layoutY="222.0" mnemonicParsing="false" text="Add POI"/>

@@ -7,6 +7,8 @@ public class ControllerMediator {
   private MapViewController mapViewController;
   private FavouritesController favouritesController;
   private POIDescriptionController poiDescripController;
+  private TypesPOIController poiTypesController;
+
   private Application app;
 
   void registerMapViewController(MapViewController controller) {
@@ -20,6 +22,14 @@ public class ControllerMediator {
   void registerFavouritesController(FavouritesController controller) {
     favouritesController = controller;
   }
+
+  public void registerPOITypesController(TypesPOIController controller) {
+    poiTypesController = controller;
+  }
+
+  // void registerPOITypesController(TypesPOIController controller) {
+  // poiTypesController = controller;
+  // }
 
   void registerApplication(Application app) {
     this.app = app;
@@ -50,5 +60,6 @@ public class ControllerMediator {
   private static class ControllerMediatorHolder {
     private static final ControllerMediator INSTANCE = new ControllerMediator();
   }
+
 
 }

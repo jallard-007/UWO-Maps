@@ -19,6 +19,8 @@ public class MainController {
   private FavouritesController favouritesController;
   @FXML
   private POIDescriptionController poiDescripController;
+  @FXML
+  private TypesPOIController poiTypesController;
 
   public POIDescriptionController getPOIDescriptionController() {
     return poiDescripController;
@@ -34,5 +36,9 @@ public class MainController {
 
   public FavouritesController getFavouritesController() {
     return favouritesController;
+  }
+
+  public TypesPOIController getPOITypesController() {
+    return poiTypesController;
   }
 }

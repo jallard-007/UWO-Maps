@@ -31,8 +31,6 @@ public class MapViewController {
 
   public void setApp(Application app) {
     this.app = app;
-    // error is here
-    types.getItems().setAll(maps.POIType.values());
 
     // this is just printing out the POI types
     // for (POIType type : maps.POIType.values()) {

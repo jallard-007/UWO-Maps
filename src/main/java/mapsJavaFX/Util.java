@@ -9,9 +9,11 @@ public class Util {
         .registerFavouritesController(controller.getFavouritesController());
     ControllerMediator.getInstance()
         .registerPOIDescriptionController(controller.getPOIDescriptionController());
+    ControllerMediator.getInstance().registerPOITypesController(controller.getPOITypesController());
     controller.getSearchPOIController().setApp(app);
     controller.getMapViewController().setApp(app);
     controller.getFavouritesController().setApp(app);
     POIDescriptionController.setApp(app);
+    controller.getPOITypesController().setApp(app);
   }
 }
