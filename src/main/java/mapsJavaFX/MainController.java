@@ -12,6 +12,8 @@ public class MainController {
   @FXML
   private BorderPane favourites;
   @FXML
+  private BorderPane types;
+  @FXML
   private MapViewController mapViewController;
   @FXML
   private SearchPOIController searchPOIController;
@@ -20,7 +22,7 @@ public class MainController {
   @FXML
   private POIDescriptionController poiDescripController;
   @FXML
-  private TypesPOIController poiTypesController;
+  private TypesPOIController typesController;
 
   public POIDescriptionController getPOIDescriptionController() {
     return poiDescripController;
@@ -39,6 +41,6 @@ public class MainController {
   }
 
   public TypesPOIController getPOITypesController() {
-    return poiTypesController;
+    return typesController;
   }
 }
