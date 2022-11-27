@@ -1,5 +1,6 @@
 package mapsJavaFX;
 
+import java.util.List;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -22,6 +23,7 @@ public class MapViewController {
   @FXML
   private TabPane tabPane;
   Application app;
+  private List<POILocation> poiList;
 
   public void setApp(Application app) {
     this.app = app;
@@ -63,20 +65,12 @@ public class MapViewController {
     String floorName = "";
     Pane currPane = null;
 
-
     for (POILocation poiLocation : this.app.getPoiLocations()) {
-      // poiLocation.getPOI().getPOIType() == refreshList(???){
-      // then render out the POIs
-      // need to re build this entire mapViewController every time a type is selected since this
-      // isn't bound to a FXML id
-      // }
-
-
+      poiList.add(poiLocation);
       // you can now use this to make the button. currently the colour is different based on type
       POIButton poiButton = new POIButton(poiLocation);
       poiButton.makeDraggable();
       // buttons can be set to movable using POIButton.
-
 
       // change this so it only displays after 2 mouse clicks
       poiButton.setOnAction(event -> {
