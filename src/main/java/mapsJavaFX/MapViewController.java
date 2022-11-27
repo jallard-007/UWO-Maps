@@ -15,6 +15,7 @@ import maps.Building;
 import maps.Floor;
 import maps.POILocation;
 import maps.POIType;
+import maps.Pair;
 
 public class MapViewController {
   @FXML
@@ -50,9 +51,6 @@ public class MapViewController {
         // Add floor PNGs into a scrollPane so users can pan through the maps; set dimensions to
         StackPane stackPane = new StackPane();
         ScrollPane scrollPane = new ScrollPane();
-
-        imageView.setFitHeight(image.getHeight() / 2);
-        imageView.setFitWidth(image.getWidth() / 2);
 
         Pane poiPane = new Pane();
         stackPane.getChildren().add(imageView);
@@ -90,23 +88,29 @@ public class MapViewController {
   public void goToPOI(POILocation poiLocation) {
     System.out.println("go to " + poiLocation);
 
-    Tab floorTab =
+    Tab tab =
         goToTab((TabPane) goToTab(this.tabPane, poiLocation.getBuilding().getName()).getContent(),
             poiLocation.getFloor().getName());
 
-    // need to somehow highlight the POI and focus on it.
-    // example: highlightPOI(poILocation, floorTab?)
+    Pair position = poiLocation.getPOI().getPosition();
+    ScrollPane scrollPane = (ScrollPane) tab.getContent();
+    double xRatio = position.getX() / poiLocation.getFloor().getImage().getWidth();
+    double yRatio = position.getY() / poiLocation.getFloor().getImage().getHeight();
+    double errorX = xRatio - 0.5;
+    double errorY = yRatio - 0.5;
+
+    scrollPane.setHvalue(xRatio + (errorX * 0.2));
+    scrollPane.setVvalue(yRatio + (errorY * 0.2));
+
   }
 
   private Tab goToTab(TabPane tabPane, String tabName) {
     if (tabPane == null) {
-      // error. POI does not exist
       System.exit(44);
     }
     for (Tab tab : tabPane.getTabs()) {
       if (tab.getText().equals(tabName)) {
         tabPane.getSelectionModel().select(tab);
-        System.out.println("Selected " + tab.getText());
         return tab;
       }
     }

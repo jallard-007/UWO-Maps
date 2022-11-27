@@ -7,16 +7,13 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import maps.POIType;
-import maps.Application;
 
 public class TypesPOIController {
-    private Application app;
     @FXML
     private ListView<POIType> poiTypeList;
 
-    public void setApp(Application app) {
+    public void initialize() {
         poiTypeList.setPlaceholder(new Label("No Matching POIs"));
-        this.app = app;
         poiTypeList.getItems().addAll(maps.POIType.values());
     }
 
