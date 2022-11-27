@@ -44,9 +44,10 @@ public class LoginController {
     Util.setControllers(controller, app);
 
     Stage stage = (Stage) logIn.getScene().getWindow();
-    stage.setX(23);
-    stage.setY(20);
+    stage.setHeight(700);
+    stage.setWidth(1200);
     stage.setScene(scene);
+
     stage.show();
   }
 

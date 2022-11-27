@@ -2,7 +2,6 @@ package mapsJavaFX;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
@@ -70,7 +69,7 @@ public class MapViewController {
       }
     }
 
-    String buildingName = "";;
+    String buildingName = "";
     String floorName = "";
     Pane currPane = null;
     for (POILocation poiLocation : this.app.getPoiLocations()) {
@@ -91,11 +90,11 @@ public class MapViewController {
       if (!buildingName.equals(poiLocation.getBuilding().getName())
           || !floorName.equals(poiLocation.getFloor().getName())) {
         currPane = getPane(poiLocation);
-        if (currPane == null) {
-          System.out
-              .print("Error: Could not find the specified Pane | in MapViewController.setApp");
-          System.exit(55);
-        }
+      }
+      if (currPane == null) {
+        System.out
+            .print("Error: Could not find the specified Pane | in MapViewController.setApp");
+        System.exit(55);
       }
       currPane.getChildren().add(poiButton);
     }
