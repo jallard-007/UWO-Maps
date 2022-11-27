@@ -6,6 +6,7 @@ import maps.POILocation;
 public class ControllerMediator {
   private MapViewController mapViewController;
   private FavouritesController favouritesController;
+  private SearchPOIController searchPOIController;
   private Application app;
 
   void registerMapViewController(MapViewController controller) {
@@ -14,6 +15,9 @@ public class ControllerMediator {
 
   void registerFavouritesController(FavouritesController controller) {
     favouritesController = controller;
+  }
+  void registerSearchPOIController(SearchPOIController controller){
+    searchPOIController = controller;
   }
 
   void registerApplication(Application app) {
@@ -30,6 +34,10 @@ public class ControllerMediator {
 
   void refreshFavouritesList() {
     favouritesController.refreshList();
+  }
+
+  void refreshSearchList(){
+    searchPOIController.refreshList();
   }
 
   private ControllerMediator() {}

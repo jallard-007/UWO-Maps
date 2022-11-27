@@ -8,7 +8,16 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import maps.*;
 
+/**
+ * Controller to handle the popup window displaying information about a selected POI.
+ */
 public class POIDescriptionController {
+  /**
+   * Constructor for the class, stages the popup window and sets up all its button functionalities (edit, favourite, remove)
+   * @param user current user logged into the application
+   * @param poiLocation the POI location selected by the user to view its information
+   * @param app the application
+   */
   public POIDescriptionController(User user, POILocation poiLocation, Application app) {
     BorderPane borderPane = new BorderPane();
 
@@ -79,7 +88,12 @@ public class POIDescriptionController {
     }
     btnDeletePOI.setOnAction(event -> {
       app.deletePOI(poiLocation);
-      // TODO: refresh search and favourites after delete.
+      //Refresh both the favourites and search display to reflect the deletion.
+      ControllerMediator.getInstance().refreshFavouritesList();
+      ControllerMediator.getInstance().refreshSearchList();
+      //exit pop-up
+      Stage stage = (Stage) btnDeletePOI.getScene().getWindow();
+      stage.close();
     });
 
 

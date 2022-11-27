@@ -51,4 +51,11 @@ public class SearchPOIController {
   public void navigateToPOI(POILocation poiLocation) {
     ControllerMediator.getInstance().mapViewControllerGoToPOI(poiLocation);
   }
+
+  /**
+   * Refreshes the list of displayed POIs in the search tab.
+   */
+  public void refreshList() {
+    matchingPOIList.getItems().setAll(app.getPoiLocations());
+  }
 }

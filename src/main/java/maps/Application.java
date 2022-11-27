@@ -289,26 +289,7 @@ public class Application {
   }
 
   /**
-   * Deletes a POI from the application
-   * 
-   * @param poi the POI to delete
-   * @return true if successful, false otherwise
-   */
-  public boolean deletePOI(POI poi) {
-    System.out.println(poiLocations);
-    if (poi.getPOIType() == POIType.custom || this.user.getUserType() == UserType.admin) {
-      for (POILocation poiLocation : this.poiLocations) {
-        if (poiLocation.poi.equals(poi)) {
-          this.poiLocations.remove(poiLocation);
-          return poiLocation.removePOI();
-        }
-      }
-    }
-    return false;
-  }
-
-  /**
-   * Deletes a POI from the application
+   * Deletes a POI from the application, including from the user's favourites list
    * 
    * @param poiLocation the POILocation to delete
    * @return true if successful, false otherwise
@@ -316,6 +297,9 @@ public class Application {
   public boolean deletePOI(POILocation poiLocation) {
     if (poiLocation.poi.getPOIType() == POIType.custom
         || this.user.getUserType() == UserType.admin) {
+        if (this.user.indexOfFavourite(poiLocation) != -1){
+          this.user.removeFavourites(poiLocation);
+        }
       return poiLocation.removePOI() && this.poiLocations.remove(poiLocation);
     }
     return false;
