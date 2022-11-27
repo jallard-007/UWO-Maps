@@ -18,11 +18,14 @@ public class WesternMaps extends javafx.application.Application {
 
   @Override
   public void start(Stage stage) throws IOException {
+    WeatherController weather = new WeatherController();
     FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/login.fxml"));
     Scene scene = new Scene(fxmlLoader.load());
     stage.setTitle("Western Maps");
+    weather.displayWeatherData(); // null pointer exception for weatherText variable, not able to set text
     stage.setResizable(false);
     stage.setScene(scene);
+
     Application app = new Application();
     app.loadData();
     ControllerMediator.getInstance().registerApplication(app);

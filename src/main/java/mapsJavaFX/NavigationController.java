@@ -17,12 +17,6 @@ public class NavigationController {
   @FXML
   private AnchorPane menuBar;
 
-  public void goToProfile(ActionEvent event) throws IOException {
-    FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/profile.fxml"));
-    Scene scene = new Scene(fxmlLoader.load());
-    changeScene(scene, event);
-  }
-
   public void goToHelp(ActionEvent event) throws IOException {
     FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/help.fxml"));
     Scene scene = new Scene(fxmlLoader.load());
