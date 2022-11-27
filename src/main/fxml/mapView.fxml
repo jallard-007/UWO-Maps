@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Slider?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.geometry.Insets?>
 
 <StackPane fx:id="stackPane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapsJavaFX.MapViewController">
   <TabPane fx:id="tabPane" >
   </TabPane>
+  <Slider fx:id="zoomBar" blockIncrement="0.1" majorTickUnit="0.1" max="1.0" maxHeight="200.0" min="0.3" minHeight="100.0" minorTickCount="5" orientation="VERTICAL" prefHeight="200.0" value="0.8" StackPane.alignment="CENTER_RIGHT">
+      <StackPane.margin>
+         <Insets right="20.0" />
+      </StackPane.margin></Slider>
 </StackPane>

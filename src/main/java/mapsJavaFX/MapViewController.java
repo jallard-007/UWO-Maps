@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Slider;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
@@ -18,6 +19,8 @@ import maps.POIType;
 import maps.Pair;
 
 public class MapViewController {
+  @FXML
+  private Slider zoomBar;
   @FXML
   private StackPane stackPane;
   @FXML
@@ -47,42 +50,53 @@ public class MapViewController {
         Tab floorTab = new Tab(floor.getName());
         Image image = floor.getImage();
         ImageView imageView = new ImageView(image);
+        imageView.setPreserveRatio(true);
 
         // Add floor PNGs into a scrollPane so users can pan through the maps; set dimensions to
         StackPane stackPane = new StackPane();
         ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setPannable(true);
+        scrollPane.setHvalue(0.5);
+        scrollPane.setVvalue(0.5);
 
         Pane poiPane = new Pane();
         stackPane.getChildren().add(imageView);
-        stackPane.getChildren().add(poiPane);
+        // stackPane.getChildren().add(poiPane);
         scrollPane.setContent(stackPane);
         floorTab.setContent(scrollPane);
         floorTab.setClosable(false);
         buildingTabPane.getTabs().add(floorTab);
+
+        zoomBar.valueProperty().addListener((o, oldV, newV) -> {
+          var x = scrollPane.getHvalue();
+          var y = scrollPane.getVvalue();
+          imageView.setFitWidth(image.getWidth() * newV.doubleValue());
+          scrollPane.setHvalue(x);
+          scrollPane.setVvalue(y);
+        });
       }
     }
 
     String buildingName = "";
     String floorName = "";
     Pane currPane = null;
+    // for (POILocation poiLocation : this.app.getPoiLocations()) {
+    // POIButton poiButton = new POIButton(poiLocation);
+    // poiButtons[poiLocation.getPOI().getPOIType().ordinal()].add(poiButton);
+    // poiButton.makeDraggable();
 
-    for (POILocation poiLocation : this.app.getPoiLocations()) {
-      POIButton poiButton = new POIButton(poiLocation);
-      poiButtons[poiLocation.getPOI().getPOIType().ordinal()].add(poiButton);
-      poiButton.makeDraggable();
-
-      poiButton.setLayoutX(poiLocation.getPOI().getPosition().getX());
-      poiButton.setLayoutY(poiLocation.getPOI().getPosition().getY());
-      if (!buildingName.equals(poiLocation.getBuilding().getName())
-          || !floorName.equals(poiLocation.getFloor().getName())) {
-        currPane = getPane(poiLocation);
-      }
-      if (currPane == null) {
-        System.out.print("Error: Could not find the specified Pane | in MapViewController.setApp");
-        System.exit(55);
-      }
-      currPane.getChildren().add(poiButton);
-    }
+    // poiButton.setLayoutX(poiLocation.getPOI().getPosition().getX());
+    // poiButton.setLayoutY(poiLocation.getPOI().getPosition().getY());
+    // if (!buildingName.equals(poiLocation.getBuilding().getName())
+    // || !floorName.equals(poiLocation.getFloor().getName())) {
+    // currPane = getPane(poiLocation);
+    // }
+    // if (currPane == null) {
+    // System.out.print("Error: Could not find the specified Pane | in MapViewController.setApp");
+    // System.exit(55);
+    // }
+    // currPane.getChildren().add(poiButton);
+    // }
   }
 
   public void goToPOI(POILocation poiLocation) {
