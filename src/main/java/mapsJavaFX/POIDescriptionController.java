@@ -6,12 +6,10 @@ import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import maps.POI;
-import maps.POILocation;
-import maps.User;
+import maps.*;
 
 public class POIDescriptionController {
-  public POIDescriptionController(User user, POILocation poiLocation) {
+  public POIDescriptionController(User user, POILocation poiLocation, Application app) {
     BorderPane borderPane = new BorderPane();
 
     // Concatenate variables to form a string Label containing the description of the selected POI
@@ -73,6 +71,16 @@ public class POIDescriptionController {
 
       }
     });
+
+    //Handling deleting POIs
+    if (user.getUserType() != UserType.admin && poiLocation.getPOI().getPOIType() != POIType.custom){
+      btnDeletePOI.setDisable(true);
+    }
+    btnDeletePOI.setOnAction(event -> {
+      app.deletePOI(poiLocation.getFloor(), poiLocation.getPOI());
+      //TODO: refresh search and favourites after delete.
+    });
+
 
     Scene scene = new Scene(borderPane, 200, 300);
     Stage stage = new Stage();

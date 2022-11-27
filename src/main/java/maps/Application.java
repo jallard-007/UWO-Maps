@@ -296,15 +296,26 @@ public class Application {
    * @return true if successful, false otherwise
    */
   public boolean deletePOI(Floor floor, POI poi) {
-    if (user.getUserType() != UserType.admin) {
-      return false;
-    }
-    for (POILocation poiLocation : this.poiLocations) {
-      if (poiLocation.poi.equals(poi)) {
-        this.poiLocations.remove(poiLocation);
-        return poiLocation.removePOI();
+    System.out.println(poiLocations);
+    if (poi.getPOIType() == POIType.custom){
+      for (POILocation poiLocation : this.poiLocations) {
+        if (poiLocation.poi.equals(poi)) {
+          System.out.println(poi + " hi");
+          this.poiLocations.remove(poiLocation);
+          return poiLocation.removePOI();
+        }
       }
     }
+    else if (user.getUserType() == UserType.admin) {
+      for (POILocation poiLocation : this.poiLocations) {
+        if (poiLocation.poi.equals(poi)) {
+          System.out.println(poi);
+          this.poiLocations.remove(poiLocation);
+          return poiLocation.removePOI();
+        }
+      }
+    }
+
     return false;
   }
 
