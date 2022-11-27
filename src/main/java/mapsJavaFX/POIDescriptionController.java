@@ -72,13 +72,14 @@ public class POIDescriptionController {
       }
     });
 
-    //Handling deleting POIs
-    if (user.getUserType() != UserType.admin && poiLocation.getPOI().getPOIType() != POIType.custom){
+    // Handling deleting POIs
+    if (user.getUserType() != UserType.admin
+        && poiLocation.getPOI().getPOIType() != POIType.custom) {
       btnDeletePOI.setDisable(true);
     }
     btnDeletePOI.setOnAction(event -> {
-      app.deletePOI(poiLocation.getFloor(), poiLocation.getPOI());
-      //TODO: refresh search and favourites after delete.
+      app.deletePOI(poiLocation);
+      // TODO: refresh search and favourites after delete.
     });
 
 

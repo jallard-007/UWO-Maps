@@ -291,31 +291,33 @@ public class Application {
   /**
    * Deletes a POI from the application
    * 
-   * @param floor the floor that the POI is on
    * @param poi the POI to delete
    * @return true if successful, false otherwise
    */
-  public boolean deletePOI(Floor floor, POI poi) {
+  public boolean deletePOI(POI poi) {
     System.out.println(poiLocations);
-    if (poi.getPOIType() == POIType.custom){
+    if (poi.getPOIType() == POIType.custom || this.user.getUserType() == UserType.admin) {
       for (POILocation poiLocation : this.poiLocations) {
         if (poiLocation.poi.equals(poi)) {
-          System.out.println(poi + " hi");
           this.poiLocations.remove(poiLocation);
           return poiLocation.removePOI();
         }
       }
     }
-    else if (user.getUserType() == UserType.admin) {
-      for (POILocation poiLocation : this.poiLocations) {
-        if (poiLocation.poi.equals(poi)) {
-          System.out.println(poi);
-          this.poiLocations.remove(poiLocation);
-          return poiLocation.removePOI();
-        }
-      }
-    }
+    return false;
+  }
 
+  /**
+   * Deletes a POI from the application
+   * 
+   * @param poiLocation the POILocation to delete
+   * @return true if successful, false otherwise
+   */
+  public boolean deletePOI(POILocation poiLocation) {
+    if (poiLocation.poi.getPOIType() == POIType.custom
+        || this.user.getUserType() == UserType.admin) {
+      return poiLocation.removePOI() && this.poiLocations.remove(poiLocation);
+    }
     return false;
   }
 
