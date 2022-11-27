@@ -56,6 +56,13 @@ public class POI {
   }
 
   /**
+   * @param roomNumber room number of POI
+   */
+  public void setRoomNumber(String roomNumber) {
+    this.roomNumber = roomNumber;
+  }
+
+  /**
    * @param name name of POI
    */
   public void setName(String name) {

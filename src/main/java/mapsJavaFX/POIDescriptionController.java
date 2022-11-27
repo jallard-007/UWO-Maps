@@ -1,12 +1,16 @@
 package mapsJavaFX;
 
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import maps.*;
+
+import java.io.IOException;
 
 /**
  * Controller to handle the popup window displaying information about a selected POI.
@@ -81,11 +85,13 @@ public class POIDescriptionController {
       }
     });
 
-    // Handling deleting POIs
     if (user.getUserType() != UserType.admin
         && poiLocation.getPOI().getPOIType() != POIType.custom) {
       btnDeletePOI.setDisable(true);
+      btnEditPOI.setDisable(true);
     }
+
+    // Handling deleting POIs
     btnDeletePOI.setOnAction(event -> {
       app.deletePOI(poiLocation);
       //Refresh both the favourites and search display to reflect the deletion.
@@ -96,6 +102,21 @@ public class POIDescriptionController {
       stage.close();
     });
 
+    //Handling editing POIs
+    btnEditPOI.setOnAction(event -> {
+      FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/edit.fxml"));
+      try {
+        Scene scene = new Scene(fxmlLoader.load());
+        EditController editController = fxmlLoader.getController();
+        editController.setPoiLocation(poiLocation);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+        stage.centerOnScreen();
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      }
+    });
 
     Scene scene = new Scene(borderPane, 200, 300);
     Stage stage = new Stage();
