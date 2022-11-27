@@ -1,5 +1,6 @@
 package mapsJavaFX;
 
+import java.util.List;
 import maps.Application;
 import maps.POILocation;
 import maps.POIType;
@@ -7,8 +8,6 @@ import maps.POIType;
 public class ControllerMediator {
   private MapViewController mapViewController;
   private FavouritesController favouritesController;
-  private POIDescriptionController poiDescripController;
-  private TypesPOIController poiTypesController;
 
   private Application app;
 
@@ -16,16 +15,8 @@ public class ControllerMediator {
     mapViewController = controller;
   }
 
-  void registerPOIDescriptionController(POIDescriptionController controller) {
-    poiDescripController = controller;
-  }
-
   void registerFavouritesController(FavouritesController controller) {
     favouritesController = controller;
-  }
-
-  public void registerPOITypesController(TypesPOIController controller) {
-    poiTypesController = controller;
   }
 
   void registerApplication(Application app) {
@@ -40,18 +31,13 @@ public class ControllerMediator {
     mapViewController.goToPOI(poiLocation);
   }
 
+  void filterList(List<POIType> selectedPOIType) {
+    mapViewController.filterList(selectedPOIType);
+  }
+
   void refreshFavouritesList() {
     favouritesController.refreshList();
   }
-
-  public void refreshPOIList(POIType selectedPOIType) {
-    mapViewController.refreshList(selectedPOIType);
-  }
-
-
-  // void refreshPOIList() {
-  // mapViewController.refreshPOIs();
-  // }
 
   private ControllerMediator() {}
 

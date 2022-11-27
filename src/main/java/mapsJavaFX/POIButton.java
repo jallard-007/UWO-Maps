@@ -1,6 +1,7 @@
 package mapsJavaFX;
 
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseButton;
 import maps.Application;
 import maps.POI;
 import maps.POILocation;
@@ -11,6 +12,8 @@ public class POIButton extends Button {
   private static double startX;
   private static double startY;
   POILocation poiLocation;
+
+
 
   public static void setApp(Application newApp) {
     app = newApp;
@@ -23,6 +26,15 @@ public class POIButton extends Button {
     }
     this.poiLocation = poiLocation;
     POIType poiType = poiLocation.getPOI().getPOIType();
+
+    this.setOnMouseClicked(mouseEvent -> {
+      if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+        if (mouseEvent.getClickCount() == 2) {
+          new POIDescriptionController(this.poiLocation);
+        }
+      }
+    });
+
     switch (poiType) {
       case classroom:
         this.setStyle("-fx-background-color: Green");

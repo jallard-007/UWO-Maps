@@ -1,16 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.ListView?>
-<<<<<<< HEAD
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.text.Font?>
-
-<ListView fx:id="poiTypeList" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/19"  onMouseClicked="#onPOIListMouseClick"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapsJavaFX.TypesPOIController"
-                  />
-
-=======
 
 <ListView xmlns="http://javafx.com/javafx/19"
-    xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapsJavaFX.TypesPOIController" fx:id="poiTypeList" />
->>>>>>> eb7553444eea22bf569422a4e395b8ccaafda1ac
+    xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapsJavaFX.TypesPOIController" onMouseClicked="#onPOIListMouseClick" fx:id="poiTypeList" />

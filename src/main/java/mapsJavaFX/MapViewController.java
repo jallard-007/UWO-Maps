@@ -1,8 +1,8 @@
 package mapsJavaFX;
 
+import java.util.ArrayList;
+import java.util.List;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -22,18 +22,24 @@ public class MapViewController {
   @FXML
   private TabPane tabPane;
   Application app;
+  private List<POIButton>[] poiButtons;
 
+  @SuppressWarnings("unchecked")
   public void setApp(Application app) {
     this.app = app;
+    this.poiButtons = (ArrayList<POIButton>[]) new ArrayList[POIType.values().length];
+    for (int i = 0; i < POIType.values().length; ++i) {
+      this.poiButtons[i] = new ArrayList<>();
+    }
 
     // creates a new tab for each building
     for (Building building : this.app.getBuildings()) {
       Tab buildingTab = new Tab(building.getName());
-      buildingTab.setClosable(false); // prevents the user from closing the tab
+      buildingTab.setClosable(false);
       this.tabPane.getTabs().add(buildingTab);
 
       TabPane buildingTabPane = new TabPane();
-      buildingTab.setContent(buildingTabPane); // adds a TabPane to the tab, so we can add floors
+      buildingTab.setContent(buildingTabPane);
 
       // creates a new tab for each floor within the building tab
       for (Floor floor : building.getFloors()) {
@@ -42,8 +48,7 @@ public class MapViewController {
         ImageView imageView = new ImageView(image);
 
         // Add floor PNGs into a scrollPane so users can pan through the maps; set dimensions to
-        // half the original image size
-        StackPane stackPane = new StackPane(); // Stack to hold both the imageview and gridpane
+        StackPane stackPane = new StackPane();
         ScrollPane scrollPane = new ScrollPane();
 
         imageView.setFitHeight(image.getHeight() / 2);
@@ -65,23 +70,10 @@ public class MapViewController {
 
 
     for (POILocation poiLocation : this.app.getPoiLocations()) {
-      // poiLocation.getPOI().getPOIType() == refreshList(???){
-      // then render out the POIs
-      // need to re build this entire mapViewController every time a type is selected since this
-      // isn't bound to a FXML id
-      // }
 
-
-      // you can now use this to make the button. currently the colour is different based on type
       POIButton poiButton = new POIButton(poiLocation);
+      poiButtons[poiLocation.getPOI().getPOIType().ordinal()].add(poiButton);
       poiButton.makeDraggable();
-      // buttons can be set to movable using POIButton.
-
-
-      // change this so it only displays after 2 mouse clicks
-      poiButton.setOnAction(event -> {
-        new POIDescriptionController(poiLocation);
-      });
 
       poiButton.setLayoutX(poiLocation.getPOI().getPosition().getX());
       poiButton.setLayoutY(poiLocation.getPOI().getPosition().getY());
@@ -138,9 +130,13 @@ public class MapViewController {
     return null;
   }
 
-  // get the results of the selected POI type but unclear how to link that to the displayed POIs
-  public POIType refreshList(POIType selectedPOIType) {
-    System.out.println("poitype exposed in map: " + selectedPOIType);
-    return selectedPOIType;
+  public void filterList(List<POIType> selectedPOITypes) {
+    for (POIType poiType : POIType.values()) {
+      boolean show = selectedPOITypes.contains(poiType);
+      for (POIButton poiTypeButtons : this.poiButtons[poiType.ordinal()]) {
+        poiTypeButtons.setDisable(!show);
+        poiTypeButtons.setVisible(show);
+      }
+    }
   }
 }
