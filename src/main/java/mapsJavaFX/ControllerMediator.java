@@ -2,6 +2,7 @@ package mapsJavaFX;
 
 import maps.Application;
 import maps.POILocation;
+import maps.POIType;
 
 public class ControllerMediator {
   private MapViewController mapViewController;
@@ -43,6 +44,11 @@ public class ControllerMediator {
     favouritesController.refreshList();
   }
 
+  public void refreshPOIList(POIType selectedPOIType) {
+    mapViewController.refreshList(selectedPOIType);
+  }
+
+
   // void refreshPOIList() {
   // mapViewController.refreshPOIs();
   // }
@@ -56,6 +62,7 @@ public class ControllerMediator {
   private static class ControllerMediatorHolder {
     private static final ControllerMediator INSTANCE = new ControllerMediator();
   }
+
 
 
 }

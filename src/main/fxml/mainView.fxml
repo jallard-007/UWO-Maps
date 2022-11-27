@@ -25,10 +25,10 @@
                 text="Point of Interest Types" >
                 <!-- Trying to put the POI Types here to be displayed -->
                 <fx:include source="typePOI.fxml" minHeight="0.0" minWidth="0.0" prefHeight="238.0" prefWidth="228.0" fx:id="types"/>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="263.0" prefWidth="225.0">
+        <!-- <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="263.0" prefWidth="225.0">
             <Button layoutX="96.0" layoutY="222.0" mnemonicParsing="false" text="Update"/>
             <Button layoutX="160.0" layoutY="222.0" mnemonicParsing="false" text="Add POI"/>
-        </AnchorPane>
+        </AnchorPane> -->
     </TitledPane>
     <AnchorPane layoutX="11.0" layoutY="8.0" prefHeight="50.0" prefWidth="1263.0">
         <fx:include source="menuBar.fxml"/>

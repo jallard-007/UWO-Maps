@@ -1,8 +1,6 @@
 package mapsJavaFX;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
@@ -14,7 +12,6 @@ import javafx.scene.layout.StackPane;
 import maps.Application;
 import maps.Building;
 import maps.Floor;
-import maps.POI;
 import maps.POILocation;
 import maps.POIType;
 
@@ -24,18 +21,9 @@ public class MapViewController {
   @FXML
   private TabPane tabPane;
   Application app;
-  @FXML
-  private ListView<POILocation> POIList;
-  @FXML
-  private ListView<POIType> types;
 
   public void setApp(Application app) {
     this.app = app;
-
-    // this is just printing out the POI types
-    // for (POIType type : maps.POIType.values()) {
-    // System.out.println(type);
-    // }
 
     // creates a new tab for each building
     for (Building building : this.app.getBuildings()) {
@@ -73,19 +61,27 @@ public class MapViewController {
     String buildingName = "";;
     String floorName = "";
     Pane currPane = null;
+
+
     for (POILocation poiLocation : this.app.getPoiLocations()) {
+      // poiLocation.getPOI().getPOIType() == refreshList(???){
+      // then render out the POIs
+      // need to re build this entire mapViewController every time a type is selected since this
+      // isn't bound to a FXML id
+      // }
 
 
       // you can now use this to make the button. currently the colour is different based on type
-      // Button poiButton = new POIButton(poiLocation);
+      POIButton poiButton = new POIButton(poiLocation);
+      poiButton.makeDraggable();
       // buttons can be set to movable using POIButton.
 
 
-      Button poiButton = new Button("P");
-      addButtonFeatures(poiButton, poiLocation);
+      // change this so it only displays after 2 mouse clicks
       poiButton.setOnAction(event -> {
         new POIDescriptionController(poiLocation);
       });
+
       poiButton.setLayoutX(poiLocation.getPOI().getPosition().getX());
       poiButton.setLayoutY(poiLocation.getPOI().getPosition().getY());
       if (!buildingName.equals(poiLocation.getBuilding().getName())
@@ -99,48 +95,6 @@ public class MapViewController {
       }
       currPane.getChildren().add(poiButton);
     }
-  }
-
-  private double startX;
-  private double startY;
-
-  private void addButtonFeatures(Button node, POILocation poiLocation) {
-    node.setOnMouseClicked(e -> {
-    });
-
-    node.setOnMousePressed(e -> {
-      if (app.getEditMode()) {
-        startX = e.getScreenX();
-        startY = e.getScreenY();
-      }
-    });
-
-    //
-    node.setOnMouseClicked(e -> {
-      System.out.println(startX + " : " + startY);
-    });
-
-    node.setOnMouseDragged(e -> {
-      if (app.getEditMode()) {
-        node.setTranslateX(e.getScreenX() - startX);
-        node.setTranslateY(e.getScreenY() - startY);
-      }
-    });
-
-    node.setOnMouseReleased(e -> {
-      if (app.getEditMode()) {
-        POI poi = poiLocation.getPOI();
-        poi.setPosition(poi.getPosition().getX() + (e.getScreenX() - startX),
-            poi.getPosition().getY() + (e.getScreenY() - startY));
-        node.setLayoutX(poi.getPosition().getX());
-        node.setTranslateX(0);
-        node.setLayoutY(poi.getPosition().getY());
-        node.setTranslateY(0);
-      } else {
-        new POIDescriptionController(poiLocation);
-      }
-
-    });
   }
 
   public void goToPOI(POILocation poiLocation) {
@@ -182,5 +136,11 @@ public class MapViewController {
       }
     }
     return null;
+  }
+
+  // get the results of the selected POI type but unclear how to link that to the displayed POIs
+  public POIType refreshList(POIType selectedPOIType) {
+    System.out.println("poitype exposed in map: " + selectedPOIType);
+    return selectedPOIType;
   }
 }
