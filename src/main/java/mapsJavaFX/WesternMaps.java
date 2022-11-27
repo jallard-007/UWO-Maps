@@ -30,7 +30,6 @@ public class WesternMaps extends javafx.application.Application {
     weatherLoader.load();
     WeatherController weather = weatherLoader.getController();
     weather.displayWeatherData();
-    weather.setWeatherText(weather.getWeatherText());
 
     Application app = new Application();
     app.loadData();
