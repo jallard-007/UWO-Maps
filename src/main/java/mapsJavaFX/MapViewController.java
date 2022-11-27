@@ -68,9 +68,7 @@ public class MapViewController {
     String floorName = "";
     Pane currPane = null;
 
-
     for (POILocation poiLocation : this.app.getPoiLocations()) {
-
       POIButton poiButton = new POIButton(poiLocation);
       poiButtons[poiLocation.getPOI().getPOIType().ordinal()].add(poiButton);
       poiButton.makeDraggable();
