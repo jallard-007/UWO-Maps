@@ -47,8 +47,8 @@ public class SignupController {
     Util.setControllers(controller, app);
 
     Stage stage = (Stage) username.getScene().getWindow();
-    stage.setX(23);
-    stage.setY(20);
+    stage.setHeight(700);
+    stage.setWidth(1200);
     stage.setScene(scene);
     stage.show();
   }

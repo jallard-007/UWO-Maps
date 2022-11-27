@@ -26,6 +26,7 @@ public class WesternMaps extends javafx.application.Application {
     Application app = new Application();
     app.loadData();
     ControllerMediator.getInstance().registerApplication(app);
+    stage.setResizable(true);
     stage.show();
 
     stage.setOnCloseRequest(event -> {

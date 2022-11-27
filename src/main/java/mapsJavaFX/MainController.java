@@ -1,6 +1,7 @@
 package mapsJavaFX;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import maps.POIType;
