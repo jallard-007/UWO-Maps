@@ -50,6 +50,11 @@ public class LoginController {
     stage.show();
   }
 
+  /**
+   * Go to sign up page from login page
+   * @param event user clicks on signup button on login page
+   * @throws IOException if signup.fxml does not exist
+   */
   public void goToSignUp(ActionEvent event) throws IOException {
     FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/signup.fxml"));
     Scene scene = new Scene(fxmlLoader.load());

@@ -1,6 +1,5 @@
 package mapsJavaFX;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 
@@ -12,27 +11,17 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
+import maps.Application;
+
 /**
  * Retrieve information pertaining to the current weather in London, ON and display the information
  * to the user
  */
 public class WeatherController {
+  public Application app;
+
   @FXML private Text weatherText;
 
-
-  /**
-   * @return
-   */
-  public Text getWeatherText() {
-    return weatherText;
-  }
-
-  /**
-   * @param weatherText
-   */
-  public void setWeatherText(Text weatherText) {
-    this.weatherText = weatherText;
-  }
 
   /**
    * Get JSON object from openweathermap API
@@ -82,7 +71,8 @@ public class WeatherController {
    * display to the user, setting the text to show the current weather
    */
 
-  public void displayWeatherData() {
+  public void setApp(Application app) {
+    this.app = app;
     JSONObject currWeather = fetchWeatherData("https://api.openweathermap.org/data/2.5/weather?lat=42.9849&lon=-81.2453&appid=09928fefc6a87f8130ddec17c33e22ee&units=metric");
     JSONObject main = (JSONObject) currWeather.get("main");
     weatherText.setText("Current Weather in London: " + main.get("temp") + "°C");

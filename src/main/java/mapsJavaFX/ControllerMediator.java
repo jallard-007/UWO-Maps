@@ -6,6 +6,7 @@ import maps.POILocation;
 public class ControllerMediator {
   private MapViewController mapViewController;
   private FavouritesController favouritesController;
+  private WeatherController weatherController;
   private Application app;
 
   void registerMapViewController(MapViewController controller) {
@@ -14,6 +15,10 @@ public class ControllerMediator {
 
   void registerFavouritesController(FavouritesController controller) {
     favouritesController = controller;
+  }
+
+  void registerWeatherController(WeatherController controller) {
+    weatherController = controller;
   }
 
   void registerApplication(Application app) {

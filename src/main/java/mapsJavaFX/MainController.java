@@ -17,6 +17,8 @@ public class MainController {
   private SearchPOIController searchPOIController;
   @FXML
   private FavouritesController favouritesController;
+  @FXML
+  private WeatherController weatherController;
 
   public SearchPOIController getSearchPOIController() {
     return searchPOIController;
@@ -29,4 +31,6 @@ public class MainController {
   public FavouritesController getFavouritesController() {
     return favouritesController;
   }
+
+  public WeatherController getWeatherController() { return weatherController;}
 }
