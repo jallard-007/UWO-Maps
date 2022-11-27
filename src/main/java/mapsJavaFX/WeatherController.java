@@ -51,9 +51,10 @@ public class WeatherController {
 
   void displayWeatherData() {
     JSONObject currWeather = fetchWeatherData("https://api.openweathermap.org/data/2.5/weather?lat=42.9849&lon=-81.2453&appid=09928fefc6a87f8130ddec17c33e22ee&units=metric");
+    JSONObject main = (JSONObject) currWeather.get("main");
+    double temp = (double) main.get("temp");
 
-    weatherText.setText("Current Weather in London: " + currWeather.get("main.temp"));
-
+    weatherText.setText("Current Weather in London: " + (int)temp + "°C");
   }
 
 }
