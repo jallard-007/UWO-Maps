@@ -28,6 +28,10 @@ public class MapViewController {
   public void setApp(Application app) {
     this.app = app;
 
+    for (POILocation loc : this.app.getPoiLocations()) {
+      poiList.add(loc);
+    }
+
     // creates a new tab for each building
     for (Building building : this.app.getBuildings()) {
       Tab buildingTab = new Tab(building.getName());
@@ -65,7 +69,9 @@ public class MapViewController {
     String floorName = "";
     Pane currPane = null;
 
-    for (POILocation poiLocation : this.app.getPoiLocations()) {
+
+
+    for (POILocation poiLocation : poiList) {
       poiList.add(poiLocation);
       // you can now use this to make the button. currently the colour is different based on type
       POIButton poiButton = new POIButton(poiLocation);
