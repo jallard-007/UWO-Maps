@@ -12,8 +12,15 @@ import java.net.URL;
 import java.util.Scanner;
 
 public class WeatherController {
-  @FXML
-  private Text weatherText;
+  @FXML private Text weatherText;
+
+  public Text getWeatherText() {
+    return weatherText;
+  }
+
+  public void setWeatherText(Text weatherText) {
+    this.weatherText = weatherText;
+  }
 
   public JSONObject fetchWeatherData(String urlWeather) {
     try {
@@ -52,9 +59,7 @@ public class WeatherController {
   void displayWeatherData() {
     JSONObject currWeather = fetchWeatherData("https://api.openweathermap.org/data/2.5/weather?lat=42.9849&lon=-81.2453&appid=09928fefc6a87f8130ddec17c33e22ee&units=metric");
     JSONObject main = (JSONObject) currWeather.get("main");
-    double temp = (double) main.get("temp");
-
-    weatherText.setText("Current Weather in London: " + (int)temp + "°C");
+    weatherText.setText("Current Weather in London: " + main.get("temp") + "°C");
   }
 
 }

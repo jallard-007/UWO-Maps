@@ -6,7 +6,7 @@
 
 <AnchorPane prefHeight="25.0" prefWidth="354.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapsJavaFX.WeatherController">
   <children>
-    <Text fx:id="weatherText" layoutX="6.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current Weather in London:">
+    <Text fx:id="weatherText" layoutX="6.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0">
       <font>
         <Font size="16.0" />
       </font>

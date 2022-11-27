@@ -1,5 +1,6 @@
 package mapsJavaFX;
 
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -18,13 +19,18 @@ public class WesternMaps extends javafx.application.Application {
 
   @Override
   public void start(Stage stage) throws IOException {
-    WeatherController weather = new WeatherController();
-    FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/login.fxml"));
-    Scene scene = new Scene(fxmlLoader.load());
+    FXMLLoader loginLoader = new FXMLLoader(SignupController.class.getResource("/login.fxml"));
+    Scene scene = new Scene(loginLoader.load());
     stage.setTitle("Western Maps");
-    weather.displayWeatherData(); // null pointer exception for weatherText variable, not able to set text
+
     stage.setResizable(false);
     stage.setScene(scene);
+
+    FXMLLoader weatherLoader = new FXMLLoader(SignupController.class.getResource("/weather.fxml"));
+    weatherLoader.load();
+    WeatherController weather = weatherLoader.getController();
+    weather.displayWeatherData();
+    weather.setWeatherText(weather.getWeatherText());
 
     Application app = new Application();
     app.loadData();
