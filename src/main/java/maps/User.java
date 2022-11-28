@@ -16,6 +16,7 @@ public class User {
   private List<POILocation> favourites;
 
   /**
+   * Class constructor.
    * @param username username
    * @param password password
    * @param type type of user
@@ -28,6 +29,7 @@ public class User {
   }
 
   /**
+   * Class constructor.
    * @param jsonUser json object representation of a user
    */
   public User(JSONObject jsonUser) {

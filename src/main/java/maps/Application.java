@@ -160,6 +160,10 @@ public class Application {
     }
   }
 
+  /**
+   * Whether the user can access the ability to delete, edit, and add buildings, floors, and built-in POIs (i.e., if they're an admin with access to edit mode).
+   * @return whether the user can enter edit mode
+   */
   public boolean getEditMode() {
     return this.editMode;
   }

@@ -9,13 +9,37 @@ import javafx.stage.Stage;
 import maps.POILocation;
 
 public class EditController {
+  /**
+   * The Save button on the editing page.
+   */
   @FXML private  Button btnSave;
+  /**
+   * the Cancel button on the editing page
+   */
   @FXML private Button btnCancel;
+  /**
+   * the text box on the UI where the user enters the new room number.
+   */
   @FXML private TextField newRoomNum;
+  /**
+   * the text box on the UI where the user enters the new common name.
+   */
   @FXML private TextField newName;
+  /**
+   * the text box on the UI where the user enters the new room capacity.
+   */
   @FXML private TextField newRoomCapacity;
+  /**
+   * the text box on the UI where the user enters the new hours of operation of the location.
+   */
   @FXML private TextField newHours;
+  /**
+   * the text box on the UI where the user enters any additional information for the POI.
+   */
   @FXML private TextArea newInformation;
+  /**
+   * the specific POI location that the user has selected to edit its POI.
+   */
   private POILocation poiLocation;
 
   /**

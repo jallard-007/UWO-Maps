@@ -15,15 +15,32 @@ import javafx.stage.Stage;
 import maps.Application;
 
 public class LoginController {
+  /**
+   * the login button on the log in page.
+   */
   @FXML
   private Button loginButton;
+  /**
+   * the text box where the user enters their password.
+   */
   @FXML
   private PasswordField password;
+  /**
+   * the text box where the user enters their username.
+   */
   @FXML
   private TextField username;
+  /**
+   * anchor pane containing the entire UI of the log in page.
+   */
   @FXML
   private AnchorPane logIn;
 
+  /**
+   * Method called when the user clicks the log in button; checks the validity of their username and password, and takes the user to the main view of the application
+   * @param event onAction event
+   * @throws IOException if the fxml file is missing
+   */
   public void goToApplication(ActionEvent event) throws IOException {
     if (username.getText().equals("")) {
       // ask user to input username
@@ -50,6 +67,11 @@ public class LoginController {
     stage.show();
   }
 
+  /**
+   * Takes the user to the sign up page upon clicking a button so that users can register with the application.
+   * @param event onAction
+   * @throws IOException if the fxml file is missing
+   */
   public void goToSignUp(ActionEvent event) throws IOException {
     FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/signup.fxml"));
     Scene scene = new Scene(fxmlLoader.load());

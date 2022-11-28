@@ -37,7 +37,11 @@ public class NavigationController {
     changeScene(scene, event);
   }
 
-
+  /**
+   * Method that prompts the user with a confirmation message upon the clicking of the logout button.
+   * @param event onAction event
+   * @throws IOException if the fxml file is missing
+   */
   public void logout(ActionEvent event) throws IOException {
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
     alert.setTitle("Logout");

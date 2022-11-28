@@ -16,6 +16,11 @@ public class WesternMaps extends javafx.application.Application {
     launch(args);
   }
 
+  /**
+   * The method that initiates the start of the application.
+   * @param stage the stage to set and show when the application is first started.
+   * @throws IOException if the fxml file is missing
+   */
   @Override
   public void start(Stage stage) throws IOException {
     FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/login.fxml"));
@@ -34,6 +39,9 @@ public class WesternMaps extends javafx.application.Application {
     });
   }
 
+  /** Method that prompts the user with a confirmation message when the user wants to exit the application.
+   * @param stage the stage that the user is currently on when they click the exit button.
+   */
   public void exit(Stage stage) {
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
     alert.setTitle("Logout");
