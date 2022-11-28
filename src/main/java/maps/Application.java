@@ -13,8 +13,8 @@ import java.lang.String;
 public class Application {
   User user;
   boolean editMode;
-  List<Building> buildings;
-  List<POILocation> poiLocations;
+  final List<Building> buildings;
+  final List<POILocation> poiLocations;
 
   /**
    * Default constructor

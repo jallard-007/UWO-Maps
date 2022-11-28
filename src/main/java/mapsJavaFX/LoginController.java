@@ -24,7 +24,7 @@ public class LoginController {
   @FXML
   private AnchorPane logIn;
 
-  public void goToApplication(ActionEvent event) throws IOException {
+  public void goToApplication() throws IOException {
     if (username.getText().equals("")) {
       // ask user to input username
       return;
@@ -53,6 +53,12 @@ public class LoginController {
     stage.show();
   }
 
+  /**
+   * Go to sign up page from login page
+   * 
+   * @param event user clicks on signup button on login page
+   * @throws IOException if signup.fxml does not exist
+   */
   public void goToSignUp(ActionEvent event) throws IOException {
     FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/signup.fxml"));
     Scene scene = new Scene(fxmlLoader.load());

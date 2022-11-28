@@ -10,10 +10,10 @@ import java.util.ArrayList;
  * Represents a user
  */
 public class User {
-  private String username;
-  private String password;
-  private UserType type;
-  private List<POILocation> favourites;
+  private final String username;
+  private final String password;
+  private final UserType type;
+  private final List<POILocation> favourites;
 
   /**
    * @param username username
@@ -101,27 +101,6 @@ public class User {
   }
 
   /**
-   * @return username
-   */
-  public String getUserName() {
-    return username;
-  }
-
-  /**
-   * @param username username
-   */
-  public void setUsername(String username) {
-    this.username = username;
-  }
-
-  /**
-   * @param type user type
-   */
-  public void setUserType(UserType type) {
-    this.type = type;
-  }
-
-  /**
    * @return user type
    */
   public UserType getUserType() {
@@ -133,13 +112,6 @@ public class User {
    */
   public List<POILocation> getFavourites() {
     return this.favourites;
-  }
-
-  /**
-   * @param newPassword new password
-   */
-  public void setPassword(String newPassword) {
-    this.password = newPassword;
   }
 
   /**

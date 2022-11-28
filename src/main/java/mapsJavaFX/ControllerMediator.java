@@ -8,7 +8,6 @@ import maps.POIType;
 public class ControllerMediator {
   private MapViewController mapViewController;
   private FavouritesController favouritesController;
-
   private Application app;
 
   void registerMapViewController(MapViewController controller) {

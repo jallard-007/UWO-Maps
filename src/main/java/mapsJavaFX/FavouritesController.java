@@ -22,14 +22,6 @@ public class FavouritesController {
     favouritePOIList.getItems().setAll(app.getUser().getFavourites());
   }
 
-  public void addFavourite(POILocation poiLocation) {
-    favouritePOIList.getItems().add(poiLocation);
-  }
-
-  public void removeFavourite(POILocation poiLocation) {
-    favouritePOIList.getItems().remove(poiLocation);
-  }
-
   public void onPOIListMouseClick(MouseEvent mouseEvent) {
     if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
       if (mouseEvent.getClickCount() == 2) {

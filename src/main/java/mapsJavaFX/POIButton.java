@@ -11,12 +11,11 @@ import maps.POIType;
 public class POIButton extends Button {
   static Application app;
   static Slider zoom;
+  final POILocation poiLocation;
   private static double startX;
   private static double startY;
-  POILocation poiLocation;
-  private double imageWidth;
-  private double imageHeight;
-
+  private final double imageWidth;
+  private final double imageHeight;
 
 
   public static void setApp(Application newApp) {
@@ -47,42 +46,15 @@ public class POIButton extends Button {
     });
 
     switch (poiType) {
-      case classroom:
-        this.setStyle("-fx-background-color: Green");
-        break;
-
-      case lab:
-        this.setStyle("-fx-background-color: Brown");
-        break;
-
-      case recreation:
-        this.setStyle("-fx-background-color: Black");
-        break;
-
-      case collaboration:
-        this.setStyle("-fx-background-color: White");
-        break;
-
-      case accessibility:
-        this.setStyle("-fx-background-color: Pink");
-        break;
-
-      case restaurant:
-        this.setStyle("-fx-background-color: Orange");
-        break;
-
-      case washroom:
-        this.setStyle("-fx-background-color: Yellow");
-        break;
-
-      case library:
-        this.setStyle("-fx-background-color: Blue");
-        break;
-
-      case custom:
-        this.setStyle("-fx-background-color: Red");
-        break;
-
+      case classroom -> this.setStyle("-fx-background-color: Green");
+      case lab -> this.setStyle("-fx-background-color: Brown");
+      case recreation -> this.setStyle("-fx-background-color: Black");
+      case collaboration -> this.setStyle("-fx-background-color: White");
+      case accessibility -> this.setStyle("-fx-background-color: Pink");
+      case restaurant -> this.setStyle("-fx-background-color: Orange");
+      case washroom -> this.setStyle("-fx-background-color: Yellow");
+      case library -> this.setStyle("-fx-background-color: Blue");
+      case custom -> this.setStyle("-fx-background-color: Red");
     }
     // classroom, lab, recreation, collaboration, accessibility, restaurant, washroom, library,
     // custom

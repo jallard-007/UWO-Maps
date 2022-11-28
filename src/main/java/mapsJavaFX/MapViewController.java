@@ -89,6 +89,12 @@ public class MapViewController {
     }
   }
 
+  /**
+   * Finds the button that corresponds to a poi
+   *
+   * @param poiLocation a poi location to find
+   * @return the matching button
+   */
   public POIButton getButton(POILocation poiLocation) {
     final POI poi = poiLocation.getPOI();
     for (POIButton button : this.poiButtons[poi.getPOIType().ordinal()]) {
@@ -99,6 +105,11 @@ public class MapViewController {
     return null;
   }
 
+  /**
+   * Centers the map view on a poi. The centering is not 100% accurate, but it is fairly close
+   *
+   * @param poiLocation the poi to find
+   */
   public void goToPOI(POILocation poiLocation) {
     System.out.println("go to " + poiLocation);
 
@@ -117,6 +128,13 @@ public class MapViewController {
     scrollPane.setVvalue(0.5 + (zoomBar.getValue() * ((yRatio + (errorY * 0.20)) - 0.5)));
   }
 
+  /**
+   * Finds and selects a pane, displaying it for the user
+   *
+   * @param tabPane the tabPane to search in
+   * @param tabName the name of the tab to find
+   * @return the matching tab
+   */
   private Tab goToTab(TabPane tabPane, String tabName) {
     if (tabPane == null) {
       System.exit(44);
@@ -130,14 +148,20 @@ public class MapViewController {
     return null;
   }
 
+  /**
+   * Finds the pane (floor), that this poi is on
+   *
+   * @param poiLocation the poi to find
+   * @return The pane which the poi resides in
+   */
   private Pane getPane(POILocation poiLocation) {
     for (Tab buildingTab : this.tabPane.getTabs()) {
       if (buildingTab.getText().equals(poiLocation.getBuilding().getName())) {
         TabPane buildingTabPane = (TabPane) buildingTab.getContent();
         for (Tab floorTab : buildingTabPane.getTabs()) {
           if (floorTab.getText().equals(poiLocation.getFloor().getName())) {
-            StackPane stak = (StackPane) ((ScrollPane) floorTab.getContent()).getContent();
-            return (Pane) (stak.getChildren()).get(1);
+            StackPane stack = (StackPane) ((ScrollPane) floorTab.getContent()).getContent();
+            return (Pane) (stack.getChildren()).get(1);
           }
         }
       }
@@ -145,6 +169,11 @@ public class MapViewController {
     return null;
   }
 
+  /**
+   * Displays POIs with the specified POIType(s), and hides all other POIs
+   *
+   * @param selectedPOITypes a list of POITypes to filter by
+   */
   public void filterList(List<POIType> selectedPOITypes) {
     for (POIType poiType : POIType.values()) {
       boolean show = selectedPOITypes.contains(poiType);

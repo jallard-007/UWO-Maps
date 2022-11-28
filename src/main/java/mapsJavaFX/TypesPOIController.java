@@ -22,7 +22,7 @@ public class TypesPOIController {
 
     public void onPOIListMouseClick(MouseEvent mouseEvent) {
         if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
-            List<POIType> l = new ArrayList<POIType>();
+            List<POIType> l = new ArrayList<>();
             // will change to be able to select multiple filters
             l.add(getSelectedPOIType());
             ControllerMediator.getInstance().filterList(l);
