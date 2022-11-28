@@ -99,10 +99,6 @@ public class POIButton extends Button {
       startY = e.getScreenY();
     });
 
-    this.setOnMouseClicked(e -> {
-      System.out.println(startX + " : " + startY);
-    });
-
     this.setOnMouseDragged(e -> {
       this.setTranslateX((e.getScreenX() - startX) / zoom.getValue());
       this.setTranslateY((e.getScreenY() - startY) / zoom.getValue());
@@ -135,11 +131,7 @@ public class POIButton extends Button {
     this.setOnMousePressed(e -> {
     });
 
-    this.setOnMouseClicked(e -> {
-    });
-
     this.setOnMouseDragged(e -> {
-
     });
 
     this.setOnMouseReleased(e -> {

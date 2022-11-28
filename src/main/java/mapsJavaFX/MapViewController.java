@@ -11,12 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import maps.Application;
-import maps.Building;
-import maps.Floor;
-import maps.POILocation;
-import maps.POIType;
-import maps.Pair;
+import maps.*;
 
 public class MapViewController {
   @FXML
@@ -79,7 +74,6 @@ public class MapViewController {
     for (POILocation poiLocation : this.app.getPoiLocations()) {
       POIButton poiButton = new POIButton(poiLocation);
       poiButtons[poiLocation.getPOI().getPOIType().ordinal()].add(poiButton);
-      poiButton.makeDraggable();
 
       poiButton.setLayoutX(poiLocation.getPOI().getPosition().getX());
       poiButton.setLayoutY(poiLocation.getPOI().getPosition().getY());
@@ -95,15 +89,25 @@ public class MapViewController {
     }
   }
 
+  public POIButton getButton(POILocation poiLocation) {
+    final POI poi = poiLocation.getPOI();
+    for (POIButton button : this.poiButtons[poi.getPOIType().ordinal()]) {
+      if (button.poiLocation.equals(poiLocation)) {
+        return button;
+      }
+    }
+    return null;
+  }
+
   public void goToPOI(POILocation poiLocation) {
     System.out.println("go to " + poiLocation);
 
     Tab tab =
         goToTab((TabPane) goToTab(this.tabPane, poiLocation.getBuilding().getName()).getContent(),
             poiLocation.getFloor().getName());
+    ScrollPane scrollPane = (ScrollPane) tab.getContent();
 
     Pair position = poiLocation.getPOI().getPosition();
-    ScrollPane scrollPane = (ScrollPane) tab.getContent();
     double xRatio = position.getX() / poiLocation.getFloor().getImage().getWidth();
     double yRatio = position.getY() / poiLocation.getFloor().getImage().getHeight();
     double errorX = xRatio - 0.5;
@@ -111,7 +115,6 @@ public class MapViewController {
 
     scrollPane.setHvalue(0.5 + (zoomBar.getValue() * ((xRatio + (errorX * 0.20)) - 0.5)));
     scrollPane.setVvalue(0.5 + (zoomBar.getValue() * ((yRatio + (errorY * 0.20)) - 0.5)));
-
   }
 
   private Tab goToTab(TabPane tabPane, String tabName) {

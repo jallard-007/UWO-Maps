@@ -48,7 +48,4 @@ public class ControllerMediator {
   private static class ControllerMediatorHolder {
     private static final ControllerMediator INSTANCE = new ControllerMediator();
   }
-
-
-
 }

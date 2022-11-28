@@ -12,6 +12,9 @@ public class TypesPOIController {
     @FXML
     private ListView<POIType> poiTypeList;
 
+    public TypesPOIController() {}
+
+    @FXML
     public void initialize() {
         poiTypeList.setPlaceholder(new Label("No Matching POIs"));
         poiTypeList.getItems().addAll(maps.POIType.values());
