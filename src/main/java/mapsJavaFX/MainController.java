@@ -5,7 +5,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import maps.POIType;
-import javafx.scene.control.ListView;
 
 public class MainController {
   @FXML

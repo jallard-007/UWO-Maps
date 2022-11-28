@@ -1,6 +1,8 @@
 package mapsJavaFX;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.Slider;
+import javafx.scene.input.MouseButton;
 import maps.Application;
 import maps.POI;
 import maps.POILocation;
@@ -8,12 +10,21 @@ import maps.POIType;
 
 public class POIButton extends Button {
   static Application app;
+  static Slider zoom;
   private static double startX;
   private static double startY;
   POILocation poiLocation;
+  private double imageWidth;
+  private double imageHeight;
+
+
 
   public static void setApp(Application newApp) {
     app = newApp;
+  }
+
+  public static void setSlider(Slider newZoom) {
+    zoom = newZoom;
   }
 
   public POIButton(POILocation poiLocation) {
@@ -23,6 +34,18 @@ public class POIButton extends Button {
     }
     this.poiLocation = poiLocation;
     POIType poiType = poiLocation.getPOI().getPOIType();
+    this.imageWidth = poiLocation.getFloor().getImage().getWidth();
+    this.imageHeight = poiLocation.getFloor().getImage().getHeight();
+
+
+    this.setOnMouseClicked(mouseEvent -> {
+      if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+        if (mouseEvent.getClickCount() == 2) {
+          new POIDescriptionController(this.poiLocation);
+        }
+      }
+    });
+
     switch (poiType) {
       case classroom:
         this.setStyle("-fx-background-color: Green");
@@ -70,6 +93,7 @@ public class POIButton extends Button {
   }
 
   public void makeDraggable() {
+
     this.setOnMousePressed(e -> {
       startX = e.getScreenX();
       startY = e.getScreenY();
@@ -80,17 +104,29 @@ public class POIButton extends Button {
     });
 
     this.setOnMouseDragged(e -> {
-      this.setTranslateX(e.getScreenX() - startX);
-      this.setTranslateY(e.getScreenY() - startY);
+      this.setTranslateX((e.getScreenX() - startX) / zoom.getValue());
+      this.setTranslateY((e.getScreenY() - startY) / zoom.getValue());
     });
 
     this.setOnMouseReleased(e -> {
       POI poi = this.poiLocation.getPOI();
-      poi.setPosition(poi.getPosition().getX() + (e.getScreenX() - startX),
-          poi.getPosition().getY() + (e.getScreenY() - startY));
+      double x = poi.getPosition().getX() + this.getTranslateX();
+      double y = poi.getPosition().getY() + this.getTranslateY();
+
+      if (x < 0) {
+        x = 0;
+      } else if (x > imageWidth) {
+        x = imageWidth - 20;
+      }
+      if (y < 0) {
+        y = 0;
+      } else if (y > imageHeight) {
+        y = imageHeight - 30;
+      }
+      poi.setPosition(x, y);
       this.setLayoutX(poi.getPosition().getX());
-      this.setTranslateX(0);
       this.setLayoutY(poi.getPosition().getY());
+      this.setTranslateX(0);
       this.setTranslateY(0);
     });
   }

@@ -34,20 +34,22 @@ public class LoginController {
       return;
     }
     Application app = ControllerMediator.getInstance().getApplication();
+    Stage stage = (Stage) logIn.getScene().getWindow();
     if (!app.login(username.getText(), password.getText())) {
       // username / password incorrect
       return;
     }
+    stage.close();
     FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/mainView.fxml"));
     Scene scene = new Scene(fxmlLoader.load());
     MainController controller = fxmlLoader.getController();
     Util.setControllers(controller, app);
 
-    Stage stage = (Stage) logIn.getScene().getWindow();
+
     stage.setHeight(700);
     stage.setWidth(1200);
+    stage.centerOnScreen();
     stage.setScene(scene);
-
     stage.show();
   }
 
