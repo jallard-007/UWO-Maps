@@ -3,7 +3,6 @@ module mapsJavaFX {
   requires javafx.controls;
   requires javafx.fxml;
   requires org.json;
-  requires json.simple;
 
   opens mapsJavaFX to javafx.fxml;
 

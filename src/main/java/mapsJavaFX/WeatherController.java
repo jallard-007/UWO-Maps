@@ -3,14 +3,10 @@ package mapsJavaFX;
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 
-import org.json.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
-
+import org.json.JSONObject;
 import maps.Application;
 
 /**
@@ -20,11 +16,14 @@ import maps.Application;
 public class WeatherController {
   public Application app;
 
-  @FXML private Text weatherText;
+  @FXML
+  private Text weatherText;
 
+  public WeatherController() {}
 
   /**
    * Get JSON object from openweathermap API
+   * 
    * @param urlWeather the URL to make a GET request with
    * @return the JSON object containing all the retrieved data pertaining to the current weather
    */
@@ -56,9 +55,8 @@ public class WeatherController {
         scanner.close();
 
         // parse the string into a JSON object
-        JSONParser parser = new JSONParser();
 
-        return (JSONObject) parser.parse(String.valueOf(weatherInfo));
+        return new JSONObject(weatherInfo.toString());
       }
     } catch (Exception e) {
       e.printStackTrace(); // print out what is returned from our exception
@@ -71,10 +69,10 @@ public class WeatherController {
    * display to the user, setting the text to show the current weather
    */
 
-  public void setApp(Application app) {
-    this.app = app;
-    JSONObject currWeather = fetchWeatherData("https://api.openweathermap.org/data/2.5/weather?lat=42.9849&lon=-81.2453&appid=09928fefc6a87f8130ddec17c33e22ee&units=metric");
-    JSONObject main = (JSONObject) currWeather.get("main");
+  public void initialize() {
+    JSONObject currWeather = fetchWeatherData(
+        "https://api.openweathermap.org/data/2.5/weather?lat=42.9849&lon=-81.2453&appid=09928fefc6a87f8130ddec17c33e22ee&units=metric");
+    JSONObject main = currWeather.getJSONObject("main");
     weatherText.setText("Current Weather in London: " + main.get("temp") + "°C");
   }
 
