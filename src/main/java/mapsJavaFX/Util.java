@@ -7,8 +7,12 @@ public class Util {
     ControllerMediator.getInstance().registerMapViewController(controller.getMapViewController());
     ControllerMediator.getInstance()
         .registerFavouritesController(controller.getFavouritesController());
-    controller.getSearchPOIController().setApp(app);
+
+    POIButton.setApp(app);
+    POIDescriptionController.setApp(app);
+
     controller.getMapViewController().setApp(app);
+    controller.getSearchPOIController().setApp(app);
     controller.getFavouritesController().setApp(app);
   }
 }

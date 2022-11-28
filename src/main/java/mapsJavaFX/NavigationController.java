@@ -37,7 +37,6 @@ public class NavigationController {
     changeScene(scene, event);
   }
 
-
   public void logout(ActionEvent event) throws IOException {
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
     alert.setTitle("Logout");
@@ -57,6 +56,5 @@ public class NavigationController {
     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
     stage.setScene(scene);
     stage.show();
-    stage.centerOnScreen();
   }
 }

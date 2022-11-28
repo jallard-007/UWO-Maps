@@ -8,10 +8,19 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import maps.POI;
 import maps.POILocation;
-import maps.User;
+import maps.Application;
 
 public class POIDescriptionController {
-  public POIDescriptionController(User user, POILocation poiLocation) {
+  static Application app;
+
+  public static void setApp(Application newApp) {
+    app = newApp;
+  }
+
+  public POIDescriptionController(POILocation poiLocation) {
+    if (app == null) {
+      return;
+    }
     BorderPane borderPane = new BorderPane();
 
     // Concatenate variables to form a string Label containing the description of the selected POI
@@ -19,19 +28,19 @@ public class POIDescriptionController {
 
     String description = "ROOM NUMBER: " + poi.getRoomNumber() + "\n";
 
-    if (poiLocation.getPOI().getName() != null) {
+    if (poi.getName() != null) {
       description += "NAME: " + poi.getName() + "\n";
     }
 
     description += "TYPE: " + poi.getPOIType() + "\n";
 
-    if (poiLocation.getPOI().getCapacity() != null) {
+    if (poi.getCapacity() != null) {
       description += "ROOM CAPACITY: " + poi.getCapacity() + "\n";
     }
-    if (poiLocation.getPOI().getHoursOfOperation() != null) {
+    if (poi.getHoursOfOperation() != null) {
       description += "\nHOURS OF OPERATION: \n" + poi.getHoursOfOperation();
     }
-    if (poiLocation.getPOI().getInformation() != null) {
+    if (poi.getInformation() != null) {
       description += "\nADDITIONAL INFORMATION: \n" + poi.getInformation();
     }
 
@@ -48,7 +57,7 @@ public class POIDescriptionController {
     Button btnDeletePOI = new Button("Delete");
     ToggleButton btnFavouritePOI = new ToggleButton("Favourite");
     btnFavouritePOI.setPrefWidth(100);
-    Button btnEditPOI = new Button("Edit");
+    ToggleButton btnEditPOI = new ToggleButton("Edit");
 
     ButtonBar buttonBar = new ButtonBar();
     buttonBar.getButtons().addAll(btnEditPOI, btnFavouritePOI, btnDeletePOI);
@@ -57,18 +66,19 @@ public class POIDescriptionController {
 
     // Handling favouriting POIs
     // check if POI is already favourited
-    if (user.indexOfFavourite(poiLocation) != -1) {
+    if (app.getUser().indexOfFavourite(poiLocation) != -1) {
       btnFavouritePOI.setSelected(true);
       btnFavouritePOI.setText("Unfavourite");
     }
+
     btnFavouritePOI.setOnAction(event -> {
       if (btnFavouritePOI.isSelected()) {
         btnFavouritePOI.setText("Unfavourite");
-        user.addFavourite(poiLocation);
+        app.getUser().addFavourite(poiLocation);
         ControllerMediator.getInstance().refreshFavouritesList();
       } else {
         btnFavouritePOI.setText("Favourite");
-        user.removeFavourites(poiLocation);
+        app.getUser().removeFavourites(poiLocation);
         ControllerMediator.getInstance().refreshFavouritesList();
 
       }

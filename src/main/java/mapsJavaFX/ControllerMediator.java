@@ -1,11 +1,14 @@
 package mapsJavaFX;
 
+import java.util.List;
 import maps.Application;
 import maps.POILocation;
+import maps.POIType;
 
 public class ControllerMediator {
   private MapViewController mapViewController;
   private FavouritesController favouritesController;
+
   private Application app;
 
   void registerMapViewController(MapViewController controller) {
@@ -26,6 +29,10 @@ public class ControllerMediator {
 
   void mapViewControllerGoToPOI(POILocation poiLocation) {
     mapViewController.goToPOI(poiLocation);
+  }
+
+  void filterList(List<POIType> selectedPOIType) {
+    mapViewController.filterList(selectedPOIType);
   }
 
   void refreshFavouritesList() {
