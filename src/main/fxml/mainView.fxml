@@ -7,34 +7,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="650.0" prefWidth="1287.0" xmlns="http://javafx.com/javafx/19"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapsJavaFX.MainController">
-    <fx:include source="mapView.fxml" layoutX="14.0" layoutY="62.0" prefHeight="575.0" prefWidth="1004.0"
-                fx:id="mapView"/>
-    <TabPane layoutX="1038.0" layoutY="62.0" prefHeight="267.0" prefWidth="237.0" tabClosingPolicy="UNAVAILABLE">
-        <Tab text="Search">
-            <fx:include source="searchPOI.fxml" minHeight="0.0" minWidth="0.0" prefHeight="278.0" prefWidth="221.0"
-                        fx:id="searchPOI"/>
-        </Tab>
-        <Tab text="Favourites">
-            <fx:include source="favourites.fxml" minHeight="0.0" minWidth="0.0" prefHeight="238.0" prefWidth="228.0"
-            fx:id="favourites"/>
-        </Tab>
-    </TabPane>
-    <TitledPane animated="false" layoutX="1039.0" layoutY="354.0" prefHeight="283.0" prefWidth="237.0"
-                text="Point of Interest Types" >
-                <!-- Trying to put the POI Types here to be displayed -->
-                <fx:include source="typePOI.fxml" minHeight="0.0" minWidth="0.0" prefHeight="238.0" prefWidth="228.0" fx:id="types"/>
-        <!-- <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="263.0" prefWidth="225.0">
-            <Button layoutX="96.0" layoutY="222.0" mnemonicParsing="false" text="Update"/>
-            <Button layoutX="160.0" layoutY="222.0" mnemonicParsing="false" text="Add POI"/>
-        </AnchorPane> -->
-    </TitledPane>
-    <AnchorPane layoutX="11.0" layoutY="8.0" prefHeight="50.0" prefWidth="1263.0">
-        <fx:include source="menuBar.fxml"/>
-    </AnchorPane>
-</AnchorPane>
-<!-- <BorderPane prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapsJavaFX.MainController">
+<BorderPane prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapsJavaFX.MainController">
    <right>
       <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="5.0" BorderPane.alignment="CENTER">
                 <TabPane tabClosingPolicy="UNAVAILABLE">
@@ -60,4 +33,4 @@
    <center>
      <fx:include fx:id="mapView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" source="mapView.fxml" />
    </center>
-</BorderPane> -->
+</BorderPane>
