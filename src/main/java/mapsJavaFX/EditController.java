@@ -1,19 +1,35 @@
 package mapsJavaFX;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import maps.POILocation;
+import maps.POIType;
 
-public class EditController {
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class EditController implements Initializable {
 
   /**
    * The button that allows the user to edit the POI position.
    */
   public Button btnEditPosition;
+  /**
+   * List of all possible choices of POI types; base users may only may [custom] POIs
+   */
+  public ChoiceBox newPOIType;
   /**
    * The Save button on the editing page.
    */
@@ -54,6 +70,14 @@ public class EditController {
   public void setPoiLocation(POILocation poiLocation){
     this.poiLocation = poiLocation;
   }
+
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
+    //Get all POI types and turn it into an array list, then turn into observable list and set values as POI type options.
+    newPOIType.setItems(FXCollections.observableList(Stream.of(POIType.values()).map(POIType::name).toList()));
+    newPOIType.getSelectionModel().selectLast();
+  }
+
 
   /**
    * Saves the changes to the POI made by the user

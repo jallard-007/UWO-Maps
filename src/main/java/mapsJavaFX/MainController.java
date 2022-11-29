@@ -1,10 +1,13 @@
 package mapsJavaFX;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 
 public class MainController {
+  public Button addPOI;
   @FXML
   private StackPane mapView;
   @FXML
@@ -28,5 +31,8 @@ public class MainController {
 
   public FavouritesController getFavouritesController() {
     return favouritesController;
+  }
+
+  public void onAddPOI(ActionEvent event) {
   }
 }

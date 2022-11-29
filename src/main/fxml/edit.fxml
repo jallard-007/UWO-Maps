@@ -3,63 +3,65 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-  prefHeight="330.0" prefWidth="399.0" xmlns="http://javafx.com/javafx/19"
-  xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapsJavaFX.EditController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="358.0" prefWidth="399.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapsJavaFX.EditController">
    <padding>
-      <Insets bottom="10.0" right="10.0"/>
+      <Insets bottom="10.0" right="10.0" />
    </padding>
-   <ButtonBar layoutX="9.0" layoutY="290.0" prefHeight="40.0" prefWidth="382.0">
+   <ButtonBar layoutX="8.0" layoutY="316.0" prefHeight="40.0" prefWidth="382.0">
       <buttons>
-         <Button fx:id="btnEditPosition" mnemonicParsing="false" onAction="#onEdit"
-           text="Edit map position"/>
-         <Button fx:id="btnSave" mnemonicParsing="false" onAction="#onSave" text="Save"/>
+         <Button fx:id="btnEditPosition" mnemonicParsing="false" onAction="#onEdit" text="Edit map position" />
+         <Button fx:id="btnSave" mnemonicParsing="false" onAction="#onSave" text="Save" />
          <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#onCancel" text="Cancel">
             <opaqueInsets>
-               <Insets/>
+               <Insets />
             </opaqueInsets>
          </Button>
       </buttons>
       <opaqueInsets>
-         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
       </opaqueInsets>
    </ButtonBar>
-   <TextField fx:id="newRoomNum" layoutX="127.0" layoutY="14.0"/>
+   <TextField fx:id="newRoomNum" layoutX="127.0" layoutY="14.0" />
    <Text layoutX="14.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Room Number">
       <font>
-         <Font size="13.0"/>
+         <Font size="13.0" />
       </font>
    </Text>
    <Text layoutX="14.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
       <font>
-         <Font size="13.0"/>
+         <Font size="13.0" />
       </font>
    </Text>
-   <Text layoutX="14.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Room Capacity">
+   <TextField fx:id="newRoomCapacity" layoutX="127.0" layoutY="112.0" />
+   <Text layoutX="14.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Room Capacity">
       <font>
-         <Font size="13.0"/>
+         <Font size="13.0" />
       </font>
    </Text>
-   <TextField fx:id="newName" layoutX="127.0" layoutY="46.0"/>
-   <TextField fx:id="newRoomCapacity" layoutX="127.0" layoutY="80.0"/>
-   <Text layoutX="14.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hours">
+   <TextField fx:id="newName" layoutX="127.0" layoutY="46.0" />
+   <Text layoutX="14.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hours">
       <font>
-         <Font size="13.0"/>
+         <Font size="13.0" />
       </font>
    </Text>
-   <TextField fx:id="newHours" layoutX="127.0" layoutY="115.0"/>
-   <Text layoutX="14.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0"
-     text="Additional Information">
+   <TextField fx:id="newHours" layoutX="127.0" layoutY="146.0" />
+   <Text layoutX="14.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Additional Information">
       <font>
-         <Font size="13.0"/>
+         <Font size="13.0" />
       </font>
    </Text>
-   <TextArea fx:id="newInformation" layoutX="14.0" layoutY="174.0" prefHeight="113.0"
-     prefWidth="370.0" wrapText="true"/>
+   <TextArea fx:id="newInformation" layoutX="14.0" layoutY="196.0" prefHeight="113.0" prefWidth="370.0" wrapText="true" />
+   <Text layoutX="14.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="POI Type">
+      <font>
+         <Font size="13.0" />
+      </font>
+   </Text>
+   <ChoiceBox fx:id="newPOIType" layoutX="126.0" layoutY="79.0" prefWidth="150.0" />
 </AnchorPane>
