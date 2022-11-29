@@ -78,7 +78,7 @@ public class POIDescriptionController {
         ControllerMediator.getInstance().refreshFavouritesList();
       } else {
         btnFavouritePOI.setText("Favourite");
-        app.getUser().removeFavourites(poiLocation);
+        app.getUser().removeFavourite(poiLocation);
         ControllerMediator.getInstance().refreshFavouritesList();
 
       }

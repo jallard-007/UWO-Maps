@@ -29,7 +29,7 @@ public class Floor {
    * @param name the name of the floor
    */
   @SuppressWarnings("unchecked")
-  Floor(int level, String name) {
+  public Floor(int level, String name) {
     this.level = level;
     this.name = name;
     this.imagePath = "";

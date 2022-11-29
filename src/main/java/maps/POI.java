@@ -18,7 +18,7 @@ public class POI {
   /**
    * @param jsonPOI the json representation of a poi
    */
-  POI(JSONObject jsonPOI) {
+  public POI(JSONObject jsonPOI) {
     JSONArray jsonPosition = jsonPOI.getJSONArray("position");
     this.position = new Pair(jsonPosition.getInt(0), jsonPosition.getInt(1));
     this.roomNumber = jsonPOI.getString("roomNum");
@@ -44,7 +44,7 @@ public class POI {
    * @param poiType poi type
    * @param position coordinates of poi
    */
-  POI(String roomNumber, POIType poiType, Pair position) {
+  public POI(String roomNumber, POIType poiType, Pair position) {
     this.roomNumber = roomNumber;
     this.position = position;
     this.type = poiType;

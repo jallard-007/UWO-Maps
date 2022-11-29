@@ -49,7 +49,7 @@ public class User {
    * 
    * @param poiLocation poi location to remove from favourites
    */
-  public void removeFavourites(POILocation poiLocation) {
+  public void removeFavourite(POILocation poiLocation) {
     favourites.remove(poiLocation);
   }
 
@@ -69,7 +69,7 @@ public class User {
    * @param customPOIs a list of custom POIs created by the user
    */
   public void saveUser(List<POILocation> customPOIs) {
-    JSONObject jsonUser = createJSONObjectOfUser(customPOIs);
+    JSONObject jsonUser = toJSON(customPOIs);
     Util.writeToFile(jsonUser, "/appData/users/" + this.username + ".json");
   }
 
@@ -79,7 +79,7 @@ public class User {
    * @param customPOIs a list of custom POIs created by the user
    * @return json representation of the user
    */
-  private JSONObject createJSONObjectOfUser(List<POILocation> customPOIs) {
+  private JSONObject toJSON(List<POILocation> customPOIs) {
     JSONObject jsonUser = new JSONObject();
     jsonUser.put("username", this.username);
     jsonUser.put("password", this.password);
