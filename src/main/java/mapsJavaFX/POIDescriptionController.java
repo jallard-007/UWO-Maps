@@ -6,31 +6,37 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import maps.*;
 import java.io.IOException;
 
 /**
- * Controller to handle the popup window displaying information about a selected POI.
+ * Controller to handle the popup window displaying information about a selected
+ * POI.
  */
 public class POIDescriptionController {
   static Application app;
+  static Stage stage = new Stage();
 
   public static void setApp(Application newApp) {
     app = newApp;
+    stage.setMaxWidth(500);
   }
 
   /**
-   * Constructor for the class, stages the popup window and sets up all its button functionalities (edit, favourite, remove)
-   * @param user current user logged into the application
-   * @param poiLocation the POI location selected by the user to view its information
-   * @param app the application
+   * Constructor for the class, stages the popup window and sets up all its button
+   * functionalities (edit, favourite, remove)
+   * 
+   * @param user        current user logged into the application
+   * @param poiLocation the POI location selected by the user to view its
+   *                    information
+   * @param app         the application
    */
   public POIDescriptionController(User user, POILocation poiLocation, Application app) {
     BorderPane borderPane = new BorderPane();
 
-    // Concatenate variables to form a string Label containing the description of the selected POI
+    // Concatenate variables to form a string Label containing the description of
+    // the selected POI
     POI poi = poiLocation.getPOI();
 
     String description = "ROOM NUMBER: " + poi.getRoomNumber() + "\n";
@@ -100,16 +106,17 @@ public class POIDescriptionController {
     // Handling deleting POIs
     btnDeletePOI.setOnAction(event -> {
       app.deletePOI(poiLocation);
-      //Refresh both the favourites and search display to reflect the deletion; remove the POI from the map
+      // Refresh both the favourites and search display to reflect the deletion;
+      // remove the POI from the map
       ControllerMediator.getInstance().refreshFavouritesList();
       ControllerMediator.getInstance().refreshSearchList();
       ControllerMediator.getInstance().removePOIButton(poiLocation);
-      //exit pop-up
+      // exit pop-up
       Stage stage = (Stage) btnDeletePOI.getScene().getWindow();
       stage.close();
     });
 
-    //Handling editing POIs
+    // Handling editing POIs
     btnEditPOI.setOnAction(event -> {
       FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/edit.fxml"));
       try {
@@ -125,15 +132,14 @@ public class POIDescriptionController {
       }
     });
 
-    Scene scene = new Scene(borderPane, 200, 300);
-    Stage stage = new Stage();
+    Scene scene = new Scene(borderPane);
+
     stage.setScene(scene);
     stage.setTitle(poi.getRoomNumber());
     stage.setMinHeight(200);
     stage.setMinWidth(300);
-    // Indicate that the stage should be a popup
-    stage.initModality(Modality.APPLICATION_MODAL);
-    stage.showAndWait();
+
+    stage.show();
     stage.centerOnScreen();
   }
 }
