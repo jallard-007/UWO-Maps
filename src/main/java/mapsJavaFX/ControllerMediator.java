@@ -18,7 +18,8 @@ public class ControllerMediator {
   void registerFavouritesController(FavouritesController controller) {
     favouritesController = controller;
   }
-  void registerSearchPOIController(SearchPOIController controller){
+
+  void registerSearchPOIController(SearchPOIController controller) {
     searchPOIController = controller;
   }
 
@@ -30,8 +31,8 @@ public class ControllerMediator {
     return app;
   }
 
-  void mapViewControllerGoToPOI(POILocation poiLocation) {
-    mapViewController.goToPOI(poiLocation);
+  POIButton mapViewControllerGoToPOI(POILocation poiLocation) {
+    return mapViewController.goToPOI(poiLocation);
   }
 
   void filterList(List<POIType> selectedPOIType) {
@@ -42,13 +43,16 @@ public class ControllerMediator {
     favouritesController.refreshList();
   }
 
-  void refreshSearchList(){
+  void refreshSearchList() {
     searchPOIController.refreshList();
   }
 
-  void removePOIButton(POILocation poiLocation){ mapViewController.removeButton(poiLocation);}
+  void removePOIButton(POILocation poiLocation) {
+    mapViewController.removeButton(poiLocation);
+  }
 
-  private ControllerMediator() {}
+  private ControllerMediator() {
+  }
 
   public static ControllerMediator getInstance() {
     return ControllerMediatorHolder.INSTANCE;

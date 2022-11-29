@@ -2,9 +2,9 @@ package mapsJavaFX;
 
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import maps.*;
@@ -20,7 +20,9 @@ public class POIDescriptionController {
 
   public static void setApp(Application newApp) {
     app = newApp;
+    EditController.setStage(stage);
     stage.setMaxWidth(500);
+    stage.setAlwaysOnTop(true);
   }
 
   /**
@@ -32,7 +34,14 @@ public class POIDescriptionController {
    *                    information
    * @param app         the application
    */
-  public POIDescriptionController(User user, POILocation poiLocation, Application app) {
+  public POIDescriptionController(POIButton poiButton, POILocation poiLocation) {
+    Scene s = stage.getScene();
+    if (s != null && s.getRoot().getClass() == AnchorPane.class) {
+      // poi is being edited and cannot switch, otherwise the button will be moveable,
+      // even not when editing
+      return;
+    }
+    stage.setOnHiding(null);
     BorderPane borderPane = new BorderPane();
 
     // Concatenate variables to form a string Label containing the description of
@@ -97,7 +106,7 @@ public class POIDescriptionController {
       }
     });
 
-    if (user.getUserType() != UserType.admin
+    if (app.getUser().getUserType() != UserType.admin
         && poiLocation.getPOI().getPOIType() != POIType.custom) {
       btnDeletePOI.setDisable(true);
       btnEditPOI.setDisable(true);
@@ -122,8 +131,7 @@ public class POIDescriptionController {
       try {
         Scene scene = new Scene(fxmlLoader.load());
         EditController editController = fxmlLoader.getController();
-        editController.setPoiLocation(poiLocation);
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        editController.setPoiLocation(poiLocation, poiButton);
         stage.setScene(scene);
         stage.show();
         stage.centerOnScreen();

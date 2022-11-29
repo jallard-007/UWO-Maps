@@ -55,6 +55,8 @@ public class NavigationController {
   public void logout(ActionEvent event) throws IOException {
     // confirmation message for user before they complete logging out
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    alert.initOwner(stage);
     alert.setTitle("Logout");
     alert.setHeaderText("You're about to log out");
     alert.setContentText("Are you sure?");
@@ -67,6 +69,9 @@ public class NavigationController {
     // go back to login page if user successfully logs out
     FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/login.fxml"));
     Scene scene = new Scene(fxmlLoader.load());
+    stage.setWidth(600);
+    stage.setHeight(330);
+    stage.setResizable(false);
     ControllerMediator.getInstance().getApplication().save();
     changeScene(scene, event);
   }

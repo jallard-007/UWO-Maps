@@ -46,7 +46,8 @@ public class MapViewController {
         ImageView imageView = new ImageView(image);
         imageView.setPreserveRatio(true);
 
-        // Add floor PNGs into a scrollPane so users can pan through the maps; set dimensions to
+        // Add floor PNGs into a scrollPane so users can pan through the maps; set
+        // dimensions to
         StackPane stackPane = new StackPane();
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setPannable(true);
@@ -105,7 +106,7 @@ public class MapViewController {
     return null;
   }
 
-  public void removeButton(POILocation poiLocation){
+  public void removeButton(POILocation poiLocation) {
     POIButton poiButton = getButton(poiLocation);
     this.poiButtons[poiLocation.getPOI().getPOIType().ordinal()].remove(poiButton);
     Pane pane = getPane(poiLocation);
@@ -118,16 +119,17 @@ public class MapViewController {
   }
 
   /**
-   * Centers the map view on a poi. The centering is not 100% accurate, but it is fairly close
+   * Centers the map view on a poi. The centering is not 100% accurate, but it is
+   * fairly close
    *
    * @param poiLocation the poi to find
+   * @return the button corresponding the to the poi
    */
-  public void goToPOI(POILocation poiLocation) {
+  public POIButton goToPOI(POILocation poiLocation) {
     System.out.println("go to " + poiLocation);
 
-    Tab tab =
-        goToTab((TabPane) goToTab(this.tabPane, poiLocation.getBuilding().getName()).getContent(),
-            poiLocation.getFloor().getName());
+    Tab tab = goToTab((TabPane) goToTab(this.tabPane, poiLocation.getBuilding().getName()).getContent(),
+        poiLocation.getFloor().getName());
     ScrollPane scrollPane = (ScrollPane) tab.getContent();
 
     Pair position = poiLocation.getPOI().getPosition();
@@ -138,6 +140,7 @@ public class MapViewController {
 
     scrollPane.setHvalue(0.5 + (zoomBar.getValue() * ((xRatio + (errorX * 0.20)) - 0.5)));
     scrollPane.setVvalue(0.5 + (zoomBar.getValue() * ((yRatio + (errorY * 0.20)) - 0.5)));
+    return getButton(poiLocation);
   }
 
   /**
