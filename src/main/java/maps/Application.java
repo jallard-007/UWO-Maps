@@ -3,6 +3,7 @@ package maps;
 import java.io.File;
 import java.util.*;
 
+import mapsJavaFX.ControllerMediator;
 import org.json.*;
 
 import java.lang.String;
@@ -299,11 +300,11 @@ public class Application {
    * @return true if successful, false otherwise
    */
   public boolean deletePOI(POILocation poiLocation) {
-    if (poiLocation.poi.getPOIType() == POIType.custom
-        || this.user.getUserType() == UserType.admin) {
-        if (this.user.indexOfFavourite(poiLocation) != -1){
-          this.user.removeFavourites(poiLocation);
-        }
+    if (poiLocation.poi.getPOIType() == POIType.custom || this.user.getUserType() == UserType.admin) {
+      if (this.user.indexOfFavourite(poiLocation) != -1){
+        this.user.removeFavourites(poiLocation);
+      }
+
       return poiLocation.removePOI() && this.poiLocations.remove(poiLocation);
     }
     return false;

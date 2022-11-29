@@ -105,6 +105,12 @@ public class MapViewController {
     return null;
   }
 
+  public void removeButton (POILocation poiLocation){
+    POIButton poiButton = getButton(poiLocation);
+    poiButton.setDisable(true);
+    poiButton.setVisible(false);
+  }
+
   /**
    * Centers the map view on a poi. The centering is not 100% accurate, but it is fairly close
    *

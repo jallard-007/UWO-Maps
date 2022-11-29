@@ -46,6 +46,8 @@ public class ControllerMediator {
     searchPOIController.refreshList();
   }
 
+  void removePOIButton(POILocation poiLocation){ mapViewController.removeButton(poiLocation);}
+
   private ControllerMediator() {}
 
   public static ControllerMediator getInstance() {

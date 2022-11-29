@@ -100,9 +100,10 @@ public class POIDescriptionController {
     // Handling deleting POIs
     btnDeletePOI.setOnAction(event -> {
       app.deletePOI(poiLocation);
-      //Refresh both the favourites and search display to reflect the deletion.
+      //Refresh both the favourites and search display to reflect the deletion; remove the POI from the map
       ControllerMediator.getInstance().refreshFavouritesList();
       ControllerMediator.getInstance().refreshSearchList();
+      ControllerMediator.getInstance().removePOIButton(poiLocation);
       //exit pop-up
       Stage stage = (Stage) btnDeletePOI.getScene().getWindow();
       stage.close();
