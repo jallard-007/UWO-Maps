@@ -5,18 +5,15 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/19"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapsJavaFX.SearchPOIController">
+<BorderPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapsJavaFX.SearchPOIController">
     <top>
-        <TextField fx:id="searchInput" alignment="CENTER" focusTraversable="false" onKeyTyped="#onSearchInputKeyPress"
-                   promptText="Search For POI:" BorderPane.alignment="CENTER">
+        <TextField fx:id="searchInput" alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyTyped="#onSearchInputKeyPress" promptText="Search For POI:" BorderPane.alignment="CENTER">
             <font>
-                <Font size="16.0"/>
+                <Font size="16.0" />
             </font>
         </TextField>
     </top>
     <bottom>
-        <ListView fx:id="matchingPOIList" onKeyReleased="#onPOIListKeyPress" onMouseClicked="#onPOIListMouseClick"
-                  BorderPane.alignment="CENTER"/>
+        <ListView fx:id="matchingPOIList" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyReleased="#onPOIListKeyPress" onMouseClicked="#onPOIListMouseClick" BorderPane.alignment="CENTER" />
     </bottom>
 </BorderPane>

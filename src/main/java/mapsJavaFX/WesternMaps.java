@@ -10,6 +10,10 @@ import java.io.IOException;
 
 import maps.Application;
 
+/**
+ * The WesternMaps class is dedicated to setting up the stage, corresponding scenes, and handling
+ * start up and closure of the application
+ */
 public class WesternMaps extends javafx.application.Application {
 
   public static void main(String[] args) {
@@ -17,20 +21,27 @@ public class WesternMaps extends javafx.application.Application {
   }
 
   /**
-   * The method that initiates the start of the application.
-   * @param stage the stage to set and show when the application is first started.
-   * @throws IOException if the fxml file is missing
+   * starts up the application by setting up the appropriate stage and scene as well as handling the
+   * event in which the user closes the application
+   *
+   * @param stage the stage which will be used to display the scene to the user
+   * @throws IOException if a fxml file does not exist
    */
   @Override
   public void start(Stage stage) throws IOException {
-    FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/login.fxml"));
-    Scene scene = new Scene(fxmlLoader.load());
+    // load the login UI from the fxml file, load the scene, and set the title
+    FXMLLoader loginLoader = new FXMLLoader(SignupController.class.getResource("/login.fxml"));
+    Scene scene = new Scene(loginLoader.load());
     stage.setTitle("Western Maps");
+
+    // make it so the stage cannot be resized by the user and set the scene
     stage.setResizable(false);
     stage.setScene(scene);
+
     Application app = new Application();
     app.loadData();
     ControllerMediator.getInstance().registerApplication(app);
+    stage.setResizable(true);
     stage.show();
 
     stage.setOnCloseRequest(event -> {

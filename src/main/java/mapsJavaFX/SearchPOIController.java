@@ -54,7 +54,8 @@ public class SearchPOIController {
     if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
       if (mouseEvent.getClickCount() == 2) {
         navigateToPOI(getSelectedPOI());
-        new POIDescriptionController(app.getUser(), getSelectedPOI(), app);
+        // Commented out to allow easy testing of goToPOI method in MainViewController
+        // new POIDescriptionController(getSelectedPOI());
       }
     }
   }

@@ -46,7 +46,7 @@ public class FavouritesController {
     if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
       if (mouseEvent.getClickCount() == 2) {
         navigateToPOI(getSelectedPOI());
-        new POIDescriptionController(app.getUser(), getSelectedPOI(), app);
+        new POIDescriptionController(getSelectedPOI());
       }
     }
   }

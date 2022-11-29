@@ -13,8 +13,8 @@ import java.lang.String;
 public class Application {
   User user;
   boolean editMode;
-  List<Building> buildings;
-  List<POILocation> poiLocations;
+  final List<Building> buildings;
+  final List<POILocation> poiLocations;
 
   /**
    * Default constructor
@@ -344,7 +344,6 @@ public class Application {
    * Used to save all changes made by the current user for both user types
    */
   public void save() {
-    // TODO:
     if (user == null) {
       return;
     }
@@ -361,7 +360,6 @@ public class Application {
    * @return json representation the application object
    */
   private JSONObject createJSONObjectOfApplication() {
-    // TODO:
     JSONObject jsonApplication = new JSONObject();
     JSONArray jsonBuildings = new JSONArray();
     jsonApplication.put("buildings", jsonBuildings);

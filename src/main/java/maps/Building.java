@@ -9,8 +9,8 @@ import org.json.JSONObject;
  * Stores information regrading the building
  */
 public class Building {
-  String name;
-  List<Floor> floors;
+  final String name;
+  final List<Floor> floors;
 
   /**
    * Default constructor

@@ -1,8 +1,8 @@
 module mapsJavaFX {
   requires transitive javafx.graphics;
-  requires javafx.controls;
+  requires transitive javafx.controls;
   requires javafx.fxml;
-  requires org.json;
+  requires transitive org.json;
 
   opens mapsJavaFX to javafx.fxml;
 

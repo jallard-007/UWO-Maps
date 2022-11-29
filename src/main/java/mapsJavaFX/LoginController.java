@@ -38,10 +38,9 @@ public class LoginController {
 
   /**
    * Method called when the user clicks the log in button; checks the validity of their username and password, and takes the user to the main view of the application
-   * @param event onAction event
    * @throws IOException if the fxml file is missing
    */
-  public void goToApplication(ActionEvent event) throws IOException {
+  public void goToApplication() throws IOException {
     if (username.getText().equals("")) {
       // ask user to input username
       return;
@@ -51,26 +50,30 @@ public class LoginController {
       return;
     }
     Application app = ControllerMediator.getInstance().getApplication();
+    Stage stage = (Stage) logIn.getScene().getWindow();
     if (!app.login(username.getText(), password.getText())) {
       // username / password incorrect
       return;
     }
+    stage.close();
     FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/mainView.fxml"));
     Scene scene = new Scene(fxmlLoader.load());
     MainController controller = fxmlLoader.getController();
     Util.setControllers(controller, app);
 
-    Stage stage = (Stage) logIn.getScene().getWindow();
-    stage.setX(23);
-    stage.setY(20);
+
+    stage.setHeight(700);
+    stage.setWidth(1200);
+    stage.centerOnScreen();
     stage.setScene(scene);
     stage.show();
   }
 
   /**
-   * Takes the user to the sign up page upon clicking a button so that users can register with the application.
-   * @param event onAction
-   * @throws IOException if the fxml file is missing
+   * Go to sign up page from login page
+   *
+   * @param event user clicks on signup button on login page
+   * @throws IOException if signup.fxml does not exist
    */
   public void goToSignUp(ActionEvent event) throws IOException {
     FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/signup.fxml"));

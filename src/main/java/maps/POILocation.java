@@ -4,9 +4,9 @@ package maps;
  * Stores the location of a poi, so it can be easily navigated to when selected from a list
  */
 public class POILocation {
-  Building building;
-  Floor floor;
-  POI poi;
+  final Building building;
+  final Floor floor;
+  final POI poi;
 
   /**
    * @param building the building
