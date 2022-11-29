@@ -3,7 +3,6 @@ package maps;
 import java.io.File;
 import java.util.*;
 
-import mapsJavaFX.ControllerMediator;
 import org.json.*;
 
 import java.lang.String;
@@ -28,7 +27,8 @@ public class Application {
   }
 
   /**
-   * Reads the main poi meta-data file on disk and loads all data into their respective classes
+   * Reads the main poi meta-data file on disk and loads all data into their
+   * respective classes
    */
   public void loadData() {
     String rootPath = Util.getRootPath(); // gets root folder of application
@@ -90,8 +90,7 @@ public class Application {
       // username does not exist;
       return false;
     }
-    String fileContent =
-        Util.getJSONFileContents(rootPath + "/appData/users/" + username + ".json");
+    String fileContent = Util.getJSONFileContents(rootPath + "/appData/users/" + username + ".json");
     JSONObject jsonObject = new JSONObject(fileContent);
     if (!password.equals(jsonObject.getString("password"))) {
       // password does not match
@@ -101,7 +100,8 @@ public class Application {
 
     // Just to test restricting edit mode. will need to be changed.
     // Signing in as 'user' allows you to move the buttons freely, and
-    // the new position is stored added to the json file and current application state.
+    // the new position is stored added to the json file and current application
+    // state.
     // Signing in as 'example' the buttons cannot be moved.
     if (this.user.getUserType() == UserType.admin) {
       this.editMode = true;
@@ -162,7 +162,10 @@ public class Application {
   }
 
   /**
-   * Whether the user can access the ability to delete, edit, and add buildings, floors, and built-in POIs (i.e., if they're an admin with access to edit mode).
+   * Whether the user can access the ability to delete, edit, and add buildings,
+   * floors, and built-in POIs (i.e., if they're an admin with access to edit
+   * mode).
+   * 
    * @return whether the user can enter edit mode
    */
   public boolean getEditMode() {
@@ -187,7 +190,8 @@ public class Application {
   }
 
   /**
-   * Logs out the current user, removing the user's custom POIs and saving any changes such as
+   * Logs out the current user, removing the user's custom POIs and saving any
+   * changes such as
    * favourites, and custom POIs to the user's file
    */
   private UserType logout() {
@@ -228,7 +232,8 @@ public class Application {
   }
 
   /**
-   * Searches for POIs with buildingName, floorName, or POIName/POINum containing the searchText
+   * Searches for POIs with buildingName, floorName, or POIName/POINum containing
+   * the searchText
    * 
    * @param searchText the text to search for a POI
    * @return all poi location objects with partial match
@@ -276,7 +281,7 @@ public class Application {
    * Deletes a floor from the application
    * 
    * @param building the building that the floor is in
-   * @param floor the floor to delete
+   * @param floor    the floor to delete
    * @return true if successful, false otherwise
    */
   public boolean deleteFloor(Building building, Floor floor) {
@@ -301,7 +306,7 @@ public class Application {
    */
   public boolean deletePOI(POILocation poiLocation) {
     if (poiLocation.poi.getPOIType() == POIType.custom || this.user.getUserType() == UserType.admin) {
-      if (this.user.indexOfFavourite(poiLocation) != -1){
+      if (this.user.indexOfFavourite(poiLocation) != -1) {
         this.user.removeFavourites(poiLocation);
       }
 
@@ -329,11 +334,12 @@ public class Application {
   }
 
   /**
-   * Creates a POILocation object for the poi, adds it to the list, and adds the poi to the floor
+   * Creates a POILocation object for the poi, adds it to the list, and adds the
+   * poi to the floor
    * 
    * @param building the building that the floor is in
-   * @param floor the floor that the poi is on
-   * @param poi the poi to add
+   * @param floor    the floor that the poi is on
+   * @param poi      the poi to add
    */
   public void addPOI(Building building, Floor floor, POI poi) {
     this.poiLocations.add(new POILocation(building, floor, poi));
