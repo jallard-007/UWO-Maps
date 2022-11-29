@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="25.0" prefWidth="354.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapsJavaFX.WeatherController">
-    <Text fx:id="weatherText" layoutX="6.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0">
-      <font>
-        <Font size="16.0" />
-      </font>
-    </Text>
-</AnchorPane>
+<Text fx:id="weatherText" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapsJavaFX.WeatherController">
+  <font>
+    <Font size="16.0" />
+  </font>
+</Text>

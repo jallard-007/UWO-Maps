@@ -7,7 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -18,7 +18,7 @@ import java.io.IOException;
 public class NavigationController {
 
   @FXML
-  private AnchorPane menuBar;
+  private BorderPane menuBar;
 
   /**
    * Go to help page of application

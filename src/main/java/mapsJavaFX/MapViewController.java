@@ -105,10 +105,16 @@ public class MapViewController {
     return null;
   }
 
-  public void removeButton (POILocation poiLocation){
+  public void removeButton(POILocation poiLocation){
     POIButton poiButton = getButton(poiLocation);
-    poiButton.setDisable(true);
-    poiButton.setVisible(false);
+    this.poiButtons[poiLocation.getPOI().getPOIType().ordinal()].remove(poiButton);
+    Pane pane = getPane(poiLocation);
+    if (pane == null) {
+      // the button is not in a pane? hide the button
+      poiButton.setVisible(false);
+      return;
+    }
+    pane.getChildren().remove(poiButton);
   }
 
   /**
@@ -184,7 +190,6 @@ public class MapViewController {
     for (POIType poiType : POIType.values()) {
       boolean show = selectedPOITypes.contains(poiType);
       for (POIButton poiTypeButtons : this.poiButtons[poiType.ordinal()]) {
-        poiTypeButtons.setDisable(!show);
         poiTypeButtons.setVisible(show);
       }
     }
