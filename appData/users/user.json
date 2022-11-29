@@ -1,1 +1,1 @@
-{"password":"123","favourites":["Talbot College | Second | TC 201"],"userType":"admin","customPOIs":[],"username":"user"}
+{"password":"123","favourites":["Talbot College | Second | TC 201","Middlesex College | Ground | test"],"userType":"admin","customPOIs":[{"hours":"2","roomNum":"test","information":"kd","position":[749,697],"type":"custom","floor":"Ground","building":"Middlesex College","capacity":30}],"username":"user"}

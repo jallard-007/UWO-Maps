@@ -40,7 +40,7 @@ public class POIButton extends Button {
     this.setOnMouseClicked(mouseEvent -> {
       if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
         if (mouseEvent.getClickCount() == 2) {
-          new POIDescriptionController(this.poiLocation);
+          new POIDescriptionController(app.getUser(), this.poiLocation, app);
         }
       }
     });
