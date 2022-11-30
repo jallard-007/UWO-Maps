@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import maps.*;
 import java.io.IOException;
 
+//TODO: bug-- POIDescription only pops up once, then buttons can't be clicked.
 /**
  * Controller to handle the popup window displaying information about a selected
  * POI.
@@ -32,10 +33,8 @@ public class POIDescriptionController {
    * Constructor for the class, stages the popup window and sets up all its button
    * functionalities (edit, favourite, remove)
    * 
-   * @param user        current user logged into the application
    * @param poiLocation the POI location selected by the user to view its
    *                    information
-   * @param app         the application
    */
   public POIDescriptionController(POIButton poiButton, POILocation poiLocation) {
     Scene s = stage.getScene();
