@@ -60,7 +60,8 @@ public class AddPOIController implements Initializable {
     try {
       Scene scene = new Scene(fxmlLoader.load());
       EditController editController = fxmlLoader.getController();
-      editController.setPoiLocation(poiLocation);
+      POIButton poiButton = new POIButton(poiLocation);
+      editController.setPoiLocation(poiLocation, poiButton);
       Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
       stage.setScene(scene);
       stage.show();

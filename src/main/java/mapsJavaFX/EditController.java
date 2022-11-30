@@ -170,7 +170,6 @@ public class EditController implements Initializable {
       //Add POI location to list and display new POI button on map if the POI location being edited is a newly-created POI
       if (ControllerMediator.getInstance().getApplication().searchForPOI(poiLocation.toString()).isEmpty()){
         ControllerMediator.getInstance().getApplication().addPOI(poiLocation);
-        POIButton poiButton = new POIButton(poiLocation);
         ControllerMediator.getInstance().addPOIButton(poiButton, poiLocation);
       }
       //Refresh both the favourites and search display to reflect the deletion.
