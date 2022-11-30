@@ -17,7 +17,8 @@ public class Floor {
   Image image;
 
   /**
-   * Each index corresponds to a POIType, for example: pois[POIType.classroom] is all the pois with
+   * Each index corresponds to a POIType, for example: pois[POIType.classroom] is
+   * all the pois with
    * type POIType.classroom.
    */
   final List<POI>[] pois;
@@ -26,7 +27,7 @@ public class Floor {
    * Constructor without an image path
    * 
    * @param level integer corresponding to the floor's level
-   * @param name the name of the floor
+   * @param name  the name of the floor
    */
   @SuppressWarnings("unchecked")
   Floor(int level, String name) {
@@ -43,8 +44,8 @@ public class Floor {
   /**
    * Constructor with an image path. Loads the image and stores it in memory
    * 
-   * @param level integer corresponding to the floor's level
-   * @param name the name of the floor
+   * @param level     integer corresponding to the floor's level
+   * @param name      the name of the floor
    * @param imagePath absolute path to the image of this floor
    */
   Floor(int level, String name, String imagePath) {
@@ -54,13 +55,7 @@ public class Floor {
   }
 
   public String toString() {
-    StringBuilder str = new StringBuilder(this.name);
-    for (List<POI> poiList : this.pois) {
-      for (POI poi : poiList) {
-        str.append("\n\t\tPOIRoomNum: ").append(poi.toString());
-      }
-    }
-    return str.toString();
+    return this.name;
   }
 
   public void addPOI(POI poi) {

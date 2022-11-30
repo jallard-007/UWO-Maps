@@ -3,7 +3,8 @@ package maps;
 import java.util.Arrays;
 
 /**
- * Stores the location of a poi, so it can be easily navigated to when selected from a list
+ * Stores the location of a poi, so it can be easily navigated to when selected
+ * from a list
  */
 public class POILocation {
   final Building building;
@@ -12,8 +13,8 @@ public class POILocation {
 
   /**
    * @param building the building
-   * @param floor the floor
-   * @param poi the poi
+   * @param floor    the floor
+   * @param poi      the poi
    */
   public POILocation(Building building, Floor floor, POI poi) {
     this.building = building;
@@ -27,10 +28,7 @@ public class POILocation {
    * @return true if the removal was successful, false otherwise
    */
   public boolean removePOI() {
-    System.out.println(Arrays.toString(floor.pois));
-    boolean b = floor.pois[poi.type.ordinal()].remove(poi);
-    System.out.println(Arrays.toString(floor.pois));
-    return b;
+    return floor.pois[poi.type.ordinal()].remove(poi);
   }
 
   public String toString() {

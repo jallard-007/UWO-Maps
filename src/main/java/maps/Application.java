@@ -310,9 +310,6 @@ public class Application {
       if (this.user.indexOfFavourite(poiLocation) != -1) {
         this.user.removeFavourites(poiLocation);
       }
-      System.out.println(poiLocation.removePOI());
-      System.out.println(this.poiLocations.remove(poiLocation));
-
     }
   }
 
