@@ -20,13 +20,13 @@ import java.util.ResourceBundle;
 
 public class AddPOIController implements Initializable {
   @FXML
-  private ChoiceBox floorName;
+  private ChoiceBox<String> floorName;
   @FXML
   private Text buildingName;
   private Building selectedBuilding;
 
   public void initialize(URL location, ResourceBundle resources) {
-    //Get current building selected in the map view
+    // Get current building selected in the map view
     String strSelectedBuilding = ControllerMediator.getInstance().getBuildingTab();
     List<Building> allBuildings = ControllerMediator.getInstance().getApplication().getBuildings();
     for (Building building : allBuildings) {
@@ -36,7 +36,7 @@ public class AddPOIController implements Initializable {
     }
     buildingName.setText(selectedBuilding.getName());
 
-    //Set choicebox options
+    // Set choicebox options
     List<String> floorList = new ArrayList<>();
     for (Floor floor : selectedBuilding.getFloors()) {
       floorList.add(floor.getName());
@@ -54,7 +54,7 @@ public class AddPOIController implements Initializable {
     }
 
     POILocation poiLocation = new POILocation(selectedBuilding, selectedFloor,
-        new POI("placeholder", POIType.custom, new Pair(0,0)));
+        new POI("placeholder", POIType.custom, new Pair(0, 0)));
 
     FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/edit.fxml"));
     try {

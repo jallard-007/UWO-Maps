@@ -1,5 +1,6 @@
 package mapsJavaFX;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -12,11 +13,8 @@ import maps.POI;
 import maps.POILocation;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class EditController implements Initializable {
   public static Stage stage;
@@ -30,7 +28,7 @@ public class EditController implements Initializable {
    * POIs
    */
   @FXML
-  private ChoiceBox newPOIType;
+  private ChoiceBox<POIType> newPOIType;
   /**
    * The Save button on the editing page.
    */
@@ -95,7 +93,7 @@ public class EditController implements Initializable {
   public void initialize(URL location, ResourceBundle resources) {
     // Get all POI types and turn it into an array list, then turn into observable
     // list and set values as POI type options.
-    newPOIType.setItems(FXCollections.observableList(Stream.of(POIType.values()).map(POIType::name).toList()));
+    newPOIType.setItems(FXCollections.observableList(Arrays.asList(POIType.values())));
     newPOIType.getSelectionModel().selectLast();
     if (ControllerMediator.getInstance().getApplication().getUser().getUserType() == UserType.base) {
       newPOIType.setDisable(true);
@@ -157,8 +155,7 @@ public class EditController implements Initializable {
     poi.setName(newName.getText());
     poi.setHoursOfOperation(newHours.getText());
     poi.setInformation(newInformation.getText());
-    poi.setType(POIType.valueOf(
-        (String) newPOIType.getSelectionModel().getSelectedItem()));
+    poi.setType(newPOIType.getSelectionModel().getSelectedItem());
 
     // if after removing spaces, the textfield is empty, set attribute as null
     // (Textfields are initialized as empty strings)
@@ -189,7 +186,6 @@ public class EditController implements Initializable {
       ControllerMediator.getInstance().refreshFavouritesList();
       ControllerMediator.getInstance().refreshSearchList();
       // exit pop-up
-      stage.setScene(null);
       stage.hide();
     }
   }

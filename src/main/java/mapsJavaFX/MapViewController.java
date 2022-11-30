@@ -1,10 +1,8 @@
 package mapsJavaFX;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
 import javafx.scene.control.Tab;
@@ -109,9 +107,10 @@ public class MapViewController {
 
   /**
    * Removes a POI's button from the map
+   * 
    * @param poiLocation the selected POI location
    */
-  public void removeButton(POILocation poiLocation){
+  public void removeButton(POILocation poiLocation) {
     POIButton poiButton = getButton(poiLocation);
     this.poiButtons[poiLocation.getPOI().getPOIType().ordinal()].remove(poiButton);
     Pane pane = getPane(poiLocation);
@@ -123,7 +122,7 @@ public class MapViewController {
     pane.getChildren().remove(poiButton);
   }
 
-  public void addButton(POIButton poiButton, POILocation poiLocation){
+  public void addButton(POIButton poiButton, POILocation poiLocation) {
     poiButtons[poiLocation.getPOI().getPOIType().ordinal()].add(poiButton);
   }
 
@@ -207,7 +206,7 @@ public class MapViewController {
     }
   }
 
-  public String getBuildingTab(){
+  public String getBuildingTab() {
     return tabPane.getSelectionModel().getSelectedItem().getText();
   }
 }

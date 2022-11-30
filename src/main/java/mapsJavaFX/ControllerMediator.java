@@ -2,7 +2,6 @@ package mapsJavaFX;
 
 import java.util.List;
 import maps.Application;
-import maps.POI;
 import maps.POILocation;
 import maps.POIType;
 
@@ -40,7 +39,9 @@ public class ControllerMediator {
     mapViewController.filterList(selectedPOIType);
   }
 
-  String getBuildingTab(){return mapViewController.getBuildingTab();}
+  String getBuildingTab() {
+    return mapViewController.getBuildingTab();
+  }
 
   void refreshFavouritesList() {
     favouritesController.refreshList();
@@ -50,10 +51,16 @@ public class ControllerMediator {
     searchPOIController.refreshList();
   }
 
-  void removePOIButton(POILocation poiLocation){ mapViewController.removeButton(poiLocation);}
-  void addPOIButton(POIButton poiButton, POILocation poiLocation){mapViewController.addButton(poiButton, poiLocation);}
+  void removePOIButton(POILocation poiLocation) {
+    mapViewController.removeButton(poiLocation);
+  }
 
-  private ControllerMediator() {}
+  void addPOIButton(POIButton poiButton, POILocation poiLocation) {
+    mapViewController.addButton(poiButton, poiLocation);
+  }
+
+  private ControllerMediator() {
+  }
 
   public static ControllerMediator getInstance() {
     return ControllerMediatorHolder.INSTANCE;
