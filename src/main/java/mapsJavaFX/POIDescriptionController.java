@@ -20,6 +20,11 @@ public class POIDescriptionController {
   private final POILocation poiLocation;
   private final POIButton poiButton;
 
+  /**
+   * Called to set up the app, and the dimensions of the pop-up window for future use
+   *
+   * @param newApp referring to the map application
+   */
   public static void setApp(Application newApp) {
     app = newApp;
     EditController.setStage(stage);

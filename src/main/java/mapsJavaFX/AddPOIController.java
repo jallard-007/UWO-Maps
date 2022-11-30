@@ -1,7 +1,6 @@
 package mapsJavaFX;
 
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -22,18 +21,32 @@ public class AddPOIController {
   private Text buildingName;
   private Building selectedBuilding;
 
+  /**
+   * Called to set up the app
+   * @param newApp referring to the map application
+   */
   public static void setApp(Application newApp) {
     app = newApp;
   }
 
+  /**
+   * Sets stage of application
+   * @param newStage stage to be set
+   */
   public static void setStage(Stage newStage) {
     stage = newStage;
   }
 
+  /**
+   * @return current application stage
+   */
   public static Stage getStage() {
     return stage;
   }
 
+  /**
+   * Sets up interface: gives user options to select the floor that their new POI will be associated with.
+   */
   @FXML
   public void initialize() {
     // Get current building selected in the map view
@@ -51,13 +64,16 @@ public class AddPOIController {
     floorName.getSelectionModel().selectFirst();
   }
 
-  public void onContinue(ActionEvent event) {
+  /**
+   * Pressing [Continue] button takes user to input information about their new POI.
+   */
+  public void onContinue() {
     Floor selectedFloor = floorName.getSelectionModel().getSelectedItem();
 
     Double x = selectedFloor.getImage().getWidth();
     Double y = selectedFloor.getImage().getHeight();
     POILocation poiLocation = new POILocation(selectedBuilding, selectedFloor,
-        new POI("", POIType.custom, new Pair(x / 2, y / 2)));
+        new POI("New POI", POIType.custom, new Pair(x / 2, y / 2)));
     app.addPOI(poiLocation);
     try {
       FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/edit.fxml"));
