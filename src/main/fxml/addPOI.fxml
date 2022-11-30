@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="124.0" prefWidth="399.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapsJavaFX.AddPOIController">
+  <padding>
+    <Insets bottom="10.0" right="10.0" />
+  </padding>
+  <ButtonBar layoutX="8.0" layoutY="83.0" prefHeight="40.0" prefWidth="382.0">
+    <buttons>
+      <Button fx:id="btnContinue" mnemonicParsing="false" onAction="#onContinue" text="Continue" />
+    </buttons>
+    <opaqueInsets>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+    </opaqueInsets>
+  </ButtonBar>
+  <Text layoutX="14.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Building: ">
+    <font>
+      <Font size="13.0" />
+    </font>
+  </Text>
+   <Text layoutX="14.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Floor">
+      <font>
+         <Font size="13.0" />
+      </font>
+   </Text>
+   <ChoiceBox fx:id="floorName" layoutX="126.0" layoutY="47.0" prefWidth="150.0" />
+   <Text fx:id="buildingName" layoutX="126.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="149.60000000000014" />
+</AnchorPane>
