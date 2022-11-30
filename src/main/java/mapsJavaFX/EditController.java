@@ -175,19 +175,19 @@ public class EditController implements Initializable {
     } catch (NumberFormatException e) {
       // Set as null if empty or not a number
       poi.setCapacity(null);
-    } finally {
-      // Add POI location to list and display new POI button on map if the POI
-      // location being edited is a newly-created POI
-      if (ControllerMediator.getInstance().getApplication().searchForPOI(poiLocation.toString()).isEmpty()) {
-        ControllerMediator.getInstance().getApplication().addPOI(poiLocation);
-        ControllerMediator.getInstance().addPOIButton(poiButton, poiLocation);
-      }
-      // Refresh both the favourites and search display to reflect the deletion.
-      ControllerMediator.getInstance().refreshFavouritesList();
-      ControllerMediator.getInstance().refreshSearchList();
-      // exit pop-up
-      stage.hide();
     }
+    // Add POI location to list and display new POI button on map if the POI
+    // location being edited is a newly-created POI
+    if (ControllerMediator.getInstance().getApplication().searchForPOI(poiLocation.toString()).isEmpty()) {
+      ControllerMediator.getInstance().getApplication().addPOI(poiLocation);
+      ControllerMediator.getInstance().addPOIButton(poiButton, poiLocation);
+    }
+    // Refresh both the favourites and search display to reflect the deletion.
+    ControllerMediator.getInstance().refreshFavouritesList();
+    ControllerMediator.getInstance().refreshSearchList();
+
+    // exit pop-up
+    stage.hide();
   }
 
   /**
