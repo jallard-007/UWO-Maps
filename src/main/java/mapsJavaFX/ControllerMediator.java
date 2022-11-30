@@ -5,6 +5,9 @@ import maps.Application;
 import maps.POILocation;
 import maps.POIType;
 
+/**
+ * Class that mediates the interaction between different controllers.
+ */
 public class ControllerMediator {
   private MapViewController mapViewController;
   private FavouritesController favouritesController;
@@ -53,6 +56,10 @@ public class ControllerMediator {
 
   void removePOIButton(POILocation poiLocation) {
     mapViewController.removeButton(poiLocation);
+  }
+
+  void updateButtonStorage(POIType oldType, POIType newType, POIButton poiButton){
+    mapViewController.updateButtonStorage(oldType, newType, poiButton);
   }
 
   void addPOIButton(POIButton poiButton, POILocation poiLocation) {

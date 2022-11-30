@@ -21,6 +21,10 @@ public class MapViewController {
   Application app;
   private List<POIButton>[] poiButtons;
 
+  /**
+   * Method to initialize the map view of the application.
+   * @param app the current application being used
+   */
   @SuppressWarnings("unchecked")
   public void setApp(Application app) {
     this.app = app;
@@ -122,6 +126,22 @@ public class MapViewController {
     pane.getChildren().remove(poiButton);
   }
 
+  /**
+   * Updates the location where the selected POI's button is stored within the POI buttons list; used when the type of a POI is being updated
+   * @param oldType old POI type
+   * @param newType new POI type
+   * @param poiButton the Button associated with the POI whose type is being updated
+   */
+  public void updateButtonStorage(POIType oldType, POIType newType, POIButton poiButton){
+    this.poiButtons[oldType.ordinal()].remove(poiButton);
+    this.poiButtons[newType.ordinal()].add(poiButton);
+  }
+
+  /**
+   * Adds a button to the POI buttons list and properly displays the new button on the map
+   * @param poiButton newly-created POI button
+   * @param poiLocation POI location associated with that button
+   */
   public void addButton(POIButton poiButton, POILocation poiLocation) {
     Pane currPane;
     poiButtons[poiLocation.getPOI().getPOIType().ordinal()].add(poiButton);
@@ -217,6 +237,9 @@ public class MapViewController {
     }
   }
 
+  /**
+   * @return the current building being displayed in the main view
+   */
   public String getBuildingTab() {
     return tabPane.getSelectionModel().getSelectedItem().getText();
   }

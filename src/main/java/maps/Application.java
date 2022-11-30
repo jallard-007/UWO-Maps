@@ -305,15 +305,14 @@ public class Application {
    * @param poiLocation the POILocation to delete
    * @return true if successful, false otherwise
    */
-  public void deletePOI(POILocation poiLocation) {
+  public boolean deletePOI(POILocation poiLocation) {
     if (poiLocation.poi.getPOIType() == POIType.custom || this.user.getUserType() == UserType.admin) {
       if (this.user.indexOfFavourite(poiLocation) != -1) {
         this.user.removeFavourites(poiLocation);
       }
-      System.out.println(poiLocation.removePOI());
-      System.out.println(this.poiLocations.remove(poiLocation));
-
+      return poiLocation.removePOI() && this.poiLocations.remove(poiLocation);
     }
+    return false;
   }
 
   /**
@@ -348,6 +347,10 @@ public class Application {
     floor.addPOI(poi);
   }
 
+  /**
+   * Adds an already-created POI location to the list and adds it to the floor
+   * @param poiLocation newly-created POI location
+   */
   public void addPOI(POILocation poiLocation) {
     this.poiLocations.add(poiLocation);
     this.sortPOIs();

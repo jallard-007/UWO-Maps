@@ -155,7 +155,17 @@ public class EditController implements Initializable {
     poi.setName(newName.getText());
     poi.setHoursOfOperation(newHours.getText());
     poi.setInformation(newInformation.getText());
-    poi.setType(newPOIType.getSelectionModel().getSelectedItem());
+
+    //Handle POI type changes: the selected POI's floor stores its POIs by type. Similarly, the POI button seen on the map are also stored by type. So both storages must be updated
+    POIType oldType = poi.getPOIType();
+    POIType newType = newPOIType.getSelectionModel().getSelectedItem();
+    if (oldType != newType){
+      //The button must be updated before the new type is set
+      ControllerMediator.getInstance().updateButtonStorage(oldType, newType, poiButton);
+      poi.setType(newType);
+      poiLocation.getFloor().updatePOIStorage(oldType, newType, poi);
+    }
+
 
     // if after removing spaces, the textfield is empty, set attribute as null
     // (Textfields are initialized as empty strings)
