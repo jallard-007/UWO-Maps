@@ -15,8 +15,10 @@ import java.io.IOException;
  * POI.
  */
 public class POIDescriptionController {
+  final static Stage stage = new Stage();
   static Application app;
-  static Stage stage = new Stage();
+  private final POILocation poiLocation;
+  private final POIButton poiButton;
 
   public static void setApp(Application newApp) {
     app = newApp;
@@ -29,15 +31,15 @@ public class POIDescriptionController {
    * Constructor for the class, stages the popup window and sets up all its button
    * functionalities (edit, favourite, remove)
    * 
-   * @param user        current user logged into the application
    * @param poiLocation the POI location selected by the user to view its
    *                    information
-   * @param app         the application
    */
   public POIDescriptionController(POIButton poiButton, POILocation poiLocation) {
+    this.poiButton = poiButton;
+    this.poiLocation = poiLocation;
     Scene s = stage.getScene();
     if (s != null && s.getRoot().getClass() == AnchorPane.class) {
-      // poi is being edited and cannot switch, otherwise the button will be moveable,
+      // poi is being edited and cannot switch, otherwise the button will be movable,
       // even not when editing
       return;
     }
@@ -93,61 +95,59 @@ public class POIDescriptionController {
       btnFavouritePOI.setText("Unfavourite");
     }
 
-    btnFavouritePOI.setOnAction(event -> {
-      if (btnFavouritePOI.isSelected()) {
-        btnFavouritePOI.setText("Unfavourite");
-        app.getUser().addFavourite(poiLocation);
-        ControllerMediator.getInstance().refreshFavouritesList();
-      } else {
-        btnFavouritePOI.setText("Favourite");
-        app.getUser().removeFavourites(poiLocation);
-        ControllerMediator.getInstance().refreshFavouritesList();
-
-      }
-    });
+    btnFavouritePOI.setOnAction(event -> onFavouriteButton(btnFavouritePOI));
 
     if (app.getUser().getUserType() != UserType.admin
         && poiLocation.getPOI().getPOIType() != POIType.custom) {
       btnDeletePOI.setDisable(true);
       btnEditPOI.setDisable(true);
+    } else {
+      // Handling deleting POIs
+      btnDeletePOI.setOnAction(event -> onDeleteButton());
+      // Handling editing POIs
+      btnEditPOI.setOnAction(e -> onEditButton());
     }
 
-    // Handling deleting POIs
-    btnDeletePOI.setOnAction(event -> {
-      app.deletePOI(poiLocation);
-      // Refresh both the favourites and search display to reflect the deletion;
-      // remove the POI from the map
-      ControllerMediator.getInstance().refreshFavouritesList();
-      ControllerMediator.getInstance().refreshSearchList();
-      ControllerMediator.getInstance().removePOIButton(poiLocation);
-      // exit pop-up
-      Stage stage = (Stage) btnDeletePOI.getScene().getWindow();
-      stage.close();
-    });
-
-    // Handling editing POIs
-    btnEditPOI.setOnAction(event -> {
-      FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/edit.fxml"));
-      try {
-        Scene scene = new Scene(fxmlLoader.load());
-        EditController editController = fxmlLoader.getController();
-        editController.setPoiLocation(poiLocation, poiButton);
-        stage.setScene(scene);
-        stage.show();
-        stage.centerOnScreen();
-      } catch (IOException e) {
-        throw new RuntimeException(e);
-      }
-    });
-
     Scene scene = new Scene(borderPane);
-
     stage.setScene(scene);
     stage.setTitle(poi.getRoomNumber());
-    stage.setMinHeight(200);
-    stage.setMinWidth(300);
-
     stage.show();
-    stage.centerOnScreen();
+  }
+
+  public void onEditButton() {
+    FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/edit.fxml"));
+    try {
+      Scene scene = new Scene(fxmlLoader.load());
+      EditController editController = fxmlLoader.getController();
+      editController.setPoiLocation(poiLocation, poiButton);
+      stage.setScene(scene);
+      stage.show();
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  public void onDeleteButton() {
+    app.deletePOI(poiLocation);
+    // Refresh both the favourites and search display to reflect the deletion;
+    // remove the POI from the map
+    ControllerMediator.getInstance().refreshFavouritesList();
+    ControllerMediator.getInstance().refreshSearchList();
+    ControllerMediator.getInstance().removePOIButton(poiLocation);
+    // exit pop-up
+    stage.hide();
+  }
+
+  private void onFavouriteButton(ToggleButton btnFavouritePOI) {
+    if (btnFavouritePOI.isSelected()) {
+      btnFavouritePOI.setText("Unfavourite");
+      app.getUser().addFavourite(poiLocation);
+      ControllerMediator.getInstance().refreshFavouritesList();
+    } else {
+      btnFavouritePOI.setText("Favourite");
+      app.getUser().removeFavourites(poiLocation);
+      ControllerMediator.getInstance().refreshFavouritesList();
+
+    }
   }
 }

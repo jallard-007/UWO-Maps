@@ -1,6 +1,5 @@
 package mapsJavaFX;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -89,16 +88,15 @@ public class EditController {
     }
 
     stage.setOnHiding(event -> {
-      this.onCancel();
+      this.poiButton.removeDraggable();
+      stage.setScene(null);
     });
   }
 
   /**
    * Saves the changes to the POI made by the user
-   * 
-   * @param event button onAction event
    */
-  public void onSave(ActionEvent event) {
+  public void onSave() {
 
     // save position
     this.poiButton.savePosition();
@@ -138,7 +136,7 @@ public class EditController {
       ControllerMediator.getInstance().refreshFavouritesList();
       ControllerMediator.getInstance().refreshSearchList();
       // exit pop-up
-      Stage stage = (Stage) btnSave.getScene().getWindow();
+      stage.setScene(null);
       stage.hide();
     }
   }
@@ -146,11 +144,10 @@ public class EditController {
   /**
    * Return to the POI's description popup if the user clicks on the [Cancel]
    * button in the editing window.
-   *
-   * @return the POI description popup corresponding to the POI being edited
    */
-  public POIDescriptionController onCancel() {
+  public void onCancel() {
     this.poiButton.removeDraggable();
-    return new POIDescriptionController(this.poiButton, this.poiLocation);
+    stage.setScene(null);
+    new POIDescriptionController(this.poiButton, this.poiLocation);
   }
 }
