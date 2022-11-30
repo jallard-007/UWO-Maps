@@ -123,7 +123,18 @@ public class MapViewController {
   }
 
   public void addButton(POIButton poiButton, POILocation poiLocation) {
+    Pane currPane;
     poiButtons[poiLocation.getPOI().getPOIType().ordinal()].add(poiButton);
+
+    //Display new button on map
+    poiButton.setLayoutX(poiLocation.getPOI().getPosition().getX());
+    poiButton.setLayoutY(poiLocation.getPOI().getPosition().getY());
+    currPane = getPane(poiLocation);
+    if (currPane == null) {
+      System.out.print("Error: Could not find the specified Pane | in MapViewController.setApp");
+      System.exit(55);
+    }
+    currPane.getChildren().add(poiButton);
   }
 
   /**
