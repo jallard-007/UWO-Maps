@@ -30,6 +30,7 @@ public class SearchPOIController {
 
   /**
    * Called to set up the app and list of matching POIs for future use
+   * 
    * @param app referring to the map application
    */
   public void setApp(Application app) {
@@ -48,6 +49,7 @@ public class SearchPOIController {
 
   /**
    * Event handler to dictate what to do when a user clicks on a POI in the list
+   * 
    * @param mouseEvent onMouseClicked event
    */
   public void onPOIListMouseClick(MouseEvent mouseEvent) {
@@ -60,10 +62,11 @@ public class SearchPOIController {
     }
   }
 
-  //TODO: not quite sure what this method is for, someone else pls do the javadoc here, thank youuu
   /**
+   * Handles when a keyboard button is pressed. Allows the user to press enter to
+   * navigate to the highlighted poi
    *
-   * @param keyEvent
+   * @param keyEvent the key event
    */
   public void onPOIListKeyPress(KeyEvent keyEvent) {
     if (keyEvent.getCode().equals(KeyCode.ENTER)) {
@@ -73,6 +76,7 @@ public class SearchPOIController {
 
   /**
    * Gets the POI location selected by the user.
+   * 
    * @return selected POI location
    */
   private POILocation getSelectedPOI() {
@@ -81,6 +85,7 @@ public class SearchPOIController {
 
   /**
    * Navigate to the map location of the selected POI.
+   * 
    * @param poiLocation selected POI location
    */
   public void navigateToPOI(POILocation poiLocation) {

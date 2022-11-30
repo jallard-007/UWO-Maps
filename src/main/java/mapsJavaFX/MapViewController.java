@@ -128,16 +128,17 @@ public class MapViewController {
   }
 
   /**
-   * Centers the map view on a poi. The centering is not 100% accurate, but it is fairly close
+   * Centers the map view on a poi. The centering is not 100% accurate, but it is
+   * fairly close
    *
    * @param poiLocation the poi to find
+   * @return the button corresponding the to the poi
    */
-  public void goToPOI(POILocation poiLocation) {
+  public POIButton goToPOI(POILocation poiLocation) {
     System.out.println("go to " + poiLocation);
 
-    Tab tab =
-        goToTab((TabPane) goToTab(this.tabPane, poiLocation.getBuilding().getName()).getContent(),
-            poiLocation.getFloor().getName());
+    Tab tab = goToTab((TabPane) goToTab(this.tabPane, poiLocation.getBuilding().getName()).getContent(),
+        poiLocation.getFloor().getName());
     ScrollPane scrollPane = (ScrollPane) tab.getContent();
 
     Pair position = poiLocation.getPOI().getPosition();
@@ -148,6 +149,7 @@ public class MapViewController {
 
     scrollPane.setHvalue(0.5 + (zoomBar.getValue() * ((xRatio + (errorX * 0.20)) - 0.5)));
     scrollPane.setVvalue(0.5 + (zoomBar.getValue() * ((yRatio + (errorY * 0.20)) - 0.5)));
+    return getButton(poiLocation);
   }
 
   /**
@@ -208,11 +210,4 @@ public class MapViewController {
   public String getBuildingTab(){
     return tabPane.getSelectionModel().getSelectedItem().getText();
   }
-//
-//  public String getFloorTab(){
-//    Tab tab = tabPane.getSelectionModel().getSelectedItem();
-//    Node temp = tab.getContent();
-//    temp.get
-//    return tabPane.getSelectionModel().getSelectedItem()
-//  }
 }

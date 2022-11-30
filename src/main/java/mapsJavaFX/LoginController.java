@@ -37,7 +37,10 @@ public class LoginController {
   private AnchorPane logIn;
 
   /**
-   * Method called when the user clicks the log in button; checks the validity of their username and password, and takes the user to the main view of the application
+   * Method called when the user clicks the log in button; checks the validity of
+   * their username and password, and takes the user to the main view of the
+   * application
+   * 
    * @throws IOException if the fxml file is missing
    */
   public void goToApplication() throws IOException {
@@ -61,9 +64,9 @@ public class LoginController {
     MainController controller = fxmlLoader.getController();
     Util.setControllers(controller, app);
 
-
     stage.setHeight(700);
     stage.setWidth(1200);
+    stage.setResizable(true);
     stage.centerOnScreen();
     stage.setScene(scene);
     stage.show();

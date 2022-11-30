@@ -16,11 +16,10 @@
    </padding>
    <ButtonBar layoutX="8.0" layoutY="316.0" prefHeight="40.0" prefWidth="382.0">
       <buttons>
-         <Button fx:id="btnEditPosition" mnemonicParsing="false" onAction="#onEdit" text="Edit map position" />
-         <Button fx:id="btnSave" mnemonicParsing="false" onAction="#onSave" text="Save" />
+         <Button fx:id="btnSave" mnemonicParsing="false" onAction="#onSave" text="Save"/>
          <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#onCancel" text="Cancel">
             <opaqueInsets>
-               <Insets />
+               <Insets/>
             </opaqueInsets>
          </Button>
       </buttons>
