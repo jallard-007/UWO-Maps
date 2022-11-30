@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.VBox?>
 
-<ListView xmlns="http://javafx.com/javafx/19"
-    xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapsJavaFX.TypesPOIController" onMouseClicked="#onPOIListMouseClick" fx:id="poiTypeList" />
+<VBox fx:id="poiTypeList" spacing="3.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapsJavaFX.TypesPOIController" />

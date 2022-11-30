@@ -1,51 +1,44 @@
 package mapsJavaFX;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.CheckBoxListCell;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.util.Callback;
+import javafx.scene.control.CheckBox;
+import javafx.scene.layout.VBox;
 import maps.POIType;
 
 public class TypesPOIController {
-    @FXML
-    private ListView<POIType> poiTypeList;
+  @FXML
+  private VBox poiTypeList;
 
-    public TypesPOIController() {
-    }
+  ArrayList<POIType> selectedList = new ArrayList<>();
 
-    @FXML
-    public void initialize() {
-        poiTypeList.setPlaceholder(new Label("No Matching POIs"));
-        poiTypeList.getItems().addAll(maps.POIType.values());
-        poiTypeList.setCellFactory(CheckBoxListCell.forListView(new Callback<POIType, ObservableValue<Boolean>>() {
-            @Override
-            public ObservableValue<Boolean> call(POIType item) {
-                BooleanProperty observable = new SimpleBooleanProperty();
-                observable.addListener((obs, wasSelected, isNowSelected) -> System.out
-                        .println("Check box for " + item + " changed from " + wasSelected + " to " + isNowSelected));
-                return observable;
-            }
-        }));
-    }
+  public TypesPOIController() {
+  }
 
-    public void onPOIListMouseClick(MouseEvent mouseEvent) {
-        if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
-            List<POIType> l = new ArrayList<>();
-            // will change to be able to select multiple filters
-            l.add(getSelectedPOIType());
-            ControllerMediator.getInstance().filterList(l);
+  @FXML
+  public void initialize() {
+    poiTypeList.setFocusTraversable(false);
+    for (POIType poiType : POIType.values()) {
+      CheckBox cb = new CheckBox(poiType.name());
+      cb.setOnAction(e -> {
+        if (cb.isSelected()) {
+          selectedList.add(poiType);
+        } else {
+          selectedList.remove(poiType);
         }
+        updateFilter();
+      });
+      poiTypeList.getChildren().add(cb);
     }
+  }
 
-    public POIType getSelectedPOIType() {
-        return poiTypeList.getSelectionModel().getSelectedItem();
+  private void updateFilter() {
+    if (selectedList.size() == 0) {
+      ControllerMediator.getInstance().filterList(Arrays.asList(POIType.values()));
+    } else {
+      ControllerMediator.getInstance().filterList(selectedList);
     }
+  }
 }
