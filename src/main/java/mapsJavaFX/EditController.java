@@ -74,26 +74,14 @@ public class EditController {
   }
 
   /**
-   * Default set-up of the add/edit POI page upon entering it.
-   */
-  @FXML
-  public void initialize() {
-    // Get all POI types and turn it into an array list, then turn into observable
-    // list and set values as POI type options.
-    newPOIType.setItems(FXCollections.observableList(Arrays.asList(POIType.values())));
-    newPOIType.getSelectionModel().selectLast();
-    if (ControllerMediator.getInstance().getApplication().getUser().getUserType() == UserType.base) {
-      newPOIType.setDisable(true);
-    }
-  }
-
-  /**
    * Retrieves the POI the user wants to edit
    *
    * @param poiLocation POI location to edit
    * @param poiButton   button that corresponds to the poi
    */
   public void setPoiLocation(POILocation poiLocation, POIButton poiButton) {
+    newPOIType.setItems(FXCollections.observableList(Arrays.asList(POIType.values())));
+
     this.poiLocation = poiLocation;
     this.poiButton = poiButton;
     this.poiButton.makeDraggable();
@@ -115,6 +103,13 @@ public class EditController {
     String info = poi.getInformation();
     if (info != null) {
       this.newInformation.setText(info);
+    }
+
+    if (ControllerMediator.getInstance().getApplication().getUser().getUserType() == UserType.base) {
+      newPOIType.setDisable(true);
+      newPOIType.getSelectionModel().selectLast();
+    }else{
+      newPOIType.getSelectionModel().select(poi.getPOIType().ordinal());
     }
 
     stage.setOnHiding(event -> {

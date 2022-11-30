@@ -303,18 +303,15 @@ public class Application {
    * Deletes a POI from the application, including from the user's favourites list
    *
    * @param poiLocation the POILocation to delete
-   * @return true if successful, false otherwise
    */
   public void deletePOI(POILocation poiLocation) {
-    if (poiLocation.poi.getPOIType() == POIType.custom) {
+    if (poiLocation.poi.getPOIType() == POIType.custom || this.user.getUserType() == UserType.admin) {
       this.user.removeFavourite(poiLocation);
-      this.poiLocations.remove(poiLocation);
       poiLocation.removePOI();
-    } else if (this.user.getUserType() == UserType.admin) {
       this.poiLocations.remove(poiLocation);
-      poiLocation.removePOI();
     }
   }
+
 
   /**
    * Adds a building to the application
