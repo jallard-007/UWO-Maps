@@ -15,6 +15,9 @@ import java.io.IOException;
  * Controller to handle the popup window displaying information about a selected POI.
  */
 public class POIDescriptionController {
+  /**
+   * Current application being used
+   */
   static Application app;
 
   public static void setApp(Application newApp) {

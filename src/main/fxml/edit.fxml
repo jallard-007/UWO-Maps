@@ -34,7 +34,14 @@
          <Font size="13.0" />
       </font>
    </Text>
+   <TextField fx:id="newName" layoutX="127.0" layoutY="46.0" />
    <Text layoutX="14.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
+      <font>
+         <Font size="13.0" />
+      </font>
+   </Text>
+   <ChoiceBox fx:id="newPOIType" layoutX="126.0" layoutY="79.0" prefWidth="150.0" />
+   <Text layoutX="14.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="POI Type">
       <font>
          <Font size="13.0" />
       </font>
@@ -45,23 +52,16 @@
          <Font size="13.0" />
       </font>
    </Text>
-   <TextField fx:id="newName" layoutX="127.0" layoutY="46.0" />
+   <TextField fx:id="newHours" layoutX="127.0" layoutY="146.0" />
    <Text layoutX="14.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hours">
       <font>
          <Font size="13.0" />
       </font>
    </Text>
-   <TextField fx:id="newHours" layoutX="127.0" layoutY="146.0" />
+   <TextArea fx:id="newInformation" layoutX="14.0" layoutY="196.0" prefHeight="113.0" prefWidth="370.0" wrapText="true" />
    <Text layoutX="14.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Additional Information">
       <font>
          <Font size="13.0" />
       </font>
    </Text>
-   <TextArea fx:id="newInformation" layoutX="14.0" layoutY="196.0" prefHeight="113.0" prefWidth="370.0" wrapText="true" />
-   <Text layoutX="14.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="POI Type">
-      <font>
-         <Font size="13.0" />
-      </font>
-   </Text>
-   <ChoiceBox fx:id="newPOIType" layoutX="126.0" layoutY="79.0" prefWidth="150.0" />
 </AnchorPane>

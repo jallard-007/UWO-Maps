@@ -13,7 +13,7 @@ public class POILocation {
    * @param floor the floor
    * @param poi the poi
    */
-  POILocation(Building building, Floor floor, POI poi) {
+  public POILocation(Building building, Floor floor, POI poi) {
     this.building = building;
     this.floor = floor;
     this.poi = poi;

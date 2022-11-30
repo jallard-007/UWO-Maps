@@ -200,6 +200,7 @@ public class Application {
       if (currentPOI.poi.type == POIType.custom) {
         currentPOI.floor.pois[POIType.custom.ordinal()].clear();
         poiLocationsToRemove.add(currentPOI);
+
       }
     }
     user.saveUser(poiLocationsToRemove);
@@ -345,6 +346,12 @@ public class Application {
     this.poiLocations.add(new POILocation(building, floor, poi));
     this.sortPOIs();
     floor.addPOI(poi);
+  }
+
+  public void addPOI(POILocation poiLocation) {
+    this.poiLocations.add(poiLocation);
+    this.sortPOIs();
+    poiLocation.getFloor().addPOI(poiLocation.getPOI());
   }
 
   /**

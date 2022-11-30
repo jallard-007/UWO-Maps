@@ -15,6 +15,7 @@ public class POI {
   String information;
   String hoursOfOperation;
 
+
   /**
    * @param jsonPOI the json representation of a poi
    */
@@ -44,7 +45,7 @@ public class POI {
    * @param poiType poi type
    * @param position coordinates of poi
    */
-  POI(String roomNumber, POIType poiType, Pair position) {
+  public POI(String roomNumber, POIType poiType, Pair position) {
     this.roomNumber = roomNumber;
     this.position = position;
     this.type = poiType;
@@ -69,9 +70,15 @@ public class POI {
     this.name = name;
   }
 
+  public void setType(POIType type) {
+    this.type = type;
+  }
+
   /**
    * @param information information about the POI
    */
+
+
   public void setInformation(String information) {
     this.information = information;
   }

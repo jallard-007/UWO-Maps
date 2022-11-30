@@ -49,7 +49,7 @@ public class POIButton extends Button {
       case classroom -> this.setStyle("-fx-background-color: Green");
       case lab -> this.setStyle("-fx-background-color: Brown");
       case recreation -> this.setStyle("-fx-background-color: Black");
-      case collaboration -> this.setStyle("-fx-background-color: White");
+      case collaboration -> this.setStyle("-fx-background-color: Purple");
       case accessibility -> this.setStyle("-fx-background-color: Pink");
       case restaurant -> this.setStyle("-fx-background-color: Orange");
       case washroom -> this.setStyle("-fx-background-color: Yellow");

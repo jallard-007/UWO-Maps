@@ -1,8 +1,10 @@
 package mapsJavaFX;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
 import javafx.scene.control.Tab;
@@ -46,7 +48,7 @@ public class MapViewController {
         ImageView imageView = new ImageView(image);
         imageView.setPreserveRatio(true);
 
-        // Add floor PNGs into a scrollPane so users can pan through the maps; set dimensions to
+        // Add floor PNGs into a scrollPane so users can pan through the maps
         StackPane stackPane = new StackPane();
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setPannable(true);
@@ -105,6 +107,10 @@ public class MapViewController {
     return null;
   }
 
+  /**
+   * Removes a POI's button from the map
+   * @param poiLocation the selected POI location
+   */
   public void removeButton(POILocation poiLocation){
     POIButton poiButton = getButton(poiLocation);
     this.poiButtons[poiLocation.getPOI().getPOIType().ordinal()].remove(poiButton);
@@ -115,6 +121,12 @@ public class MapViewController {
       return;
     }
     pane.getChildren().remove(poiButton);
+  }
+
+  public void addButton(POIButton poiButton, POILocation poiLocation){
+    poiButtons[poiLocation.getPOI().getPOIType().ordinal()].add(poiButton);
+    System.out.println(getButton(poiLocation));
+    System.out.println(Arrays.toString(poiButtons));
   }
 
   /**
@@ -194,4 +206,15 @@ public class MapViewController {
       }
     }
   }
+
+  public String getBuildingTab(){
+    return tabPane.getSelectionModel().getSelectedItem().getText();
+  }
+//
+//  public String getFloorTab(){
+//    Tab tab = tabPane.getSelectionModel().getSelectedItem();
+//    Node temp = tab.getContent();
+//    temp.get
+//    return tabPane.getSelectionModel().getSelectedItem()
+//  }
 }

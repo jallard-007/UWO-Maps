@@ -17,9 +17,10 @@ public class User {
 
   /**
    * Class constructor.
+   *
    * @param username username
    * @param password password
-   * @param type type of user
+   * @param type     type of user
    */
   public User(String username, String password, UserType type) {
     this.username = username;
@@ -30,6 +31,7 @@ public class User {
 
   /**
    * Class constructor.
+   *
    * @param jsonUser json object representation of a user
    */
   public User(JSONObject jsonUser) {
@@ -39,7 +41,7 @@ public class User {
 
   /**
    * Adds a poi to favourites
-   * 
+   *
    * @param poiLocation poi location to add to favourites
    */
   public void addFavourite(POILocation poiLocation) {
@@ -48,7 +50,7 @@ public class User {
 
   /**
    * Removes a poi from favourites
-   * 
+   *
    * @param poiLocation poi location to remove from favourites
    */
   public void removeFavourites(POILocation poiLocation) {
@@ -57,7 +59,7 @@ public class User {
 
   /**
    * Finds the index of a favourite poi
-   * 
+   *
    * @param poiLocation object to search for
    * @return index of poiLocation in favourites, -1 if it is not in the list
    */
@@ -67,7 +69,7 @@ public class User {
 
   /**
    * Saves the user object to disk as json
-   * 
+   *
    * @param customPOIs a list of custom POIs created by the user
    */
   public void saveUser(List<POILocation> customPOIs) {
@@ -77,7 +79,7 @@ public class User {
 
   /**
    * Creates the json representation of the user
-   * 
+   *
    * @param customPOIs a list of custom POIs created by the user
    * @return json representation of the user
    */
