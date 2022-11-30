@@ -1,7 +1,5 @@
 package maps;
 
-import java.util.Arrays;
-
 /**
  * Stores the location of a poi, so it can be easily navigated to when selected
  * from a list

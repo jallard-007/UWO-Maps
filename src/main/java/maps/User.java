@@ -53,7 +53,7 @@ public class User {
    *
    * @param poiLocation poi location to remove from favourites
    */
-  public void removeFavourites(POILocation poiLocation) {
+  public void removeFavourite(POILocation poiLocation) {
     favourites.remove(poiLocation);
   }
 

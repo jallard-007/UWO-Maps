@@ -306,10 +306,13 @@ public class Application {
    * @return true if successful, false otherwise
    */
   public void deletePOI(POILocation poiLocation) {
-    if (poiLocation.poi.getPOIType() == POIType.custom || this.user.getUserType() == UserType.admin) {
-      if (this.user.indexOfFavourite(poiLocation) != -1) {
-        this.user.removeFavourites(poiLocation);
-      }
+    if (poiLocation.poi.getPOIType() == POIType.custom) {
+      this.user.removeFavourite(poiLocation);
+      this.poiLocations.remove(poiLocation);
+      poiLocation.removePOI();
+    } else if (this.user.getUserType() == UserType.admin) {
+      this.poiLocations.remove(poiLocation);
+      poiLocation.removePOI();
     }
   }
 
