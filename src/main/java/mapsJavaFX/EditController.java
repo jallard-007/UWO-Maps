@@ -185,6 +185,7 @@ public class EditController implements Initializable {
     // Refresh both the favourites and search display to reflect the deletion.
     ControllerMediator.getInstance().refreshFavouritesList();
     ControllerMediator.getInstance().refreshSearchList();
+    poiButton.updateButtonDisplay(poiLocation, poiButton);
 
     // exit pop-up
     stage.hide();

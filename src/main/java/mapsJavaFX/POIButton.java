@@ -60,6 +60,20 @@ public class POIButton extends Button {
     // this.setGraphic();
   }
 
+  public void updateButtonDisplay(POILocation poiLocation, POIButton poiButton){
+    switch (poiLocation.getPOI().getPOIType()) {
+      case classroom -> poiButton.setStyle("-fx-background-color: Green");
+      case lab -> poiButton.setStyle("-fx-background-color: Brown");
+      case recreation -> poiButton.setStyle("-fx-background-color: Black");
+      case collaboration -> poiButton.setStyle("-fx-background-color: Purple");
+      case accessibility -> poiButton.setStyle("-fx-background-color: Pink");
+      case restaurant -> poiButton.setStyle("-fx-background-color: Orange");
+      case washroom -> poiButton.setStyle("-fx-background-color: Yellow");
+      case library -> poiButton.setStyle("-fx-background-color: Blue");
+      case custom -> poiButton.setStyle("-fx-background-color: Red");
+    }
+  }
+
   public void savePosition() {
     POI poi = this.poiLocation.getPOI();
     double x = this.getLayoutX();
