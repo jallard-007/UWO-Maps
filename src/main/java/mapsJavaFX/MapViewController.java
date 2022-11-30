@@ -125,8 +125,6 @@ public class MapViewController {
 
   public void addButton(POIButton poiButton, POILocation poiLocation){
     poiButtons[poiLocation.getPOI().getPOIType().ordinal()].add(poiButton);
-    System.out.println(getButton(poiLocation));
-    System.out.println(Arrays.toString(poiButtons));
   }
 
   /**
