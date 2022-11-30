@@ -311,7 +311,13 @@ public class Application {
         this.user.removeFavourites(poiLocation);
       }
 
-      return poiLocation.removePOI() && this.poiLocations.remove(poiLocation);
+      System.out.println(Arrays.toString(poiLocations.toArray()));
+      System.out.println("\n" + poiLocation);
+
+      System.out.println("\n"+Arrays.toString(poiLocations.toArray()));
+
+
+      return this.poiLocations.remove(poiLocation) && poiLocation.removePOI();
     }
     return false;
   }
