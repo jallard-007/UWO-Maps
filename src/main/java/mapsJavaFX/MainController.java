@@ -7,13 +7,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class MainController {
-  public Button addPOI;
+  @FXML
+  private Button addPOI;
   @FXML
   private StackPane mapView;
   @FXML
@@ -43,10 +43,9 @@ public class MainController {
     FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/addPOI.fxml"));
     try {
       Scene scene = new Scene(fxmlLoader.load());
-      Stage stage = new Stage();
+      Stage stage = AddPOIController.getStage();
       stage.setTitle("New POI");
       stage.setScene(scene);
-      stage.initModality(Modality.APPLICATION_MODAL);
       stage.showAndWait();
       stage.centerOnScreen();
     } catch (IOException e) {

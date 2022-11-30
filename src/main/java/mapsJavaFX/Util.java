@@ -11,6 +11,7 @@ public class Util {
 
     POIButton.setApp(app);
     POIDescriptionController.setApp(app);
+    AddPOIController.setApp(app);
 
     controller.getMapViewController().setApp(app);
     controller.getSearchPOIController().setApp(app);

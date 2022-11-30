@@ -2,7 +2,6 @@ package mapsJavaFX;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
@@ -12,11 +11,9 @@ import maps.*;
 import maps.POI;
 import maps.POILocation;
 
-import java.net.URL;
 import java.util.Arrays;
-import java.util.ResourceBundle;
 
-public class EditController implements Initializable {
+public class EditController {
   public static Stage stage;
   /**
    * The button that allows the user to edit the POI position.
@@ -78,19 +75,9 @@ public class EditController implements Initializable {
 
   /**
    * Default set-up of the add/edit POI page upon entering it.
-   * 
-   * @param location
-   *                  The location used to resolve relative paths for the root
-   *                  object, or
-   *                  {@code null} if the location is not known.
-   *
-   * @param resources
-   *                  The resources used to localize the root object, or
-   *                  {@code null} if
-   *                  the root object was not localized.
    */
-  @Override
-  public void initialize(URL location, ResourceBundle resources) {
+  @FXML
+  public void initialize() {
     // Get all POI types and turn it into an array list, then turn into observable
     // list and set values as POI type options.
     newPOIType.setItems(FXCollections.observableList(Arrays.asList(POIType.values())));
@@ -195,7 +182,7 @@ public class EditController implements Initializable {
     // Refresh both the favourites and search display to reflect the deletion.
     ControllerMediator.getInstance().refreshFavouritesList();
     ControllerMediator.getInstance().refreshSearchList();
-    poiButton.updateButtonDisplay(poiLocation, poiButton);
+    this.poiButton.updateButtonDisplay();
 
     // exit pop-up
     stage.hide();

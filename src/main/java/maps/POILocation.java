@@ -1,7 +1,8 @@
 package maps;
 
 /**
- * Stores the location of a poi, so it can be easily navigated to when selected from a list
+ * Stores the location of a poi, so it can be easily navigated to when selected
+ * from a list
  */
 public class POILocation {
   final Building building;
@@ -10,8 +11,8 @@ public class POILocation {
 
   /**
    * @param building the building
-   * @param floor the floor
-   * @param poi the poi
+   * @param floor    the floor
+   * @param poi      the poi
    */
   public POILocation(Building building, Floor floor, POI poi) {
     this.building = building;

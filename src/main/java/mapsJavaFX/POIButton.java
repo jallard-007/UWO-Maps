@@ -27,12 +27,14 @@ public class POIButton extends Button {
   }
 
   public POIButton(POILocation poiLocation) {
+    this.setLayoutX(poiLocation.getPOI().getPosition().getX());
+    this.setLayoutY(poiLocation.getPOI().getPosition().getY());
+
     if (app == null) {
       System.out.println("App has not been set in POIButton");
       System.exit(12);
     }
     this.poiLocation = poiLocation;
-    POIType poiType = poiLocation.getPOI().getPOIType();
     this.imageWidth = poiLocation.getFloor().getImage().getWidth();
     this.imageHeight = poiLocation.getFloor().getImage().getHeight();
 
@@ -44,6 +46,14 @@ public class POIButton extends Button {
       }
     });
 
+    updateButtonDisplay();
+
+    // this can be used to set an image on button
+    // this.setGraphic();
+  }
+
+  public void updateButtonDisplay() {
+    POIType poiType = this.poiLocation.getPOI().getPOIType();
     switch (poiType) {
       case classroom -> this.setStyle("-fx-background-color: Green");
       case lab -> this.setStyle("-fx-background-color: Brown");
@@ -54,23 +64,6 @@ public class POIButton extends Button {
       case washroom -> this.setStyle("-fx-background-color: Yellow");
       case library -> this.setStyle("-fx-background-color: Blue");
       case custom -> this.setStyle("-fx-background-color: Red");
-    }
-
-    // this can be used to set an image on button
-    // this.setGraphic();
-  }
-
-  public void updateButtonDisplay(POILocation poiLocation, POIButton poiButton){
-    switch (poiLocation.getPOI().getPOIType()) {
-      case classroom -> poiButton.setStyle("-fx-background-color: Green");
-      case lab -> poiButton.setStyle("-fx-background-color: Brown");
-      case recreation -> poiButton.setStyle("-fx-background-color: Black");
-      case collaboration -> poiButton.setStyle("-fx-background-color: Purple");
-      case accessibility -> poiButton.setStyle("-fx-background-color: Pink");
-      case restaurant -> poiButton.setStyle("-fx-background-color: Orange");
-      case washroom -> poiButton.setStyle("-fx-background-color: Yellow");
-      case library -> poiButton.setStyle("-fx-background-color: Blue");
-      case custom -> poiButton.setStyle("-fx-background-color: Red");
     }
   }
 

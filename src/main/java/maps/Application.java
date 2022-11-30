@@ -305,14 +305,15 @@ public class Application {
    * @param poiLocation the POILocation to delete
    * @return true if successful, false otherwise
    */
-  public boolean deletePOI(POILocation poiLocation) {
-    if (poiLocation.poi.getPOIType() == POIType.custom || this.user.getUserType() == UserType.admin) {
-      if (this.user.indexOfFavourite(poiLocation) != -1) {
-        this.user.removeFavourites(poiLocation);
-      }
-      return poiLocation.removePOI() && this.poiLocations.remove(poiLocation);
+  public void deletePOI(POILocation poiLocation) {
+    if (poiLocation.poi.getPOIType() == POIType.custom) {
+      this.user.removeFavourite(poiLocation);
+      this.poiLocations.remove(poiLocation);
+      poiLocation.removePOI();
+    } else if (this.user.getUserType() == UserType.admin) {
+      this.poiLocations.remove(poiLocation);
+      poiLocation.removePOI();
     }
-    return false;
   }
 
   /**
