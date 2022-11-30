@@ -219,7 +219,7 @@ public class Application {
 
   /**
    * Gets the building object with name attribute matching buildingName
-   * 
+   *
    * @param buildingName the name of the building to find
    * @return the matching building object
    */
@@ -235,7 +235,7 @@ public class Application {
   /**
    * Searches for POIs with buildingName, floorName, or POIName/POINum containing
    * the searchText
-   * 
+   *
    * @param searchText the text to search for a POI
    * @return all poi location objects with partial match
    */
@@ -260,7 +260,7 @@ public class Application {
 
   /**
    * Deletes a building from the application
-   * 
+   *
    * @param building the building to delete
    * @return true if successful, false otherwise
    */
@@ -280,7 +280,7 @@ public class Application {
 
   /**
    * Deletes a floor from the application
-   * 
+   *
    * @param building the building that the floor is in
    * @param floor    the floor to delete
    * @return true if successful, false otherwise
@@ -301,23 +301,24 @@ public class Application {
 
   /**
    * Deletes a POI from the application, including from the user's favourites list
-   * 
+   *
    * @param poiLocation the POILocation to delete
    * @return true if successful, false otherwise
    */
-  public boolean deletePOI(POILocation poiLocation) {
+  public void deletePOI(POILocation poiLocation) {
     if (poiLocation.poi.getPOIType() == POIType.custom || this.user.getUserType() == UserType.admin) {
       if (this.user.indexOfFavourite(poiLocation) != -1) {
         this.user.removeFavourites(poiLocation);
       }
-      return this.poiLocations.remove(poiLocation) && poiLocation.removePOI();
+      System.out.println(poiLocation.removePOI());
+      System.out.println(this.poiLocations.remove(poiLocation));
+
     }
-    return false;
   }
 
   /**
    * Adds a building to the application
-   * 
+   *
    * @param building the building to add
    */
   public void addBuilding(Building building) {
@@ -326,7 +327,7 @@ public class Application {
 
   /**
    * Adds a floor to the building
-   * 
+   *
    * @param floor the floor to add
    */
   public void addFloor(Building building, Floor floor) {
@@ -336,7 +337,7 @@ public class Application {
   /**
    * Creates a POILocation object for the poi, adds it to the list, and adds the
    * poi to the floor
-   * 
+   *
    * @param building the building that the floor is in
    * @param floor    the floor that the poi is on
    * @param poi      the poi to add
