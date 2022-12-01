@@ -73,7 +73,6 @@ public class Util {
   public static boolean createUserFile(String username, String password) {
     // search users folder within the application folder for username
     String rootPath = getRootPath();
-    System.out.println("Hello");
     File userFile = new File(rootPath + "/appData/users/" + username + ".json");
     if (userFile.exists()) {
       return false;
@@ -93,7 +92,7 @@ public class Util {
   /**
    * Writes a json object to a file
    *
-   * @param json the json object to write
+   * @param json         the json object to write
    * @param relativePath the relative path
    */
   public static void writeToFile(JSONObject json, String relativePath) {

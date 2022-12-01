@@ -7,6 +7,7 @@ import maps.Application;
 import maps.POI;
 import maps.POILocation;
 import maps.POIType;
+import maps.Pair;
 
 public class POIButton extends Button {
   static Application app;
@@ -17,7 +18,6 @@ public class POIButton extends Button {
   private final double imageWidth;
   private final double imageHeight;
 
-
   public static void setApp(Application newApp) {
     app = newApp;
   }
@@ -27,45 +27,66 @@ public class POIButton extends Button {
   }
 
   public POIButton(POILocation poiLocation) {
+    this.setLayoutX(poiLocation.getPOI().getPosition().getX());
+    this.setLayoutY(poiLocation.getPOI().getPosition().getY());
+
     if (app == null) {
       System.out.println("App has not been set in POIButton");
       System.exit(12);
     }
     this.poiLocation = poiLocation;
-    POIType poiType = poiLocation.getPOI().getPOIType();
     this.imageWidth = poiLocation.getFloor().getImage().getWidth();
     this.imageHeight = poiLocation.getFloor().getImage().getHeight();
-
 
     this.setOnMouseClicked(mouseEvent -> {
       if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
         if (mouseEvent.getClickCount() == 2) {
-          new POIDescriptionController(this.poiLocation);
+          new POIDescriptionController(this, this.poiLocation);
         }
       }
     });
 
+    updateButtonDisplay();
+
+    // this can be used to set an image on button
+    // this.setGraphic();
+  }
+
+  public void updateButtonDisplay() {
+    POIType poiType = this.poiLocation.getPOI().getPOIType();
     switch (poiType) {
       case classroom -> this.setStyle("-fx-background-color: Green");
       case lab -> this.setStyle("-fx-background-color: Brown");
       case recreation -> this.setStyle("-fx-background-color: Black");
-      case collaboration -> this.setStyle("-fx-background-color: White");
+      case collaboration -> this.setStyle("-fx-background-color: Purple");
       case accessibility -> this.setStyle("-fx-background-color: Pink");
       case restaurant -> this.setStyle("-fx-background-color: Orange");
       case washroom -> this.setStyle("-fx-background-color: Yellow");
       case library -> this.setStyle("-fx-background-color: Blue");
       case custom -> this.setStyle("-fx-background-color: Red");
     }
-    // classroom, lab, recreation, collaboration, accessibility, restaurant, washroom, library,
-    // custom
+  }
 
+  public void savePosition() {
+    POI poi = this.poiLocation.getPOI();
+    double x = this.getLayoutX();
+    double y = this.getLayoutY();
 
-    // this can be used to set an image on button
-    // this.setGraphic();
+    if (x < 0) {
+      x = 0;
+    } else if (x > imageWidth) {
+      x = imageWidth - 20;
+    }
+    if (y < 0) {
+      y = 0;
+    } else if (y > imageHeight) {
+      y = imageHeight - 30;
+    }
+
+    poi.setPosition(x, y);
   }
 
   public void makeDraggable() {
-
     this.setOnMousePressed(e -> {
       startX = e.getScreenX();
       startY = e.getScreenY();
@@ -77,36 +98,22 @@ public class POIButton extends Button {
     });
 
     this.setOnMouseReleased(e -> {
-      POI poi = this.poiLocation.getPOI();
-      double x = poi.getPosition().getX() + this.getTranslateX();
-      double y = poi.getPosition().getY() + this.getTranslateY();
-
-      if (x < 0) {
-        x = 0;
-      } else if (x > imageWidth) {
-        x = imageWidth - 20;
-      }
-      if (y < 0) {
-        y = 0;
-      } else if (y > imageHeight) {
-        y = imageHeight - 30;
-      }
-      poi.setPosition(x, y);
-      this.setLayoutX(poi.getPosition().getX());
-      this.setLayoutY(poi.getPosition().getY());
+      this.setLayoutX(this.getLayoutX() + this.getTranslateX());
+      this.setLayoutY(this.getLayoutY() + this.getTranslateY());
       this.setTranslateX(0);
       this.setTranslateY(0);
     });
   }
 
   public void removeDraggable() {
+    Pair position = this.poiLocation.getPOI().getPosition();
+    this.setLayoutX(position.getX());
+    this.setLayoutY(position.getY());
+
     this.setOnMousePressed(e -> {
     });
 
     this.setOnMouseDragged(e -> {
-    });
-
-    this.setOnMouseReleased(e -> {
     });
   }
 }

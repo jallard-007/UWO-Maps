@@ -49,6 +49,7 @@ public class SignupController {
     Stage stage = (Stage) username.getScene().getWindow();
     stage.setHeight(700);
     stage.setWidth(1200);
+    stage.setResizable(true);
     stage.centerOnScreen();
     stage.setScene(scene);
     stage.show();

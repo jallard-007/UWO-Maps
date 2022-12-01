@@ -5,9 +5,13 @@ import maps.Application;
 import maps.POILocation;
 import maps.POIType;
 
+/**
+ * Class that mediates the interaction between different controllers.
+ */
 public class ControllerMediator {
   private MapViewController mapViewController;
   private FavouritesController favouritesController;
+  private SearchPOIController searchPOIController;
   private Application app;
 
   void registerMapViewController(MapViewController controller) {
@@ -18,6 +22,10 @@ public class ControllerMediator {
     favouritesController = controller;
   }
 
+  void registerSearchPOIController(SearchPOIController controller) {
+    searchPOIController = controller;
+  }
+
   void registerApplication(Application app) {
     this.app = app;
   }
@@ -26,19 +34,40 @@ public class ControllerMediator {
     return app;
   }
 
-  void mapViewControllerGoToPOI(POILocation poiLocation) {
-    mapViewController.goToPOI(poiLocation);
+  POIButton mapViewControllerGoToPOI(POILocation poiLocation) {
+    return mapViewController.goToPOI(poiLocation);
   }
 
   void filterList(List<POIType> selectedPOIType) {
     mapViewController.filterList(selectedPOIType);
   }
 
+  String getBuildingTab() {
+    return mapViewController.getBuildingTab();
+  }
+
   void refreshFavouritesList() {
     favouritesController.refreshList();
   }
 
-  private ControllerMediator() {}
+  void refreshSearchList() {
+    searchPOIController.refreshList();
+  }
+
+  void removePOIButton(POILocation poiLocation) {
+    mapViewController.removeButton(poiLocation);
+  }
+
+  void updateButtonStorage(POIType oldType, POIType newType, POIButton poiButton){
+    mapViewController.updateButtonStorage(oldType, newType, poiButton);
+  }
+
+  void addPOIButton(POIButton poiButton, POILocation poiLocation) {
+    mapViewController.addButton(poiButton, poiLocation);
+  }
+
+  private ControllerMediator() {
+  }
 
   public static ControllerMediator getInstance() {
     return ControllerMediatorHolder.INSTANCE;

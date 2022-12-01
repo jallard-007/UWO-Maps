@@ -11,7 +11,8 @@ import java.io.IOException;
 import maps.Application;
 
 /**
- * The WesternMaps class is dedicated to setting up the stage, corresponding scenes, and handling
+ * The WesternMaps class is dedicated to setting up the stage, corresponding
+ * scenes, and handling
  * start up and closure of the application
  */
 public class WesternMaps extends javafx.application.Application {
@@ -21,9 +22,10 @@ public class WesternMaps extends javafx.application.Application {
   }
 
   /**
-   * starts up the application by setting up the appropriate stage and scene as well as handling the
+   * starts up the application by setting up the appropriate stage and scene as
+   * well as handling the
    * event in which the user closes the application
-   * 
+   *
    * @param stage the stage which will be used to display the scene to the user
    * @throws IOException if a fxml file does not exist
    */
@@ -41,7 +43,6 @@ public class WesternMaps extends javafx.application.Application {
     Application app = new Application();
     app.loadData();
     ControllerMediator.getInstance().registerApplication(app);
-    stage.setResizable(true);
     stage.show();
 
     stage.setOnCloseRequest(event -> {
@@ -50,6 +51,13 @@ public class WesternMaps extends javafx.application.Application {
     });
   }
 
+  /**
+   * Method that prompts the user with a confirmation message when the user wants
+   * to exit the application.
+   * 
+   * @param stage the stage that the user is currently on when they click the exit
+   *              button.
+   */
   public void exit(Stage stage) {
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
     alert.setTitle("Logout");
