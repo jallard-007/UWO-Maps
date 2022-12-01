@@ -2,7 +2,6 @@ package mapsTest;
 
 import maps.Building;
 import maps.Floor;
-import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
