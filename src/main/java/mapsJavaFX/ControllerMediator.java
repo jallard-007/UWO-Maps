@@ -30,7 +30,7 @@ public class ControllerMediator {
     this.app = app;
   }
 
-  Application getApplication() {
+  public Application getApplication() {
     return app;
   }
 

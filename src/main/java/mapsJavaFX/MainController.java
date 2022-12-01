@@ -40,7 +40,7 @@ public class MainController {
   }
 
   public void onAddPOI(ActionEvent event) {
-    FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/addPOI.fxml"));
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/addPOI.fxml"));
     try {
       Scene scene = new Scene(fxmlLoader.load());
       Stage stage = AddPOIController.getStage();

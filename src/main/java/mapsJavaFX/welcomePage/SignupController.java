@@ -1,4 +1,4 @@
-package mapsJavaFX;
+package mapsJavaFX.welcomePage;
 
 import java.io.IOException;
 
@@ -9,6 +9,9 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import maps.Application;
+import mapsJavaFX.ControllerMediator;
+import mapsJavaFX.MainController;
+import mapsJavaFX.Util;
 
 public class SignupController {
   @FXML

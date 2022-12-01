@@ -32,7 +32,7 @@ public class WesternMaps extends javafx.application.Application {
   @Override
   public void start(Stage stage) throws IOException {
     // load the login UI from the fxml file, load the scene, and set the title
-    FXMLLoader loginLoader = new FXMLLoader(SignupController.class.getResource("/login.fxml"));
+    FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/login.fxml"));
     Scene scene = new Scene(loginLoader.load());
     stage.setTitle("Western Maps");
 

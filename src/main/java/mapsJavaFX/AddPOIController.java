@@ -76,7 +76,7 @@ public class AddPOIController {
         new POI("New POI", POIType.custom, new Pair(x / 2, y / 2)));
     app.addPOI(poiLocation);
     try {
-      FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/edit.fxml"));
+      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edit.fxml"));
       Scene scene = new Scene(fxmlLoader.load());
       EditController editController = fxmlLoader.getController();
       POIButton poiButton = new POIButton(poiLocation);
