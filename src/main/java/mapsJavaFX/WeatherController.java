@@ -59,7 +59,7 @@ public class WeatherController {
         return new JSONObject(weatherInfo.toString());
       }
     } catch (Exception e) {
-      e.printStackTrace(); // print out what is returned from our exception
+      System.out.println("Unable to fetch data from weather API"); // print out what is returned from our exception
     }
     return null; // return null if the try block fails
   }
@@ -72,8 +72,10 @@ public class WeatherController {
   public void initialize() {
     JSONObject currWeather = fetchWeatherData(
         "https://api.openweathermap.org/data/2.5/weather?lat=42.9849&lon=-81.2453&appid=09928fefc6a87f8130ddec17c33e22ee&units=metric");
-    JSONObject main = currWeather.getJSONObject("main");
-    weatherText.setText("Current Weather in London: " + main.get("temp") + "°C");
+    if (currWeather != null) {
+      JSONObject main = currWeather.getJSONObject("main");
+      weatherText.setText("Current Weather in London: " + main.get("temp") + "°C");
+    }
   }
 
 }
