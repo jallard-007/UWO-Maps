@@ -23,6 +23,7 @@ public class MapViewController {
 
   /**
    * Method to initialize the map view of the application.
+   * 
    * @param app the current application being used
    */
   @SuppressWarnings("unchecked")
@@ -87,6 +88,10 @@ public class MapViewController {
         System.out.print("Error: Could not find the specified Pane | in MapViewController.setApp");
         System.exit(55);
       }
+      zoomBar.valueProperty().addListener((o, oldV, newV) -> {
+        poiButton.setScaleX(1 / newV.doubleValue());
+        poiButton.setScaleY(1 / newV.doubleValue());
+      });
       currPane.getChildren().add(poiButton);
     }
   }
@@ -125,19 +130,24 @@ public class MapViewController {
   }
 
   /**
-   * Updates the location where the selected POI's button is stored within the POI buttons list; used when the type of a POI is being updated
-   * @param oldType old POI type
-   * @param newType new POI type
-   * @param poiButton the Button associated with the POI whose type is being updated
+   * Updates the location where the selected POI's button is stored within the POI
+   * buttons list; used when the type of a POI is being updated
+   * 
+   * @param oldType   old POI type
+   * @param newType   new POI type
+   * @param poiButton the Button associated with the POI whose type is being
+   *                  updated
    */
-  public void updateButtonStorage(POIType oldType, POIType newType, POIButton poiButton){
+  public void updateButtonStorage(POIType oldType, POIType newType, POIButton poiButton) {
     this.poiButtons[oldType.ordinal()].remove(poiButton);
     this.poiButtons[newType.ordinal()].add(poiButton);
   }
 
   /**
-   * Adds a button to the POI buttons list and properly displays the new button on the map
-   * @param poiButton newly-created POI button
+   * Adds a button to the POI buttons list and properly displays the new button on
+   * the map
+   * 
+   * @param poiButton   newly-created POI button
    * @param poiLocation POI location associated with that button
    */
   public void addButton(POIButton poiButton, POILocation poiLocation) {
