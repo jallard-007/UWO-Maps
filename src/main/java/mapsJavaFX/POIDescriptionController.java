@@ -1,5 +1,6 @@
 package mapsJavaFX;
 
+import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -8,7 +9,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import maps.*;
-import java.io.IOException;
 
 /**
  * Controller to handle the popup window displaying information about a selected
@@ -121,7 +121,7 @@ public class POIDescriptionController {
   }
 
   public void onEditButton() {
-    FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/edit.fxml"));
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edit.fxml"));
     try {
       Scene scene = new Scene(fxmlLoader.load());
       EditController editController = fxmlLoader.getController();

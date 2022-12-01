@@ -27,7 +27,7 @@ public class NavigationController {
    * @throws IOException if help.fxml file does not exist
    */
   public void goToHelp(ActionEvent event) throws IOException {
-    FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/help.fxml"));
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/help.fxml"));
     Scene scene = new Scene(fxmlLoader.load());
     changeScene(scene, event);
   }
@@ -39,7 +39,7 @@ public class NavigationController {
    * @throws IOException if mainView.fxml does not exist
    */
   public void goBack(ActionEvent event) throws IOException {
-    FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/mainView.fxml"));
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/mainView.fxml"));
     Scene scene = new Scene(fxmlLoader.load());
     MainController controller = fxmlLoader.getController();
     Util.setControllers(controller, ControllerMediator.getInstance().getApplication());
@@ -67,7 +67,7 @@ public class NavigationController {
     }
 
     // go back to login page if user successfully logs out
-    FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/login.fxml"));
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/login.fxml"));
     Scene scene = new Scene(fxmlLoader.load());
     stage.setWidth(600);
     stage.setHeight(330);

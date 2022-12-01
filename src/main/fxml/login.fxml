@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="330.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="mapsJavaFX.LoginController" fx:id="logIn">
+            fx:controller="mapsJavaFX.welcomePage.LoginController" fx:id="logIn">
     <Text layoutX="69.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to Western Maps!"
           textAlignment="CENTER" wrappingWidth="471.13671875">
         <font>
