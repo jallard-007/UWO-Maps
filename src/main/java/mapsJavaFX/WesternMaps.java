@@ -11,8 +11,8 @@ import java.io.IOException;
 import maps.Application;
 
 /**
- * The WesternMaps class is dedicated to setting up the stage, corresponding scenes, and handling
- * start up and closure of the application
+ * The WesternMaps class is dedicated to setting up the stage, corresponding
+ * scenes, and handling start up and closure of the application
  */
 public class WesternMaps extends javafx.application.Application {
 
@@ -21,16 +21,16 @@ public class WesternMaps extends javafx.application.Application {
   }
 
   /**
-   * starts up the application by setting up the appropriate stage and scene as well as handling the
-   * event in which the user closes the application
-   * 
+   * starts up the application by setting up the appropriate stage and scene as
+   * well as handling the event in which the user closes the application
+   *
    * @param stage the stage which will be used to display the scene to the user
    * @throws IOException if a fxml file does not exist
    */
   @Override
   public void start(Stage stage) throws IOException {
     // load the login UI from the fxml file, load the scene, and set the title
-    FXMLLoader loginLoader = new FXMLLoader(SignupController.class.getResource("/login.fxml"));
+    FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/login.fxml"));
     Scene scene = new Scene(loginLoader.load());
     stage.setTitle("Western Maps");
 
@@ -41,7 +41,6 @@ public class WesternMaps extends javafx.application.Application {
     Application app = new Application();
     app.loadData();
     ControllerMediator.getInstance().registerApplication(app);
-    stage.setResizable(true);
     stage.show();
 
     stage.setOnCloseRequest(event -> {
@@ -50,8 +49,17 @@ public class WesternMaps extends javafx.application.Application {
     });
   }
 
+  /**
+   * Method that prompts the user with a confirmation message when the user wants
+   * to exit the application.
+   * 
+   * @param stage the stage that the user is currently on when they click the exit
+   *              button.
+   */
   public void exit(Stage stage) {
+    stage.setFullScreen(false);
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+    alert.setResizable(false);
     alert.setTitle("Logout");
     alert.setHeaderText("You're about to exit from the program");
     alert.setContentText("Are you sure?");

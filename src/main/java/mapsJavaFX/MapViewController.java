@@ -13,6 +13,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import maps.*;
 
+/**
+ * Controls the building and floor tabs
+ */
 public class MapViewController {
   @FXML
   private Slider zoomBar;
@@ -21,6 +24,11 @@ public class MapViewController {
   Application app;
   private List<POIButton>[] poiButtons;
 
+  /**
+   * Initializes the map view based on the Application object.
+   * 
+   * @param app the current application being used
+   */
   @SuppressWarnings("unchecked")
   public void setApp(Application app) {
     this.app = app;
@@ -46,7 +54,7 @@ public class MapViewController {
         ImageView imageView = new ImageView(image);
         imageView.setPreserveRatio(true);
 
-        // Add floor PNGs into a scrollPane so users can pan through the maps; set dimensions to
+        // Add floor PNGs into a scrollPane so users can pan through the maps
         StackPane stackPane = new StackPane();
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setPannable(true);
@@ -75,8 +83,6 @@ public class MapViewController {
       POIButton poiButton = new POIButton(poiLocation);
       poiButtons[poiLocation.getPOI().getPOIType().ordinal()].add(poiButton);
 
-      poiButton.setLayoutX(poiLocation.getPOI().getPosition().getX());
-      poiButton.setLayoutY(poiLocation.getPOI().getPosition().getY());
       if (!buildingName.equals(poiLocation.getBuilding().getName())
           || !floorName.equals(poiLocation.getFloor().getName())) {
         currPane = getPane(poiLocation);
@@ -85,6 +91,10 @@ public class MapViewController {
         System.out.print("Error: Could not find the specified Pane | in MapViewController.setApp");
         System.exit(55);
       }
+      zoomBar.valueProperty().addListener((o, oldV, newV) -> {
+        poiButton.setScaleX(1 / newV.doubleValue());
+        poiButton.setScaleY(1 / newV.doubleValue());
+      });
       currPane.getChildren().add(poiButton);
     }
   }
@@ -106,16 +116,67 @@ public class MapViewController {
   }
 
   /**
-   * Centers the map view on a poi. The centering is not 100% accurate, but it is fairly close
+   * Removes a POIButton from the map
+   * 
+   * @param poiLocation the selected POILocation
+   */
+  public void removeButton(POILocation poiLocation) {
+    POIButton poiButton = getButton(poiLocation);
+    this.poiButtons[poiLocation.getPOI().getPOIType().ordinal()].remove(poiButton);
+    Pane pane = getPane(poiLocation);
+    if (pane == null) {
+      // the button is not in a pane? hide the button
+      poiButton.setVisible(false);
+      return;
+    }
+    pane.getChildren().remove(poiButton);
+  }
+
+  /**
+   * Updates the location where the selected POI's button is stored within the POI
+   * buttons list; used when the type of a POI is being updated
+   * 
+   * @param oldType   old POI type
+   * @param newType   new POI type
+   * @param poiButton the Button associated with the POI whose type is being
+   *                  updated
+   */
+  public void updateButtonStorage(POIType oldType, POIType newType, POIButton poiButton) {
+    this.poiButtons[oldType.ordinal()].remove(poiButton);
+    this.poiButtons[newType.ordinal()].add(poiButton);
+  }
+
+  /**
+   * Adds a POIButton to the list and displays it on the map
+   * 
+   * @param poiButton the POIButton to add
+   */
+  public void addButton(POIButton poiButton) {
+    POILocation poiLocation = poiButton.poiLocation;
+    poiButtons[poiLocation.getPOI().getPOIType().ordinal()].add(poiButton);
+    // Display new button on map
+    poiButton.setLayoutX(poiLocation.getPOI().getPosition().getX());
+    poiButton.setLayoutY(poiLocation.getPOI().getPosition().getY());
+    Pane currPane = getPane(poiLocation);
+    if (currPane == null) {
+      System.out.print("Error: Could not find the specified Pane | in MapViewController.setApp");
+      System.exit(55);
+    }
+    currPane.getChildren().add(poiButton);
+  }
+
+  /**
+   * Displays the floor on which the poi resides and centers the map view on the
+   * poi. The centering is not 100% accurate, but it is fairly close
    *
    * @param poiLocation the poi to find
+   * @return the button corresponding the to the poi
    */
-  public void goToPOI(POILocation poiLocation) {
+  public POIButton goToPOI(POILocation poiLocation) {
     System.out.println("go to " + poiLocation);
 
-    Tab tab =
-        goToTab((TabPane) goToTab(this.tabPane, poiLocation.getBuilding().getName()).getContent(),
-            poiLocation.getFloor().getName());
+    Tab tab = goToTab((TabPane) goToTab(this.tabPane, poiLocation.getBuilding().getName()).getContent(),
+        poiLocation.getFloor().getName());
     ScrollPane scrollPane = (ScrollPane) tab.getContent();
 
     Pair position = poiLocation.getPOI().getPosition();
@@ -126,14 +187,16 @@ public class MapViewController {
 
     scrollPane.setHvalue(0.5 + (zoomBar.getValue() * ((xRatio + (errorX * 0.20)) - 0.5)));
     scrollPane.setVvalue(0.5 + (zoomBar.getValue() * ((yRatio + (errorY * 0.20)) - 0.5)));
+    return getButton(poiLocation);
   }
 
   /**
-   * Finds and selects a pane, displaying it for the user
+   * Finds and selects a pane within the passed TabPane, displaying it for the
+   * user
    *
-   * @param tabPane the tabPane to search in
-   * @param tabName the name of the tab to find
-   * @return the matching tab
+   * @param tabPane the TabPane to search in
+   * @param tabName the name of the Tab to find
+   * @return the Tab matching tabName, null if not found
    */
   private Tab goToTab(TabPane tabPane, String tabName) {
     if (tabPane == null) {
@@ -178,9 +241,15 @@ public class MapViewController {
     for (POIType poiType : POIType.values()) {
       boolean show = selectedPOITypes.contains(poiType);
       for (POIButton poiTypeButtons : this.poiButtons[poiType.ordinal()]) {
-        poiTypeButtons.setDisable(!show);
         poiTypeButtons.setVisible(show);
       }
     }
+  }
+
+  /**
+   * @return the current building being displayed in the main view
+   */
+  public String getBuildingTab() {
+    return tabPane.getSelectionModel().getSelectedItem().getText();
   }
 }

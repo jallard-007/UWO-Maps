@@ -15,6 +15,7 @@ public class Application {
   boolean editMode;
   final List<Building> buildings;
   final List<POILocation> poiLocations;
+  List<POIType> filter = Arrays.asList(POIType.values());
 
   /**
    * Default constructor
@@ -27,7 +28,8 @@ public class Application {
   }
 
   /**
-   * Reads the main poi meta-data file on disk and loads all data into their respective classes
+   * Reads the main poi meta-data file on disk and loads all data into their
+   * respective classes
    */
   public void loadData() {
     String rootPath = Util.getRootPath(); // gets root folder of application
@@ -89,8 +91,7 @@ public class Application {
       // username does not exist;
       return false;
     }
-    String fileContent =
-        Util.getJSONFileContents(rootPath + "/appData/users/" + username + ".json");
+    String fileContent = Util.getJSONFileContents(rootPath + "/appData/users/" + username + ".json");
     JSONObject jsonObject = new JSONObject(fileContent);
     if (!password.equals(jsonObject.getString("password"))) {
       // password does not match
@@ -100,7 +101,8 @@ public class Application {
 
     // Just to test restricting edit mode. will need to be changed.
     // Signing in as 'user' allows you to move the buttons freely, and
-    // the new position is stored added to the json file and current application state.
+    // the new position is stored added to the json file and current application
+    // state.
     // Signing in as 'example' the buttons cannot be moved.
     if (this.user.getUserType() == UserType.admin) {
       this.editMode = true;
@@ -160,6 +162,13 @@ public class Application {
     }
   }
 
+  /**
+   * Whether the user can access the ability to delete, edit, and add buildings,
+   * floors, and built-in POIs (i.e., if they're an admin with access to edit
+   * mode).
+   * 
+   * @return whether the user can enter edit mode
+   */
   public boolean getEditMode() {
     return this.editMode;
   }
@@ -182,7 +191,8 @@ public class Application {
   }
 
   /**
-   * Logs out the current user, removing the user's custom POIs and saving any changes such as
+   * Logs out the current user, removing the user's custom POIs and saving any
+   * changes such as
    * favourites, and custom POIs to the user's file
    */
   private UserType logout() {
@@ -191,6 +201,7 @@ public class Application {
       if (currentPOI.poi.type == POIType.custom) {
         currentPOI.floor.pois[POIType.custom.ordinal()].clear();
         poiLocationsToRemove.add(currentPOI);
+
       }
     }
     user.saveUser(poiLocationsToRemove);
@@ -209,7 +220,7 @@ public class Application {
 
   /**
    * Gets the building object with name attribute matching buildingName
-   * 
+   *
    * @param buildingName the name of the building to find
    * @return the matching building object
    */
@@ -223,8 +234,9 @@ public class Application {
   }
 
   /**
-   * Searches for POIs with buildingName, floorName, or POIName/POINum containing the searchText
-   * 
+   * Searches for POIs with buildingName, floorName, or POIName/POINum containing
+   * the searchText
+   *
    * @param searchText the text to search for a POI
    * @return all poi location objects with partial match
    */
@@ -232,6 +244,9 @@ public class Application {
     searchText = searchText.toLowerCase();
     List<POILocation> matchingPOIs = new ArrayList<>();
     for (POILocation poiLocation : this.poiLocations) {
+      if (!filter.contains(poiLocation.getPOI().getPOIType())) {
+        continue;
+      }
       if (poiLocation.toString().toLowerCase().contains(searchText)
           || poiLocation.poi.getRoomNumber().toLowerCase().contains(searchText)) {
         matchingPOIs.add(poiLocation);
@@ -249,7 +264,7 @@ public class Application {
 
   /**
    * Deletes a building from the application
-   * 
+   *
    * @param building the building to delete
    * @return true if successful, false otherwise
    */
@@ -269,9 +284,9 @@ public class Application {
 
   /**
    * Deletes a floor from the application
-   * 
+   *
    * @param building the building that the floor is in
-   * @param floor the floor to delete
+   * @param floor    the floor to delete
    * @return true if successful, false otherwise
    */
   public boolean deleteFloor(Building building, Floor floor) {
@@ -288,29 +303,26 @@ public class Application {
     return building.floors.remove(floor);
   }
 
+  public void setFilter(List<POIType> filter) {
+    this.filter = filter;
+  }
+
   /**
-   * Deletes a POI from the application
-   * 
-   * @param floor the floor that the POI is on
-   * @param poi the POI to delete
-   * @return true if successful, false otherwise
+   * Deletes a POI from the application, including from the user's favourites list
+   *
+   * @param poiLocation the POILocation to delete
    */
-  public boolean deletePOI(Floor floor, POI poi) {
-    if (user.getUserType() != UserType.admin) {
-      return false;
+  public void deletePOI(POILocation poiLocation) {
+    if (poiLocation.poi.getPOIType() == POIType.custom || this.user.getUserType() == UserType.admin) {
+      this.user.removeFavourite(poiLocation);
+      poiLocation.removePOI();
+      this.poiLocations.remove(poiLocation);
     }
-    for (POILocation poiLocation : this.poiLocations) {
-      if (poiLocation.poi.equals(poi)) {
-        this.poiLocations.remove(poiLocation);
-        return poiLocation.removePOI();
-      }
-    }
-    return false;
   }
 
   /**
    * Adds a building to the application
-   * 
+   *
    * @param building the building to add
    */
   public void addBuilding(Building building) {
@@ -319,7 +331,7 @@ public class Application {
 
   /**
    * Adds a floor to the building
-   * 
+   *
    * @param floor the floor to add
    */
   public void addFloor(Building building, Floor floor) {
@@ -327,16 +339,28 @@ public class Application {
   }
 
   /**
-   * Creates a POILocation object for the poi, adds it to the list, and adds the poi to the floor
-   * 
+   * Creates a POILocation object for the poi, adds it to the list, and adds the
+   * poi to the floor
+   *
    * @param building the building that the floor is in
-   * @param floor the floor that the poi is on
-   * @param poi the poi to add
+   * @param floor    the floor that the poi is on
+   * @param poi      the poi to add
    */
   public void addPOI(Building building, Floor floor, POI poi) {
     this.poiLocations.add(new POILocation(building, floor, poi));
     this.sortPOIs();
     floor.addPOI(poi);
+  }
+
+  /**
+   * Adds an already-created POI location to the list and adds it to the floor
+   * 
+   * @param poiLocation newly-created POI location
+   */
+  public void addPOI(POILocation poiLocation) {
+    this.poiLocations.add(poiLocation);
+    this.sortPOIs();
+    poiLocation.getFloor().addPOI(poiLocation.getPOI());
   }
 
   /**
