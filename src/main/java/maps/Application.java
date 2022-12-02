@@ -15,6 +15,7 @@ public class Application {
   boolean editMode;
   final List<Building> buildings;
   final List<POILocation> poiLocations;
+  List<POIType> filter = Arrays.asList(POIType.values());
 
   /**
    * Default constructor
@@ -243,6 +244,9 @@ public class Application {
     searchText = searchText.toLowerCase();
     List<POILocation> matchingPOIs = new ArrayList<>();
     for (POILocation poiLocation : this.poiLocations) {
+      if (!filter.contains(poiLocation.getPOI().getPOIType())) {
+        continue;
+      }
       if (poiLocation.toString().toLowerCase().contains(searchText)
           || poiLocation.poi.getRoomNumber().toLowerCase().contains(searchText)) {
         matchingPOIs.add(poiLocation);
@@ -299,6 +303,10 @@ public class Application {
     return building.floors.remove(floor);
   }
 
+  public void setFilter(List<POIType> filter) {
+    this.filter = filter;
+  }
+
   /**
    * Deletes a POI from the application, including from the user's favourites list
    *
@@ -311,7 +319,6 @@ public class Application {
       this.poiLocations.remove(poiLocation);
     }
   }
-
 
   /**
    * Adds a building to the application
@@ -347,6 +354,7 @@ public class Application {
 
   /**
    * Adds an already-created POI location to the list and adds it to the floor
+   * 
    * @param poiLocation newly-created POI location
    */
   public void addPOI(POILocation poiLocation) {

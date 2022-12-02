@@ -57,7 +57,9 @@ public class WesternMaps extends javafx.application.Application {
    *              button.
    */
   public void exit(Stage stage) {
+    stage.setFullScreen(false);
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+    alert.setResizable(false);
     alert.setTitle("Logout");
     alert.setHeaderText("You're about to exit from the program");
     alert.setContentText("Are you sure?");

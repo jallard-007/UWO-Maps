@@ -2,6 +2,7 @@ package mapsJavaFX;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
@@ -15,7 +16,7 @@ public class TypesPOIController {
   @FXML
   private VBox poiTypeList;
 
-  ArrayList<POIType> selectedList = new ArrayList<>();
+  List<POIType> selectedList = new ArrayList<>();
 
   public TypesPOIController() {
   }
@@ -41,10 +42,16 @@ public class TypesPOIController {
   }
 
   private void updateFilter() {
+    ControllerMediator.getInstance().getApplication().setFilter(getFilterList());
+    ControllerMediator.getInstance().searchPOIControllerRefreshList();
+    ControllerMediator.getInstance().mapViewControllerFilterList(getFilterList());
+  }
+
+  public List<POIType> getFilterList() {
     if (selectedList.size() == 0) {
-      ControllerMediator.getInstance().mapViewControllerFilterList(Arrays.asList(POIType.values()));
+      return Arrays.asList(POIType.values());
     } else {
-      ControllerMediator.getInstance().mapViewControllerFilterList(selectedList);
+      return selectedList;
     }
   }
 }
