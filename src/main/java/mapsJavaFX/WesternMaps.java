@@ -68,6 +68,7 @@ public class WesternMaps extends javafx.application.Application {
       ControllerMediator.getInstance().getApplication().save();
       System.out.println("The program was exited successfully.");
       stage.close();
+      AddPOIController.getStage().close();
     }
   }
 }

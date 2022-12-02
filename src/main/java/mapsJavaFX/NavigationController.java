@@ -86,5 +86,6 @@ public class NavigationController {
     stage.setScene(scene);
     stage.show();
     stage.centerOnScreen();
+    AddPOIController.getStage().close();
   }
 }

@@ -21,6 +21,9 @@ public class POIDescriptionController {
    * AddPOIController, and EditController
    */
   final static Stage stage = new Stage();
+  static {
+    stage.initStyle(StageStyle.UTILITY);
+  }
   static Application app;
   private final POILocation poiLocation;
   private final POIButton poiButton;
@@ -35,7 +38,6 @@ public class POIDescriptionController {
     app = newApp;
     EditController.setStage(stage);
     AddPOIController.setStage(stage);
-    stage.initStyle(StageStyle.UTILITY);
     stage.setMaxWidth(500);
     stage.setMaxHeight(500);
   }
