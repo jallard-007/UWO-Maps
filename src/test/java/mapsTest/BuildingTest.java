@@ -35,14 +35,14 @@ class BuildingTest {
   @Test
   @DisplayName("Verify Building's toString()")
   void testBuildingToString() {
-    String expected = "\nBuildingName: TestBuilding";
+    String expected = "TestBuilding";
     assertEquals(expected, building.toString());
   }
 
   @Test
   @DisplayName("Verify Building's toJson()")
   void testBuildingToJSON() {
-    assertEquals("\nBuildingName: TestBuilding", building.toString());
+    assertEquals("{\"buildingName\":\"TestBuilding\",\"floors\":[]}", building.toJSON().toString());
   }
 
   @Test

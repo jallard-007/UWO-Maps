@@ -29,7 +29,7 @@ public class FloorTest {
     void testFloorAddPOI() {
         POI poi = new POI("23", maps.POIType.classroom, new Pair(134, 324));
         floor.addPOI(poi);
-        System.out.println(floor.toString());
-        assertEquals("TestFloor\n\t\tPOIRoomNum: 23", floor.toString());
+        POI resultPOI = floor.getPOIs()[maps.POIType.classroom.ordinal()].remove(0);
+        assertEquals(resultPOI, poi);
     }
 }

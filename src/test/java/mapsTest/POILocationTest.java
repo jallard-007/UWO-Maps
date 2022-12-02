@@ -44,7 +44,7 @@ public class POILocationTest {
     @Test
     @DisplayName("Verify POILocations's toString()")
     void testtoString() {
-        assertEquals("TestBuilding | TestFloor | 24", poiLocation.toString());
+        assertEquals("24 | TestBuilding | TestFloor", poiLocation.toString());
     }
 
     @Test

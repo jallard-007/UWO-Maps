@@ -35,7 +35,7 @@ public class Floor {
     this.name = name;
     this.imagePath = "";
     this.image = null;
-    //Store POIs of each floor are stored by their POIType
+    // Store POIs of each floor are stored by their POIType
     this.pois = (ArrayList<POI>[]) new ArrayList[POIType.values().length];
     for (int i = 0; i < POIType.values().length; ++i) {
       this.pois[i] = new ArrayList<>();
@@ -64,6 +64,7 @@ public class Floor {
 
   /**
    * Adds the POIs of a floor into the floor's POI list
+   * 
    * @param poi POI to be added to the floor's POIs list
    */
   public void addPOI(POI poi) {
@@ -71,12 +72,21 @@ public class Floor {
   }
 
   /**
-   * Update the storage of a POI in the floor's POI list if its POI type was recently updated
+   * @return all pois on this floor
+   */
+  public List<POI>[] getPOIs() {
+    return this.pois;
+  }
+
+  /**
+   * Update the storage of a POI in the floor's POI list if its POI type was
+   * recently updated
+   * 
    * @param oldType old POI type
    * @param newType new POI type
-   * @param poi POI to be updated
+   * @param poi     POI to be updated
    */
-  public void updatePOIStorage(POIType oldType, POIType newType, POI poi){
+  public void updatePOIStorage(POIType oldType, POIType newType, POI poi) {
     this.pois[oldType.ordinal()].remove(poi);
     this.pois[newType.ordinal()].add(poi);
   }

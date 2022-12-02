@@ -1,6 +1,5 @@
 package mapsTest;
 
-import maps.Floor;
 import maps.POI;
 import maps.Pair;
 
