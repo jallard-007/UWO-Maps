@@ -1,8 +1,10 @@
 package mapsJavaFX;
 
+import javafx.animation.PauseTransition;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.input.MouseButton;
+import javafx.util.Duration;
 import maps.Application;
 import maps.POI;
 import maps.POILocation;
@@ -63,6 +65,7 @@ public class POIButton extends Button {
     this.setOnMouseClicked(mouseEvent -> {
       if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
         if (mouseEvent.getClickCount() == 2) {
+          onSelectButtonDisplay();
           new POIDescriptionController(this, this.poiLocation);
         }
       }
@@ -84,15 +87,22 @@ public class POIButton extends Button {
     POIType poiType = this.poiLocation.getPOI().getPOIType();
     switch (poiType) {
       case classroom -> this.setStyle("-fx-background-color: Green");
-      case lab -> this.setStyle("-fx-background-color: Brown");
+      case lab -> this.setStyle("-fx-background-color: Lime");
       case recreation -> this.setStyle("-fx-background-color: Black");
       case collaboration -> this.setStyle("-fx-background-color: Purple");
-      case accessibility -> this.setStyle("-fx-background-color: Pink");
+      case accessibility -> this.setStyle("-fx-background-color: Magenta");
       case restaurant -> this.setStyle("-fx-background-color: Orange");
       case washroom -> this.setStyle("-fx-background-color: Yellow");
       case library -> this.setStyle("-fx-background-color: Blue");
-      case custom -> this.setStyle("-fx-background-color: Red");
+      case custom -> this.setStyle("-fx-background-color: Maroon");
     }
+  }
+
+  public void onSelectButtonDisplay(){
+    this.setStyle("-fx-border-color: black; -fx-background-color: red");
+    PauseTransition pause = new PauseTransition(Duration.seconds(2));
+    pause.setOnFinished(event -> {this.updateButtonDisplay();});
+    pause.play();
   }
 
   /**

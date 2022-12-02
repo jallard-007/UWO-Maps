@@ -2,6 +2,7 @@ package mapsJavaFX;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
@@ -183,7 +184,9 @@ public class MapViewController {
 
     scrollPane.setHvalue(0.5 + (zoomBar.getValue() * ((xRatio + (errorX * 0.20)) - 0.5)));
     scrollPane.setVvalue(0.5 + (zoomBar.getValue() * ((yRatio + (errorY * 0.20)) - 0.5)));
-    return getButton(poiLocation);
+    POIButton poiButton = getButton(poiLocation);
+    poiButton.onSelectButtonDisplay();
+    return poiButton;
   }
 
   /**
