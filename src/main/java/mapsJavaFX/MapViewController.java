@@ -2,15 +2,24 @@ package mapsJavaFX;
 
 import java.util.ArrayList;
 import java.util.List;
+import javafx.collections.*;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.event.ActionEvent;  
 import maps.*;
 
 public class MapViewController {
@@ -18,6 +27,14 @@ public class MapViewController {
   private Slider zoomBar;
   @FXML
   private TabPane tabPane;
+  // @FXML
+  // private ButtonBar poiBar;
+  // @FXML
+  // private ButtonBar floorBar;
+  // @FXML
+  // private ButtonBar bldBar;
+  
+  @FXML 
   Application app;
   private List<POIButton>[] poiButtons;
 
@@ -33,14 +50,18 @@ public class MapViewController {
     for (int i = 0; i < POIType.values().length; ++i) {
       this.poiButtons[i] = new ArrayList<>();
     }
-
+    
+    
     // creates a new tab for each building
     for (Building building : this.app.getBuildings()) {
       Tab buildingTab = new Tab(building.getName());
+      
       buildingTab.setClosable(false);
+      // buildingTab.setGraphic(editFloor);
       this.tabPane.getTabs().add(buildingTab);
 
       TabPane buildingTabPane = new TabPane();
+
       buildingTab.setContent(buildingTabPane);
 
       // creates a new tab for each floor within the building tab
@@ -240,4 +261,6 @@ public class MapViewController {
   public String getBuildingTab() {
     return tabPane.getSelectionModel().getSelectedItem().getText();
   }
+
+  
 }

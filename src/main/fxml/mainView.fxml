@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TitledPane?>
@@ -10,8 +11,8 @@
 
 <BorderPane prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapsJavaFX.MainController">
    <right>
-      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="5.0" BorderPane.alignment="CENTER">
-                <TabPane tabClosingPolicy="UNAVAILABLE">
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="559.0" prefWidth="340.0" spacing="5.0" BorderPane.alignment="CENTER">
+                <TabPane prefWidth="325.0" tabClosingPolicy="UNAVAILABLE">
                     <Tab text="Search">
                         <fx:include fx:id="searchPOI" minHeight="0.0" minWidth="0.0" prefHeight="278.0" prefWidth="221.0" source="searchPOI.fxml" />
                     </Tab>
@@ -19,11 +20,31 @@
                         <fx:include fx:id="favourites" minHeight="0.0" minWidth="0.0" prefHeight="238.0" prefWidth="228.0" source="favourites.fxml" />
                     </Tab>
                 </TabPane>
-                <TitledPane animated="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Point of Interest Types">
+                <TitledPane animated="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="208.0" prefWidth="178.0" text="Point of Interest Types">
                             <!-- Trying to put the POI Types here to be displayed -->
                             <fx:include fx:id="types" minHeight="0.0" minWidth="0.0" prefHeight="238.0" prefWidth="228.0" source="typePOI.fxml" />
                 </TitledPane>
-         <Button fx:id="addPOI" mnemonicParsing="false" onAction="#onAddPOI" text="Add POI" translateX="170.0" />
+         <ButtonBar fx:id="poiBar" prefHeight="40.0" prefWidth="200.0">
+           <buttons>
+               <Button id="addPOI" fx:id="addPOI" mnemonicParsing="false" onAction="#onAddPOI" prefHeight="25.0" prefWidth="141.0" text="Add POI" />
+               <Button fx:id="editPOI" mnemonicParsing="false" text="Edit POI" />
+               <Button fx:id="delPOI" mnemonicParsing="false" text="Delete POI" />
+           </buttons>
+         </ButtonBar>
+         <ButtonBar fx:id="floorBar" prefHeight="40.0" prefWidth="200.0">
+           <buttons>
+             <Button fx:id="addFloor" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="Add Floor" />
+               <Button fx:id="editFloor" mnemonicParsing="false" text="Edit Floor" />
+               <Button fx:id="delFloor" mnemonicParsing="false" text="Delete Floor" />
+           </buttons>
+         </ButtonBar>
+         <ButtonBar fx:id="bldBar" prefHeight="40.0" prefWidth="200.0">
+           <buttons>
+             <Button fx:id="addBld" mnemonicParsing="false" text="Add Building" textOverrun="CLIP" />
+               <Button fx:id="editBld" mnemonicParsing="false" onAction="#onEditBuild" text="Edit Building" />
+               <Button fx:id="delBld" mnemonicParsing="false" text="Delete Building" />
+           </buttons>
+         </ButtonBar>
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" />
          </padding>
