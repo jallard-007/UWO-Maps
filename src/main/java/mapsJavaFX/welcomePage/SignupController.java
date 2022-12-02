@@ -1,4 +1,4 @@
-package mapsJavaFX;
+package mapsJavaFX.welcomePage;
 
 import java.io.IOException;
 
@@ -9,7 +9,13 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import maps.Application;
+import mapsJavaFX.ControllerMediator;
+import mapsJavaFX.MainController;
+import mapsJavaFX.Util;
 
+/**
+ * Controls the signup page
+ */
 public class SignupController {
   @FXML
   private TextField username;
@@ -49,6 +55,7 @@ public class SignupController {
     Stage stage = (Stage) username.getScene().getWindow();
     stage.setHeight(700);
     stage.setWidth(1200);
+    stage.setResizable(true);
     stage.centerOnScreen();
     stage.setScene(scene);
     stage.show();

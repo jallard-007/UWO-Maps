@@ -10,7 +10,8 @@ import org.json.JSONObject;
 import maps.Application;
 
 /**
- * Retrieve information pertaining to the current weather in London, ON and display the information
+ * Retrieve information pertaining to the current weather in London, ON and
+ * display the information
  * to the user
  */
 public class WeatherController {
@@ -19,13 +20,15 @@ public class WeatherController {
   @FXML
   private Text weatherText;
 
-  public WeatherController() {}
+  public WeatherController() {
+  }
 
   /**
    * Get JSON object from openweathermap API
    * 
    * @param urlWeather the URL to make a GET request with
-   * @return the JSON object containing all the retrieved data pertaining to the current weather
+   * @return the JSON object containing all the retrieved data pertaining to the
+   *         current weather
    */
   public JSONObject fetchWeatherData(String urlWeather) {
     try {
@@ -33,7 +36,8 @@ public class WeatherController {
       // create a URL with the inputted url string
       URL url = new URL(urlWeather);
 
-      // create an HTTP connection with the URL and specify that we are making a GET request
+      // create an HTTP connection with the URL and specify that we are making a GET
+      // request
       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
       conn.setRequestMethod("GET");
       conn.connect();
@@ -59,22 +63,24 @@ public class WeatherController {
         return new JSONObject(weatherInfo.toString());
       }
     } catch (Exception e) {
-      e.printStackTrace(); // print out what is returned from our exception
+      System.out.println("Unable to fetch data from weather API"); // print out what is returned from our exception
     }
     return null; // return null if the try block fails
   }
 
   /**
-   * Get the current weather in London from the openweathermap API, and then extract the data to
+   * Get the current weather in London from the openweathermap API, and then
+   * extract the data to
    * display to the user, setting the text to show the current weather
    */
 
   public void initialize() {
     JSONObject currWeather = fetchWeatherData(
         "https://api.openweathermap.org/data/2.5/weather?lat=42.9849&lon=-81.2453&appid=09928fefc6a87f8130ddec17c33e22ee&units=metric");
-    JSONObject main = currWeather.getJSONObject("main");
-    weatherText.setText("Current Weather in London: " + main.get("temp") + "°C");
+    if (currWeather != null) {
+      JSONObject main = currWeather.getJSONObject("main");
+      weatherText.setText("Current Weather in London: " + main.get("temp") + "°C");
+    }
   }
 
 }
-

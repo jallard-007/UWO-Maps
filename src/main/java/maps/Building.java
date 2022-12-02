@@ -37,11 +37,7 @@ public class Building {
   }
 
   public String toString() {
-    StringBuilder str = new StringBuilder("\nBuildingName: " + this.name);
-    for (Floor floor : this.floors) {
-      str.append("\n\tFloorName: ").append(floor.toString());
-    }
-    return str.toString();
+    return this.name;
   }
 
   /**
