@@ -6,6 +6,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+
 import maps.Application;
 import maps.POILocation;
 
@@ -99,6 +100,6 @@ public class SearchPOIController {
    * Refreshes the list of displayed POIs in the search tab.
    */
   public void refreshList() {
-    matchingPOIList.getItems().setAll(app.getPoiLocations());
+    matchingPOIList.getItems().setAll(app.searchForPOI(""));
   }
 }

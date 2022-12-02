@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import maps.*;
 
 /**
@@ -34,8 +35,9 @@ public class POIDescriptionController {
     app = newApp;
     EditController.setStage(stage);
     AddPOIController.setStage(stage);
+    stage.initStyle(StageStyle.UTILITY);
     stage.setMaxWidth(500);
-    stage.setAlwaysOnTop(true);
+    stage.setMaxHeight(500);
   }
 
   /**
@@ -48,6 +50,7 @@ public class POIDescriptionController {
   public POIDescriptionController(POIButton poiButton, POILocation poiLocation) {
     this.poiButton = poiButton;
     this.poiLocation = poiLocation;
+    stage.toFront();
     Scene s = stage.getScene();
     if (s != null && s.getRoot().getClass() == AnchorPane.class) {
       // poi is being edited and cannot switch, otherwise the button will be movable,
