@@ -27,12 +27,7 @@ public class MapViewController {
   private Slider zoomBar;
   @FXML
   private TabPane tabPane;
-  // @FXML
-  // private ButtonBar poiBar;
-  // @FXML
-  // private ButtonBar floorBar;
-  // @FXML
-  // private ButtonBar bldBar;
+  
   
   @FXML 
   Application app;
@@ -255,6 +250,12 @@ public class MapViewController {
     }
   }
 
+  /**
+   * @return the current building being displayed in the main view
+   */
+  // public String getFloorTab() {
+  //   return tabPane.getSelectionModel().g
+  // }
   /**
    * @return the current building being displayed in the main view
    */

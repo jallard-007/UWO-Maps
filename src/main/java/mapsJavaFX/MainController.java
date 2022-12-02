@@ -44,16 +44,27 @@ public class MainController {
   private SearchPOIController searchPOIController;
   @FXML
   private FavouritesController favouritesController;
-  @FXML
-  private Button editBld;
   @FXML 
   Application app;
   @FXML
-  private ButtonBar poiBar;
+  private ButtonBar addBar;
   @FXML
   private ButtonBar floorBar;
   @FXML
   private ButtonBar bldBar;
+  @FXML
+  private Button addBld;
+  @FXML
+  private Button editBld;
+  @FXML
+  private Button delBld;
+  @FXML
+  private Button addFloor;
+  @FXML
+  private Button editFloor;
+  @FXML
+  private Button delFloor;
+
 
 
   public SearchPOIController getSearchPOIController() {
@@ -67,12 +78,7 @@ public class MainController {
   public FavouritesController getFavouritesController() {
     return favouritesController;
   }
-  @FXML
-  public void onEditBuild(ActionEvent event) {
-    event.consume();
-    System.out.println("all good");
-    
-  }
+  
 
   public void onAddPOI(ActionEvent event) {
     FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/addPOI.fxml"));
@@ -87,13 +93,46 @@ public class MainController {
       throw new RuntimeException(e);
     }
   }
+  public void onAddFloor(ActionEvent event) {
+    
+  }
+  public void onEditFloor(ActionEvent event) {
+    
+  }
+  public void onDelFloor(ActionEvent event) {
+    
+  }
+  public void onAddBld(ActionEvent event) {
+    
+  }
+  @FXML
+  public void onEditBld(ActionEvent event) {
+    FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/editBuilding.fxml"));
+    System.out.println(mapViewController.getBuildingTab());
+    try {
+      Scene scene = new Scene(fxmlLoader.load());
+      editBuildingController editBuildingController = new editBuildingController();
+      Stage stage = editBuildingController.getStage();
+      editBuildingController.setCurr(mapViewController.getBuildingTab());
+      stage.setTitle("Edit Building Name");
+      stage.setScene(scene);
+      stage.showAndWait();
+      stage.centerOnScreen();
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+    
+  }
+  public void onDelBld(ActionEvent event) {
+    
+  }
   public void setApp(Application app) {
     this.app = app;
     //making certain buttons unclickable for base users
     if (this.app.getUser().getUserType() == UserType.base){
       System.out.println("being called");
       ObservableList<Node> buttonsToSet = FXCollections.observableArrayList();
-      buttonsToSet = poiBar.getButtons();
+      buttonsToSet = addBar.getButtons();
       buttonsToSet.addAll(floorBar.getButtons());
       buttonsToSet.addAll(bldBar.getButtons());
       for (Node button:buttonsToSet){
