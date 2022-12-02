@@ -91,10 +91,6 @@ public class MapViewController {
         System.out.print("Error: Could not find the specified Pane | in MapViewController.setApp");
         System.exit(55);
       }
-      zoomBar.valueProperty().addListener((o, oldV, newV) -> {
-        poiButton.setScaleX(1 / newV.doubleValue());
-        poiButton.setScaleY(1 / newV.doubleValue());
-      });
       currPane.getChildren().add(poiButton);
     }
   }

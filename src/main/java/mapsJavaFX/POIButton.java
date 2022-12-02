@@ -47,6 +47,8 @@ public class POIButton extends Button {
   public POIButton(POILocation poiLocation) {
     this.setLayoutX(poiLocation.getPOI().getPosition().getX());
     this.setLayoutY(poiLocation.getPOI().getPosition().getY());
+    this.setScaleX(1 / zoom.getValue());
+    this.setScaleY(1 / zoom.getValue());
 
     // requires that app has been set first
     if (app == null) {
@@ -64,6 +66,11 @@ public class POIButton extends Button {
           new POIDescriptionController(this, this.poiLocation);
         }
       }
+    });
+
+    zoom.valueProperty().addListener((o, oldV, newV) -> {
+      this.setScaleX(1 / newV.doubleValue());
+      this.setScaleY(1 / newV.doubleValue());
     });
 
     updateButtonDisplay();
