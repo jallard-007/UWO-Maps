@@ -12,6 +12,10 @@ import maps.*;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Controllers the addPOI window that popus up when the addPOI button is
+ * selected
+ */
 public class AddPOIController {
   static Stage stage;
   static Application app;
@@ -23,6 +27,7 @@ public class AddPOIController {
 
   /**
    * Called to set up the app
+   * 
    * @param newApp referring to the map application
    */
   public static void setApp(Application newApp) {
@@ -31,6 +36,7 @@ public class AddPOIController {
 
   /**
    * Sets stage of application
+   * 
    * @param newStage stage to be set
    */
   public static void setStage(Stage newStage) {
@@ -45,12 +51,13 @@ public class AddPOIController {
   }
 
   /**
-   * Sets up interface: gives user options to select the floor that their new POI will be associated with.
+   * Sets up interface: gives user options to select the floor that their new POI
+   * will be associated with.
    */
   @FXML
   public void initialize() {
     // Get current building selected in the map view
-    String strSelectedBuilding = ControllerMediator.getInstance().getBuildingTab();
+    String strSelectedBuilding = ControllerMediator.getInstance().mapViewControllerGetBuildingTab();
     List<Building> allBuildings = ControllerMediator.getInstance().getApplication().getBuildings();
     for (Building building : allBuildings) {
       if (building.getName().equals(strSelectedBuilding)) {
@@ -65,7 +72,8 @@ public class AddPOIController {
   }
 
   /**
-   * Pressing [Continue] button takes user to input information about their new POI.
+   * Pressing [Continue] button takes user to input information about their new
+   * POI.
    */
   public void onContinue() {
     Floor selectedFloor = floorName.getSelectionModel().getSelectedItem();
@@ -80,7 +88,7 @@ public class AddPOIController {
       Scene scene = new Scene(fxmlLoader.load());
       EditController editController = fxmlLoader.getController();
       POIButton poiButton = new POIButton(poiLocation);
-      ControllerMediator.getInstance().addPOIButton(poiButton, poiLocation);
+      ControllerMediator.getInstance().mapViewControllerAddPOIButton(poiButton);
       ControllerMediator.getInstance().mapViewControllerGoToPOI(poiLocation);
       editController.setPoiLocation(poiLocation, poiButton);
       stage.setScene(scene);

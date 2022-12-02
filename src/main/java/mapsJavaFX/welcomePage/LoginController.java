@@ -17,6 +17,9 @@ import mapsJavaFX.ControllerMediator;
 import mapsJavaFX.MainController;
 import mapsJavaFX.Util;
 
+/**
+ * Controls the Login page
+ */
 public class LoginController {
   /**
    * the login button on the log in page.

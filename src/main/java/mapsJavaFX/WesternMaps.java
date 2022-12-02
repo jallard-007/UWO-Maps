@@ -12,8 +12,7 @@ import maps.Application;
 
 /**
  * The WesternMaps class is dedicated to setting up the stage, corresponding
- * scenes, and handling
- * start up and closure of the application
+ * scenes, and handling start up and closure of the application
  */
 public class WesternMaps extends javafx.application.Application {
 
@@ -23,8 +22,7 @@ public class WesternMaps extends javafx.application.Application {
 
   /**
    * starts up the application by setting up the appropriate stage and scene as
-   * well as handling the
-   * event in which the user closes the application
+   * well as handling the event in which the user closes the application
    *
    * @param stage the stage which will be used to display the scene to the user
    * @throws IOException if a fxml file does not exist

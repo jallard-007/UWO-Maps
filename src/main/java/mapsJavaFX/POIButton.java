@@ -9,6 +9,9 @@ import maps.POILocation;
 import maps.POIType;
 import maps.Pair;
 
+/**
+ * Used to represent POIs visually and interactively
+ */
 public class POIButton extends Button {
   static Application app;
   static Slider zoom;
@@ -18,18 +21,34 @@ public class POIButton extends Button {
   private final double imageWidth;
   private final double imageHeight;
 
+  /**
+   * Static method to set the Application object for all POIButtons
+   * 
+   * @param newApp the Application
+   */
   public static void setApp(Application newApp) {
     app = newApp;
   }
 
+  /**
+   * Static method to set the Slider object for all POIButtons
+   * 
+   * @param newZoom the Slider
+   */
   public static void setSlider(Slider newZoom) {
     zoom = newZoom;
   }
 
+  /**
+   * Constructor
+   * 
+   * @param poiLocation the poi to base the button on
+   */
   public POIButton(POILocation poiLocation) {
     this.setLayoutX(poiLocation.getPOI().getPosition().getX());
     this.setLayoutY(poiLocation.getPOI().getPosition().getY());
 
+    // requires that app has been set first
     if (app == null) {
       System.out.println("App has not been set in POIButton");
       System.exit(12);
@@ -38,6 +57,7 @@ public class POIButton extends Button {
     this.imageWidth = poiLocation.getFloor().getImage().getWidth();
     this.imageHeight = poiLocation.getFloor().getImage().getHeight();
 
+    // event handler for when the button is double clicked
     this.setOnMouseClicked(mouseEvent -> {
       if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
         if (mouseEvent.getClickCount() == 2) {
@@ -47,11 +67,12 @@ public class POIButton extends Button {
     });
 
     updateButtonDisplay();
-
-    // this can be used to set an image on button
-    // this.setGraphic();
   }
 
+  /**
+   * Sets the colour based on the POIType of the POI object associated with this
+   * button
+   */
   public void updateButtonDisplay() {
     POIType poiType = this.poiLocation.getPOI().getPOIType();
     switch (poiType) {
@@ -67,6 +88,10 @@ public class POIButton extends Button {
     }
   }
 
+  /**
+   * Saves the current position of the button back to the POI object
+   * Does not allow the POI to be outside of the image
+   */
   public void savePosition() {
     POI poi = this.poiLocation.getPOI();
     double x = this.getLayoutX();
@@ -86,6 +111,10 @@ public class POIButton extends Button {
     poi.setPosition(x, y);
   }
 
+  /**
+   * Adds the ability to be moved via holding left mouse button on the button and
+   * moving the mouse
+   */
   public void makeDraggable() {
     this.setOnMousePressed(e -> {
       startX = e.getScreenX();
@@ -105,6 +134,9 @@ public class POIButton extends Button {
     });
   }
 
+  /**
+   * Removes the ability to be moved via the mouse
+   */
   public void removeDraggable() {
     Pair position = this.poiLocation.getPOI().getPosition();
     this.setLayoutX(position.getX());

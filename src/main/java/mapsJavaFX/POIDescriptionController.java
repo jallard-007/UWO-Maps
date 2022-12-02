@@ -15,13 +15,18 @@ import maps.*;
  * POI.
  */
 public class POIDescriptionController {
+  /**
+   * Static Stage object which is shared between POIDescriptionController,
+   * AddPOIController, and EditController
+   */
   final static Stage stage = new Stage();
   static Application app;
   private final POILocation poiLocation;
   private final POIButton poiButton;
 
   /**
-   * Called to set up the app, and the dimensions of the pop-up window for future use
+   * Called to set up the app, and the dimensions of the pop-up window for future
+   * use
    *
    * @param newApp referring to the map application
    */
@@ -120,7 +125,10 @@ public class POIDescriptionController {
     stage.show();
   }
 
-  public void onEditButton() {
+  /**
+   * Handles the edit button being clicked
+   */
+  private void onEditButton() {
     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edit.fxml"));
     try {
       Scene scene = new Scene(fxmlLoader.load());
@@ -133,26 +141,32 @@ public class POIDescriptionController {
     }
   }
 
-  public void onDeleteButton() {
+  /**
+   * Handles the delete button being clicked
+   */
+  private void onDeleteButton() {
     app.deletePOI(poiLocation);
     // Refresh both the favourites and search display to reflect the deletion;
     // remove the POI from the map
-    ControllerMediator.getInstance().refreshFavouritesList();
-    ControllerMediator.getInstance().refreshSearchList();
-    ControllerMediator.getInstance().removePOIButton(poiLocation);
+    ControllerMediator.getInstance().favouritesControllerRefreshList();
+    ControllerMediator.getInstance().searchPOIControllerRefreshList();
+    ControllerMediator.getInstance().mapViewControllerRemovePOIButton(poiLocation);
     // exit pop-up
     stage.hide();
   }
 
+  /**
+   * Handles the favourite button being clicked
+   */
   private void onFavouriteButton(ToggleButton btnFavouritePOI) {
     if (btnFavouritePOI.isSelected()) {
       btnFavouritePOI.setText("Unfavourite");
       app.getUser().addFavourite(poiLocation);
-      ControllerMediator.getInstance().refreshFavouritesList();
+      ControllerMediator.getInstance().favouritesControllerRefreshList();
     } else {
       btnFavouritePOI.setText("Favourite");
       app.getUser().removeFavourite(poiLocation);
-      ControllerMediator.getInstance().refreshFavouritesList();
+      ControllerMediator.getInstance().favouritesControllerRefreshList();
 
     }
   }

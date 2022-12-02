@@ -108,7 +108,7 @@ public class EditController {
     if (ControllerMediator.getInstance().getApplication().getUser().getUserType() == UserType.base) {
       newPOIType.setDisable(true);
       newPOIType.getSelectionModel().selectLast();
-    }else{
+    } else {
       newPOIType.getSelectionModel().select(poi.getPOIType().ordinal());
     }
 
@@ -138,16 +138,17 @@ public class EditController {
     poi.setHoursOfOperation(newHours.getText());
     poi.setInformation(newInformation.getText());
 
-    //Handle POI type changes: the selected POI's floor stores its POIs by type. Similarly, the POI button seen on the map are also stored by type. So both storages must be updated
+    // Handle POI type changes: the selected POI's floor stores its POIs by type.
+    // Similarly, the POI button seen on the map are also stored by type. So both
+    // storages must be updated
     POIType oldType = poi.getPOIType();
     POIType newType = newPOIType.getSelectionModel().getSelectedItem();
-    if (oldType != newType){
-      //The button must be updated before the new type is set
-      ControllerMediator.getInstance().updateButtonStorage(oldType, newType, poiButton);
+    if (oldType != newType) {
+      // The button must be updated before the new type is set
+      ControllerMediator.getInstance().mapViewControllerUpdateButtonStorage(oldType, newType, poiButton);
       poi.setType(newType);
       poiLocation.getFloor().updatePOIStorage(oldType, newType, poi);
     }
-
 
     // if after removing spaces, the textfield is empty, set attribute as null
     // (Textfields are initialized as empty strings)
@@ -172,11 +173,11 @@ public class EditController {
     // location being edited is a newly-created POI
     if (ControllerMediator.getInstance().getApplication().searchForPOI(poiLocation.toString()).isEmpty()) {
       ControllerMediator.getInstance().getApplication().addPOI(poiLocation);
-      ControllerMediator.getInstance().addPOIButton(poiButton, poiLocation);
+      ControllerMediator.getInstance().mapViewControllerAddPOIButton(poiButton);
     }
     // Refresh both the favourites and search display to reflect the deletion.
-    ControllerMediator.getInstance().refreshFavouritesList();
-    ControllerMediator.getInstance().refreshSearchList();
+    ControllerMediator.getInstance().favouritesControllerRefreshList();
+    ControllerMediator.getInstance().searchPOIControllerRefreshList();
     this.poiButton.updateButtonDisplay();
 
     // exit pop-up

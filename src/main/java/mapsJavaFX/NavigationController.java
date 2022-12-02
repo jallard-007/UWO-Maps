@@ -13,10 +13,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- * Control the navigation throughout the entire application
+ * Control the navigation in the main application scene
  */
 public class NavigationController {
-
   @FXML
   private BorderPane menuBar;
 
@@ -82,7 +81,6 @@ public class NavigationController {
    * @param scene the scene to change to
    * @param event the event which triggers the change of scene
    */
-
   private void changeScene(Scene scene, ActionEvent event) {
     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
     stage.setScene(scene);

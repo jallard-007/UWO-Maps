@@ -13,6 +13,9 @@ import mapsJavaFX.ControllerMediator;
 import mapsJavaFX.MainController;
 import mapsJavaFX.Util;
 
+/**
+ * Controls the signup page
+ */
 public class SignupController {
   @FXML
   private TextField username;
