@@ -8,8 +8,8 @@ import org.json.*;
 import java.lang.String;
 
 public class editMode {
-    // public static String editPOI(POILocation poi_to_edit){
-    //     return "POI edit success";
-    // }
+    public static void changeBuildingName(Building building, String newName){
+        
+    }
     
 }

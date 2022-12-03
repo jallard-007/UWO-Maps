@@ -105,15 +105,12 @@ public class MainController {
   public void onAddBld(ActionEvent event) {
     
   }
-  @FXML
   public void onEditBld(ActionEvent event) {
     FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/editBuilding.fxml"));
     System.out.println(mapViewController.getBuildingTab());
     try {
       Scene scene = new Scene(fxmlLoader.load());
-      editBuildingController editBuildingController = new editBuildingController();
       Stage stage = editBuildingController.getStage();
-      editBuildingController.setCurr(mapViewController.getBuildingTab());
       stage.setTitle("Edit Building Name");
       stage.setScene(scene);
       stage.showAndWait();

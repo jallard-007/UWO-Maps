@@ -27,33 +27,56 @@ public class editBuildingController {
     private Button conEditBuild;
     @FXML
     private Button cancEditBuild;
+    private Building selectedBuilding;
 
-    /**
+  /**
    * Called to set up the app
    * @param newApp referring to the map application
    */
-  @FXML
-  public void setCurr(String currName) {
-    currBuildingName.setText(currName);
+  public static void setApp(Application newApp) {
+    app = newApp;
   }
 
+  
+ 
   /**
    * Sets stage of application
    * @param newStage stage to be set
    */
-  public void setStage(Stage newStage) {
+  public static void setStage(Stage newStage) {
     stage = newStage;
   }
 
   /**
    * @return current application stage
    */
-  public Stage getStage() {
+  public static Stage getStage() {
     return stage;
   }
 
-    // public void editBuildingController(String currName){
-    //     currBuildingName.setText(currName);
-    // }
+  @FXML
+  public void initialize() {
+    String strSelectedBuilding = ControllerMediator.getInstance().getBuildingTab();
+    List<Building> allBuildings = ControllerMediator.getInstance().getApplication().getBuildings();
+    for (Building building : allBuildings) {
+      if (building.getName().equals(strSelectedBuilding)) {
+        selectedBuilding = building;
+      }
+    }
+    currBuildingName.setText(selectedBuilding.getName());
+  }
+
+  /**
+   * Pressing [Save Changes] button takes user to input.
+   */
+  public void onSaveBldEdit() {
+    
+    String newName = newBldName.getText();
+    if(!(newName.equals(""))){
+      String prevName = selectedBuilding.getName();
+      selectedBuilding.setName(newName);
+    }
+  }
+
 
 }

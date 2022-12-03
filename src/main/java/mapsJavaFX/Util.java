@@ -12,6 +12,7 @@ public class Util {
     POIButton.setApp(app);
     POIDescriptionController.setApp(app);
     AddPOIController.setApp(app);
+    editBuildingController.setApp(app);
 
     //set app in the main controller
     controller.setApp(app);
