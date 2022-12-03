@@ -68,5 +68,7 @@ efficient way to find their way around buildings without the headache that may c
 
 Happy travels :)
 
+**By: Rose Gao, Gabrielle Niamat, Lina Dbagh, Sebastian Silva, and Justin Allard**
+
 
 
