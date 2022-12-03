@@ -8,23 +8,10 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import java.util.ArrayList;
-import java.util.List;
 import javafx.collections.*;
 import javafx.collections.FXCollections;
 import javafx.scene.Node;
 import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.Slider;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.event.ActionEvent;  
 import maps.*;
 
 import java.io.IOException;
@@ -44,7 +31,7 @@ public class MainController {
   private SearchPOIController searchPOIController;
   @FXML
   private FavouritesController favouritesController;
-  @FXML 
+  @FXML
   Application app;
   @FXML
   private ButtonBar addBar;
@@ -65,8 +52,6 @@ public class MainController {
   @FXML
   private Button delFloor;
 
-
-
   public SearchPOIController getSearchPOIController() {
     return searchPOIController;
   }
@@ -78,7 +63,6 @@ public class MainController {
   public FavouritesController getFavouritesController() {
     return favouritesController;
   }
-  
 
   public void onAddPOI(ActionEvent event) {
     FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/addPOI.fxml"));
@@ -93,9 +77,11 @@ public class MainController {
       throw new RuntimeException(e);
     }
   }
+
   public void onAddFloor(ActionEvent event) {
-    
+
   }
+
   public void onEditFloor(ActionEvent event) {
     FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/editFloor.fxml"));
     try {
@@ -108,8 +94,9 @@ public class MainController {
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
-    
+
   }
+
   public void onDelFloor(ActionEvent event) {
     FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/deleteFloor.fxml"));
     try {
@@ -122,11 +109,13 @@ public class MainController {
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
-    
+
   }
+
   public void onAddBld(ActionEvent event) {
-    
+
   }
+
   public void onEditBld(ActionEvent event) {
     FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/editBuilding.fxml"));
     try {
@@ -139,8 +128,9 @@ public class MainController {
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
-    
+
   }
+
   public void onDelBld(ActionEvent event) {
     FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/deleteBuilding.fxml"));
     try {
@@ -153,25 +143,26 @@ public class MainController {
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
-    
+
   }
+
   public void setApp(Application app) {
     this.app = app;
-    //making certain buttons unclickable for base users
-    if (this.app.getUser().getUserType() == UserType.base){
+    // making certain buttons unclickable for base users
+    if (this.app.getUser().getUserType() == UserType.base) {
       System.out.println("being called");
       ObservableList<Node> buttonsToSet = FXCollections.observableArrayList();
       buttonsToSet = addBar.getButtons();
       buttonsToSet.addAll(floorBar.getButtons());
       buttonsToSet.addAll(bldBar.getButtons());
-      for (Node button:buttonsToSet){
-        if (!(button.getId().equals("addPOI"))){
+      for (Node button : buttonsToSet) {
+        if (!(button.getId().equals("addPOI"))) {
           button.setDisable(true);
           System.out.println(button.getId());
         }
 
       }
-      
+
     }
   }
 

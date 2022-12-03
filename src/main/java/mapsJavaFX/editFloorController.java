@@ -1,11 +1,7 @@
 package mapsJavaFX;
 
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
@@ -13,14 +9,13 @@ import javafx.stage.Stage;
 import maps.*;
 import java.lang.String;
 
-import java.io.IOException;
 import java.util.List;
 
 public class editFloorController {
-    static Stage stage;
-    static Application app;
-    private Tab selectedBldTab;
-    private Tab selectedTab;
+  static Stage stage;
+  static Application app;
+  private Tab selectedBldTab;
+  private Tab selectedTab;
 
     //edit floor scene
     @FXML
@@ -34,33 +29,29 @@ public class editFloorController {
     @FXML
     private TextField levelField;
 
-    //delete floor scene
-    @FXML
-    private Text floorName;
-    @FXML
-    private Text buildingName;
-    @FXML
-    private Button delFloorButton;
-    
+  // delete floor scene
+  @FXML
+  private Text floorName;
+  @FXML
+  private Text buildingName;
+  @FXML
+  private Button delFloorButton;
 
-
-
-    private Floor selectedFloor;
-    private Building selectedBuilding;
-
+  private Floor selectedFloor;
+  private Building selectedBuilding;
 
   /**
    * Called to set up the app
+   * 
    * @param newApp referring to the map application
    */
   public static void setApp(Application newApp) {
     app = newApp;
   }
 
-  
- 
   /**
    * Sets stage of application
+   * 
    * @param newStage stage to be set
    */
   public static void setStage(Stage newStage) {
@@ -83,7 +74,7 @@ public class editFloorController {
     for (Building building : allBuildings) {
       if (building.getName().equals(selectedBldTab.getText())) {
         selectedBuilding = building;
-        for(Floor floor : selectedBuilding.getFloors()){
+        for (Floor floor : selectedBuilding.getFloors()) {
           if (floor.getName().equals(selectedTab.getText())) {
             selectedFloor = floor;
             break;
@@ -109,13 +100,12 @@ public class editFloorController {
    */
   public void onSaveFloorEdit() {
     String newName = newFloorName.getText();
-    if(!(newName.equals(""))){
+    if (!(newName.equals(""))) {
       // String prevName = selectedBuilding.getName();
-      
-        for(Floor floor : selectedBuilding.getFloors()){
-          if (floor.getName().equals(newName)) {
-            return;
-          }
+
+      for (Floor floor : selectedBuilding.getFloors()) {
+        if (floor.getName().equals(newName)) {
+          return;
         }
       //check if the user entered an integer for the level
       try {
@@ -123,8 +113,8 @@ public class editFloorController {
         //if they did and its different
         if (newLevel != selectedFloor.getLevel()){
           //make sure it is not the same level as another floor in the building
-          for(Floor floor: selectedBuilding.getFloors()){
-            if(floor.getLevel() == newLevel){
+          for(Floor floor2: selectedBuilding.getFloors()){
+            if(floor2.getLevel() == newLevel){
               return;
             }
           }
@@ -140,6 +130,7 @@ public class editFloorController {
       stage.close();
 
     }
+  }
   }
   public void onCancelFloorEdit(){
     stage.close();
