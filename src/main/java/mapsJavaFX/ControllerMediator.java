@@ -1,7 +1,11 @@
 package mapsJavaFX;
 
 import java.util.List;
+
+import javafx.scene.control.Tab;
 import maps.Application;
+import maps.Building;
+import maps.Floor;
 import maps.POILocation;
 import maps.POIType;
 
@@ -66,7 +70,7 @@ public class ControllerMediator {
    * @param poiLocation the poi to go to
    * @return the POIButton object associated with the poi
    */
-  POIButton mapViewControllerGoToPOI(POILocation poiLocation) {
+  public POIButton mapViewControllerGoToPOI(POILocation poiLocation) {
     return mapViewController.goToPOI(poiLocation);
   }
 
@@ -82,21 +86,41 @@ public class ControllerMediator {
   /**
    * @return the name of the currently selected building tab
    */
-  String mapViewControllerGetBuildingTab() {
+  public String mapViewControllerGetBuildingTab() {
     return mapViewController.getBuildingTab();
+  }
+
+  public Tab getBuildingTabObject() {
+    return mapViewController.getBuildingTabObject();
+  }
+
+  public Tab getFloorTab() {
+    return mapViewController.getFloorTab();
+  }
+
+  public void removeTab(Tab tab) {
+    mapViewController.removeTab(tab);
+  }
+
+  public void addBuildingTab(Building building) {
+    mapViewController.addBuildingTab(building);
+  }
+
+  public void removeFloorTab(Tab tab) {
+    mapViewController.removeFloorTab(tab);
   }
 
   /**
    * Tells the registered FavouritesController to refresh it's list
    */
-  void favouritesControllerRefreshList() {
+  public void favouritesControllerRefreshList() {
     favouritesController.refreshList();
   }
 
   /**
    * Tells the registered SearchPOIController to refresh it's list
    */
-  void searchPOIControllerRefreshList() {
+  public void searchPOIControllerRefreshList() {
     searchPOIController.refreshList();
   }
 
@@ -117,7 +141,8 @@ public class ControllerMediator {
    * @param newType   new POIType
    * @param poiButton the button to move in storage
    */
-  void mapViewControllerUpdateButtonStorage(POIType oldType, POIType newType, POIButton poiButton) {
+  public void mapViewControllerUpdateButtonStorage(POIType oldType, POIType newType,
+      POIButton poiButton) {
     mapViewController.updateButtonStorage(oldType, newType, poiButton);
   }
 
@@ -127,8 +152,12 @@ public class ControllerMediator {
    * 
    * @param poiButton the button to add
    */
-  void mapViewControllerAddPOIButton(POIButton poiButton) {
+  public void mapViewControllerAddPOIButton(POIButton poiButton) {
     mapViewController.addButton(poiButton);
+  }
+
+  public void addFloorTab(Tab building, Floor floor) {
+    mapViewController.addFloorTab(building, floor);
   }
 
   private ControllerMediator() {

@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import java.io.IOException;
 
 import maps.Application;
+import mapsJavaFX.editFeatures.AddPOIController;
 
 /**
  * The WesternMaps class is dedicated to setting up the stage, corresponding

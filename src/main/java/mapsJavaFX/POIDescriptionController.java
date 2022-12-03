@@ -10,6 +10,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import maps.*;
+import mapsJavaFX.editFeatures.*;
 
 /**
  * Controller to handle the popup window displaying information about a selected
@@ -36,11 +37,17 @@ public class POIDescriptionController {
    */
   public static void setApp(Application newApp) {
     app = newApp;
-    EditController.setStage(stage);
     AddPOIController.setStage(stage);
-    stage.setMinWidth(300);
-    stage.setMinHeight(200);
-    stage.setMaxWidth(500);
+    AddFloorController.setStage(stage);
+    AddBuildingController.setStage(stage);
+
+    EditController.setStage(stage);
+    EditFloorController.setStage(stage);
+    EditBuildingController.setStage(stage);
+
+    DeleteFloorController.setStage(stage);
+    DeleteBuildingController.setStage(stage);
+    stage.setMaxWidth(600);
     stage.setMaxHeight(500);
   }
 

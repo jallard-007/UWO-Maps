@@ -1,13 +1,16 @@
-package mapsJavaFX;
+package mapsJavaFX.editFeatures;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import maps.*;
+import mapsJavaFX.ControllerMediator;
+import mapsJavaFX.POIButton;
 
 import java.io.IOException;
 import java.util.List;
@@ -19,6 +22,8 @@ import java.util.List;
 public class AddPOIController {
   static Stage stage;
   static Application app;
+  @FXML
+  private Button btnContinue;
   @FXML
   private ChoiceBox<Floor> floorName;
   @FXML
@@ -58,6 +63,10 @@ public class AddPOIController {
   public void initialize() {
     // Get current building selected in the map view
     String strSelectedBuilding = ControllerMediator.getInstance().mapViewControllerGetBuildingTab();
+    if (strSelectedBuilding == null) {
+      stage.close();
+      return;
+    }
     List<Building> allBuildings = ControllerMediator.getInstance().getApplication().getBuildings();
     for (Building building : allBuildings) {
       if (building.getName().equals(strSelectedBuilding)) {
@@ -66,9 +75,17 @@ public class AddPOIController {
     }
     buildingName.setText(selectedBuilding.getName());
 
-    // Set choicebox options
+    if (selectedBuilding.getFloors().isEmpty()) {
+      stage.close();
+      return;
+    }
     floorName.setItems(FXCollections.observableList(selectedBuilding.getFloors()));
     floorName.getSelectionModel().selectFirst();
+    stage.setTitle("New POI");
+    if (!stage.isShowing()) {
+      stage.show();
+    }
+    stage.centerOnScreen();
   }
 
   /**
@@ -78,8 +95,8 @@ public class AddPOIController {
   public void onContinue() {
     Floor selectedFloor = floorName.getSelectionModel().getSelectedItem();
 
-    Double x = selectedFloor.getImage().getWidth();
-    Double y = selectedFloor.getImage().getHeight();
+    double x = selectedFloor.getImage().getWidth();
+    double y = selectedFloor.getImage().getHeight();
     POILocation poiLocation = new POILocation(selectedBuilding, selectedFloor,
         new POI("New POI", POIType.custom, new Pair(x / 2, y / 2)));
     app.addPOI(poiLocation);

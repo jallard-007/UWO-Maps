@@ -10,4 +10,6 @@ module mapsJavaFX {
   exports mapsJavaFX;
   exports mapsJavaFX.welcomePage;
   exports maps;
+  exports mapsJavaFX.editFeatures;
+  opens mapsJavaFX.editFeatures to javafx.fxml;
 }

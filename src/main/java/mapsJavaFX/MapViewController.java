@@ -22,12 +22,14 @@ public class MapViewController {
   private Slider zoomBar;
   @FXML
   private TabPane tabPane;
+
+  @FXML
   Application app;
   private List<POIButton>[] poiButtons;
 
   /**
    * Initializes the map view based on the Application object.
-   * 
+   *
    * @param app the current application being used
    */
   @SuppressWarnings("unchecked")
@@ -42,10 +44,13 @@ public class MapViewController {
     // creates a new tab for each building
     for (Building building : this.app.getBuildings()) {
       Tab buildingTab = new Tab(building.getName());
+
       buildingTab.setClosable(false);
+      // buildingTab.setGraphic(editFloor);
       this.tabPane.getTabs().add(buildingTab);
 
       TabPane buildingTabPane = new TabPane();
+
       buildingTab.setContent(buildingTabPane);
 
       // creates a new tab for each floor within the building tab
@@ -114,7 +119,7 @@ public class MapViewController {
 
   /**
    * Removes a POIButton from the map
-   * 
+   *
    * @param poiLocation the selected POILocation
    */
   public void removeButton(POILocation poiLocation) {
@@ -130,23 +135,32 @@ public class MapViewController {
   }
 
   /**
-   * Updates the location where the selected POI's button is stored within the POI
-   * buttons list; used when the type of a POI is being updated
-   * 
-   * @param oldType   old POI type
-   * @param newType   new POI type
-   * @param poiButton the Button associated with the POI whose type is being
-   *                  updated
+   * Removes a Building from the TabPane
+   *
+   * @param tab the tab to be deleted
    */
+  public void removeTab(Tab tab) {
+    tabPane.getTabs().remove(tab);
+  }
+
+  /**
+   * Updates the location where the selected POI's button is stored within the POI buttons list;
+   * used when the type of POI is being updated
+   *
+   * @param oldType   old POI type*
+   * @param newType   new POI type*
+   * @param poiButton the Button associated with the POI whose type is being updated
+   */
+
   public void updateButtonStorage(POIType oldType, POIType newType, POIButton poiButton) {
     this.poiButtons[oldType.ordinal()].remove(poiButton);
     this.poiButtons[newType.ordinal()].add(poiButton);
   }
 
   /**
-   * Adds a POIButton to the list and displays it on the map
-   * 
-   * @param poiButton the POIButton to add
+   * Adds a button to the POI buttons list and properly displays the new button on the map
+   *
+   * @param poiButton   newly-created POI button
    */
   public void addButton(POIButton poiButton) {
     POILocation poiLocation = poiButton.poiLocation;
@@ -163,16 +177,17 @@ public class MapViewController {
   }
 
   /**
-   * Displays the floor on which the poi resides and centers the map view on the
-   * poi. The centering is not 100% accurate, but it is fairly close
+   * Displays the floor on which the poi resides and centers the map view on the poi. The centering
+   * is not 100% accurate, but it is fairly close
    *
    * @param poiLocation the poi to find
-   * @return the button corresponding the to the poi
+   * @return the button corresponding to the poi
    */
   public POIButton goToPOI(POILocation poiLocation) {
     System.out.println("go to " + poiLocation);
 
-    Tab tab = goToTab((TabPane) goToTab(this.tabPane, poiLocation.getBuilding().getName()).getContent(),
+    Tab tab = goToTab(
+        (TabPane) goToTab(this.tabPane, poiLocation.getBuilding().getName()).getContent(),
         poiLocation.getFloor().getName());
     ScrollPane scrollPane = (ScrollPane) tab.getContent();
 
@@ -190,8 +205,7 @@ public class MapViewController {
   }
 
   /**
-   * Finds and selects a pane within the passed TabPane, displaying it for the
-   * user
+   * Finds and selects a pane within the passed TabPane, displaying it for the user
    *
    * @param tabPane the TabPane to search in
    * @param tabName the name of the Tab to find
@@ -246,9 +260,73 @@ public class MapViewController {
   }
 
   /**
+   * @return the current floor being displayed in the main view
+   */
+  public Tab getFloorTab() {
+    TabPane floorTabPane = (TabPane) tabPane.getSelectionModel().getSelectedItem().getContent();
+    return floorTabPane.getSelectionModel().getSelectedItem();
+  }
+
+  public void addFloorTab(Tab buildingTab, Floor floor) {
+    if (buildingTab == null) {
+      return;
+    }
+    Tab floorTab = new Tab(floor.getName());
+    TabPane buildingTabPane = (TabPane) buildingTab.getContent();
+    if (buildingTabPane == null) {
+      buildingTabPane = new TabPane();
+      buildingTab.setContent(buildingTabPane);
+    }
+
+    Image image = floor.getImage();
+    ImageView imageView = new ImageView(image);
+    imageView.setPreserveRatio(true);
+
+    // Add floor PNGs into a scrollPane so users can pan through the maps
+    StackPane stackPane = new StackPane();
+    ScrollPane scrollPane = new ScrollPane();
+    scrollPane.setPannable(true);
+    scrollPane.setHvalue(0.5);
+    scrollPane.setVvalue(0.5);
+
+    Pane poiPane = new Pane();
+    stackPane.getChildren().add(imageView);
+    stackPane.getChildren().add(poiPane);
+    scrollPane.setContent(stackPane);
+    floorTab.setContent(scrollPane);
+    floorTab.setClosable(false);
+    buildingTabPane.getTabs().add(floorTab);
+    zoomBar.valueProperty().addListener((o, oldV, newV) -> {
+      stackPane.setScaleX(newV.doubleValue());
+      stackPane.setScaleY(newV.doubleValue());
+    });
+  }
+
+  /**
+   * Removes a Floor from the floor tab pane
+   *
+   * @param tab the tab to be deleted
+   */
+  public void removeFloorTab(Tab tab) {
+    TabPane floorTabPane = (TabPane) tabPane.getSelectionModel().getSelectedItem().getContent();
+    floorTabPane.getTabs().remove(tab);
+  }
+
+  /**
    * @return the current building being displayed in the main view
    */
   public String getBuildingTab() {
     return tabPane.getSelectionModel().getSelectedItem().getText();
+  }
+
+  public Tab getBuildingTabObject() {
+    return tabPane.getSelectionModel().getSelectedItem();
+  }
+
+  public void addBuildingTab(Building building) {
+    Tab buildingTab = new Tab(building.getName());
+    buildingTab.setClosable(false);
+    buildingTab.setContent(new TabPane());
+    tabPane.getTabs().add(buildingTab);
   }
 }

@@ -69,7 +69,7 @@ public class FavouritesController {
    * 
    * @return selected POI location
    */
-  private POILocation getSelectedPOI() {
+  public POILocation getSelectedPOI() {
     return favouritePOIList.getSelectionModel().getSelectedItem();
   }
 }

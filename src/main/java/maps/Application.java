@@ -15,6 +15,7 @@ public class Application {
   boolean editMode;
   final List<Building> buildings;
   final List<POILocation> poiLocations;
+  List<UserChanges> registeredUsers;
   List<POIType> filter = Arrays.asList(POIType.values());
 
   /**
@@ -25,6 +26,7 @@ public class Application {
     editMode = false;
     buildings = new ArrayList<>();
     poiLocations = new ArrayList<>();
+    UserChanges.setApp(this);
   }
 
   /**
@@ -114,16 +116,26 @@ public class Application {
     // add favourites to User object
     JSONArray favourites = jsonObject.getJSONArray("favourites");
     for (int i = 0; i < favourites.length(); ++i) {
-      String favourite = favourites.getString(i);
-      List<POILocation> poiFav = searchForPOI(favourite);
-      if (poiFav.size() == 0) {
-        // poi does not exist
-        // need to remove it
+      JSONObject favourite = favourites.getJSONObject(i);
+      Building building = this.getMatchingBuilding(favourite.getString("building"));
+      Floor floor = building.getMatchingFloor(favourite.getString("floor"));
+      POILocation poiLocation = this.getPoiLocation(floor, favourite.getString("poi"));
+      if (poiLocation == null) {
         continue;
       }
-      this.user.addFavourite(poiFav.get(0));
+      this.user.addFavourite(poiLocation);
     }
 
+    if (this.user.getUserType().equals(UserType.admin)) {
+      this.registeredUsers = new ArrayList<>();
+      File dir = new File(Util.getRootPath() + "/appData/users");
+      File[] directoryListing = dir.listFiles();
+      if (directoryListing != null) {
+        for (File userFile : directoryListing) {
+          this.registeredUsers.add(new UserChanges(new JSONObject(Util.getJSONFileContents(userFile))));
+        }
+      }
+    }
     // indicate login was successful
     return true;
   }
@@ -182,7 +194,7 @@ public class Application {
       if (buildingCompare != 0) {
         return buildingCompare;
       }
-      int floorCompare = Integer.compare(lhs.floor.level, rhs.floor.level);
+      int floorCompare = Integer.compare(lhs.floor.getLevel(), rhs.floor.getLevel());
       if (floorCompare != 0) {
         return floorCompare;
       }
@@ -224,7 +236,7 @@ public class Application {
    * @param buildingName the name of the building to find
    * @return the matching building object
    */
-  private Building getMatchingBuilding(String buildingName) {
+  public Building getMatchingBuilding(String buildingName) {
     for (Building building : this.buildings) {
       if (building.getName().equals(buildingName)) {
         return building;
@@ -266,11 +278,10 @@ public class Application {
    * Deletes a building from the application
    *
    * @param building the building to delete
-   * @return true if successful, false otherwise
    */
-  public boolean deleteBuilding(Building building) {
+  public void deleteBuilding(Building building) {
     if (user.getUserType() != UserType.admin) {
-      return false;
+      return;
     }
     List<POILocation> found = new ArrayList<>();
     for (POILocation poiLocation : this.poiLocations) {
@@ -279,7 +290,7 @@ public class Application {
       }
     }
     this.poiLocations.removeAll(found);
-    return this.buildings.remove(building);
+    this.buildings.remove(building);
   }
 
   /**
@@ -287,11 +298,10 @@ public class Application {
    *
    * @param building the building that the floor is in
    * @param floor    the floor to delete
-   * @return true if successful, false otherwise
    */
-  public boolean deleteFloor(Building building, Floor floor) {
+  public void deleteFloor(Building building, Floor floor) {
     if (user.getUserType() != UserType.admin) {
-      return false;
+      return;
     }
     List<POILocation> found = new ArrayList<>();
     for (POILocation poiLocation : this.poiLocations) {
@@ -300,7 +310,7 @@ public class Application {
       }
     }
     this.poiLocations.removeAll(found);
-    return building.floors.remove(floor);
+    building.floors.remove(floor);
   }
 
   public void setFilter(List<POIType> filter) {
@@ -374,7 +384,25 @@ public class Application {
     if (type.equals(UserType.admin)) {
       JSONObject jsonApplication = createJSONObjectOfApplication();
       Util.writeToFile(jsonApplication, "/appData/metaData/poiMetaData.json");
+      for (UserChanges user : this.registeredUsers) {
+        user.saveUser();
+      }
     }
+  }
+
+  /**
+   * 
+   * @param f       floor to look in
+   * @param poiName name of the poi
+   * @return null if not found
+   */
+  public POILocation getPoiLocation(Floor f, String poiName) {
+    for (POILocation p : this.poiLocations) {
+      if (p.getFloor().equals(f) && p.getPOI().getRoomNumber().equals(poiName)) {
+        return p;
+      }
+    }
+    return null;
   }
 
   /**
