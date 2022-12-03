@@ -17,7 +17,6 @@ public class editFloorController {
   private Tab selectedBldTab;
   private Tab selectedTab;
 
-<<<<<<< HEAD
     //edit floor scene
     @FXML
     private Text curFloorName;
@@ -29,17 +28,6 @@ public class editFloorController {
     private Button cancFloorEdit;
     @FXML
     private TextField levelField;
-=======
-  // edit floor scene
-  @FXML
-  private Text curFloorName;
-  @FXML
-  private TextField newFloorName;
-  @FXML
-  private Button saveFloorEdit;
-  @FXML
-  private Button cancFloorEdit;
->>>>>>> 0f08f2577c00a1c5742cd7b4aafb9f7f5922e323
 
   // delete floor scene
   @FXML
@@ -94,7 +82,6 @@ public class editFloorController {
         }
       }
     }
-<<<<<<< HEAD
     //if the edit floor stage is being intialized
     if (curFloorName != null){
       curFloorName.setText(selectedFloor.getName());
@@ -102,11 +89,6 @@ public class editFloorController {
     }
     //otherwise the delete floor stage is being initialized
     else{
-=======
-    if (curFloorName != null) {
-      curFloorName.setText(selectedFloor.getName());
-    } else {
->>>>>>> 0f08f2577c00a1c5742cd7b4aafb9f7f5922e323
       floorName.setText(selectedFloor.getName());
       buildingName.setText(selectedBuilding.getName() + "?");
     }
@@ -125,7 +107,6 @@ public class editFloorController {
         if (floor.getName().equals(newName)) {
           return;
         }
-<<<<<<< HEAD
       //check if the user entered an integer for the level
       try {
         int newLevel = Integer.parseInt(levelField.getText());
@@ -143,10 +124,6 @@ public class editFloorController {
       } catch (Exception e) {
         return;
       }
-=======
-      }
-
->>>>>>> 0f08f2577c00a1c5742cd7b4aafb9f7f5922e323
       selectedFloor.setName(newName);
 
       selectedTab.setText(newName);
@@ -154,16 +131,11 @@ public class editFloorController {
 
     }
   }
-<<<<<<< HEAD
   }
   public void onCancelFloorEdit(){
     stage.close();
   }
    /**
-=======
-
-  /**
->>>>>>> 0f08f2577c00a1c5742cd7b4aafb9f7f5922e323
    * Pressing [Delete] button deletes the floor from the app.
    */
   public void onDelFloor() {
