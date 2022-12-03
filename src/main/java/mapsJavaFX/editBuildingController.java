@@ -100,6 +100,7 @@ public class editBuildingController {
       }
       selectedBuilding.setName(newName);
       selectedTab.setText(newName);
+      stage.close();
 
     }
   }
@@ -111,6 +112,7 @@ public class editBuildingController {
     ControllerMediator.getInstance().removeTab(selectedTab);
     ControllerMediator.getInstance().refreshFavouritesList();
     ControllerMediator.getInstance().refreshSearchList();
+    stage.close();
 
   }
 

@@ -31,6 +31,8 @@ public class editFloorController {
     private Button saveFloorEdit;
     @FXML
     private Button cancFloorEdit;
+    @FXML
+    private TextField levelField;
 
     //delete floor scene
     @FXML
@@ -89,9 +91,12 @@ public class editFloorController {
         }
       }
     }
+    //if the edit floor stage is being intialized
     if (curFloorName != null){
       curFloorName.setText(selectedFloor.getName());
+      levelField.setText(Integer.toString(selectedFloor.getLevel()));
     }
+    //otherwise the delete floor stage is being initialized
     else{
       floorName.setText(selectedFloor.getName());
       buildingName.setText(selectedBuilding.getName() + "?");
@@ -112,11 +117,32 @@ public class editFloorController {
             return;
           }
         }
-      
+      //check if the user entered an integer for the level
+      try {
+        int newLevel = Integer.parseInt(levelField.getText());
+        //if they did and its different
+        if (newLevel != selectedFloor.getLevel()){
+          //make sure it is not the same level as another floor in the building
+          for(Floor floor: selectedBuilding.getFloors()){
+            if(floor.getLevel() == newLevel){
+              return;
+            }
+          }
+          selectedFloor.setLevel(newLevel);
+        }
+        //if not, end the function call
+      } catch (Exception e) {
+        return;
+      }
       selectedFloor.setName(newName);
+
       selectedTab.setText(newName);
+      stage.close();
 
     }
+  }
+  public void onCancelFloorEdit(){
+    stage.close();
   }
    /**
    * Pressing [Delete] button deletes the floor from the app.
@@ -126,6 +152,7 @@ public class editFloorController {
     ControllerMediator.getInstance().removeFloorTab(selectedTab);
     ControllerMediator.getInstance().refreshFavouritesList();
     ControllerMediator.getInstance().refreshSearchList();
+    stage.close();
   }
 
 }

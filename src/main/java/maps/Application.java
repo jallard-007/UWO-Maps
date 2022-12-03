@@ -193,7 +193,7 @@ public class Application {
       if (buildingCompare != 0) {
         return buildingCompare;
       }
-      int floorCompare = Integer.compare(lhs.floor.level, rhs.floor.level);
+      int floorCompare = Integer.compare(lhs.floor.getLevel(), rhs.floor.getLevel());
       if (floorCompare != 0) {
         return floorCompare;
       }
