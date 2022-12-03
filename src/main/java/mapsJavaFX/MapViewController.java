@@ -267,6 +267,15 @@ public class MapViewController {
     return floorTabPane.getSelectionModel().getSelectedItem();
   }
   /**
+   * Removes a Floor from the floor tab pane
+   * 
+   * @param tab the tab to be deleted
+   */
+  public void removeFloorTab(Tab tab) {
+    TabPane floorTabPane = (TabPane) tabPane.getSelectionModel().getSelectedItem().getContent();
+    floorTabPane.getTabs().remove(tab);
+  }
+  /**
    * @return the current building being displayed in the main view
    */
   public String getBuildingTab() {

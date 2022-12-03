@@ -111,6 +111,17 @@ public class MainController {
     
   }
   public void onDelFloor(ActionEvent event) {
+    FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/deleteFloor.fxml"));
+    try {
+      Scene scene = new Scene(fxmlLoader.load());
+      Stage stage = editFloorController.getStage();
+      stage.setTitle("Delete Floor");
+      stage.setScene(scene);
+      stage.showAndWait();
+      stage.centerOnScreen();
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
     
   }
   public void onAddBld(ActionEvent event) {

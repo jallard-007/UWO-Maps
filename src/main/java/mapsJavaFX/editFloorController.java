@@ -21,6 +21,8 @@ public class editFloorController {
     static Application app;
     private Tab selectedBldTab;
     private Tab selectedTab;
+
+    //edit floor scene
     @FXML
     private Text curFloorName;
     @FXML
@@ -29,6 +31,18 @@ public class editFloorController {
     private Button saveFloorEdit;
     @FXML
     private Button cancFloorEdit;
+
+    //delete floor scene
+    @FXML
+    private Text floorName;
+    @FXML
+    private Text buildingName;
+    @FXML
+    private Button delFloorButton;
+    
+
+
+
     private Floor selectedFloor;
     private Building selectedBuilding;
 
@@ -75,7 +89,13 @@ public class editFloorController {
         }
       }
     }
-    curFloorName.setText(selectedFloor.getName());
+    if (curFloorName != null){
+      curFloorName.setText(selectedFloor.getName());
+    }
+    else{
+      floorName.setText(selectedFloor.getName());
+      buildingName.setText(selectedBuilding.getName() + "?");
+    }
 
   }
 
@@ -98,6 +118,14 @@ public class editFloorController {
 
     }
   }
-
+   /**
+   * Pressing [Delete] button deletes the floor from the app.
+   */
+  public void onDelFloor() {
+    app.deleteFloor(selectedBuilding, selectedFloor);
+    ControllerMediator.getInstance().removeFloorTab(selectedTab);
+    ControllerMediator.getInstance().refreshFavouritesList();
+    ControllerMediator.getInstance().refreshSearchList();
+  }
 
 }
