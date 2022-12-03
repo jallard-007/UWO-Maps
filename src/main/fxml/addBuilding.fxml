@@ -7,11 +7,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="229.0" prefWidth="593.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapsJavaFX.editFloorController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="229.0" prefWidth="593.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapsJavaFX.AddBuildingController">
   <padding>
     <Insets bottom="10.0" right="10.0" />
   </padding>
-   <Button fx:id="addBuildingButton" layoutX="254.0" layoutY="190.0" mnemonicParsing="false" onAction="#onAddBuildingSubmit" text="Add Building" />
+   <Button fx:id="addBuildingButton" layoutX="254.0" layoutY="190.0" mnemonicParsing="false" onAction="#onAddBuilding" text="Add Building" />
    <Text layoutX="66.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New Building Name:" textAlignment="RIGHT" wrappingWidth="127.50537109375">
       <font>
          <Font size="13.0" />

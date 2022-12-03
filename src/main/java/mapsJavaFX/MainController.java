@@ -9,7 +9,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.collections.*;
-import javafx.collections.FXCollections;
 import javafx.scene.Node;
 import javafx.scene.control.ButtonBar;
 import maps.*;
@@ -69,10 +68,7 @@ public class MainController {
     try {
       Scene scene = new Scene(fxmlLoader.load());
       Stage stage = AddPOIController.getStage();
-      stage.setTitle("New POI");
       stage.setScene(scene);
-      stage.showAndWait();
-      stage.centerOnScreen();
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
@@ -82,26 +78,20 @@ public class MainController {
     FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/addFloor.fxml"));
     try {
       Scene scene = new Scene(fxmlLoader.load());
-      Stage stage = editFloorController.getStage();
+      Stage stage = AddFloorController.getStage();
       stage.setTitle("Add New Floor");
       stage.setScene(scene);
-      stage.showAndWait();
-      stage.centerOnScreen();
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
-
   }
 
   public void onEditFloor(ActionEvent event) {
     FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/editFloor.fxml"));
     try {
       Scene scene = new Scene(fxmlLoader.load());
-      Stage stage = editFloorController.getStage();
-      stage.setTitle("Edit Floor");
+      Stage stage = EditFloorController.getStage();
       stage.setScene(scene);
-      stage.showAndWait();
-      stage.centerOnScreen();
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
@@ -112,11 +102,8 @@ public class MainController {
     FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/deleteFloor.fxml"));
     try {
       Scene scene = new Scene(fxmlLoader.load());
-      Stage stage = editFloorController.getStage();
-      stage.setTitle("Delete Floor");
+      Stage stage = DeleteFloorController.getStage();
       stage.setScene(scene);
-      stage.showAndWait();
-      stage.centerOnScreen();
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
@@ -127,9 +114,9 @@ public class MainController {
     FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/addBuilding.fxml"));
     try {
       Scene scene = new Scene(fxmlLoader.load());
-      Stage stage = editBuildingController.getStage();
-      stage.setTitle("Add a New Building");
+      Stage stage = AddBuildingController.getStage();
       stage.setScene(scene);
+      stage.setTitle("Add a New Building");
       stage.showAndWait();
       stage.centerOnScreen();
     } catch (IOException e) {
@@ -142,26 +129,19 @@ public class MainController {
     FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/editBuilding.fxml"));
     try {
       Scene scene = new Scene(fxmlLoader.load());
-      Stage stage = editBuildingController.getStage();
-      stage.setTitle("Edit Building Name");
+      Stage stage = EditBuildingController.getStage();
       stage.setScene(scene);
-      stage.showAndWait();
-      stage.centerOnScreen();
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
-
   }
 
   public void onDelBld(ActionEvent event) {
     FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/deleteBuilding.fxml"));
     try {
       Scene scene = new Scene(fxmlLoader.load());
-      Stage stage = editBuildingController.getStage();
-      stage.setTitle("Delete Building");
+      Stage stage = DeleteBuildingController.getStage();
       stage.setScene(scene);
-      stage.showAndWait();
-      stage.centerOnScreen();
     } catch (IOException e) {
       throw new RuntimeException(e);
     }

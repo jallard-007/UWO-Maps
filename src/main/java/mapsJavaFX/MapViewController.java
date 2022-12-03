@@ -262,9 +262,9 @@ public class MapViewController {
     return floorTabPane.getSelectionModel().getSelectedItem();
   }
 
-  public boolean addFloorTab(Tab buildingTab, Floor floor) {
+  public void addFloorTab(Tab buildingTab, Floor floor) {
     if (buildingTab == null) {
-      return false;
+      return;
     }
     Tab floorTab = new Tab(floor.getName());
     TabPane buildingTabPane = (TabPane) buildingTab.getContent();
@@ -295,7 +295,6 @@ public class MapViewController {
       stackPane.setScaleX(newV.doubleValue());
       stackPane.setScaleY(newV.doubleValue());
     });
-    return true;
   }
 
   /**
@@ -322,7 +321,7 @@ public class MapViewController {
   public void addBuildingTab(Building building) {
     Tab buildingTab = new Tab(building.getName());
     buildingTab.setClosable(false);
+    buildingTab.setContent(new TabPane());
     tabPane.getTabs().add(buildingTab);
   }
-
 }

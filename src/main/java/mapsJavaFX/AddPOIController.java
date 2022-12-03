@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -16,6 +17,8 @@ public class AddPOIController {
   static Stage stage;
   static Application app;
   @FXML
+  private Button btnContinue;
+  @FXML
   private ChoiceBox<Floor> floorName;
   @FXML
   private Text buildingName;
@@ -23,6 +26,7 @@ public class AddPOIController {
 
   /**
    * Called to set up the app
+   * 
    * @param newApp referring to the map application
    */
   public static void setApp(Application newApp) {
@@ -31,6 +35,7 @@ public class AddPOIController {
 
   /**
    * Sets stage of application
+   * 
    * @param newStage stage to be set
    */
   public static void setStage(Stage newStage) {
@@ -45,12 +50,17 @@ public class AddPOIController {
   }
 
   /**
-   * Sets up interface: gives user options to select the floor that their new POI will be associated with.
+   * Sets up interface: gives user options to select the floor that their new POI
+   * will be associated with.
    */
   @FXML
   public void initialize() {
     // Get current building selected in the map view
     String strSelectedBuilding = ControllerMediator.getInstance().getBuildingTab();
+    if (strSelectedBuilding == null) {
+      stage.close();
+      return;
+    }
     List<Building> allBuildings = ControllerMediator.getInstance().getApplication().getBuildings();
     for (Building building : allBuildings) {
       if (building.getName().equals(strSelectedBuilding)) {
@@ -59,19 +69,29 @@ public class AddPOIController {
     }
     buildingName.setText(selectedBuilding.getName());
 
+    if (selectedBuilding.getFloors().isEmpty()) {
+      stage.close();
+      return;
+    }
     // Set choicebox options
     floorName.setItems(FXCollections.observableList(selectedBuilding.getFloors()));
     floorName.getSelectionModel().selectFirst();
+    stage.setTitle("New POI");
+    if (!stage.isShowing()) {
+      stage.showAndWait();
+    }
+    stage.centerOnScreen();
   }
 
   /**
-   * Pressing [Continue] button takes user to input information about their new POI.
+   * Pressing [Continue] button takes user to input information about their new
+   * POI.
    */
   public void onContinue() {
     Floor selectedFloor = floorName.getSelectionModel().getSelectedItem();
 
-    Double x = selectedFloor.getImage().getWidth();
-    Double y = selectedFloor.getImage().getHeight();
+    double x = selectedFloor.getImage().getWidth();
+    double y = selectedFloor.getImage().getHeight();
     POILocation poiLocation = new POILocation(selectedBuilding, selectedFloor,
         new POI("New POI", POIType.custom, new Pair(x / 2, y / 2)));
     app.addPOI(poiLocation);

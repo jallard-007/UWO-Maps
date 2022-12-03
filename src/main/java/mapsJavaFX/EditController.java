@@ -8,8 +8,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import maps.*;
-import maps.POI;
-import maps.POILocation;
 
 import java.util.Arrays;
 

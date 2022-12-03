@@ -21,7 +21,8 @@ public class POIDescriptionController {
   private final POIButton poiButton;
 
   /**
-   * Called to set up the app, and the dimensions of the pop-up window for future use
+   * Called to set up the app, and the dimensions of the pop-up window for future
+   * use
    *
    * @param newApp referring to the map application
    */
@@ -29,8 +30,12 @@ public class POIDescriptionController {
     app = newApp;
     EditController.setStage(stage);
     AddPOIController.setStage(stage);
-    editBuildingController.setStage(stage);
-    editFloorController.setStage(stage);
+    EditBuildingController.setStage(stage);
+    EditFloorController.setStage(stage);
+    AddFloorController.setStage(stage);
+    AddBuildingController.setStage(stage);
+    DeleteBuildingController.setStage(stage);
+    DeleteFloorController.setStage(stage);
     stage.setMaxWidth(500);
     stage.setAlwaysOnTop(true);
   }

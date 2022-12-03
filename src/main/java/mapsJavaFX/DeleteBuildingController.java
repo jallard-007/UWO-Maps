@@ -1,31 +1,20 @@
 package mapsJavaFX;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
-import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import maps.*;
-import java.lang.String;
 
 import java.util.List;
 
-public class EditBuildingController {
+public class DeleteBuildingController {
   static Stage stage;
   static Application app;
   private Tab selectedTab;
   private Building selectedBuilding;
-
-  // edit building scene
   @FXML
-  private Text currBuildingName;
-  @FXML
-  private TextField newBldName;
-  @FXML
-  private Button conEditBuild;
-  @FXML
-  private Button cancEditBuild;
+  private Text buildingName;
 
   /**
    * Called to set up the app
@@ -55,10 +44,6 @@ public class EditBuildingController {
   @FXML
   public void initialize() {
     selectedTab = ControllerMediator.getInstance().getBuildingTabObject();
-    if (selectedTab == null) {
-      stage.close();
-      return;
-    }
     List<Building> allBuildings = ControllerMediator.getInstance().getApplication().getBuildings();
     for (Building building : allBuildings) {
       if (building.getName().equals(selectedTab.getText())) {
@@ -70,31 +55,20 @@ public class EditBuildingController {
       stage.close();
       return;
     }
-    if (currBuildingName != null) {
-      currBuildingName.setText(selectedBuilding.getName());
-    }
-    stage.setTitle("Edit Building Name");
+    buildingName.setText(selectedBuilding.getName());
     if (!stage.isShowing()) {
       stage.showAndWait();
     }
-    stage.centerOnScreen();
   }
 
   /**
-   * Pressing [Save Changes] button takes user to input.
+   * Pressing [Delete] button deletes the buildinng from the app.
    */
-  public void onSaveBldEdit() {
-    List<Building> allBuildings = ControllerMediator.getInstance().getApplication().getBuildings();
-    String newName = newBldName.getText();
-    if (!(newName.equals(""))) {
-      for (Building building : allBuildings) {
-        if (building.getName().equals(newName)) {
-          return; // cannot have same name as another building
-        }
-      }
-      selectedBuilding.setName(newName);
-      selectedTab.setText(newName);
-      stage.close();
-    }
+  public void onDelBuilding() {
+    app.deleteBuilding(selectedBuilding);
+    ControllerMediator.getInstance().removeTab(selectedTab);
+    ControllerMediator.getInstance().refreshFavouritesList();
+    ControllerMediator.getInstance().refreshSearchList();
+    stage.close();
   }
 }

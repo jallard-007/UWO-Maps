@@ -26,7 +26,7 @@
                 </TitledPane>
          <ButtonBar fx:id="addBar" prefHeight="40.0" prefWidth="200.0">
            <buttons>
-               <Button id="addPOI" fx:id="addPOI" mnemonicParsing="false" onAction="#onAddPOI" prefHeight="25.0" prefWidth="141.0" text="Add POI" />
+            <Button fx:id="addPOI" mnemonicParsing="false" onAction="#onAddPOI" prefHeight="25.0" prefWidth="141.0" text="Add POI" />
              <Button fx:id="addFloor" mnemonicParsing="false" onAction="#onAddFloor" prefHeight="25.0" prefWidth="120.0" text="Add Floor" />
              <Button fx:id="addBld" mnemonicParsing="false" onAction="#onAddBld" prefHeight="26.0" prefWidth="133.0" text="Add Building" textOverrun="CLIP" />
            </buttons>

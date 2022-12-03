@@ -274,11 +274,10 @@ public class Application {
    * Deletes a building from the application
    *
    * @param building the building to delete
-   * @return true if successful, false otherwise
    */
-  public boolean deleteBuilding(Building building) {
+  public void deleteBuilding(Building building) {
     if (user.getUserType() != UserType.admin) {
-      return false;
+      return;
     }
     List<POILocation> found = new ArrayList<>();
     for (POILocation poiLocation : this.poiLocations) {
@@ -287,7 +286,7 @@ public class Application {
       }
     }
     this.poiLocations.removeAll(found);
-    return this.buildings.remove(building);
+    this.buildings.remove(building);
   }
 
   /**
@@ -295,11 +294,10 @@ public class Application {
    *
    * @param building the building that the floor is in
    * @param floor    the floor to delete
-   * @return true if successful, false otherwise
    */
-  public boolean deleteFloor(Building building, Floor floor) {
+  public void deleteFloor(Building building, Floor floor) {
     if (user.getUserType() != UserType.admin) {
-      return false;
+      return ;
     }
     List<POILocation> found = new ArrayList<>();
     for (POILocation poiLocation : this.poiLocations) {
@@ -308,7 +306,7 @@ public class Application {
       }
     }
     this.poiLocations.removeAll(found);
-    return building.floors.remove(floor);
+    building.floors.remove(floor);
   }
 
   /**
@@ -386,8 +384,8 @@ public class Application {
 
   /**
    * 
-   * @param f
-   * @param poiName
+   * @param f floor to look in
+   * @param poiName name of the poi
    * @return null if not found
    */
   public POILocation getPoiLocation(Floor f, String poiName) {

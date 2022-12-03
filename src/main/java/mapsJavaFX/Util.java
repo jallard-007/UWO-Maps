@@ -12,10 +12,14 @@ public class Util {
     POIButton.setApp(app);
     POIDescriptionController.setApp(app);
     AddPOIController.setApp(app);
-    editBuildingController.setApp(app);
-    editFloorController.setApp(app);
+    EditBuildingController.setApp(app);
+    EditFloorController.setApp(app);
+    AddFloorController.setApp(app);
+    AddBuildingController.setApp(app);
+    DeleteBuildingController.setApp(app);
+    DeleteFloorController.setApp(app);
 
-    //set app in the main controller
+    // set app in the main controller
     controller.setApp(app);
 
     controller.getMapViewController().setApp(app);
