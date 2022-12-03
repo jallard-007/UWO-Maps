@@ -15,6 +15,7 @@ public class Application {
   boolean editMode;
   final List<Building> buildings;
   final List<POILocation> poiLocations;
+  List<UserChanges> registeredUsers;
 
   /**
    * Default constructor
@@ -124,6 +125,16 @@ public class Application {
       this.user.addFavourite(poiLocation);
     }
 
+    if (this.user.getUserType().equals(UserType.admin)) {
+      this.registeredUsers = new ArrayList<>();
+      File dir = new File(Util.getRootPath() + "/appData/users");
+      File[] directoryListing = dir.listFiles();
+      if (directoryListing != null) {
+        for (File userFile : directoryListing) {
+          this.registeredUsers.add(new UserChanges(new JSONObject(Util.getJSONFileContents(userFile))));
+        }
+      }
+    }
     // indicate login was successful
     return true;
   }

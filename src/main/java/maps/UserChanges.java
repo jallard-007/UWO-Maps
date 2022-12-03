@@ -18,29 +18,42 @@ public class UserChanges extends User {
     JSONArray customs = jsonObject.getJSONArray("customPOIS");
     for (int i = 0; i < customs.length(); ++i) {
       JSONObject jsonCustom = customs.getJSONObject(i);
-      Building building = app.getMatchingBuilding(jsonCustom.getString("building"));
-      Floor floor = building.getMatchingFloor(jsonCustom.getString("floor"));
-      POI poi = new POI(jsonCustom);
-      POILocation custom = new POILocation(building, floor, poi);
-      this.customPOIs.add(custom);
+      try {
+        Building building = app.getMatchingBuilding(jsonCustom.getString("building"));
+        Floor floor = building.getMatchingFloor(jsonCustom.getString("floor"));
+        POI poi = new POI(jsonCustom);
+        POILocation custom = new POILocation(building, floor, poi);
+        this.customPOIs.add(custom);
+      } catch (Exception e) {
+        continue;
+      }
     }
+
     JSONArray favourites = jsonObject.getJSONArray("favourites");
     for (int i = 0; i < favourites.length(); ++i) {
       JSONObject jsonFavourites = favourites.getJSONObject(i);
-      Building building = app.getMatchingBuilding(jsonFavourites.getString("building"));
-      Floor floor = building.getMatchingFloor(jsonFavourites.getString("floor"));
-      POILocation favourite = app.getPoiLocation(floor, jsonFavourites.getString("poi"));
-      if (favourite == null) {
-        for (POILocation p : this.customPOIs) {
-          if (p.getFloor().equals(floor) && p.getPOI().getName().equals(jsonFavourites.getString("poi"))) {
-            favourite = p;
+      try {
+        Building building = app.getMatchingBuilding(jsonFavourites.getString("building"));
+        Floor floor = building.getMatchingFloor(jsonFavourites.getString("floor"));
+        POILocation favourite = app.getPoiLocation(floor, jsonFavourites.getString("poi"));
+        if (favourite == null) {
+          for (POILocation p : this.customPOIs) {
+            if (p.getFloor().equals(floor) && p.getPOI().getName().equals(jsonFavourites.getString("poi"))) {
+              favourite = p;
+            }
+          }
+          if (favourite == null) {
+            continue;
           }
         }
-        if (favourite == null) {
-          continue;
-        }
+        this.favourites.add(favourite);
+      } catch (Exception e) {
+        continue;
       }
-      this.favourites.add(favourite);
     }
+  }
+
+  public void saveUser() {
+    this.saveUser(this.customPOIs);
   }
 }
