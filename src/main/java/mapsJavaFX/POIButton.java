@@ -86,22 +86,23 @@ public class POIButton extends Button {
   public void updateButtonDisplay() {
     POIType poiType = this.poiLocation.getPOI().getPOIType();
     switch (poiType) {
-      case classroom -> this.setStyle("-fx-background-color: Green");
-      case lab -> this.setStyle("-fx-background-color: Lime");
-      case recreation -> this.setStyle("-fx-background-color: Black");
-      case collaboration -> this.setStyle("-fx-background-color: Purple");
-      case accessibility -> this.setStyle("-fx-background-color: Magenta");
-      case restaurant -> this.setStyle("-fx-background-color: Orange");
-      case washroom -> this.setStyle("-fx-background-color: Yellow");
-      case library -> this.setStyle("-fx-background-color: Blue");
-      case custom -> this.setStyle("-fx-background-color: Maroon");
+      case classroom -> this.setStyle("-fx-background-color: #FF8600");
+      case lab -> this.setStyle("-fx-background-color: #E7CD00");
+      case recreation -> this.setStyle("-fx-background-color: #A5DE00");
+      case collaboration -> this.setStyle("-fx-background-color: #16C600");
+      case accessibility -> this.setStyle("-fx-background-color: #00B160");
+      case restaurant -> this.setStyle("-fx-background-color: #00977E");
+      case washroom -> this.setStyle("-fx-background-color: #00538B");
+      case library -> this.setStyle("-fx-background-color: #010070");
+      case navigation -> this.setStyle("-fx-background-color: #6600A0");
+      case custom -> this.setStyle("-fx-background-color: #C700A7");
     }
   }
 
   public void onSelectButtonDisplay(){
     this.setStyle("-fx-border-color: black; -fx-background-color: red");
     PauseTransition pause = new PauseTransition(Duration.seconds(2));
-    pause.setOnFinished(event -> {this.updateButtonDisplay();});
+    pause.setOnFinished(event -> this.updateButtonDisplay());
     pause.play();
   }
 

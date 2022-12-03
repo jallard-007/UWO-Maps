@@ -38,6 +38,8 @@ public class POIDescriptionController {
     app = newApp;
     EditController.setStage(stage);
     AddPOIController.setStage(stage);
+    stage.setMinWidth(300);
+    stage.setMinHeight(200);
     stage.setMaxWidth(500);
     stage.setMaxHeight(500);
   }
