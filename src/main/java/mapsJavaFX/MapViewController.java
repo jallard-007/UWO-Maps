@@ -2,24 +2,15 @@ package mapsJavaFX;
 
 import java.util.ArrayList;
 import java.util.List;
-import javafx.collections.*;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
-import javafx.event.ActionEvent;  
 import maps.*;
 
 public class MapViewController {
@@ -27,14 +18,14 @@ public class MapViewController {
   private Slider zoomBar;
   @FXML
   private TabPane tabPane;
-  
-  
-  @FXML 
+
+  @FXML
   Application app;
   private List<POIButton>[] poiButtons;
 
   /**
    * Method to initialize the map view of the application.
+   * 
    * @param app the current application being used
    */
   @SuppressWarnings("unchecked")
@@ -45,12 +36,11 @@ public class MapViewController {
     for (int i = 0; i < POIType.values().length; ++i) {
       this.poiButtons[i] = new ArrayList<>();
     }
-    
-    
+
     // creates a new tab for each building
     for (Building building : this.app.getBuildings()) {
       Tab buildingTab = new Tab(building.getName());
-      
+
       buildingTab.setClosable(false);
       // buildingTab.setGraphic(editFloor);
       this.tabPane.getTabs().add(buildingTab);
@@ -150,19 +140,24 @@ public class MapViewController {
   }
 
   /**
-   * Updates the location where the selected POI's button is stored within the POI buttons list; used when the type of a POI is being updated
-   * @param oldType old POI type
-   * @param newType new POI type
-   * @param poiButton the Button associated with the POI whose type is being updated
+   * Updates the location where the selected POI's button is stored within the POI
+   * buttons list; used when the type of a POI is being updated
+   * 
+   * @param oldType   old POI type
+   * @param newType   new POI type
+   * @param poiButton the Button associated with the POI whose type is being
+   *                  updated
    */
-  public void updateButtonStorage(POIType oldType, POIType newType, POIButton poiButton){
+  public void updateButtonStorage(POIType oldType, POIType newType, POIButton poiButton) {
     this.poiButtons[oldType.ordinal()].remove(poiButton);
     this.poiButtons[newType.ordinal()].add(poiButton);
   }
 
   /**
-   * Adds a button to the POI buttons list and properly displays the new button on the map
-   * @param poiButton newly-created POI button
+   * Adds a button to the POI buttons list and properly displays the new button on
+   * the map
+   * 
+   * @param poiButton   newly-created POI button
    * @param poiLocation POI location associated with that button
    */
   public void addButton(POIButton poiButton, POILocation poiLocation) {
@@ -266,6 +261,7 @@ public class MapViewController {
     TabPane floorTabPane = (TabPane) tabPane.getSelectionModel().getSelectedItem().getContent();
     return floorTabPane.getSelectionModel().getSelectedItem();
   }
+
   /**
    * Removes a Floor from the floor tab pane
    * 
@@ -275,15 +271,16 @@ public class MapViewController {
     TabPane floorTabPane = (TabPane) tabPane.getSelectionModel().getSelectedItem().getContent();
     floorTabPane.getTabs().remove(tab);
   }
+
   /**
    * @return the current building being displayed in the main view
    */
   public String getBuildingTab() {
     return tabPane.getSelectionModel().getSelectedItem().getText();
   }
-  public Tab getBuildingTabObject(){
+
+  public Tab getBuildingTabObject() {
     return tabPane.getSelectionModel().getSelectedItem();
   }
 
-  
 }
