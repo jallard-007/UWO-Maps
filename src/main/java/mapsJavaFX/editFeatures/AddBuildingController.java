@@ -1,4 +1,4 @@
-package mapsJavaFX;
+package mapsJavaFX.editFeatures;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -6,6 +6,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import maps.*;
+import mapsJavaFX.ControllerMediator;
+
 import java.lang.String;
 
 public class AddBuildingController {
@@ -44,6 +46,14 @@ public class AddBuildingController {
     return stage;
   }
 
+  @FXML
+  public void initialize() {
+    stage.setTitle("Add a New Building");
+    if (!stage.isShowing()) {
+      stage.show();
+    }
+  }
+
   /**
    * Pressing [Add Building] button tries to add the building to the app.
    */
@@ -60,6 +70,5 @@ public class AddBuildingController {
       ControllerMediator.getInstance().addBuildingTab(building);
       stage.close();
     }
-    return;
   }
 }

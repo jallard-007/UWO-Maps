@@ -1,4 +1,4 @@
-package mapsJavaFX;
+package mapsJavaFX.editFeatures;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import maps.*;
+import mapsJavaFX.ControllerMediator;
 
 import java.lang.String;
 
@@ -86,11 +87,10 @@ public class EditFloorController {
       curFloorName.setText(selectedFloor.getName());
       levelField.setText(Integer.toString(selectedFloor.getLevel()));
     }
-    stage.setTitle("Delete Floor");
+    stage.setTitle("Edit Floor");
     if (!stage.isShowing()) {
-      stage.showAndWait();
+      stage.show();
     }
-    stage.centerOnScreen();
   }
 
   /**
@@ -108,7 +108,7 @@ public class EditFloorController {
         // check if the user entered an integer for the level
         try {
           int newLevel = Integer.parseInt(levelField.getText());
-          // if they did and its different
+          // if they did and it's different
           if (newLevel != selectedFloor.getLevel()) {
             // make sure it is not the same level as another floor in the building
             for (Floor floor2 : selectedBuilding.getFloors()) {
@@ -123,10 +123,8 @@ public class EditFloorController {
           return;
         }
         selectedFloor.setName(newName);
-
         selectedTab.setText(newName);
         stage.close();
-
       }
     }
   }

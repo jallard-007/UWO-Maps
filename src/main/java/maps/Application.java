@@ -16,6 +16,7 @@ public class Application {
   final List<Building> buildings;
   final List<POILocation> poiLocations;
   List<UserChanges> registeredUsers;
+  List<POIType> filter = Arrays.asList(POIType.values());
 
   /**
    * Default constructor
@@ -255,6 +256,9 @@ public class Application {
     searchText = searchText.toLowerCase();
     List<POILocation> matchingPOIs = new ArrayList<>();
     for (POILocation poiLocation : this.poiLocations) {
+      if (!filter.contains(poiLocation.getPOI().getPOIType())) {
+        continue;
+      }
       if (poiLocation.toString().toLowerCase().contains(searchText)
           || poiLocation.poi.getRoomNumber().toLowerCase().contains(searchText)) {
         matchingPOIs.add(poiLocation);
@@ -297,7 +301,7 @@ public class Application {
    */
   public void deleteFloor(Building building, Floor floor) {
     if (user.getUserType() != UserType.admin) {
-      return ;
+      return;
     }
     List<POILocation> found = new ArrayList<>();
     for (POILocation poiLocation : this.poiLocations) {
@@ -307,6 +311,10 @@ public class Application {
     }
     this.poiLocations.removeAll(found);
     building.floors.remove(floor);
+  }
+
+  public void setFilter(List<POIType> filter) {
+    this.filter = filter;
   }
 
   /**
@@ -384,7 +392,7 @@ public class Application {
 
   /**
    * 
-   * @param f floor to look in
+   * @param f       floor to look in
    * @param poiName name of the poi
    * @return null if not found
    */

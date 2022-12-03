@@ -5,7 +5,11 @@ module mapsJavaFX {
   requires transitive org.json;
 
   opens mapsJavaFX to javafx.fxml;
+  opens mapsJavaFX.welcomePage to javafx.fxml;
 
   exports mapsJavaFX;
+  exports mapsJavaFX.welcomePage;
   exports maps;
+  exports mapsJavaFX.editFeatures;
+  opens mapsJavaFX.editFeatures to javafx.fxml;
 }

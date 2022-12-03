@@ -2,6 +2,7 @@ package mapsJavaFX;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
@@ -13,6 +14,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import maps.*;
 
+/**
+ * Controls the building and floor tabs
+ */
 public class MapViewController {
   @FXML
   private Slider zoomBar;
@@ -24,8 +28,8 @@ public class MapViewController {
   private List<POIButton>[] poiButtons;
 
   /**
-   * Method to initialize the map view of the application.
-   * 
+   * Initializes the map view based on the Application object.
+   *
    * @param app the current application being used
    */
   @SuppressWarnings("unchecked")
@@ -114,9 +118,9 @@ public class MapViewController {
   }
 
   /**
-   * Removes a POI's button from the map
-   * 
-   * @param poiLocation the selected POI location
+   * Removes a POIButton from the map
+   *
+   * @param poiLocation the selected POILocation
    */
   public void removeButton(POILocation poiLocation) {
     POIButton poiButton = getButton(poiLocation);
@@ -132,7 +136,7 @@ public class MapViewController {
 
   /**
    * Removes a Building from the TabPane
-   * 
+   *
    * @param tab the tab to be deleted
    */
   public void removeTab(Tab tab) {
@@ -140,29 +144,27 @@ public class MapViewController {
   }
 
   /**
-   * Updates the location where the selected POI's button is stored within the POI
-   * buttons list; used when the type of a POI is being updated
-   * 
-   * @param oldType   old POI type
-   * @param newType   new POI type
-   * @param poiButton the Button associated with the POI whose type is being
-   *                  updated
+   * Updates the location where the selected POI's button is stored within the POI buttons list;
+   * used when the type of POI is being updated
+   *
+   * @param oldType   old POI type*
+   * @param newType   new POI type*
+   * @param poiButton the Button associated with the POI whose type is being updated
    */
+
   public void updateButtonStorage(POIType oldType, POIType newType, POIButton poiButton) {
     this.poiButtons[oldType.ordinal()].remove(poiButton);
     this.poiButtons[newType.ordinal()].add(poiButton);
   }
 
   /**
-   * Adds a button to the POI buttons list and properly displays the new button on
-   * the map
-   * 
+   * Adds a button to the POI buttons list and properly displays the new button on the map
+   *
    * @param poiButton   newly-created POI button
-   * @param poiLocation POI location associated with that button
    */
-  public void addButton(POIButton poiButton, POILocation poiLocation) {
+  public void addButton(POIButton poiButton) {
+    POILocation poiLocation = poiButton.poiLocation;
     poiButtons[poiLocation.getPOI().getPOIType().ordinal()].add(poiButton);
-
     // Display new button on map
     poiButton.setLayoutX(poiLocation.getPOI().getPosition().getX());
     poiButton.setLayoutY(poiLocation.getPOI().getPosition().getY());
@@ -175,16 +177,17 @@ public class MapViewController {
   }
 
   /**
-   * Centers the map view on a poi. The centering is not 100% accurate, but it is
-   * fairly close
+   * Displays the floor on which the poi resides and centers the map view on the poi. The centering
+   * is not 100% accurate, but it is fairly close
    *
    * @param poiLocation the poi to find
-   * @return the button corresponding the to the poi
+   * @return the button corresponding to the poi
    */
   public POIButton goToPOI(POILocation poiLocation) {
     System.out.println("go to " + poiLocation);
 
-    Tab tab = goToTab((TabPane) goToTab(this.tabPane, poiLocation.getBuilding().getName()).getContent(),
+    Tab tab = goToTab(
+        (TabPane) goToTab(this.tabPane, poiLocation.getBuilding().getName()).getContent(),
         poiLocation.getFloor().getName());
     ScrollPane scrollPane = (ScrollPane) tab.getContent();
 
@@ -196,15 +199,17 @@ public class MapViewController {
 
     scrollPane.setHvalue(0.5 + (zoomBar.getValue() * ((xRatio + (errorX * 0.20)) - 0.5)));
     scrollPane.setVvalue(0.5 + (zoomBar.getValue() * ((yRatio + (errorY * 0.20)) - 0.5)));
-    return getButton(poiLocation);
+    POIButton poiButton = getButton(poiLocation);
+    poiButton.onSelectButtonDisplay();
+    return poiButton;
   }
 
   /**
-   * Finds and selects a pane, displaying it for the user
+   * Finds and selects a pane within the passed TabPane, displaying it for the user
    *
-   * @param tabPane the tabPane to search in
-   * @param tabName the name of the tab to find
-   * @return the matching tab
+   * @param tabPane the TabPane to search in
+   * @param tabName the name of the Tab to find
+   * @return the Tab matching tabName, null if not found
    */
   private Tab goToTab(TabPane tabPane, String tabName) {
     if (tabPane == null) {
@@ -299,7 +304,7 @@ public class MapViewController {
 
   /**
    * Removes a Floor from the floor tab pane
-   * 
+   *
    * @param tab the tab to be deleted
    */
   public void removeFloorTab(Tab tab) {

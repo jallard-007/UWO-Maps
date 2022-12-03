@@ -1,4 +1,4 @@
-package mapsJavaFX;
+package mapsJavaFX.editFeatures;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -11,6 +11,7 @@ import maps.*;
 import java.io.File;
 import java.lang.String;
 import javafx.stage.FileChooser;
+import mapsJavaFX.ControllerMediator;
 
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
@@ -69,9 +70,9 @@ public class AddFloorController {
         selectedBuilding = building;
       }
     }
-    stage.showAndWait();
+    stage.setTitle("Add New Floor");
     if (!stage.isShowing()) {
-      stage.showAndWait();
+      stage.show();
     }
   }
 

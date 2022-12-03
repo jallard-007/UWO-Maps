@@ -9,11 +9,11 @@ import javafx.scene.Scene;
 import java.io.IOException;
 
 import maps.Application;
+import mapsJavaFX.editFeatures.AddPOIController;
 
 /**
  * The WesternMaps class is dedicated to setting up the stage, corresponding
- * scenes, and handling
- * start up and closure of the application
+ * scenes, and handling start up and closure of the application
  */
 public class WesternMaps extends javafx.application.Application {
 
@@ -23,8 +23,7 @@ public class WesternMaps extends javafx.application.Application {
 
   /**
    * starts up the application by setting up the appropriate stage and scene as
-   * well as handling the
-   * event in which the user closes the application
+   * well as handling the event in which the user closes the application
    *
    * @param stage the stage which will be used to display the scene to the user
    * @throws IOException if a fxml file does not exist
@@ -32,7 +31,7 @@ public class WesternMaps extends javafx.application.Application {
   @Override
   public void start(Stage stage) throws IOException {
     // load the login UI from the fxml file, load the scene, and set the title
-    FXMLLoader loginLoader = new FXMLLoader(SignupController.class.getResource("/login.fxml"));
+    FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/login.fxml"));
     Scene scene = new Scene(loginLoader.load());
     stage.setTitle("Western Maps");
 
@@ -59,7 +58,9 @@ public class WesternMaps extends javafx.application.Application {
    *              button.
    */
   public void exit(Stage stage) {
+    stage.setFullScreen(false);
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+    alert.setResizable(false);
     alert.setTitle("Logout");
     alert.setHeaderText("You're about to exit from the program");
     alert.setContentText("Are you sure?");
@@ -68,6 +69,7 @@ public class WesternMaps extends javafx.application.Application {
       ControllerMediator.getInstance().getApplication().save();
       System.out.println("The program was exited successfully.");
       stage.close();
+      AddPOIController.getStage().close();
     }
   }
 }

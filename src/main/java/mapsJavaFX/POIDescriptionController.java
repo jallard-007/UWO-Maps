@@ -1,5 +1,6 @@
 package mapsJavaFX;
 
+import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -7,15 +8,23 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import maps.*;
-import java.io.IOException;
+import mapsJavaFX.editFeatures.*;
 
 /**
  * Controller to handle the popup window displaying information about a selected
  * POI.
  */
 public class POIDescriptionController {
+  /**
+   * Static Stage object which is shared between POIDescriptionController,
+   * AddPOIController, and EditController
+   */
   final static Stage stage = new Stage();
+  static {
+    stage.initStyle(StageStyle.UTILITY);
+  }
   static Application app;
   private final POILocation poiLocation;
   private final POIButton poiButton;
@@ -28,16 +37,18 @@ public class POIDescriptionController {
    */
   public static void setApp(Application newApp) {
     app = newApp;
-    EditController.setStage(stage);
     AddPOIController.setStage(stage);
-    EditBuildingController.setStage(stage);
-    EditFloorController.setStage(stage);
     AddFloorController.setStage(stage);
     AddBuildingController.setStage(stage);
-    DeleteBuildingController.setStage(stage);
+
+    EditController.setStage(stage);
+    EditFloorController.setStage(stage);
+    EditBuildingController.setStage(stage);
+
     DeleteFloorController.setStage(stage);
-    stage.setMaxWidth(500);
-    stage.setAlwaysOnTop(true);
+    DeleteBuildingController.setStage(stage);
+    stage.setMaxWidth(600);
+    stage.setMaxHeight(500);
   }
 
   /**
@@ -50,6 +61,7 @@ public class POIDescriptionController {
   public POIDescriptionController(POIButton poiButton, POILocation poiLocation) {
     this.poiButton = poiButton;
     this.poiLocation = poiLocation;
+    stage.toFront();
     Scene s = stage.getScene();
     if (s != null && s.getRoot().getClass() == AnchorPane.class) {
       // poi is being edited and cannot switch, otherwise the button will be movable,
@@ -127,8 +139,11 @@ public class POIDescriptionController {
     stage.show();
   }
 
-  public void onEditButton() {
-    FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/edit.fxml"));
+  /**
+   * Handles the edit button being clicked
+   */
+  private void onEditButton() {
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edit.fxml"));
     try {
       Scene scene = new Scene(fxmlLoader.load());
       EditController editController = fxmlLoader.getController();
@@ -140,26 +155,32 @@ public class POIDescriptionController {
     }
   }
 
-  public void onDeleteButton() {
+  /**
+   * Handles the delete button being clicked
+   */
+  private void onDeleteButton() {
     app.deletePOI(poiLocation);
     // Refresh both the favourites and search display to reflect the deletion;
     // remove the POI from the map
-    ControllerMediator.getInstance().refreshFavouritesList();
-    ControllerMediator.getInstance().refreshSearchList();
-    ControllerMediator.getInstance().removePOIButton(poiLocation);
+    ControllerMediator.getInstance().favouritesControllerRefreshList();
+    ControllerMediator.getInstance().searchPOIControllerRefreshList();
+    ControllerMediator.getInstance().mapViewControllerRemovePOIButton(poiLocation);
     // exit pop-up
     stage.hide();
   }
 
+  /**
+   * Handles the favourite button being clicked
+   */
   private void onFavouriteButton(ToggleButton btnFavouritePOI) {
     if (btnFavouritePOI.isSelected()) {
       btnFavouritePOI.setText("Unfavourite");
       app.getUser().addFavourite(poiLocation);
-      ControllerMediator.getInstance().refreshFavouritesList();
+      ControllerMediator.getInstance().favouritesControllerRefreshList();
     } else {
       btnFavouritePOI.setText("Favourite");
       app.getUser().removeFavourite(poiLocation);
-      ControllerMediator.getInstance().refreshFavouritesList();
+      ControllerMediator.getInstance().favouritesControllerRefreshList();
 
     }
   }

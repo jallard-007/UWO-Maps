@@ -1,4 +1,4 @@
-package mapsJavaFX;
+package mapsJavaFX.editFeatures;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -6,6 +6,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import maps.*;
+import mapsJavaFX.ControllerMediator;
 
 import java.util.List;
 
@@ -14,7 +15,6 @@ public class DeleteFloorController {
   private static Stage stage;
   private Floor selectedFloor;
   private Building selectedBuilding;
-  private Tab selectedBldTab;
   private Tab selectedTab;
 
   // delete floor scene
@@ -52,7 +52,7 @@ public class DeleteFloorController {
 
   @FXML
   public void initialize() {
-    selectedBldTab = ControllerMediator.getInstance().getBuildingTabObject();
+    Tab selectedBldTab = ControllerMediator.getInstance().getBuildingTabObject();
     if (selectedBldTab == null) {
       stage.close();
       return;
@@ -81,11 +81,10 @@ public class DeleteFloorController {
       floorName.setText(selectedFloor.getName());
       buildingName.setText(selectedBuilding.getName() + "?");
     }
-    stage.setTitle("Delete Building");
+    stage.setTitle("Delete Floor");
     if (!stage.isShowing()) {
-      stage.showAndWait();
+      stage.show();
     }
-    stage.centerOnScreen();
   }
 
   /**
@@ -94,8 +93,8 @@ public class DeleteFloorController {
   public void onDelFloor() {
     app.deleteFloor(selectedBuilding, selectedFloor);
     ControllerMediator.getInstance().removeFloorTab(selectedTab);
-    ControllerMediator.getInstance().refreshFavouritesList();
-    ControllerMediator.getInstance().refreshSearchList();
+    ControllerMediator.getInstance().favouritesControllerRefreshList();
+    ControllerMediator.getInstance().searchPOIControllerRefreshList();
     stage.close();
   }
 

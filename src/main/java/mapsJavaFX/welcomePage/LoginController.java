@@ -1,4 +1,4 @@
-package mapsJavaFX;
+package mapsJavaFX.welcomePage;
 
 import java.io.IOException;
 
@@ -14,7 +14,13 @@ import javafx.scene.text.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import maps.Application;
+import mapsJavaFX.ControllerMediator;
+import mapsJavaFX.MainController;
+import mapsJavaFX.Util;
 
+/**
+ * Controls the Login page
+ */
 public class LoginController {
   /**
    * the login button on the log in page.

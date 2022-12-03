@@ -1,4 +1,4 @@
-package mapsJavaFX;
+package mapsJavaFX.editFeatures;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -9,10 +9,16 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import maps.*;
+import mapsJavaFX.ControllerMediator;
+import mapsJavaFX.POIButton;
 
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Controllers the addPOI window that popus up when the addPOI button is
+ * selected
+ */
 public class AddPOIController {
   static Stage stage;
   static Application app;
@@ -56,7 +62,7 @@ public class AddPOIController {
   @FXML
   public void initialize() {
     // Get current building selected in the map view
-    String strSelectedBuilding = ControllerMediator.getInstance().getBuildingTab();
+    String strSelectedBuilding = ControllerMediator.getInstance().mapViewControllerGetBuildingTab();
     if (strSelectedBuilding == null) {
       stage.close();
       return;
@@ -73,12 +79,11 @@ public class AddPOIController {
       stage.close();
       return;
     }
-    // Set choicebox options
     floorName.setItems(FXCollections.observableList(selectedBuilding.getFloors()));
     floorName.getSelectionModel().selectFirst();
     stage.setTitle("New POI");
     if (!stage.isShowing()) {
-      stage.showAndWait();
+      stage.show();
     }
     stage.centerOnScreen();
   }
@@ -96,11 +101,11 @@ public class AddPOIController {
         new POI("New POI", POIType.custom, new Pair(x / 2, y / 2)));
     app.addPOI(poiLocation);
     try {
-      FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/edit.fxml"));
+      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edit.fxml"));
       Scene scene = new Scene(fxmlLoader.load());
       EditController editController = fxmlLoader.getController();
       POIButton poiButton = new POIButton(poiLocation);
-      ControllerMediator.getInstance().addPOIButton(poiButton, poiLocation);
+      ControllerMediator.getInstance().mapViewControllerAddPOIButton(poiButton);
       ControllerMediator.getInstance().mapViewControllerGoToPOI(poiLocation);
       editController.setPoiLocation(poiLocation, poiButton);
       stage.setScene(scene);

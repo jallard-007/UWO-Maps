@@ -1,8 +1,16 @@
 package mapsJavaFX;
 
 import maps.Application;
+import mapsJavaFX.editFeatures.*;
 
 public class Util {
+  /**
+   * Sets all controllers, adding them to the ControllerMediator and/or setting
+   * the Application object
+   * 
+   * @param controller the main controller
+   * @param app        the application
+   */
   public static void setControllers(MainController controller, Application app) {
     ControllerMediator.getInstance().registerMapViewController(controller.getMapViewController());
     ControllerMediator.getInstance()

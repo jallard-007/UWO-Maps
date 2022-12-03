@@ -1,10 +1,11 @@
-package mapsJavaFX;
+package mapsJavaFX.editFeatures;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import maps.*;
+import mapsJavaFX.ControllerMediator;
 
 import java.util.List;
 
@@ -56,8 +57,9 @@ public class DeleteBuildingController {
       return;
     }
     buildingName.setText(selectedBuilding.getName());
+    stage.setTitle("Delete Building");
     if (!stage.isShowing()) {
-      stage.showAndWait();
+      stage.show();
     }
   }
 
@@ -67,8 +69,8 @@ public class DeleteBuildingController {
   public void onDelBuilding() {
     app.deleteBuilding(selectedBuilding);
     ControllerMediator.getInstance().removeTab(selectedTab);
-    ControllerMediator.getInstance().refreshFavouritesList();
-    ControllerMediator.getInstance().refreshSearchList();
+    ControllerMediator.getInstance().favouritesControllerRefreshList();
+    ControllerMediator.getInstance().searchPOIControllerRefreshList();
     stage.close();
   }
 }

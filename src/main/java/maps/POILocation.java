@@ -30,7 +30,7 @@ public class POILocation {
   }
 
   public String toString() {
-    return building.getName() + " | " + floor.getName() + " | " + poi.getRoomNameOrNumber();
+    return poi.getRoomNameOrNumber() + " | " + building.getName() + " | " + floor.getName();
   }
 
   /**

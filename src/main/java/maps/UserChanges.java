@@ -28,8 +28,7 @@ public class UserChanges extends User {
         POI poi = new POI(jsonCustom);
         POILocation custom = new POILocation(building, floor, poi);
         this.customPOIs.add(custom);
-      } catch (Exception e) {
-        continue;
+      } catch (Exception ignored) {
       }
     }
 
@@ -51,8 +50,7 @@ public class UserChanges extends User {
           }
         }
         this.favourites.add(favourite);
-      } catch (Exception e) {
-        continue;
+      } catch (Exception ignored) {
       }
     }
   }

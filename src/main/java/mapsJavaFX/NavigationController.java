@@ -9,14 +9,14 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import mapsJavaFX.editFeatures.AddPOIController;
 
 import java.io.IOException;
 
 /**
- * Control the navigation throughout the entire application
+ * Control the navigation in the main application scene
  */
 public class NavigationController {
-
   @FXML
   private BorderPane menuBar;
 
@@ -27,7 +27,7 @@ public class NavigationController {
    * @throws IOException if help.fxml file does not exist
    */
   public void goToHelp(ActionEvent event) throws IOException {
-    FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/help.fxml"));
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/help.fxml"));
     Scene scene = new Scene(fxmlLoader.load());
     changeScene(scene, event);
   }
@@ -39,7 +39,7 @@ public class NavigationController {
    * @throws IOException if mainView.fxml does not exist
    */
   public void goBack(ActionEvent event) throws IOException {
-    FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/mainView.fxml"));
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/mainView.fxml"));
     Scene scene = new Scene(fxmlLoader.load());
     MainController controller = fxmlLoader.getController();
     Util.setControllers(controller, ControllerMediator.getInstance().getApplication());
@@ -67,7 +67,7 @@ public class NavigationController {
     }
 
     // go back to login page if user successfully logs out
-    FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/login.fxml"));
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/login.fxml"));
     Scene scene = new Scene(fxmlLoader.load());
     stage.setWidth(600);
     stage.setHeight(330);
@@ -82,11 +82,11 @@ public class NavigationController {
    * @param scene the scene to change to
    * @param event the event which triggers the change of scene
    */
-
   private void changeScene(Scene scene, ActionEvent event) {
     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
     stage.setScene(scene);
     stage.show();
     stage.centerOnScreen();
+    AddPOIController.getStage().close();
   }
 }
