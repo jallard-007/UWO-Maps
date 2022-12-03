@@ -21,11 +21,11 @@
          <Font size="13.0" />
       </font>
    </Text>
-   <Text fx:id="currBuildingName" layoutX="141.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="202.39999999999998">
+   <Text fx:id="currBuildingName" layoutX="141.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="202.39999999999998">
       <font>
          <Font size="13.0" />
       </font></Text>
-<Button fx:id="conEditBuild" layoutX="210.0" layoutY="125.0" mnemonicParsing="false" text="Continue" textAlignment="CENTER" />
+<Button fx:id="conEditBuild" layoutX="197.0" layoutY="125.0" mnemonicParsing="false" onAction="#onSaveBldEdit" text="Save Changes" textAlignment="CENTER" />
    <Button fx:id="cancEditBld" layoutX="415.0" layoutY="124.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="55.0" text="Cancel" />
    <TextField fx:id="newBldName" layoutX="141.0" layoutY="80.0" prefHeight="19.0" prefWidth="202.0">
       <font>
