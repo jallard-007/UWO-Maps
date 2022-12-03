@@ -15,7 +15,11 @@ public class UserChanges extends User {
 
   public UserChanges(JSONObject jsonObject) {
     super(jsonObject);
-    JSONArray customs = jsonObject.getJSONArray("customPOIS");
+    if (app == null) {
+      System.out.print("app not set");
+      System.exit(1);
+    }
+    JSONArray customs = jsonObject.getJSONArray("customPOIs");
     for (int i = 0; i < customs.length(); ++i) {
       JSONObject jsonCustom = customs.getJSONObject(i);
       try {

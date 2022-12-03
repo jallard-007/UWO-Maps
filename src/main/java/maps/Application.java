@@ -25,6 +25,7 @@ public class Application {
     editMode = false;
     buildings = new ArrayList<>();
     poiLocations = new ArrayList<>();
+    UserChanges.setApp(this);
   }
 
   /**
@@ -93,7 +94,6 @@ public class Application {
     }
     String fileContent = Util.getJSONFileContents(rootPath + "/appData/users/" + username + ".json");
     JSONObject jsonObject = new JSONObject(fileContent);
-    jsonObject.put("password", "0");
     if (!password.equals(jsonObject.getString("password"))) {
       // password does not match
       return false;
