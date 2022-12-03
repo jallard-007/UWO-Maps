@@ -392,7 +392,7 @@ public class Application {
    */
   public POILocation getPoiLocation(Floor f, String poiName) {
     for (POILocation p : this.poiLocations) {
-      if (p.getFloor().equals(f) && p.getPOI().getName().equals(poiName)) {
+      if (p.getFloor().equals(f) && p.getPOI().getRoomNumber().equals(poiName)) {
         return p;
       }
     }

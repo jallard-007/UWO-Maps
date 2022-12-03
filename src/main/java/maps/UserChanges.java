@@ -42,7 +42,7 @@ public class UserChanges extends User {
         POILocation favourite = app.getPoiLocation(floor, jsonFavourites.getString("poi"));
         if (favourite == null) {
           for (POILocation p : this.customPOIs) {
-            if (p.getFloor().equals(floor) && p.getPOI().getName().equals(jsonFavourites.getString("poi"))) {
+            if (p.getFloor().equals(floor) && p.getPOI().getRoomNumber().equals(jsonFavourites.getString("poi"))) {
               favourite = p;
             }
           }

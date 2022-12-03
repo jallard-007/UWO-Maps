@@ -94,15 +94,17 @@ public class User {
       JSONObject jsonPOILocation = new JSONObject();
       jsonPOILocation.put("building", poiLocation.getBuilding().getName());
       jsonPOILocation.put("floor", poiLocation.getFloor().getName());
-      jsonPOILocation.put("poi", poiLocation.getPOI().getName());
+      jsonPOILocation.put("poi", poiLocation.getPOI().getRoomNumber());
       favouritesJsonArray.put(jsonPOILocation);
     }
     jsonUser.put("favourites", favouritesJsonArray);
     // custom to json
     JSONArray customJsonArray = new JSONArray();
-    for (POILocation poiLocation : customPOIs) {
-      customJsonArray.put(
-          poiLocation.poi.createJSONObjectOfCustomPOI(poiLocation.building, poiLocation.floor));
+    if (customPOIs != null) {
+      for (POILocation poiLocation : customPOIs) {
+        customJsonArray.put(
+            poiLocation.poi.createJSONObjectOfCustomPOI(poiLocation.building, poiLocation.floor));
+      }
     }
     jsonUser.put("customPOIs", customJsonArray);
     return jsonUser;

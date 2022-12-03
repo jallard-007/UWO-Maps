@@ -1,1 +1,1 @@
-{"password":"12345","favourites":[],"userType":"base","customPOIs":[{"roomNum":"another example","information":"Seating Type: Tab Arm; Fixed\nLectern: Portable\nWriting Surface: 16-ft Sliding Chalkboard\nProjection Screen: 8-ft Motorized\nWindow Treatment: Manual Blinds\n","position":[13,67],"type":"custom","floor":"First","building":"Talbot College","capacity":48}],"username":"example"}
+{"password":"12345","favourites":[{"poi":"MC 22","floor":"Ground","building":"Middlesex College"}],"userType":"base","customPOIs":[],"username":"example"}
