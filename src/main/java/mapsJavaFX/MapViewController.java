@@ -253,14 +253,18 @@ public class MapViewController {
   /**
    * @return the current floor being displayed in the main view
    */
-  public String getFloorTab() {
-    return tabPane.getSelectionModel().getSelectedItem().getTabPane().getSelectionModel().getSelectedItem().getText();
+  public Tab getFloorTab() {
+    TabPane floorTabPane = (TabPane) tabPane.getSelectionModel().getSelectedItem().getContent();
+    return floorTabPane.getSelectionModel().getSelectedItem();
   }
   /**
    * @return the current building being displayed in the main view
    */
   public String getBuildingTab() {
     return tabPane.getSelectionModel().getSelectedItem().getText();
+  }
+  public Tab getBuildingTabObject(){
+    return tabPane.getSelectionModel().getSelectedItem();
   }
 
   

@@ -97,6 +97,17 @@ public class MainController {
     
   }
   public void onEditFloor(ActionEvent event) {
+    FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/editFloor.fxml"));
+    try {
+      Scene scene = new Scene(fxmlLoader.load());
+      Stage stage = editFloorController.getStage();
+      stage.setTitle("Edit Floor");
+      stage.setScene(scene);
+      stage.showAndWait();
+      stage.centerOnScreen();
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
     
   }
   public void onDelFloor(ActionEvent event) {
@@ -107,7 +118,6 @@ public class MainController {
   }
   public void onEditBld(ActionEvent event) {
     FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/editBuilding.fxml"));
-    System.out.println(mapViewController.getBuildingTab());
     try {
       Scene scene = new Scene(fxmlLoader.load());
       Stage stage = editBuildingController.getStage();

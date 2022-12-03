@@ -1,6 +1,8 @@
 package mapsJavaFX;
 
 import java.util.List;
+
+import javafx.scene.control.Tab;
 import maps.Application;
 import maps.POILocation;
 import maps.POIType;
@@ -44,6 +46,13 @@ public class ControllerMediator {
 
   String getBuildingTab() {
     return mapViewController.getBuildingTab();
+  }
+
+  public Tab getBuildingTabObject(){
+    return mapViewController.getBuildingTabObject();
+  }
+  public Tab getFloorTab(){
+    return mapViewController.getFloorTab();
   }
 
   void refreshFavouritesList() {

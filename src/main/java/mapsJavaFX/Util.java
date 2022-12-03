@@ -13,6 +13,7 @@ public class Util {
     POIDescriptionController.setApp(app);
     AddPOIController.setApp(app);
     editBuildingController.setApp(app);
+    editFloorController.setApp(app);
 
     //set app in the main controller
     controller.setApp(app);

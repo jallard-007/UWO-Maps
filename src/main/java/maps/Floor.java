@@ -12,7 +12,7 @@ import javafx.scene.image.Image;
  */
 public class Floor {
   final int level;
-  final String name;
+  private String name;
   String imagePath;
   Image image;
 
@@ -104,6 +104,12 @@ public class Floor {
    */
   public String getName() {
     return name;
+  }
+  /**
+   * set name of the floor
+   */
+  public void setName(String name) {
+    this.name = name;
   }
 
   /**

@@ -30,6 +30,7 @@ public class POIDescriptionController {
     EditController.setStage(stage);
     AddPOIController.setStage(stage);
     editBuildingController.setStage(stage);
+    editFloorController.setStage(stage);
     stage.setMaxWidth(500);
     stage.setAlwaysOnTop(true);
   }

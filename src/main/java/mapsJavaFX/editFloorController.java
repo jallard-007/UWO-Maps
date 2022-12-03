@@ -16,19 +16,22 @@ import java.lang.String;
 import java.io.IOException;
 import java.util.List;
 
-public class editBuildingController {
+public class editFloorController {
     static Stage stage;
     static Application app;
+    private Tab selectedBldTab;
     private Tab selectedTab;
     @FXML
-    private Text currBuildingName;
+    private Text curFloorName;
     @FXML
-    private TextField newBldName;
+    private TextField newFloorName;
     @FXML
-    private Button conEditBuild;
+    private Button saveFloorEdit;
     @FXML
-    private Button cancEditBuild;
+    private Button cancFloorEdit;
+    private Floor selectedFloor;
     private Building selectedBuilding;
+
 
   /**
    * Called to set up the app
@@ -57,31 +60,40 @@ public class editBuildingController {
 
   @FXML
   public void initialize() {
-    selectedTab = ControllerMediator.getInstance().getBuildingTabObject();
+    selectedBldTab = ControllerMediator.getInstance().getBuildingTabObject();
+    selectedTab = ControllerMediator.getInstance().getFloorTab();
+    System.out.println(selectedTab.getText());
     List<Building> allBuildings = ControllerMediator.getInstance().getApplication().getBuildings();
     for (Building building : allBuildings) {
-      if (building.getName().equals(selectedTab.getText())) {
+      if (building.getName().equals(selectedBldTab.getText())) {
         selectedBuilding = building;
-        break;
+        for(Floor floor : selectedBuilding.getFloors()){
+          if (floor.getName().equals(selectedTab.getText())) {
+            selectedFloor = floor;
+            break;
+          }
+        }
       }
     }
-    currBuildingName.setText(selectedBuilding.getName());
+    curFloorName.setText(selectedFloor.getName());
+
   }
 
   /**
    * Pressing [Save Changes] button takes user to input.
    */
-  public void onSaveBldEdit() {
-    List<Building> allBuildings = ControllerMediator.getInstance().getApplication().getBuildings();
-    String newName = newBldName.getText();
+  public void onSaveFloorEdit() {
+    String newName = newFloorName.getText();
     if(!(newName.equals(""))){
       // String prevName = selectedBuilding.getName();
-      for (Building building : allBuildings) {
-        if (building.getName().equals(newName)) {
-          return;
+      
+        for(Floor floor : selectedBuilding.getFloors()){
+          if (floor.getName().equals(newName)) {
+            return;
+          }
         }
-      }
-      selectedBuilding.setName(newName);
+      
+      selectedFloor.setName(newName);
       selectedTab.setText(newName);
 
     }
