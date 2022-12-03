@@ -15,13 +15,13 @@
     </top>
     <center>
         <ScrollPane layoutY="47.0" prefHeight="536.0" prefWidth="1287.0">
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1100.0" prefWidth="1274.0">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1000.0" prefWidth="1274.0">
                 <Text layoutX="17.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Guide" underline="true">
                     <font>
                         <Font size="24.0" />
                     </font>
                 </Text>
-                <Label alignment="TOP_LEFT" layoutX="17.0" layoutY="62.0" prefHeight="54.0" prefWidth="1247.0" text="The Western Maps app provides a clear way for the user to select and access the maps of the buildings included in the application (Middlesex College, Natural Science, Talbot College)." wrapText="true">
+                <Label alignment="TOP_LEFT" layoutX="17.0" layoutY="62.0" prefHeight="54.0" prefWidth="1274.0" text="The Western Maps app provides a clear way for the user to select and access the maps of the buildings included in the application (Middlesex College, Natural Science, Talbot College)." wrapText="true">
                     <padding>
                         <Insets left="10.0" right="10.0" />
                     </padding>
@@ -34,7 +34,7 @@
                         <Font size="20.0" />
                     </font>
                 </Text>
-                <Label alignment="TOP_LEFT" layoutX="13.0" layoutY="144.0" prefHeight="148.0" prefWidth="1247.0" text="All available building catalogues and their respective floors can be accessed through the main tabs of the app. By clicking on a certain floor in a certain building, the map corresponding to the interior of that floor will be displayed in the main window.&#13;The map will display all POIs of that floor, at which point, you can click on a POI to see a popup describing the POI.&#13;POI are coloured by type: classrooms: orange; labs: yellow; recreation: lime; collaboration: green; accessibility: dark green; restaurant: cyan; washrooms: blue; libraries: dark blue; navigation: purple; custom: pink." wrapText="true">
+                <Label alignment="TOP_LEFT" layoutX="13.0" layoutY="144.0" prefHeight="148.0" prefWidth="1274.0" text="All available building catalogues and their respective floors can be accessed through the main tabs of the app. By clicking on a certain floor in a certain building, the map corresponding to the interior of that floor will be displayed in the main window.&#13;The map will display all POIs of that floor, at which point, you can click on a POI to see a popup describing the POI.&#13;POI are coloured by type: classrooms: orange; labs: yellow; recreation: lime; collaboration: green; accessibility: dark green; restaurant: cyan; washrooms: blue; libraries: dark blue; navigation: purple; custom: pink." wrapText="true">
                     <padding>
                         <Insets left="10.0" right="10.0" />
                     </padding>
@@ -47,7 +47,7 @@
                         <Font size="20.0" />
                     </font>
                 </Text>
-                <Label alignment="TOP_LEFT" layoutX="13.0" layoutY="315.0" prefHeight="60.0" prefWidth="1247.0" text="From the bottom right [Point of Interest Types] pane in the app, you can select specific POI types by which to filter. For example, if you wanted to see only classroom and lab POIs on a floor, check the [classroom] and [lab] options in the checklist within the pane. Deselecting all options returns all POIs to the map." wrapText="true">
+                <Label alignment="TOP_LEFT" layoutX="13.0" layoutY="315.0" prefHeight="60.0" prefWidth="1274.0" text="From the bottom right [Point of Interest Types] pane in the app, you can select specific POI types by which to filter. For example, if you wanted to see only classroom and lab POIs on a floor, check the [classroom] and [lab] options in the checklist within the pane. Deselecting all options returns all POIs to the map." wrapText="true">
                     <padding>
                         <Insets left="10.0" right="10.0" />
                     </padding>
@@ -60,7 +60,7 @@
                         <Font size="20.0" />
                     </font>
                 </Text>
-                <Label alignment="TOP_LEFT" layoutX="13.0" layoutY="405.0" prefHeight="86.0" prefWidth="1247.0" text="From the [Search] tab on the top right pane, you can search for any POIs by their room number or common name (if they have one, like “Tim Hortons”). Search results will be displayed below the search bar, upon clicking on a POI in the search results, you will be taken to where it is located on the map. A description of the POI you just selected will also pop up, where you will be able to see information about its room number, type (ex. restaurant), and additional information like seating capacity or hours of operation." wrapText="true">
+                <Label alignment="TOP_LEFT" layoutX="13.0" layoutY="405.0" prefHeight="86.0" prefWidth="1274.0" text="From the [Search] tab on the top right pane, you can search for any POIs by their room number or common name (if they have one, like “Tim Hortons”). Search results will be displayed below the search bar, upon clicking on a POI in the search results, you will be taken to where it is located on the map. A description of the POI you just selected will also pop up, where you will be able to see information about its room number, type (ex. restaurant), and additional information like seating capacity or hours of operation." wrapText="true">
                     <padding>
                         <Insets left="10.0" right="10.0" />
                     </padding>
@@ -73,7 +73,7 @@
                         <Font size="20.0" />
                     </font>
                 </Text>
-                <Label alignment="TOP_LEFT" layoutX="13.0" layoutY="521.0" prefHeight="86.0" prefWidth="1247.0" text="Within the POI description that pops up when you select a POI, you can choose to [Favourite] that POI for easy access later. Upon favouriting, that POI will now show up in the [Favourites] tab in the top right pane. Like the [search] tab, you can select a POI from that list, where you will then be taken to its corresponding location on the map.&#13;You may unfavourite the POI by re-clicking the [Favourite] button in the POI description popup. " wrapText="true">
+                <Label alignment="TOP_LEFT" layoutX="13.0" layoutY="521.0" prefHeight="86.0" prefWidth="1274.0" text="Within the POI description that pops up when you select a POI, you can choose to [Favourite] that POI for easy access later. Upon favouriting, that POI will now show up in the [Favourites] tab in the top right pane. Like the [search] tab, you can select a POI from that list, where you will then be taken to its corresponding location on the map.&#13;You may unfavourite the POI by re-clicking the [Favourite] button in the POI description popup. " wrapText="true">
                     <padding>
                         <Insets left="10.0" right="10.0" />
                     </padding>
@@ -86,7 +86,7 @@
                         <Font size="20.0" />
                     </font>
                 </Text>
-                <Label alignment="TOP_LEFT" layoutX="13.0" layoutY="637.0" prefHeight="150.0" prefWidth="1247.0" text="By clicking on the [Add POI] button in the bottom right pane, you will be able to create custom POIs for yourself. Once you select a location you want to mark as a new POI, you will be prompted to provide the app for the room number, POI type, and additional information about the POI. A newly-created marker on the map will appear, where you can then position the POI.After filling out that information, you can finalize the creation of this new POI by clicking on the [Done] button.&#13;Like built-in POIs, you can favourite and unfavourite the POIs you created.&#13;Unlike built-in POIs, you will also be able to edit and delete these created POIs through the POI description pop-up that appears when you click into a POI through the map. Similar to creating a POI, the map marker may be repositioned by dragging it when editing an existing POI." wrapText="true">
+                <Label alignment="TOP_LEFT" layoutX="13.0" layoutY="637.0" prefHeight="150.0" prefWidth="1274.0" text="By clicking on the [Add POI] button in the bottom right pane, you will be able to create custom POIs for yourself. Once you select a location you want to mark as a new POI, you will be prompted to provide the app for the room number, POI type, and additional information about the POI. A newly-created marker on the map will appear, where you can then position the POI.After filling out that information, you can finalize the creation of this new POI by clicking on the [Done] button.&#13;Like built-in POIs, you can favourite and unfavourite the POIs you created.&#13;Unlike built-in POIs, you will also be able to edit and delete these created POIs through the POI description pop-up that appears when you click into a POI through the map. Similar to creating a POI, the map marker may be repositioned by dragging it when editing an existing POI." wrapText="true">
                     <padding>
                         <Insets left="10.0" right="10.0" />
                     </padding>
@@ -99,7 +99,7 @@
                         <Font size="20.0" />
                     </font>
                 </Text>
-                <Label alignment="TOP_LEFT" layoutX="13.0" layoutY="828.0" prefHeight="150.0" prefWidth="1247.0" text="Administrators have the additional options to create, modify, and delete buildings, floors, and built-in POIs.&#13;Adding, editing, and deleting built-in POIs function identically to adding, modifying, and deleting user-created POIs.&#13;When adding buildings, admins will be prompted to enter its name.&#13;When adding floors to a building, admins will be prompted to give the floor number/name and upload a new Map." wrapText="true">
+                <Label alignment="TOP_LEFT" layoutX="13.0" layoutY="828.0" prefHeight="150.0" prefWidth="1274.0" text="Administrators have the additional options to create, modify, and delete buildings, floors, and built-in POIs.&#13;[Add Building]: admins will be prompted to enter its name. This name can be modified through the [Edit Building] functionality. [Delete Building] will remove the building, all its floors, and all its POIs from the program.&#13;[Add Floor]: admins will be prompted to give the floor level, its name, and to upload a PNG file. Its name must be distinct from all other floors of its building. Both its name and level may be edited through the [Edit Floor] option. Similar to deleting a building, [Delete Floor] will also remove all POIs associated with it." wrapText="true">
                     <padding>
                         <Insets left="10.0" right="10.0" />
                     </padding>
