@@ -17,7 +17,7 @@ public class Building {
    * 
    * @param name The name of the building
    */
-  Building(String name) {
+  public Building(String name) {
     this.name = name;
     this.floors = new ArrayList<>();
   }

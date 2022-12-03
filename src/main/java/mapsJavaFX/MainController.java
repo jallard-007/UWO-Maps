@@ -124,6 +124,17 @@ public class MainController {
   }
 
   public void onAddBld(ActionEvent event) {
+    FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/addBuilding.fxml"));
+    try {
+      Scene scene = new Scene(fxmlLoader.load());
+      Stage stage = editBuildingController.getStage();
+      stage.setTitle("Add a New Building");
+      stage.setScene(scene);
+      stage.showAndWait();
+      stage.centerOnScreen();
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
 
   }
 

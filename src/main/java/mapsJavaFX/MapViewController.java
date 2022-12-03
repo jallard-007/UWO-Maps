@@ -282,5 +282,10 @@ public class MapViewController {
   public Tab getBuildingTabObject() {
     return tabPane.getSelectionModel().getSelectedItem();
   }
+  public void addBuildingTab(Building building){
+    Tab buildingTab = new Tab(building.getName());
+    buildingTab.setClosable(false);
+    tabPane.getTabs().add(buildingTab);
+  }
 
 }

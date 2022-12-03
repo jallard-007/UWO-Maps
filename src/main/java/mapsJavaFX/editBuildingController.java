@@ -32,6 +32,14 @@ public class editBuildingController {
   @FXML
   private Text buildingName;
 
+  //add building scene
+  @FXML
+  private Button addBuildingButton;
+  @FXML
+  private TextField newBuildingNameField;
+
+
+
   private Building selectedBuilding;
 
   /**
@@ -71,7 +79,7 @@ public class editBuildingController {
     }
     if (currBuildingName != null) {
       currBuildingName.setText(selectedBuilding.getName());
-    } else {
+    } else if (buildingName != null) {
       buildingName.setText(selectedBuilding.getName());
     }
   }
@@ -107,5 +115,23 @@ public class editBuildingController {
     stage.close();
 
   }
+  /**
+   * Pressing [Add Building] button tries to add the building to the app.
+   */
+  public void onAddBuildingSubmit(){
+    String newName = newBuildingNameField.getText();
+    if (!(newName.equals(""))) {
+      for (Building building: app.getBuildings()){
+        if(building.getName().equals(newName)){
+          return;
+        }
+      }
+      Building building = new Building(newName);
+      app.addBuilding(building);
+      ControllerMediator.getInstance().addBuildingTab(building);
+      stage.close();
 
+    }
+    return;
+  }
 }

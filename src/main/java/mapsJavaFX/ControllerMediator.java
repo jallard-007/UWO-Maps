@@ -4,6 +4,7 @@ import java.util.List;
 
 import javafx.scene.control.Tab;
 import maps.Application;
+import maps.Building;
 import maps.POILocation;
 import maps.POIType;
 
@@ -57,6 +58,10 @@ public class ControllerMediator {
   public void removeTab(Tab tab){
     mapViewController.removeTab(tab);
   }
+  public void addBuildingTab(Building building){
+    mapViewController.addBuildingTab(building);
+  }
+  
   public void removeFloorTab(Tab tab){
     mapViewController.removeFloorTab(tab);
   }
