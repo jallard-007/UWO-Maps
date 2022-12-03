@@ -54,5 +54,19 @@ efficient way to find their way around buildings without the headache that may c
 - JavaFX, to create the User Interface using both FXML files for UI markup, as well as Controller classes written in Java to add user functionality. 
 - Maven, which was the build automation tool for this project.
 
+## Install and Set Up for Developers
+
+- To run Western Maps, first clone the repository to your local system.
+- Make sure you have all proper dependencies and libraries installed and/or resolved, such as:
+  - JDK 19
+  - Maven, including:
+    - org.json
+    - org.simple.json
+    - JavaFX
+    - JUnit
+- Once your repository is looking ready for use, navigate to the WesternMaps class and run WesternMaps.main() to view and use the application!
+
+Happy travels :)
+
 
 
