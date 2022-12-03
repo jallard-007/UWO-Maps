@@ -35,7 +35,7 @@ public class Floor {
     this.name = name;
     this.imagePath = "";
     this.image = null;
-    //Store POIs of each floor are stored by their POIType
+    // Store POIs of each floor are stored by their POIType
     this.pois = (ArrayList<POI>[]) new ArrayList[POIType.values().length];
     for (int i = 0; i < POIType.values().length; ++i) {
       this.pois[i] = new ArrayList<>();
@@ -47,7 +47,7 @@ public class Floor {
    * 
    * @param level     integer corresponding to the floor's level
    * @param name      the name of the floor
-   * @param imagePath absolute path to the image of this floor
+   * @param imagePath relative path to the image of this floor
    */
   public Floor(int level, String name, String imagePath) {
     this(level, name);
@@ -64,6 +64,7 @@ public class Floor {
 
   /**
    * Adds the POIs of a floor into the floor's POI list
+   * 
    * @param poi POI to be added to the floor's POIs list
    */
   public void addPOI(POI poi) {
@@ -71,12 +72,14 @@ public class Floor {
   }
 
   /**
-   * Update the storage of a POI in the floor's POI list if its POI type was recently updated
+   * Update the storage of a POI in the floor's POI list if its POI type was
+   * recently updated
+   * 
    * @param oldType old POI type
    * @param newType new POI type
-   * @param poi POI to be updated
+   * @param poi     POI to be updated
    */
-  public void updatePOIStorage(POIType oldType, POIType newType, POI poi){
+  public void updatePOIStorage(POIType oldType, POIType newType, POI poi) {
     this.pois[oldType.ordinal()].remove(poi);
     this.pois[newType.ordinal()].add(poi);
   }
@@ -105,25 +108,27 @@ public class Floor {
   public String getName() {
     return name;
   }
+
   /**
    * set name of the floor
    */
   public void setName(String name) {
     this.name = name;
   }
+
   /**
    * @return level of the floor
    */
   public int getLevel() {
     return level;
   }
+
   /**
    * set level of the floor
    */
   public void setLevel(int level) {
     this.level = level;
   }
-
 
   /**
    * @return image of the floor

@@ -262,6 +262,42 @@ public class MapViewController {
     return floorTabPane.getSelectionModel().getSelectedItem();
   }
 
+  public boolean addFloorTab(Tab buildingTab, Floor floor) {
+    if (buildingTab == null) {
+      return false;
+    }
+    Tab floorTab = new Tab(floor.getName());
+    TabPane buildingTabPane = (TabPane) buildingTab.getContent();
+    if (buildingTabPane == null) {
+      buildingTabPane = new TabPane();
+      buildingTab.setContent(buildingTabPane);
+    }
+
+    Image image = floor.getImage();
+    ImageView imageView = new ImageView(image);
+    imageView.setPreserveRatio(true);
+
+    // Add floor PNGs into a scrollPane so users can pan through the maps
+    StackPane stackPane = new StackPane();
+    ScrollPane scrollPane = new ScrollPane();
+    scrollPane.setPannable(true);
+    scrollPane.setHvalue(0.5);
+    scrollPane.setVvalue(0.5);
+
+    Pane poiPane = new Pane();
+    stackPane.getChildren().add(imageView);
+    stackPane.getChildren().add(poiPane);
+    scrollPane.setContent(stackPane);
+    floorTab.setContent(scrollPane);
+    floorTab.setClosable(false);
+    buildingTabPane.getTabs().add(floorTab);
+    zoomBar.valueProperty().addListener((o, oldV, newV) -> {
+      stackPane.setScaleX(newV.doubleValue());
+      stackPane.setScaleY(newV.doubleValue());
+    });
+    return true;
+  }
+
   /**
    * Removes a Floor from the floor tab pane
    * 
@@ -282,7 +318,8 @@ public class MapViewController {
   public Tab getBuildingTabObject() {
     return tabPane.getSelectionModel().getSelectedItem();
   }
-  public void addBuildingTab(Building building){
+
+  public void addBuildingTab(Building building) {
     Tab buildingTab = new Tab(building.getName());
     buildingTab.setClosable(false);
     tabPane.getTabs().add(buildingTab);

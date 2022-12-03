@@ -5,6 +5,7 @@ import java.util.List;
 import javafx.scene.control.Tab;
 import maps.Application;
 import maps.Building;
+import maps.Floor;
 import maps.POILocation;
 import maps.POIType;
 
@@ -49,23 +50,25 @@ public class ControllerMediator {
     return mapViewController.getBuildingTab();
   }
 
-  public Tab getBuildingTabObject(){
+  public Tab getBuildingTabObject() {
     return mapViewController.getBuildingTabObject();
   }
-  public Tab getFloorTab(){
+
+  public Tab getFloorTab() {
     return mapViewController.getFloorTab();
   }
-  public void removeTab(Tab tab){
+
+  public void removeTab(Tab tab) {
     mapViewController.removeTab(tab);
   }
-  public void addBuildingTab(Building building){
+
+  public void addBuildingTab(Building building) {
     mapViewController.addBuildingTab(building);
   }
-  
-  public void removeFloorTab(Tab tab){
+
+  public void removeFloorTab(Tab tab) {
     mapViewController.removeFloorTab(tab);
   }
-
 
   void refreshFavouritesList() {
     favouritesController.refreshList();
@@ -79,12 +82,16 @@ public class ControllerMediator {
     mapViewController.removeButton(poiLocation);
   }
 
-  void updateButtonStorage(POIType oldType, POIType newType, POIButton poiButton){
+  void updateButtonStorage(POIType oldType, POIType newType, POIButton poiButton) {
     mapViewController.updateButtonStorage(oldType, newType, poiButton);
   }
 
   void addPOIButton(POIButton poiButton, POILocation poiLocation) {
     mapViewController.addButton(poiButton, poiLocation);
+  }
+
+  void addFloorTab(Tab building, Floor floor) {
+    mapViewController.addFloorTab(building, floor);
   }
 
   private ControllerMediator() {
