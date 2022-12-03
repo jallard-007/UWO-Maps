@@ -378,6 +378,9 @@ public class Application {
     if (type.equals(UserType.admin)) {
       JSONObject jsonApplication = createJSONObjectOfApplication();
       Util.writeToFile(jsonApplication, "/appData/metaData/poiMetaData.json");
+      for (UserChanges user : this.registeredUsers) {
+        user.saveUser();
+      }
     }
   }
 
