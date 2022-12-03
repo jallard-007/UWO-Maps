@@ -7,7 +7,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import maps.*;
+
+import java.io.File;
 import java.lang.String;
+import javafx.stage.FileChooser;
 
 import java.util.List;
 
@@ -16,18 +19,19 @@ public class editFloorController {
   static Application app;
   private Tab selectedBldTab;
   private Tab selectedTab;
+  private File newImage;
 
-    //edit floor scene
-    @FXML
-    private Text curFloorName;
-    @FXML
-    private TextField newFloorName;
-    @FXML
-    private Button saveFloorEdit;
-    @FXML
-    private Button cancFloorEdit;
-    @FXML
-    private TextField levelField;
+  //edit floor scene
+  @FXML
+  private Text curFloorName;
+  @FXML
+  private TextField newFloorName;
+  @FXML
+  private Button saveFloorEdit;
+  @FXML
+  private Button cancFloorEdit;
+  @FXML
+  private TextField levelField;
 
   // delete floor scene
   @FXML
@@ -36,6 +40,21 @@ public class editFloorController {
   private Text buildingName;
   @FXML
   private Button delFloorButton;
+
+  // add floor scene
+  @FXML
+  private TextField newFloorNameField;
+  @FXML
+  private Text buildingNameNewFloor;
+  @FXML
+  private TextField newLevelField;
+  @FXML
+  private Button selectImage;
+  @FXML
+  private Button addFloorButton;
+  @FXML
+  private Text selectedImagePath;
+  
 
   private Floor selectedFloor;
   private Building selectedBuilding;
@@ -87,16 +106,59 @@ public class editFloorController {
       curFloorName.setText(selectedFloor.getName());
       levelField.setText(Integer.toString(selectedFloor.getLevel()));
     }
-    //otherwise the delete floor stage is being initialized
-    else{
+    //else if the delete floor stage is being initialized
+    else if (floorName != null){
       floorName.setText(selectedFloor.getName());
       buildingName.setText(selectedBuilding.getName() + "?");
     }
+    //else initialize for the add floor stage
+    else{
+      buildingNameNewFloor.setText(selectedBuilding.getName());
+      newImage = null;
+    }
+
 
   }
-
   /**
-   * Pressing [Save Changes] button takes user to input.
+   * Pressing [Add Floor] button attempts to make new floor.
+   */
+  public void onAddFloorSubmit() {
+    if((newImage != null)  && !(newFloorNameField.getText().equals(""))&& !(newLevelField.getText().equals(""))){
+        int newLevel = Integer.parseInt(newLevelField.getText());
+        for (Floor floor : selectedBuilding.getFloors()) {
+          if ((floor.getName().equals(newFloorNameField.getText())) || (floor.getLevel() == newLevel)) {
+            return;
+          }
+        }
+        //add the map image to all the other maps
+        String rootPath = maps.Util.getRootPath();
+        newImage.renameTo(new File(rootPath + "/appData/maps/" + selectedBuilding.getName() +"Floor"+newLevelField.getText()+".png"));
+        //create the new floor
+        Floor newFloor = new Floor(newLevel, newFloorNameField.getText(), newImage.getPath());
+        //and add it to the app
+        app.addFloor(selectedBuilding, newFloor);
+        stage.close();
+      
+
+    }
+  }
+  public void onSelectImage() {
+    //create a file chooser
+    FileChooser fileChooser = new FileChooser();
+    //set the fileChooser to filter for png files
+    FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.png");
+    fileChooser.getExtensionFilters().add(extFilter);
+    fileChooser.setTitle("Select Floor Image");
+    fileChooser.setInitialDirectory(new File("c:\\"));
+    newImage = fileChooser.showOpenDialog(stage);
+    if (newImage != null){
+      selectedImagePath.setText(newImage.getAbsolutePath() + " selected.");;
+      
+    }
+
+  }
+  /**
+   * Pressing [Save Changes] button attempts to make edit changes to thefloor.
    */
   public void onSaveFloorEdit() {
     String newName = newFloorName.getText();

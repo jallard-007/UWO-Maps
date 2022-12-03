@@ -79,6 +79,17 @@ public class MainController {
   }
 
   public void onAddFloor(ActionEvent event) {
+    FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/addFloor.fxml"));
+    try {
+      Scene scene = new Scene(fxmlLoader.load());
+      Stage stage = editFloorController.getStage();
+      stage.setTitle("Add New Floor");
+      stage.setScene(scene);
+      stage.showAndWait();
+      stage.centerOnScreen();
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
 
   }
 

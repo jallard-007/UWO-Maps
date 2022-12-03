@@ -49,7 +49,7 @@ public class Floor {
    * @param name      the name of the floor
    * @param imagePath absolute path to the image of this floor
    */
-  Floor(int level, String name, String imagePath) {
+  public Floor(int level, String name, String imagePath) {
     this(level, name);
     this.imagePath = imagePath;
     this.image = new Image(new File(Util.getRootPath() + imagePath).toURI().toString());
