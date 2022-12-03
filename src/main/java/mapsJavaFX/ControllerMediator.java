@@ -54,6 +54,10 @@ public class ControllerMediator {
   public Tab getFloorTab(){
     return mapViewController.getFloorTab();
   }
+  public void removeTab(Tab tab){
+    mapViewController.removeTab(tab);
+  }
+
 
   void refreshFavouritesList() {
     favouritesController.refreshList();

@@ -141,6 +141,15 @@ public class MapViewController {
   }
 
   /**
+   * Removes a Building from the TabPane
+   * 
+   * @param tab the tab to be deleted
+   */
+  public void removeTab(Tab tab) {
+    tabPane.getTabs().remove(tab);
+  }
+
+  /**
    * Updates the location where the selected POI's button is stored within the POI buttons list; used when the type of a POI is being updated
    * @param oldType old POI type
    * @param newType new POI type

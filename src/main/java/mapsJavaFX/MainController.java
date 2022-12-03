@@ -131,6 +131,17 @@ public class MainController {
     
   }
   public void onDelBld(ActionEvent event) {
+    FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/deleteBuilding.fxml"));
+    try {
+      Scene scene = new Scene(fxmlLoader.load());
+      Stage stage = editBuildingController.getStage();
+      stage.setTitle("Delete Building");
+      stage.setScene(scene);
+      stage.showAndWait();
+      stage.centerOnScreen();
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
     
   }
   public void setApp(Application app) {

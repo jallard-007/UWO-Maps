@@ -20,6 +20,8 @@ public class editBuildingController {
     static Stage stage;
     static Application app;
     private Tab selectedTab;
+
+    //edit building scene
     @FXML
     private Text currBuildingName;
     @FXML
@@ -28,7 +30,17 @@ public class editBuildingController {
     private Button conEditBuild;
     @FXML
     private Button cancEditBuild;
+
+    //delete building scene
+    @FXML
+    private Button delBuildingButton;
+    @FXML
+    private Text buildingName;
+
+
     private Building selectedBuilding;
+
+
 
   /**
    * Called to set up the app
@@ -65,7 +77,12 @@ public class editBuildingController {
         break;
       }
     }
-    currBuildingName.setText(selectedBuilding.getName());
+    if(currBuildingName != null){
+      currBuildingName.setText(selectedBuilding.getName());
+    }
+    else{
+      buildingName.setText(selectedBuilding.getName());
+    }
   }
 
   /**
@@ -85,6 +102,16 @@ public class editBuildingController {
       selectedTab.setText(newName);
 
     }
+  }
+  /**
+   * Pressing [Delete] button deletes the buildinng from the app.
+   */
+  public void onDelBuilding() {
+    app.deleteBuilding(selectedBuilding);
+    ControllerMediator.getInstance().removeTab(selectedTab);
+    ControllerMediator.getInstance().refreshFavouritesList();
+    ControllerMediator.getInstance().refreshSearchList();
+
   }
 
 
