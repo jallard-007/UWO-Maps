@@ -9,6 +9,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import mapsJavaFX.editFeatures.AddPOIController;
 
 import java.io.IOException;
 
@@ -86,5 +87,6 @@ public class NavigationController {
     stage.setScene(scene);
     stage.show();
     stage.centerOnScreen();
+    AddPOIController.getStage().close();
   }
 }

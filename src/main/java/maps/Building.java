@@ -9,7 +9,7 @@ import org.json.JSONObject;
  * Stores information regrading the building
  */
 public class Building {
-  final String name;
+  private String name;
   final List<Floor> floors;
 
   /**
@@ -27,6 +27,9 @@ public class Building {
    */
   public String getName() {
     return this.name;
+  }
+  public void setName(String name) {
+    this.name = name;
   }
 
   /**

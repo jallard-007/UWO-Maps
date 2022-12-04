@@ -33,14 +33,7 @@ public class Util {
     return rootPath;
   }
 
-  /**
-   * Gets the contents of a file
-   *
-   * @param absolutePath the absolute path of the file to read from
-   * @return the contents of the file
-   */
-  public static String getJSONFileContents(String absolutePath) {
-    File metaDataFile = new File(absolutePath);
+  public static String getJSONFileContents(File metaDataFile) {
     if (!metaDataFile.exists()) {
       System.out.println("File does not exist");
       System.exit(13);
@@ -61,6 +54,17 @@ public class Util {
     }
     fileScanner.close();
     return fileContent.toString();
+  }
+
+  /**
+   * Gets the contents of a file
+   *
+   * @param absolutePath the absolute path of the file to read from
+   * @return the contents of the file
+   */
+  public static String getJSONFileContents(String absolutePath) {
+    File metaDataFile = new File(absolutePath);
+    return getJSONFileContents(metaDataFile);
   }
 
   /**

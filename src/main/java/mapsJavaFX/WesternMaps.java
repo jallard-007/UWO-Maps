@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import java.io.IOException;
 
 import maps.Application;
+import mapsJavaFX.editFeatures.AddPOIController;
 
 /**
  * The WesternMaps class is dedicated to setting up the stage, corresponding
@@ -68,6 +69,9 @@ public class WesternMaps extends javafx.application.Application {
       ControllerMediator.getInstance().getApplication().save();
       System.out.println("The program was exited successfully.");
       stage.close();
+      if (AddPOIController.getStage() != null) {
+        AddPOIController.getStage().close();
+      }
     }
   }
 }

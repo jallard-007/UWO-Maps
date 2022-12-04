@@ -1,4 +1,4 @@
-package mapsJavaFX;
+package mapsJavaFX.editFeatures;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -8,8 +8,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import maps.*;
-import maps.POI;
-import maps.POILocation;
+import mapsJavaFX.ControllerMediator;
+import mapsJavaFX.POIButton;
+import mapsJavaFX.POIDescriptionController;
 
 import java.util.Arrays;
 

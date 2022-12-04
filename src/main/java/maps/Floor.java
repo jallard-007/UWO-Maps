@@ -11,8 +11,8 @@ import javafx.scene.image.Image;
  * Stores information regarding a floor
  */
 public class Floor {
-  final int level;
-  final String name;
+  private int level;
+  private String name;
   String imagePath;
   Image image;
 
@@ -47,9 +47,9 @@ public class Floor {
    * 
    * @param level     integer corresponding to the floor's level
    * @param name      the name of the floor
-   * @param imagePath absolute path to the image of this floor
+   * @param imagePath relative path to the image of this floor
    */
-  Floor(int level, String name, String imagePath) {
+  public Floor(int level, String name, String imagePath) {
     this(level, name);
     this.imagePath = imagePath;
     this.image = new Image(new File(Util.getRootPath() + imagePath).toURI().toString());
@@ -114,6 +114,27 @@ public class Floor {
    */
   public String getName() {
     return name;
+  }
+
+  /**
+   * set name of the floor
+   */
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  /**
+   * @return level of the floor
+   */
+  public int getLevel() {
+    return level;
+  }
+
+  /**
+   * set level of the floor
+   */
+  public void setLevel(int level) {
+    this.level = level;
   }
 
   /**

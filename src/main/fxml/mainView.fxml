@@ -6,12 +6,13 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapsJavaFX.MainController">
    <right>
-      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="5.0" BorderPane.alignment="CENTER">
-                <TabPane tabClosingPolicy="UNAVAILABLE">
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="558.0" prefWidth="328.0" spacing="5.0" BorderPane.alignment="CENTER">
+                <TabPane prefWidth="325.0" tabClosingPolicy="UNAVAILABLE">
                     <Tab text="Search">
                         <fx:include fx:id="searchPOI" minHeight="0.0" minWidth="0.0" prefHeight="278.0" prefWidth="221.0" source="searchPOI.fxml" />
                     </Tab>
@@ -23,7 +24,19 @@
                             <!-- Trying to put the POI Types here to be displayed -->
                             <fx:include fx:id="types" minHeight="0.0" minWidth="0.0" prefHeight="238.0" prefWidth="228.0" source="typePOI.fxml" />
                 </TitledPane>
-         <Button fx:id="addPOI" mnemonicParsing="false" onAction="#onAddPOI" text="Add POI" translateX="170.0" />
+         <HBox alignment="CENTER" spacing="10.0">
+            <Button fx:id="addPOI" mnemonicParsing="false" onAction="#onAddPOI" text="Add POI" />
+             <Button fx:id="addFloor" mnemonicParsing="false" onAction="#onAddFloor" text="Add Floor" />
+             <Button fx:id="addBld" mnemonicParsing="false" onAction="#onAddBld" text="Add Building" textOverrun="CLIP" />
+         </HBox>
+         <HBox alignment="CENTER" spacing="10.0">
+               <Button fx:id="editFloor" mnemonicParsing="false" onAction="#onEditFloor" text="Edit Floor" />
+               <Button fx:id="delFloor" alignment="CENTER" mnemonicParsing="false" onAction="#onDelFloor" text="Delete Floor" />
+         </HBox>
+         <HBox alignment="CENTER" spacing="10.0">
+               <Button fx:id="editBld" mnemonicParsing="false" onAction="#onEditBld" text="Edit Building" />
+               <Button fx:id="delBld" mnemonicParsing="false" onAction="#onDelBld" text="Delete Building" />
+         </HBox>
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" />
          </padding>

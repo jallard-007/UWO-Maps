@@ -10,10 +10,10 @@ import java.util.ArrayList;
  * Represents a user
  */
 public class User {
-  private final String username;
-  private final String password;
-  private final UserType type;
-  private final List<POILocation> favourites;
+  protected final String username;
+  protected final String password;
+  protected final UserType type;
+  protected final List<POILocation> favourites;
 
   /**
    * Class constructor.
@@ -73,7 +73,7 @@ public class User {
    * @param customPOIs a list of custom POIs created by the user
    */
   public void saveUser(List<POILocation> customPOIs) {
-    JSONObject jsonUser = toJSON(customPOIs);
+    JSONObject jsonUser = createJSONObjectOfUser(customPOIs);
     Util.writeToFile(jsonUser, "/appData/users/" + this.username + ".json");
   }
 
@@ -83,7 +83,7 @@ public class User {
    * @param customPOIs a list of custom POIs created by the user
    * @return json representation of the user
    */
-  private JSONObject toJSON(List<POILocation> customPOIs) {
+  protected JSONObject createJSONObjectOfUser(List<POILocation> customPOIs) {
     JSONObject jsonUser = new JSONObject();
     jsonUser.put("username", this.username);
     jsonUser.put("password", this.password);
@@ -91,14 +91,20 @@ public class User {
     // favourites to json
     JSONArray favouritesJsonArray = new JSONArray();
     for (POILocation poiLocation : this.favourites) {
-      favouritesJsonArray.put(poiLocation.toString());
+      JSONObject jsonPOILocation = new JSONObject();
+      jsonPOILocation.put("building", poiLocation.getBuilding().getName());
+      jsonPOILocation.put("floor", poiLocation.getFloor().getName());
+      jsonPOILocation.put("poi", poiLocation.getPOI().getRoomNumber());
+      favouritesJsonArray.put(jsonPOILocation);
     }
     jsonUser.put("favourites", favouritesJsonArray);
     // custom to json
     JSONArray customJsonArray = new JSONArray();
-    for (POILocation poiLocation : customPOIs) {
-      customJsonArray.put(
-          poiLocation.poi.createJSONObjectOfCustomPOI(poiLocation.building, poiLocation.floor));
+    if (customPOIs != null) {
+      for (POILocation poiLocation : customPOIs) {
+        customJsonArray.put(
+            poiLocation.poi.createJSONObjectOfCustomPOI(poiLocation.building, poiLocation.floor));
+      }
     }
     jsonUser.put("customPOIs", customJsonArray);
     return jsonUser;

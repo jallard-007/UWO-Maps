@@ -12,27 +12,24 @@
     <Text layoutX="69.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to Western Maps!"
           textAlignment="CENTER" wrappingWidth="471.13671875">
         <font>
-            <Font size="36.0"/>
+            <Font size="36.0" />
         </font>
     </Text>
-    <TextField fx:id="username" layoutX="196.0" layoutY="142.0" prefHeight="25.0" prefWidth="191.0"
-               promptText="Username">
+    <TextField fx:id="username" layoutX="196.0" layoutY="142.0" prefHeight="25.0" prefWidth="191.0" promptText="Username">
         <font>
-            <Font size="14.0"/>
+            <Font size="14.0" />
         </font>
     </TextField>
-    <PasswordField fx:id="password" layoutX="196.0" layoutY="185.0" prefHeight="25.0" prefWidth="191.0"
-                   promptText="Password">
+    <PasswordField fx:id="password" layoutX="196.0" layoutY="185.0" prefHeight="25.0" prefWidth="191.0" promptText="Password">
         <font>
-            <Font size="14.0"/>
+            <Font size="14.0" />
         </font>
     </PasswordField>
-    <Button fx:id="loginButton" layoutX="265.0" layoutY="240.0" mnemonicParsing="false" onAction="#goToApplication"
-            text="Login">
+    <Button fx:id="loginButton" layoutX="265.0" layoutY="240.0" mnemonicParsing="false" onAction="#goToApplication" text="Login">
         <font>
-            <Font size="14.0"/>
+            <Font size="14.0" />
         </font>
     </Button>
-    <Button layoutX="164.0" layoutY="96.0" mnemonicParsing="false" onAction="#goToSignUp"
-            text="Don't have an account? Click here to sign up."/>
+    <Button layoutX="164.0" layoutY="96.0" mnemonicParsing="false" onAction="#goToSignUp" text="Don't have an account? Click here to sign up." />
+   <Text fx:id="loginFeedBackText" layoutX="69.0" layoutY="312.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="444.13671875" />
 </AnchorPane>

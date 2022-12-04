@@ -11,7 +11,7 @@ public class POI {
   POIType type;
   String name;
   Integer capacity;
-  Pair position;
+  final Pair position;
   String information;
   String hoursOfOperation;
 

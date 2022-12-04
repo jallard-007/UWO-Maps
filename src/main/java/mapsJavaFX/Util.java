@@ -1,6 +1,7 @@
 package mapsJavaFX;
 
 import maps.Application;
+import mapsJavaFX.editFeatures.*;
 
 public class Util {
   /**
@@ -19,6 +20,15 @@ public class Util {
     POIButton.setApp(app);
     POIDescriptionController.setApp(app);
     AddPOIController.setApp(app);
+    EditBuildingController.setApp(app);
+    EditFloorController.setApp(app);
+    AddFloorController.setApp(app);
+    AddBuildingController.setApp(app);
+    DeleteBuildingController.setApp(app);
+    DeleteFloorController.setApp(app);
+
+    // set app in the main controller
+    controller.setApp(app);
 
     controller.getMapViewController().setApp(app);
     controller.getSearchPOIController().setApp(app);

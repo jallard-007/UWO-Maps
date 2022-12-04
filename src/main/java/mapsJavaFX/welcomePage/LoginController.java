@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.text.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import maps.Application;
@@ -43,6 +44,13 @@ public class LoginController {
   private AnchorPane logIn;
 
   /**
+   * the text where the user recieves login feedback.
+   */
+  @FXML
+  private Text loginFeedBackText;
+  
+
+  /**
    * Method called when the user clicks the log in button; checks the validity of
    * their username and password, and takes the user to the main view of the
    * application
@@ -52,16 +60,19 @@ public class LoginController {
   public void goToApplication() throws IOException {
     if (username.getText().equals("")) {
       // ask user to input username
+      loginFeedBackText.setText("please enter a username.");
       return;
     }
     if (password.getText().equals("")) {
       // ask user to input password
+      loginFeedBackText.setText("please enter a password.");
       return;
     }
     Application app = ControllerMediator.getInstance().getApplication();
     Stage stage = (Stage) logIn.getScene().getWindow();
     if (!app.login(username.getText(), password.getText())) {
       // username / password incorrect
+      loginFeedBackText.setText("Invalid login credentials. Please try again or select sign up to make a new account.");
       return;
     }
     stage.close();

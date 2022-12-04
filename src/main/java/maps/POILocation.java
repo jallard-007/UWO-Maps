@@ -25,8 +25,8 @@ public class POILocation {
    *
    * @return true if the removal was successful, false otherwise
    */
-  public boolean removePOI() {
-    return floor.pois[poi.type.ordinal()].remove(poi);
+  public void removePOI() {
+    floor.pois[poi.type.ordinal()].remove(poi);
   }
 
   public String toString() {
