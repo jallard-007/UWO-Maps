@@ -61,7 +61,7 @@ public class Building {
    * Gets the floor matching the input string
    * 
    * @param floorName the name of the floor
-   * @return floor object with name matching floorName
+   * @return floor object with name matching floorName, null if no match
    */
   public Floor getMatchingFloor(String floorName) {
     for (Floor floor : this.floors) {
