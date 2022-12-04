@@ -47,9 +47,4 @@ public class POILocationTest {
         assertEquals("24 | TestBuilding | TestFloor", poiLocation.toString());
     }
 
-    @Test
-    @DisplayName("Verify POILocations's removePOI()")
-    void testRemovePOI() {
-        assertEquals(false, poiLocation.removePOI());
-    }
 }
