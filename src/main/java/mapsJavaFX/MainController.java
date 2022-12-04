@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -78,10 +79,18 @@ public class MainController {
    * On add POI button event handler
    */
   public void onAddPOI() {
-    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/addPOI.fxml"));
     try {
-      Scene scene = new Scene(fxmlLoader.load());
       Stage stage = AddPOIController.getStage();
+      Scene s = stage.getScene();
+      if (s != null && s.getRoot().getClass() == AnchorPane.class) {
+        // poi is being edited and cannot switch, otherwise the button will be movable,
+        // even not when editing
+        stage.toFront();
+
+        return;
+      }
+      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/addPOI.fxml"));
+      Scene scene = new Scene(fxmlLoader.load());
       stage.setScene(scene);
     } catch (IOException e) {
       throw new RuntimeException(e);
@@ -89,10 +98,17 @@ public class MainController {
   }
 
   public void onAddFloor() {
-    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/addFloor.fxml"));
     try {
-      Scene scene = new Scene(fxmlLoader.load());
       Stage stage = AddPOIController.getStage();
+      Scene s = stage.getScene();
+      if (s != null && s.getRoot().getClass() == AnchorPane.class) {
+        // poi is being edited and cannot switch, otherwise the button will be movable,
+        // even not when editing
+        stage.toFront();
+        return;
+      }
+      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/addFloor.fxml"));
+      Scene scene = new Scene(fxmlLoader.load());
       stage.setScene(scene);
     } catch (IOException e) {
       throw new RuntimeException(e);
@@ -100,10 +116,18 @@ public class MainController {
   }
 
   public void onEditFloor() {
-    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/editFloor.fxml"));
     try {
-      Scene scene = new Scene(fxmlLoader.load());
       Stage stage = AddPOIController.getStage();
+      Scene s = stage.getScene();
+      if (s != null && s.getRoot().getClass() == AnchorPane.class) {
+        // poi is being edited and cannot switch, otherwise the button will be movable,
+        // even not when editing
+        stage.toFront();
+
+        return;
+      }
+      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/editFloor.fxml"));
+      Scene scene = new Scene(fxmlLoader.load());
       stage.setScene(scene);
     } catch (IOException e) {
       throw new RuntimeException(e);
@@ -112,10 +136,18 @@ public class MainController {
   }
 
   public void onDelFloor() {
-    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/deleteFloor.fxml"));
     try {
-      Scene scene = new Scene(fxmlLoader.load());
       Stage stage = AddPOIController.getStage();
+      Scene s = stage.getScene();
+      if (s != null && s.getRoot().getClass() == AnchorPane.class) {
+        // poi is being edited and cannot switch, otherwise the button will be movable,
+        // even not when editing
+        stage.toFront();
+
+        return;
+      }
+      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/deleteFloor.fxml"));
+      Scene scene = new Scene(fxmlLoader.load());
       stage.setScene(scene);
     } catch (IOException e) {
       throw new RuntimeException(e);
@@ -123,10 +155,18 @@ public class MainController {
   }
 
   public void onAddBld() {
-    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/addBuilding.fxml"));
     try {
-      Scene scene = new Scene(fxmlLoader.load());
       Stage stage = AddPOIController.getStage();
+      Scene s = stage.getScene();
+      if (s != null && s.getRoot().getClass() == AnchorPane.class) {
+        // poi is being edited and cannot switch, otherwise the button will be movable,
+        // even not when editing
+        stage.toFront();
+
+        return;
+      }
+      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/addBuilding.fxml"));
+      Scene scene = new Scene(fxmlLoader.load());
       stage.setScene(scene);
       stage.centerOnScreen();
     } catch (IOException e) {
@@ -135,10 +175,18 @@ public class MainController {
   }
 
   public void onEditBld() {
-    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/editBuilding.fxml"));
     try {
-      Scene scene = new Scene(fxmlLoader.load());
       Stage stage = AddPOIController.getStage();
+      Scene s = stage.getScene();
+      if (s != null && s.getRoot().getClass() == AnchorPane.class) {
+        // poi is being edited and cannot switch, otherwise the button will be movable,
+        // even not when editing
+        stage.toFront();
+
+        return;
+      }
+      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/editBuilding.fxml"));
+      Scene scene = new Scene(fxmlLoader.load());
       stage.setScene(scene);
     } catch (IOException e) {
       throw new RuntimeException(e);
@@ -146,10 +194,18 @@ public class MainController {
   }
 
   public void onDelBld() {
-    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/deleteBuilding.fxml"));
     try {
-      Scene scene = new Scene(fxmlLoader.load());
       Stage stage = AddPOIController.getStage();
+      Scene s = stage.getScene();
+      if (s != null && s.getRoot().getClass() == AnchorPane.class) {
+        // poi is being edited and cannot switch, otherwise the button will be movable,
+        // even not when editing
+        stage.toFront();
+
+        return;
+      }
+      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/deleteBuilding.fxml"));
+      Scene scene = new Scene(fxmlLoader.load());
       stage.setScene(scene);
     } catch (IOException e) {
       throw new RuntimeException(e);
