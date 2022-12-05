@@ -1,12 +1,13 @@
 package mapsJavaFX;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-
 import maps.Application;
 import maps.POILocation;
 
@@ -31,7 +32,7 @@ public class SearchPOIController {
 
   /**
    * Called to set up the app and list of matching POIs for future use
-   * 
+   *
    * @param app referring to the map application
    */
   public void setApp(Application app) {
@@ -50,7 +51,7 @@ public class SearchPOIController {
 
   /**
    * Event handler to dictate what to do when a user clicks on a POI in the list
-   * 
+   *
    * @param mouseEvent onMouseClicked event
    */
   public void onPOIListMouseClick(MouseEvent mouseEvent) {
@@ -67,8 +68,8 @@ public class SearchPOIController {
   }
 
   /**
-   * Handles when a keyboard button is pressed. Allows the user to press enter to
-   * navigate to the highlighted poi
+   * Handles when a keyboard button is pressed. Allows the user to press enter to navigate to the
+   * highlighted poi
    *
    * @param keyEvent the key event
    */
@@ -80,7 +81,7 @@ public class SearchPOIController {
 
   /**
    * Gets the POI location selected by the user.
-   * 
+   *
    * @return selected POI location
    */
   private POILocation getSelectedPOI() {
@@ -89,7 +90,7 @@ public class SearchPOIController {
 
   /**
    * Navigate to the map location of the selected POI.
-   * 
+   *
    * @param poiLocation selected POI location
    */
   public void navigateToPOI(POILocation poiLocation) {

@@ -1,22 +1,21 @@
 package mapsJavaFX;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.VBox;
 import maps.POIType;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Controls the filtering by POIType
  */
 public class TypesPOIController {
+  final List<POIType> selectedList = new ArrayList<>();
   @FXML
   private VBox poiTypeList;
-
-  List<POIType> selectedList = new ArrayList<>();
 
   public TypesPOIController() {
   }

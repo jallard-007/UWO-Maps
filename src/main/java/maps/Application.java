@@ -1,20 +1,21 @@
 package maps;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.File;
-import java.util.*;
-
-import org.json.*;
-
-import java.lang.String;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * The Application class is the top level class for the application
  */
 public class Application {
-  User user;
-  boolean editMode;
   final List<Building> buildings;
   final List<POILocation> poiLocations;
+  User user;
+  boolean editMode;
   List<UserChanges> registeredUsers;
   List<POIType> filter = Arrays.asList(POIType.values());
 
@@ -30,8 +31,7 @@ public class Application {
   }
 
   /**
-   * Reads the main poi meta-data file on disk and loads all data into their
-   * respective classes
+   * Reads the main poi meta-data file on disk and loads all data into their respective classes
    */
   public void loadData() {
     String rootPath = Util.getRootPath(); // gets root folder of application
@@ -67,11 +67,10 @@ public class Application {
 
   /**
    * Signs up a user and then logs in
-   * 
+   *
    * @param username The username to use when creating the user
    * @param password The password for the user
    * @return true if the signup was successful, false otherwise
-   * 
    */
   public boolean signup(String username, String password) {
     if (!Util.createUserFile(username, password)) {
@@ -82,7 +81,7 @@ public class Application {
 
   /**
    * Logs in the user
-   * 
+   *
    * @param username The username to use when logging in
    * @param password The password for the user
    * @return true if the login was successful, false otherwise
@@ -93,7 +92,8 @@ public class Application {
       // username does not exist;
       return false;
     }
-    String fileContent = Util.getJSONFileContents(rootPath + "/appData/users/" + username + ".json");
+    String fileContent = Util.getJSONFileContents(
+        rootPath + "/appData/users/" + username + ".json");
     JSONObject jsonObject = new JSONObject(fileContent);
     if (!password.equals(jsonObject.getString("password"))) {
       // password does not match
@@ -132,7 +132,8 @@ public class Application {
       File[] directoryListing = dir.listFiles();
       if (directoryListing != null) {
         for (File userFile : directoryListing) {
-          this.registeredUsers.add(new UserChanges(new JSONObject(Util.getJSONFileContents(userFile))));
+          this.registeredUsers.add(
+              new UserChanges(new JSONObject(Util.getJSONFileContents(userFile))));
         }
       }
     }
@@ -149,7 +150,7 @@ public class Application {
 
   /**
    * Loads custom POIs
-   * 
+   *
    * @param jsonUser the json representation of the user
    */
   private void loadUserPOIs(JSONObject jsonUser) {
@@ -175,17 +176,6 @@ public class Application {
   }
 
   /**
-   * Whether the user can access the ability to delete, edit, and add buildings,
-   * floors, and built-in POIs (i.e., if they're an admin with access to edit
-   * mode).
-   * 
-   * @return whether the user can enter edit mode
-   */
-  public boolean getEditMode() {
-    return this.editMode;
-  }
-
-  /**
    * Sorts the poiLocations list in ascending order
    */
   private void sortPOIs() {
@@ -203,8 +193,7 @@ public class Application {
   }
 
   /**
-   * Logs out the current user, removing the user's custom POIs and saving any
-   * changes such as
+   * Logs out the current user, removing the user's custom POIs and saving any changes such as
    * favourites, and custom POIs to the user's file
    */
   private UserType logout() {
@@ -246,8 +235,7 @@ public class Application {
   }
 
   /**
-   * Searches for POIs with buildingName, floorName, or POIName/POINum containing
-   * the searchText
+   * Searches for POIs with buildingName, floorName, or POIName/POINum containing the searchText
    *
    * @param searchText the text to search for a POI
    * @return all poi location objects with partial match
@@ -323,7 +311,8 @@ public class Application {
    * @param poiLocation the POILocation to delete
    */
   public void deletePOI(POILocation poiLocation) {
-    if (poiLocation.poi.getPOIType() == POIType.custom || this.user.getUserType() == UserType.admin) {
+    if (poiLocation.poi.getPOIType() == POIType.custom
+        || this.user.getUserType() == UserType.admin) {
       this.user.removeFavourite(poiLocation);
       poiLocation.removePOI();
       this.poiLocations.remove(poiLocation);
@@ -349,22 +338,8 @@ public class Application {
   }
 
   /**
-   * Creates a POILocation object for the poi, adds it to the list, and adds the
-   * poi to the floor
-   *
-   * @param building the building that the floor is in
-   * @param floor    the floor that the poi is on
-   * @param poi      the poi to add
-   */
-  public void addPOI(Building building, Floor floor, POI poi) {
-    this.poiLocations.add(new POILocation(building, floor, poi));
-    this.sortPOIs();
-    floor.addPOI(poi);
-  }
-
-  /**
    * Adds an already-created POI location to the list and adds it to the floor
-   * 
+   *
    * @param poiLocation newly-created POI location
    */
   public void addPOI(POILocation poiLocation) {
@@ -391,7 +366,6 @@ public class Application {
   }
 
   /**
-   * 
    * @param f       floor to look in
    * @param poiName name of the poi
    * @return null if not found
@@ -407,7 +381,7 @@ public class Application {
 
   /**
    * Creates a JSONObject representation of the application object
-   * 
+   *
    * @return json representation the application object
    */
   private JSONObject createJSONObjectOfApplication() {

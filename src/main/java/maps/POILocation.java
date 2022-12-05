@@ -1,8 +1,7 @@
 package maps;
 
 /**
- * Stores the location of a poi, so it can be easily navigated to when selected
- * from a list
+ * Stores the location of a poi, so it can be easily navigated to when selected from a list
  */
 public class POILocation {
   final Building building;

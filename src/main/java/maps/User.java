@@ -3,8 +3,8 @@ package maps;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents a user

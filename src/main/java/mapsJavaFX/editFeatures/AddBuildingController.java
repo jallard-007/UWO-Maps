@@ -1,53 +1,20 @@
 package mapsJavaFX.editFeatures;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import maps.*;
+import maps.Building;
 import mapsJavaFX.ControllerMediator;
 
-import java.lang.String;
-
 public class AddBuildingController {
-  static Stage stage;
-  static Application app;
   public Text buildingNameNewFloor;
-
-  // add building scene
-  @FXML
-  private Button addBuildingButton;
   @FXML
   private TextField newBuildingNameField;
 
-  /**
-   * Called to set up the app
-   * 
-   * @param newApp referring to the map application
-   */
-  public static void setApp(Application newApp) {
-    app = newApp;
-  }
-
-  /**
-   * Sets stage of application
-   * 
-   * @param newStage stage to be set
-   */
-  public static void setStage(Stage newStage) {
-    stage = newStage;
-  }
-
-  /**
-   * @return current application stage
-   */
-  public static Stage getStage() {
-    return stage;
-  }
-
   @FXML
   public void initialize() {
+    Stage stage = EditHelper.getStage();
     stage.setTitle("Add a New Building");
     if (!stage.isShowing()) {
       stage.show();
@@ -59,16 +26,17 @@ public class AddBuildingController {
    */
   public void onAddBuilding() {
     String newName = newBuildingNameField.getText();
-    if (!(newName.equals(""))) {
-      for (Building building : app.getBuildings()) {
-        if (building.getName().equals(newName)) {
-          return;
-        }
-      }
-      Building building = new Building(newName);
-      app.addBuilding(building);
-      ControllerMediator.getInstance().addBuildingTab(building);
-      stage.close();
+    if (newName.equals("")) {
+      return;
     }
+    for (Building building : EditHelper.getApp().getBuildings()) {
+      if (building.getName().equals(newName)) {
+        return;
+      }
+    }
+    Building building = new Building(newName);
+    EditHelper.getApp().addBuilding(building);
+    ControllerMediator.getInstance().addBuildingTab(building);
+    EditHelper.getStage().close();
   }
 }

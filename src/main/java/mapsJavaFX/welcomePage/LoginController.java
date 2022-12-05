@@ -1,7 +1,5 @@
 package mapsJavaFX.welcomePage;
 
-import java.io.IOException;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,13 +8,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.text.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import maps.Application;
 import mapsJavaFX.ControllerMediator;
 import mapsJavaFX.MainController;
 import mapsJavaFX.Util;
+
+import java.io.IOException;
 
 /**
  * Controls the Login page
@@ -48,13 +48,12 @@ public class LoginController {
    */
   @FXML
   private Text loginFeedBackText;
-  
+
 
   /**
-   * Method called when the user clicks the log in button; checks the validity of
-   * their username and password, and takes the user to the main view of the
-   * application
-   * 
+   * Method called when the user clicks the log in button; checks the validity of their username and
+   * password, and takes the user to the main view of the application
+   *
    * @throws IOException if the fxml file is missing
    */
   public void goToApplication() throws IOException {
@@ -72,7 +71,8 @@ public class LoginController {
     Stage stage = (Stage) logIn.getScene().getWindow();
     if (!app.login(username.getText(), password.getText())) {
       // username / password incorrect
-      loginFeedBackText.setText("Invalid login credentials. Please try again or select sign up to make a new account.");
+      loginFeedBackText.setText(
+          "Invalid login credentials. Please try again or select sign up to make a new account.");
       return;
     }
     stage.close();

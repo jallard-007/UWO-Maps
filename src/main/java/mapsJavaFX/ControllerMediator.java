@@ -1,19 +1,14 @@
 package mapsJavaFX;
 
+import javafx.scene.control.Tab;
+import maps.*;
+
 import java.util.List;
 
-import javafx.scene.control.Tab;
-import maps.Application;
-import maps.Building;
-import maps.Floor;
-import maps.POILocation;
-import maps.POIType;
-
 /**
- * Allows interaction between different controllers without having
- * to store a reference to a controller within another controller.
- * Also holds a reference to the Application object so that data does not
- * need to be reloaded when changing scenes
+ * Allows interaction between different controllers without having to store a reference to a
+ * controller within another controller. Also holds a reference to the Application object so that
+ * data does not need to be reloaded when changing scenes
  */
 public class ControllerMediator {
   private MapViewController mapViewController;
@@ -21,9 +16,19 @@ public class ControllerMediator {
   private SearchPOIController searchPOIController;
   private Application app;
 
+  private ControllerMediator() {
+  }
+
+  /**
+   * @return the instance of this class
+   */
+  public static ControllerMediator getInstance() {
+    return ControllerMediatorHolder.INSTANCE;
+  }
+
   /**
    * Registers a MapViewController
-   * 
+   *
    * @param controller the controller to register
    */
   void registerMapViewController(MapViewController controller) {
@@ -32,7 +37,7 @@ public class ControllerMediator {
 
   /**
    * Registers a FavouritesController
-   * 
+   *
    * @param controller the controller to register
    */
   void registerFavouritesController(FavouritesController controller) {
@@ -41,7 +46,7 @@ public class ControllerMediator {
 
   /**
    * Registers a SearchPOIController
-   * 
+   *
    * @param controller the controller to register
    */
   void registerSearchPOIController(SearchPOIController controller) {
@@ -50,7 +55,7 @@ public class ControllerMediator {
 
   /**
    * Registers the Application object
-   * 
+   *
    * @param app the app to register
    */
   void registerApplication(Application app) {
@@ -66,7 +71,7 @@ public class ControllerMediator {
 
   /**
    * Tells the registered MapViewController to navigate to a poi
-   * 
+   *
    * @param poiLocation the poi to go to
    * @return the POIButton object associated with the poi
    */
@@ -76,7 +81,7 @@ public class ControllerMediator {
 
   /**
    * Tells the registered MapViewController to filter pois
-   * 
+   *
    * @param selectedPOIType a list of POITypes to show
    */
   void mapViewControllerFilterList(List<POIType> selectedPOIType) {
@@ -125,9 +130,8 @@ public class ControllerMediator {
   }
 
   /**
-   * Tells the registered MapviewController to remove the POIButton associated
-   * with poiLocation
-   * 
+   * Tells the registered MapviewController to remove the POIButton associated with poiLocation
+   *
    * @param poiLocation the poi to remove
    */
   void mapViewControllerRemovePOIButton(POILocation poiLocation) {
@@ -136,7 +140,7 @@ public class ControllerMediator {
 
   /**
    * Updates where the button is stored
-   * 
+   *
    * @param oldType   old POIType
    * @param newType   new POIType
    * @param poiButton the button to move in storage
@@ -147,9 +151,8 @@ public class ControllerMediator {
   }
 
   /**
-   * Tells the registered MapViewController to add poiButton to it's approriate
-   * floor
-   * 
+   * Tells the registered MapViewController to add poiButton to it's approriate floor
+   *
    * @param poiButton the button to add
    */
   public void mapViewControllerAddPOIButton(POIButton poiButton) {
@@ -158,16 +161,6 @@ public class ControllerMediator {
 
   public void addFloorTab(Tab building, Floor floor) {
     mapViewController.addFloorTab(building, floor);
-  }
-
-  private ControllerMediator() {
-  }
-
-  /**
-   * @return the instance of this class
-   */
-  public static ControllerMediator getInstance() {
-    return ControllerMediatorHolder.INSTANCE;
   }
 
   /**

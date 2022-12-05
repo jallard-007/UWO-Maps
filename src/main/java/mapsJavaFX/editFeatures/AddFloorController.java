@@ -1,25 +1,21 @@
 package mapsJavaFX.editFeatures;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
-import maps.*;
-
-import java.io.File;
-import java.lang.String;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import maps.Building;
+import maps.Floor;
 import mapsJavaFX.ControllerMediator;
 
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 public class AddFloorController {
-  private static Application app;
-  private static Stage stage;
   private Tab selectedBldTab;
   private File newImage;
   private Building selectedBuilding;
@@ -29,35 +25,6 @@ public class AddFloorController {
   private Text buildingNameNewFloor;
   @FXML
   private TextField newLevelField;
-  @FXML
-  private Button selectImage;
-  @FXML
-  private Button addFloorButton;
-
-  /**
-   * Called to set up the app
-   * 
-   * @param newApp referring to the map application
-   */
-  public static void setApp(Application newApp) {
-    app = newApp;
-  }
-
-  /**
-   * Sets stage of application
-   * 
-   * @param newStage stage to be set
-   */
-  public static void setStage(Stage newStage) {
-    stage = newStage;
-  }
-
-  /**
-   * @return current application stage
-   */
-  public static Stage getStage() {
-    return stage;
-  }
 
   @FXML
   public void initialize() {
@@ -70,6 +37,7 @@ public class AddFloorController {
         selectedBuilding = building;
       }
     }
+    Stage stage = EditHelper.getStage();
     stage.setTitle("Add New Floor");
     if (!stage.isShowing()) {
       stage.show();
@@ -77,7 +45,8 @@ public class AddFloorController {
   }
 
   public void onAddFloor() {
-    if ((newImage == null) || (newFloorNameField.getText().equals("")) || (newLevelField.getText().equals(""))) {
+    if ((newImage == null) || (newFloorNameField.getText().equals("")) || (newLevelField.getText()
+        .equals(""))) {
       return; // not valid input
     }
 
@@ -90,9 +59,11 @@ public class AddFloorController {
 
     // move the image file to the applicaiton directory
     String rootPath = maps.Util.getRootPath();
-    String relativePath = "/appData/maps/" + selectedBuilding.getName() + "Floor" + newLevelField.getText() + ".png";
+    String relativePath =
+        "/appData/maps/" + selectedBuilding.getName() + "Floor" + newLevelField.getText() + ".png";
     try {
-      Files.copy(newImage.toPath(), new File(rootPath + relativePath).toPath(), StandardCopyOption.REPLACE_EXISTING);
+      Files.copy(newImage.toPath(), new File(rootPath + relativePath).toPath(),
+          StandardCopyOption.REPLACE_EXISTING);
     } catch (Exception e) {
       return; // error adding file
     }
@@ -100,20 +71,21 @@ public class AddFloorController {
     // create the new floor
     Floor newFloor = new Floor(newLevel, newFloorNameField.getText(), relativePath);
     // and add it to the app
-    app.addFloor(selectedBuilding, newFloor);
+    EditHelper.getApp().addFloor(selectedBuilding, newFloor);
     ControllerMediator.getInstance().addFloorTab(selectedBldTab, newFloor);
     // add it to the mapview
-    stage.close();
+    EditHelper.getStage().close();
   }
 
   public void onSelectImage() {
     // create a file chooser
     FileChooser fileChooser = new FileChooser();
     // set the fileChooser to filter for png files
-    FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.png");
+    FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PNG files (*.png)",
+        "*.png");
     fileChooser.getExtensionFilters().add(extFilter);
     fileChooser.setTitle("Select Floor Image");
     // fileChooser.setInitialDirectory(new File("."));
-    newImage = fileChooser.showOpenDialog(stage);
+    newImage = fileChooser.showOpenDialog(EditHelper.getStage());
   }
 }

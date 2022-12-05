@@ -7,11 +7,11 @@ import org.json.JSONObject;
  * Represents a POI. Room number, type, and position are the minimum required to create a poi
  */
 public class POI {
+  final Pair position;
   String roomNumber;
   POIType type;
   String name;
   Integer capacity;
-  final Pair position;
   String information;
   String hoursOfOperation;
 
@@ -42,8 +42,8 @@ public class POI {
 
   /**
    * @param roomNumber room number
-   * @param poiType poi type
-   * @param position coordinates of poi
+   * @param poiType    poi type
+   * @param position   coordinates of poi
    */
   public POI(String roomNumber, POIType poiType, Pair position) {
     this.roomNumber = roomNumber;
@@ -56,45 +56,8 @@ public class POI {
     this.position.setY(y);
   }
 
-  /**
-   * @param roomNumber room number of POI
-   */
-  public void setRoomNumber(String roomNumber) {
-    this.roomNumber = roomNumber;
-  }
-
-  /**
-   * @param name name of POI
-   */
-  public void setName(String name) {
-    this.name = name;
-  }
-
   public void setType(POIType type) {
     this.type = type;
-  }
-
-  /**
-   * @param information information about the POI
-   */
-
-
-  public void setInformation(String information) {
-    this.information = information;
-  }
-
-  /**
-   * @param capacity capacity of the POI
-   */
-  public void setCapacity(Integer capacity) {
-    this.capacity = capacity;
-  }
-
-  /**
-   * @param hoursOfOperation hours of operation
-   */
-  public void setHoursOfOperation(String hoursOfOperation) {
-    this.hoursOfOperation = hoursOfOperation;
   }
 
   /**
@@ -122,9 +85,9 @@ public class POI {
 
   /**
    * Creates a json representation of a poi with custom type
-   * 
+   *
    * @param building the building that this poi resides in
-   * @param floor the floor that this poi is on
+   * @param floor    the floor that this poi is on
    * @return a json object representation of this POI to be stored in a users file
    */
   public JSONObject createJSONObjectOfCustomPOI(Building building, Floor floor) {
@@ -149,6 +112,13 @@ public class POI {
   }
 
   /**
+   * @param roomNumber room number of POI
+   */
+  public void setRoomNumber(String roomNumber) {
+    this.roomNumber = roomNumber;
+  }
+
+  /**
    * @return the name of the room if its set, otherwise the room number
    */
   public String getRoomNameOrNumber() {
@@ -166,6 +136,13 @@ public class POI {
   }
 
   /**
+   * @param name name of POI
+   */
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  /**
    * @return the enum value of this POI's type
    */
   public POIType getPOIType() {
@@ -180,6 +157,15 @@ public class POI {
   }
 
   /**
+   * @param information information about the POI
+   */
+
+
+  public void setInformation(String information) {
+    this.information = information;
+  }
+
+  /**
    * @return capacity of the POI
    */
   public Integer getCapacity() {
@@ -187,10 +173,24 @@ public class POI {
   }
 
   /**
+   * @param capacity capacity of the POI
+   */
+  public void setCapacity(Integer capacity) {
+    this.capacity = capacity;
+  }
+
+  /**
    * @return hours of operation
    */
   public String getHoursOfOperation() {
     return hoursOfOperation;
+  }
+
+  /**
+   * @param hoursOfOperation hours of operation
+   */
+  public void setHoursOfOperation(String hoursOfOperation) {
+    this.hoursOfOperation = hoursOfOperation;
   }
 
   /**

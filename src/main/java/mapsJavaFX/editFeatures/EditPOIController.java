@@ -2,41 +2,25 @@ package mapsJavaFX.editFeatures;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-import maps.*;
+import maps.POI;
+import maps.POILocation;
+import maps.POIType;
+import maps.UserType;
 import mapsJavaFX.ControllerMediator;
 import mapsJavaFX.POIButton;
 import mapsJavaFX.POIDescriptionController;
 
 import java.util.Arrays;
 
-public class EditController {
-  public static Stage stage;
+public class EditPOIController {
   /**
-   * The button that allows the user to edit the POI position.
-   */
-  @FXML
-  private Button btnEditPosition;
-  /**
-   * List of all possible choices of POI types; base users may only may [custom]
-   * POIs
+   * List of all possible choices of POI types; base users may only may [custom] POIs
    */
   @FXML
   private ChoiceBox<POIType> newPOIType;
-  /**
-   * The Save button on the editing page.
-   */
-  @FXML
-  private Button btnSave;
-  /**
-   * the Cancel button on the editing page
-   */
-  @FXML
-  private Button btnCancel;
   /**
    * the text box on the UI where the user enters the new room number.
    */
@@ -53,14 +37,12 @@ public class EditController {
   @FXML
   private TextField newRoomCapacity;
   /**
-   * the text box on the UI where the user enters the new hours of operation of
-   * the location.
+   * the text box on the UI where the user enters the new hours of operation of the location.
    */
   @FXML
   private TextField newHours;
   /**
-   * the text box on the UI where the user enters any additional information for
-   * the POI.
+   * the text box on the UI where the user enters any additional information for the POI.
    */
   @FXML
   private TextArea newInformation;
@@ -69,10 +51,6 @@ public class EditController {
    */
   private POILocation poiLocation;
   private POIButton poiButton;
-
-  public static void setStage(Stage newStage) {
-    stage = newStage;
-  }
 
   /**
    * Retrieves the POI the user wants to edit
@@ -106,16 +84,17 @@ public class EditController {
       this.newInformation.setText(info);
     }
 
-    if (ControllerMediator.getInstance().getApplication().getUser().getUserType() == UserType.base) {
+    if (ControllerMediator.getInstance().getApplication().getUser().getUserType()
+        == UserType.base) {
       newPOIType.setDisable(true);
       newPOIType.getSelectionModel().selectLast();
     } else {
       newPOIType.getSelectionModel().select(poi.getPOIType().ordinal());
     }
 
-    stage.setOnHiding(event -> {
+    EditHelper.getStage().setOnHiding(event -> {
       this.poiButton.removeDraggable();
-      stage.setScene(null);
+      EditHelper.getStage().setScene(null);
     });
   }
 
@@ -144,10 +123,11 @@ public class EditController {
     // storages must be updated
     POIType oldType = poi.getPOIType();
     POIType newType = newPOIType.getSelectionModel().getSelectedItem();
+    ControllerMediator controllerMediator = ControllerMediator.getInstance();
     if (oldType != newType) {
       // The button must be updated before the new type is set
-      ControllerMediator.getInstance().mapViewControllerUpdateButtonStorage(oldType, newType, poiButton);
       poi.setType(newType);
+      controllerMediator.mapViewControllerUpdateButtonStorage(oldType, newType, poiButton);
       poiLocation.getFloor().updatePOIStorage(oldType, newType, poi);
     }
 
@@ -172,26 +152,26 @@ public class EditController {
     }
     // Add POI location to list and display new POI button on map if the POI
     // location being edited is a newly-created POI
-    if (ControllerMediator.getInstance().getApplication().searchForPOI(poiLocation.toString()).isEmpty()) {
-      ControllerMediator.getInstance().getApplication().addPOI(poiLocation);
-      ControllerMediator.getInstance().mapViewControllerAddPOIButton(poiButton);
+    if (controllerMediator.getApplication().searchForPOI(poiLocation.toString()).isEmpty()) {
+      controllerMediator.getApplication().addPOI(poiLocation);
+      controllerMediator.mapViewControllerAddPOIButton(poiButton);
     }
     // Refresh both the favourites and search display to reflect the deletion.
-    ControllerMediator.getInstance().favouritesControllerRefreshList();
-    ControllerMediator.getInstance().searchPOIControllerRefreshList();
+    controllerMediator.favouritesControllerRefreshList();
+    controllerMediator.searchPOIControllerRefreshList();
     this.poiButton.updateButtonDisplay();
 
     // exit pop-up
-    stage.hide();
+    EditHelper.getStage().hide();
   }
 
   /**
-   * Return to the POI's description popup if the user clicks on the [Cancel]
-   * button in the editing window.
+   * Return to the POI's description popup if the user clicks on the [Cancel] button in the editing
+   * window.
    */
   public void onCancel() {
     this.poiButton.removeDraggable();
-    stage.setScene(null);
+    EditHelper.getStage().setScene(null);
     new POIDescriptionController(this.poiButton, this.poiLocation);
   }
 }

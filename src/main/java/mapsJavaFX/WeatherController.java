@@ -2,16 +2,15 @@ package mapsJavaFX;
 
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
+import maps.Application;
+import org.json.JSONObject;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
-import org.json.JSONObject;
-import maps.Application;
 
 /**
- * Retrieve information pertaining to the current weather in London, ON and
- * display the information
+ * Retrieve information pertaining to the current weather in London, ON and display the information
  * to the user
  */
 public class WeatherController {
@@ -25,10 +24,9 @@ public class WeatherController {
 
   /**
    * Get JSON object from openweathermap API
-   * 
+   *
    * @param urlWeather the URL to make a GET request with
-   * @return the JSON object containing all the retrieved data pertaining to the
-   *         current weather
+   * @return the JSON object containing all the retrieved data pertaining to the current weather
    */
   public JSONObject fetchWeatherData(String urlWeather) {
     try {
@@ -63,14 +61,14 @@ public class WeatherController {
         return new JSONObject(weatherInfo.toString());
       }
     } catch (Exception e) {
-      System.out.println("Unable to fetch data from weather API"); // print out what is returned from our exception
+      System.out.println(
+          "Unable to fetch data from weather API"); // print out what is returned from our exception
     }
     return null; // return null if the try block fails
   }
 
   /**
-   * Get the current weather in London from the openweathermap API, and then
-   * extract the data to
+   * Get the current weather in London from the openweathermap API, and then extract the data to
    * display to the user, setting the text to show the current weather
    */
 

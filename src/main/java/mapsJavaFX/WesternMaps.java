@@ -1,19 +1,18 @@
 package mapsJavaFX;
 
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
-import javafx.scene.Scene;
+import maps.Application;
+import mapsJavaFX.editFeatures.EditHelper;
 
 import java.io.IOException;
 
-import maps.Application;
-import mapsJavaFX.editFeatures.AddPOIController;
-
 /**
- * The WesternMaps class is dedicated to setting up the stage, corresponding
- * scenes, and handling start up and closure of the application
+ * The WesternMaps class is dedicated to setting up the stage, corresponding scenes, and handling
+ * start up and closure of the application
  */
 public class WesternMaps extends javafx.application.Application {
 
@@ -22,8 +21,8 @@ public class WesternMaps extends javafx.application.Application {
   }
 
   /**
-   * starts up the application by setting up the appropriate stage and scene as
-   * well as handling the event in which the user closes the application
+   * starts up the application by setting up the appropriate stage and scene as well as handling the
+   * event in which the user closes the application
    *
    * @param stage the stage which will be used to display the scene to the user
    * @throws IOException if a fxml file does not exist
@@ -51,11 +50,10 @@ public class WesternMaps extends javafx.application.Application {
   }
 
   /**
-   * Method that prompts the user with a confirmation message when the user wants
-   * to exit the application.
-   * 
-   * @param stage the stage that the user is currently on when they click the exit
-   *              button.
+   * Method that prompts the user with a confirmation message when the user wants to exit the
+   * application.
+   *
+   * @param stage the stage that the user is currently on when they click the exit button.
    */
   public void exit(Stage stage) {
     stage.setFullScreen(false);
@@ -69,8 +67,8 @@ public class WesternMaps extends javafx.application.Application {
       ControllerMediator.getInstance().getApplication().save();
       System.out.println("The program was exited successfully.");
       stage.close();
-      if (AddPOIController.getStage() != null) {
-        AddPOIController.getStage().close();
+      if (EditHelper.getStage() != null) {
+        EditHelper.getStage().close();
       }
     }
   }

@@ -4,7 +4,6 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -16,14 +15,9 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Controllers the addPOI window that popus up when the addPOI button is
- * selected
+ * Controllers the addPOI window that popus up when the addPOI button is selected
  */
 public class AddPOIController {
-  static Stage stage;
-  static Application app;
-  @FXML
-  private Button btnContinue;
   @FXML
   private ChoiceBox<Floor> floorName;
   @FXML
@@ -31,36 +25,12 @@ public class AddPOIController {
   private Building selectedBuilding;
 
   /**
-   * Called to set up the app
-   * 
-   * @param newApp referring to the map application
-   */
-  public static void setApp(Application newApp) {
-    app = newApp;
-  }
-
-  /**
-   * Sets stage of application
-   * 
-   * @param newStage stage to be set
-   */
-  public static void setStage(Stage newStage) {
-    stage = newStage;
-  }
-
-  /**
-   * @return current application stage
-   */
-  public static Stage getStage() {
-    return stage;
-  }
-
-  /**
-   * Sets up interface: gives user options to select the floor that their new POI
-   * will be associated with.
+   * Sets up interface: gives user options to select the floor that their new POI will be associated
+   * with.
    */
   @FXML
   public void initialize() {
+    Stage stage = EditHelper.getStage();
     // Get current building selected in the map view
     String strSelectedBuilding = ControllerMediator.getInstance().mapViewControllerGetBuildingTab();
     if (strSelectedBuilding == null) {
@@ -89,8 +59,7 @@ public class AddPOIController {
   }
 
   /**
-   * Pressing [Continue] button takes user to input information about their new
-   * POI.
+   * Pressing [Continue] button takes user to input information about their new POI.
    */
   public void onContinue() {
     Floor selectedFloor = floorName.getSelectionModel().getSelectedItem();
@@ -99,17 +68,17 @@ public class AddPOIController {
     double y = selectedFloor.getImage().getHeight();
     POILocation poiLocation = new POILocation(selectedBuilding, selectedFloor,
         new POI("New POI", POIType.custom, new Pair(x / 2, y / 2)));
-    app.addPOI(poiLocation);
+    EditHelper.getApp().addPOI(poiLocation);
     try {
       FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edit.fxml"));
       Scene scene = new Scene(fxmlLoader.load());
-      EditController editController = fxmlLoader.getController();
+      EditPOIController editPOIController = fxmlLoader.getController();
       POIButton poiButton = new POIButton(poiLocation);
       ControllerMediator.getInstance().mapViewControllerAddPOIButton(poiButton);
       ControllerMediator.getInstance().mapViewControllerGoToPOI(poiLocation);
-      editController.setPoiLocation(poiLocation, poiButton);
-      stage.setScene(scene);
-      stage.show();
+      editPOIController.setPoiLocation(poiLocation, poiButton);
+      EditHelper.getStage().setScene(scene);
+      EditHelper.getStage().show();
     } catch (IOException e) {
       throw new RuntimeException(e);
     }

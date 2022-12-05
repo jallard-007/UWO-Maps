@@ -1,71 +1,48 @@
 package mapsJavaFX;
 
-import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import maps.*;
-import mapsJavaFX.editFeatures.*;
+import mapsJavaFX.editFeatures.EditHelper;
+import mapsJavaFX.editFeatures.EditPOIController;
+
+import java.io.IOException;
 
 /**
- * Controller to handle the popup window displaying information about a selected
- * POI.
+ * Controller to handle the popup window displaying information about a selected POI.
  */
 public class POIDescriptionController {
   /**
-   * Static Stage object which is shared between POIDescriptionController,
-   * AddPOIController, and EditController
+   * Static Stage object which is shared between POIDescriptionController, AddPOIController, and
+   * EditController
    */
   final static Stage stage = new Stage();
+  static Application app;
+
   static {
     stage.initStyle(StageStyle.UTILITY);
   }
-  static Application app;
+
   private final POILocation poiLocation;
   private final POIButton poiButton;
 
   /**
-   * Called to set up the app, and the dimensions of the pop-up window for future
-   * use
+   * Constructor for the class, stages the popup window and sets up all its button functionalities
+   * (edit, favourite, remove)
    *
-   * @param newApp referring to the map application
-   */
-  public static void setApp(Application newApp) {
-    app = newApp;
-    AddPOIController.setStage(stage);
-    AddFloorController.setStage(stage);
-    AddBuildingController.setStage(stage);
-
-    EditController.setStage(stage);
-    EditFloorController.setStage(stage);
-    EditBuildingController.setStage(stage);
-
-    DeleteFloorController.setStage(stage);
-    DeleteBuildingController.setStage(stage);
-    stage.setMaxWidth(600);
-    stage.setMaxHeight(500);
-  }
-
-  /**
-   * Constructor for the class, stages the popup window and sets up all its button
-   * functionalities (edit, favourite, remove)
-   * 
-   * @param poiLocation the POI location selected by the user to view its
-   *                    information
+   * @param poiLocation the POI location selected by the user to view its information
    */
   public POIDescriptionController(POIButton poiButton, POILocation poiLocation) {
     this.poiButton = poiButton;
     this.poiLocation = poiLocation;
     stage.toFront();
     Scene s = stage.getScene();
-    if (s != null && s.getRoot().getClass() == AnchorPane.class) {
-      // poi is being edited and cannot switch, otherwise the button will be movable,
-      // even not when editing
+    if (s != null && s.getRoot().getClass() == CustomPane.class) {
       return;
     }
     stage.setOnHiding(null);
@@ -140,14 +117,26 @@ public class POIDescriptionController {
   }
 
   /**
+   * Called to set up the app, and the dimensions of the pop-up window for future use
+   *
+   * @param newApp referring to the map application
+   */
+  public static void setApp(Application newApp) {
+    app = newApp;
+    EditHelper.setStage(stage);
+    stage.setMaxWidth(600);
+    stage.setMaxHeight(500);
+  }
+
+  /**
    * Handles the edit button being clicked
    */
   private void onEditButton() {
     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edit.fxml"));
     try {
       Scene scene = new Scene(fxmlLoader.load());
-      EditController editController = fxmlLoader.getController();
-      editController.setPoiLocation(poiLocation, poiButton);
+      EditPOIController editPOIController = fxmlLoader.getController();
+      editPOIController.setPoiLocation(poiLocation, poiButton);
       stage.setScene(scene);
       stage.show();
     } catch (IOException e) {

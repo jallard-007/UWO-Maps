@@ -1,13 +1,13 @@
 package mapsJavaFX;
 
 import maps.Application;
-import mapsJavaFX.editFeatures.*;
+import mapsJavaFX.editFeatures.EditHelper;
 
 public class Util {
   /**
-   * Sets all controllers, adding them to the ControllerMediator and/or setting
-   * the Application object
-   * 
+   * Sets all controllers, adding them to the ControllerMediator and/or setting the Application
+   * object
+   *
    * @param controller the main controller
    * @param app        the application
    */
@@ -15,20 +15,14 @@ public class Util {
     ControllerMediator.getInstance().registerMapViewController(controller.getMapViewController());
     ControllerMediator.getInstance()
         .registerFavouritesController(controller.getFavouritesController());
-    ControllerMediator.getInstance().registerSearchPOIController(controller.getSearchPOIController());
+    ControllerMediator.getInstance()
+        .registerSearchPOIController(controller.getSearchPOIController());
 
     POIButton.setApp(app);
     POIDescriptionController.setApp(app);
-    AddPOIController.setApp(app);
-    EditBuildingController.setApp(app);
-    EditFloorController.setApp(app);
-    AddFloorController.setApp(app);
-    AddBuildingController.setApp(app);
-    DeleteBuildingController.setApp(app);
-    DeleteFloorController.setApp(app);
+    EditHelper.setApp(app);
 
-    // set app in the main controller
-    controller.setApp(app);
+    controller.setPerms(app.getUser().getUserType());
 
     controller.getMapViewController().setApp(app);
     controller.getSearchPOIController().setApp(app);

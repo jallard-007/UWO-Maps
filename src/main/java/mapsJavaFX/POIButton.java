@@ -5,11 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.input.MouseButton;
 import javafx.util.Duration;
-import maps.Application;
-import maps.POI;
-import maps.POILocation;
-import maps.POIType;
-import maps.Pair;
+import maps.*;
 
 /**
  * Used to represent POIs visually and interactively
@@ -17,33 +13,15 @@ import maps.Pair;
 public class POIButton extends Button {
   static Application app;
   static Slider zoom;
-  final POILocation poiLocation;
   private static double startX;
   private static double startY;
+  final POILocation poiLocation;
   private final double imageWidth;
   private final double imageHeight;
 
   /**
-   * Static method to set the Application object for all POIButtons
-   * 
-   * @param newApp the Application
-   */
-  public static void setApp(Application newApp) {
-    app = newApp;
-  }
-
-  /**
-   * Static method to set the Slider object for all POIButtons
-   * 
-   * @param newZoom the Slider
-   */
-  public static void setSlider(Slider newZoom) {
-    zoom = newZoom;
-  }
-
-  /**
    * Constructor
-   * 
+   *
    * @param poiLocation the poi to base the button on
    */
   public POIButton(POILocation poiLocation) {
@@ -80,8 +58,25 @@ public class POIButton extends Button {
   }
 
   /**
-   * Sets the colour based on the POIType of the POI object associated with this
-   * button
+   * Static method to set the Application object for all POIButtons
+   *
+   * @param newApp the Application
+   */
+  public static void setApp(Application newApp) {
+    app = newApp;
+  }
+
+  /**
+   * Static method to set the Slider object for all POIButtons
+   *
+   * @param newZoom the Slider
+   */
+  public static void setSlider(Slider newZoom) {
+    zoom = newZoom;
+  }
+
+  /**
+   * Sets the colour based on the POIType of the POI object associated with this button
    */
   public void updateButtonDisplay() {
     POIType poiType = this.poiLocation.getPOI().getPOIType();
@@ -99,7 +94,7 @@ public class POIButton extends Button {
     }
   }
 
-  public void onSelectButtonDisplay(){
+  public void onSelectButtonDisplay() {
     this.setStyle("-fx-border-color: black; -fx-background-color: red");
     PauseTransition pause = new PauseTransition(Duration.seconds(2));
     pause.setOnFinished(event -> this.updateButtonDisplay());
@@ -107,8 +102,8 @@ public class POIButton extends Button {
   }
 
   /**
-   * Saves the current position of the button back to the POI object
-   * Does not allow the POI to be outside of the image
+   * Saves the current position of the button back to the POI object Does not allow the POI to be
+   * outside of the image
    */
   public void savePosition() {
     POI poi = this.poiLocation.getPOI();
@@ -130,8 +125,7 @@ public class POIButton extends Button {
   }
 
   /**
-   * Adds the ability to be moved via holding left mouse button on the button and
-   * moving the mouse
+   * Adds the ability to be moved via holding left mouse button on the button and moving the mouse
    */
   public void makeDraggable() {
     this.setOnMousePressed(e -> {

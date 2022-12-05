@@ -2,26 +2,31 @@ package mapsJavaFX;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import javafx.collections.*;
-import javafx.scene.Node;
-import javafx.scene.control.ButtonBar;
-import maps.*;
-import mapsJavaFX.editFeatures.AddPOIController;
+import maps.UserType;
+import mapsJavaFX.editFeatures.EditHelper;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Primarily used to get other controllers
  */
 public class MainController {
   @FXML
-  private Button addPOI;
+  private Button addBuilding;
+  @FXML
+  private Button addFloor;
+  @FXML
+  private HBox buildingButtons;
+  @FXML
+  private HBox floorButtons;
   @FXML
   private StackPane mapView;
   @FXML
@@ -34,25 +39,37 @@ public class MainController {
   private SearchPOIController searchPOIController;
   @FXML
   private FavouritesController favouritesController;
-  Application app;
-  @FXML
-  private ButtonBar addBar;
-  @FXML
-  private ButtonBar floorBar;
-  @FXML
-  private ButtonBar bldBar;
-  @FXML
-  private Button addBld;
-  @FXML
-  private Button editBld;
-  @FXML
-  private Button delBld;
-  @FXML
-  private Button addFloor;
-  @FXML
-  private Button editFloor;
-  @FXML
-  private Button delFloor;
+
+  /**
+   * Checks if a POI is being edited by checking the main layout node's class. This checks the
+   * pop-up stage
+   *
+   * @return true if a poi is in edit mode, false otherwise
+   */
+  private static boolean poiBeingEdited() {
+    Scene s = EditHelper.getStage().getScene();
+    if (s != null && s.getRoot().getClass() == CustomPane.class) {
+      EditHelper.getStage().toFront();
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * Changes the scene by loading an fxml file and applying it to the popup stage
+   *
+   * @param fxmlFileName the name of the fxml file
+   */
+  public static void changeScene(String fxmlFileName) {
+    Stage stage = EditHelper.getStage();
+    try {
+      FXMLLoader fxmlLoader = new FXMLLoader(MainController.class.getResource(fxmlFileName));
+      Scene scene = new Scene(fxmlLoader.load());
+      stage.setScene(scene);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
 
   /**
    * @return SearchPOIController loaded with this controller
@@ -79,157 +96,63 @@ public class MainController {
    * On add POI button event handler
    */
   public void onAddPOI() {
-    try {
-      Stage stage = AddPOIController.getStage();
-      Scene s = stage.getScene();
-      if (s != null && s.getRoot().getClass() == AnchorPane.class) {
-        // poi is being edited and cannot switch, otherwise the button will be movable,
-        // even not when editing
-        stage.toFront();
-
-        return;
-      }
-      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/addPOI.fxml"));
-      Scene scene = new Scene(fxmlLoader.load());
-      stage.setScene(scene);
-    } catch (IOException e) {
-      throw new RuntimeException(e);
+    if (!poiBeingEdited()) {
+      changeScene("/addPOI.fxml");
     }
   }
 
   public void onAddFloor() {
-    try {
-      Stage stage = AddPOIController.getStage();
-      Scene s = stage.getScene();
-      if (s != null && s.getRoot().getClass() == AnchorPane.class) {
-        // poi is being edited and cannot switch, otherwise the button will be movable,
-        // even not when editing
-        stage.toFront();
-        return;
-      }
-      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/addFloor.fxml"));
-      Scene scene = new Scene(fxmlLoader.load());
-      stage.setScene(scene);
-    } catch (IOException e) {
-      throw new RuntimeException(e);
+    if (!poiBeingEdited()) {
+      changeScene("/addFloor.fxml");
     }
   }
 
   public void onEditFloor() {
-    try {
-      Stage stage = AddPOIController.getStage();
-      Scene s = stage.getScene();
-      if (s != null && s.getRoot().getClass() == AnchorPane.class) {
-        // poi is being edited and cannot switch, otherwise the button will be movable,
-        // even not when editing
-        stage.toFront();
-
-        return;
-      }
-      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/editFloor.fxml"));
-      Scene scene = new Scene(fxmlLoader.load());
-      stage.setScene(scene);
-    } catch (IOException e) {
-      throw new RuntimeException(e);
+    if (!poiBeingEdited()) {
+      changeScene("/editFloor.fxml");
     }
-
   }
 
   public void onDelFloor() {
-    try {
-      Stage stage = AddPOIController.getStage();
-      Scene s = stage.getScene();
-      if (s != null && s.getRoot().getClass() == AnchorPane.class) {
-        // poi is being edited and cannot switch, otherwise the button will be movable,
-        // even not when editing
-        stage.toFront();
-
-        return;
-      }
-      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/deleteFloor.fxml"));
-      Scene scene = new Scene(fxmlLoader.load());
-      stage.setScene(scene);
-    } catch (IOException e) {
-      throw new RuntimeException(e);
+    if (!poiBeingEdited()) {
+      changeScene("/deleteFloor.fxml");
     }
   }
 
   public void onAddBld() {
-    try {
-      Stage stage = AddPOIController.getStage();
-      Scene s = stage.getScene();
-      if (s != null && s.getRoot().getClass() == AnchorPane.class) {
-        // poi is being edited and cannot switch, otherwise the button will be movable,
-        // even not when editing
-        stage.toFront();
-
-        return;
-      }
-      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/addBuilding.fxml"));
-      Scene scene = new Scene(fxmlLoader.load());
-      stage.setScene(scene);
-      stage.centerOnScreen();
-    } catch (IOException e) {
-      throw new RuntimeException(e);
+    if (!poiBeingEdited()) {
+      changeScene("/addBuilding.fxml");
     }
   }
 
   public void onEditBld() {
-    try {
-      Stage stage = AddPOIController.getStage();
-      Scene s = stage.getScene();
-      if (s != null && s.getRoot().getClass() == AnchorPane.class) {
-        // poi is being edited and cannot switch, otherwise the button will be movable,
-        // even not when editing
-        stage.toFront();
-
-        return;
-      }
-      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/editBuilding.fxml"));
-      Scene scene = new Scene(fxmlLoader.load());
-      stage.setScene(scene);
-    } catch (IOException e) {
-      throw new RuntimeException(e);
+    if (!poiBeingEdited()) {
+      changeScene("/editBuilding.fxml");
     }
   }
 
   public void onDelBld() {
-    try {
-      Stage stage = AddPOIController.getStage();
-      Scene s = stage.getScene();
-      if (s != null && s.getRoot().getClass() == AnchorPane.class) {
-        // poi is being edited and cannot switch, otherwise the button will be movable,
-        // even not when editing
-        stage.toFront();
-
-        return;
-      }
-      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/deleteBuilding.fxml"));
-      Scene scene = new Scene(fxmlLoader.load());
-      stage.setScene(scene);
-    } catch (IOException e) {
-      throw new RuntimeException(e);
+    if (!poiBeingEdited()) {
+      changeScene("/deleteBuilding.fxml");
     }
   }
 
-  public void setApp(Application app) {
-    this.app = app;
-    // making certain buttons unclickable for base users
-    if (this.app.getUser().getUserType() == UserType.base) {
-      System.out.println("being called");
-      ObservableList<Node> buttonsToSet = FXCollections.observableArrayList();
-      buttonsToSet = addBar.getButtons();
-      buttonsToSet.addAll(floorBar.getButtons());
-      buttonsToSet.addAll(bldBar.getButtons());
-      for (Node button : buttonsToSet) {
-        if (!(button.getId().equals("addPOI"))) {
-          button.setDisable(true);
-          System.out.println(button.getId());
-        }
-
-      }
-
+  /**
+   * Removes admin features for base users
+   *
+   * @param userType the current user type
+   */
+  public void setPerms(UserType userType) {
+    if (userType == UserType.admin) {
+      return;
+    }
+    ArrayList<Node> buttonsToSet = new ArrayList<>();
+    buttonsToSet.addAll(buildingButtons.getChildren());
+    buttonsToSet.addAll(floorButtons.getChildren());
+    buttonsToSet.add(addBuilding);
+    buttonsToSet.add(addFloor);
+    for (Node button : buttonsToSet) {
+      button.setDisable(true);
     }
   }
-
 }

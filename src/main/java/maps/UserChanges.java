@@ -1,17 +1,14 @@
 package maps;
 
-import java.util.List;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class UserChanges extends User {
-  private List<POILocation> customPOIs;
-  static Application app;
+import java.util.ArrayList;
+import java.util.List;
 
-  public static void setApp(Application newApp) {
-    app = newApp;
-  }
+public class UserChanges extends User {
+  static Application app;
+  private final List<POILocation> customPOIs = new ArrayList<>();
 
   public UserChanges(JSONObject jsonObject) {
     super(jsonObject);
@@ -41,7 +38,8 @@ public class UserChanges extends User {
         POILocation favourite = app.getPoiLocation(floor, jsonFavourites.getString("poi"));
         if (favourite == null) {
           for (POILocation p : this.customPOIs) {
-            if (p.getFloor().equals(floor) && p.getPOI().getRoomNumber().equals(jsonFavourites.getString("poi"))) {
+            if (p.getFloor().equals(floor) && p.getPOI().getRoomNumber()
+                .equals(jsonFavourites.getString("poi"))) {
               favourite = p;
             }
           }
@@ -53,6 +51,10 @@ public class UserChanges extends User {
       } catch (Exception ignored) {
       }
     }
+  }
+
+  public static void setApp(Application newApp) {
+    app = newApp;
   }
 
   public void saveUser() {

@@ -1,31 +1,30 @@
 package maps;
 
+import javafx.scene.image.Image;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import org.json.JSONArray;
-import org.json.JSONObject;
-import javafx.scene.image.Image;
 
 /**
  * Stores information regarding a floor
  */
 public class Floor {
-  private int level;
-  private String name;
-  String imagePath;
-  Image image;
-
   /**
-   * Each index corresponds to a POIType, for example: pois[POIType.classroom] is
-   * all the pois with
+   * Each index corresponds to a POIType, for example: pois[POIType.classroom] is all the pois with
    * type POIType.classroom.
    */
   final List<POI>[] pois;
+  String imagePath;
+  Image image;
+  private int level;
+  private String name;
 
   /**
    * Constructor without an image path
-   * 
+   *
    * @param level integer corresponding to the floor's level
    * @param name  the name of the floor
    */
@@ -44,7 +43,7 @@ public class Floor {
 
   /**
    * Constructor with an image path. Loads the image and stores it in memory
-   * 
+   *
    * @param level     integer corresponding to the floor's level
    * @param name      the name of the floor
    * @param imagePath relative path to the image of this floor
@@ -64,7 +63,7 @@ public class Floor {
 
   /**
    * Adds the POIs of a floor into the floor's POI list
-   * 
+   *
    * @param poi POI to be added to the floor's POIs list
    */
   public void addPOI(POI poi) {
@@ -79,9 +78,8 @@ public class Floor {
   }
 
   /**
-   * Update the storage of a POI in the floor's POI list if its POI type was
-   * recently updated
-   * 
+   * Update the storage of a POI in the floor's POI list if its POI type was recently updated
+   *
    * @param oldType old POI type
    * @param newType new POI type
    * @param poi     POI to be updated

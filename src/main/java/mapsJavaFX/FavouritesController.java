@@ -4,8 +4,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import maps.POILocation;
 import maps.Application;
+import maps.POILocation;
 
 /**
  * Controller to handle actions involving the display of the favourites list.
@@ -24,7 +24,7 @@ public class FavouritesController {
 
   /**
    * Called to set up the app and favourites list for future use
-   * 
+   *
    * @param app referring to the map application
    */
   public void setApp(Application app) {
@@ -33,8 +33,8 @@ public class FavouritesController {
   }
 
   /**
-   * Method used to refresh the list of favourited POIs being displayed in the
-   * [Favourites] tab of the application
+   * Method used to refresh the list of favourited POIs being displayed in the [Favourites] tab of
+   * the application
    */
   public void refreshList() {
     favouritePOIList.getItems().setAll(app.getUser().getFavourites());
@@ -42,7 +42,7 @@ public class FavouritesController {
 
   /**
    * Event handler to dictate what to do when a user clicks on a POI in the list
-   * 
+   *
    * @param mouseEvent onMouseClicked event
    */
   public void onPOIListMouseClick(MouseEvent mouseEvent) {
@@ -55,9 +55,9 @@ public class FavouritesController {
   }
 
   /**
-   * Method that takes the user to the area on the map where the POI location they
-   * selected is located
-   * 
+   * Method that takes the user to the area on the map where the POI location they selected is
+   * located
+   *
    * @param poiLocation the selected POI location
    */
   public POIButton navigateToPOI(POILocation poiLocation) {
@@ -66,7 +66,7 @@ public class FavouritesController {
 
   /**
    * Gets the POI location selected by the user.
-   * 
+   *
    * @return selected POI location
    */
   public POILocation getSelectedPOI() {

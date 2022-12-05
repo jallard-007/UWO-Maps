@@ -1,20 +1,21 @@
 package maps;
 
-import java.util.ArrayList;
-import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Stores information regrading the building
  */
 public class Building {
-  private String name;
   final List<Floor> floors;
+  private String name;
 
   /**
    * Default constructor
-   * 
+   *
    * @param name The name of the building
    */
   public Building(String name) {
@@ -28,6 +29,7 @@ public class Building {
   public String getName() {
     return this.name;
   }
+
   public void setName(String name) {
     this.name = name;
   }
@@ -59,7 +61,7 @@ public class Building {
 
   /**
    * Gets the floor matching the input string
-   * 
+   *
    * @param floorName the name of the floor
    * @return floor object with name matching floorName, null if no match
    */

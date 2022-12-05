@@ -27,27 +27,19 @@ public class Pair {
   }
 
   /**
-   * @param x x coordinate
-   */
-
-  public void setX(double x) {
-    this.x = x;
-  }
-
-  /**
-   * @param y y coordinate
-   */
-
-  public void setY(double y) {
-    this.y = y;
-  }
-
-  /**
    * @return x coordinate
    */
 
   public double getX() {
     return x;
+  }
+
+  /**
+   * @param x x coordinate
+   */
+
+  public void setX(double x) {
+    this.x = x;
   }
 
   /**
@@ -59,9 +51,17 @@ public class Pair {
   }
 
   /**
+   * @param y y coordinate
+   */
+
+  public void setY(double y) {
+    this.y = y;
+  }
+
+  /**
    * @return int[] of size 2, x coordinate at index 0, y at index 1
    */
   public double[] getPair() {
-    return new double[] {x, y};
+    return new double[]{x, y};
   }
 }

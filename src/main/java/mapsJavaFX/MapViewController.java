@@ -1,8 +1,5 @@
 package mapsJavaFX;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
@@ -14,17 +11,19 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import maps.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Controls the building and floor tabs
  */
 public class MapViewController {
   @FXML
+  Application app;
+  @FXML
   private Slider zoomBar;
   @FXML
   private TabPane tabPane;
-
-  @FXML
-  Application app;
   private List<POIButton>[] poiButtons;
 
   /**
@@ -160,7 +159,7 @@ public class MapViewController {
   /**
    * Adds a button to the POI buttons list and properly displays the new button on the map
    *
-   * @param poiButton   newly-created POI button
+   * @param poiButton newly-created POI button
    */
   public void addButton(POIButton poiButton) {
     POILocation poiLocation = poiButton.poiLocation;

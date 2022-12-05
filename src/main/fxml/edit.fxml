@@ -6,18 +6,18 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
+<?import mapsJavaFX.CustomPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="358.0" prefWidth="399.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapsJavaFX.editFeatures.EditController">
+<CustomPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="358.0" prefWidth="399.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapsJavaFX.editFeatures.EditPOIController">
    <padding>
       <Insets bottom="10.0" right="10.0" />
    </padding>
    <ButtonBar layoutX="8.0" layoutY="316.0" prefHeight="40.0" prefWidth="382.0">
       <buttons>
-         <Button fx:id="btnSave" mnemonicParsing="false" onAction="#onSave" text="Save"/>
-         <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#onCancel" text="Cancel">
+         <Button mnemonicParsing="false" onAction="#onSave" text="Save"/>
+         <Button mnemonicParsing="false" onAction="#onCancel" text="Cancel">
             <opaqueInsets>
                <Insets/>
             </opaqueInsets>
@@ -63,4 +63,4 @@
          <Font size="13.0" />
       </font>
    </Text>
-</AnchorPane>
+</CustomPane>

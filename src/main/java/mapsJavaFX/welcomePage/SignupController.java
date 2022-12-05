@@ -1,7 +1,5 @@
 package mapsJavaFX.welcomePage;
 
-import java.io.IOException;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -12,6 +10,8 @@ import maps.Application;
 import mapsJavaFX.ControllerMediator;
 import mapsJavaFX.MainController;
 import mapsJavaFX.Util;
+
+import java.io.IOException;
 
 /**
  * Controls the signup page
