@@ -31,7 +31,8 @@ public class Application {
   }
 
   /**
-   * Reads the main poi meta-data file on disk and loads all data into their respective classes
+   * Reads the main poi meta-data file on disk and loads all data into their
+   * respective classes
    */
   public void loadData() {
     String rootPath = Util.getRootPath(); // gets root folder of application
@@ -132,8 +133,10 @@ public class Application {
       File[] directoryListing = dir.listFiles();
       if (directoryListing != null) {
         for (File userFile : directoryListing) {
-          this.registeredUsers.add(
-              new UserChanges(new JSONObject(Util.getJSONFileContents(userFile))));
+          if (!userFile.getName().equals(this.user.username + ".json")) {
+            this.registeredUsers.add(
+                new UserChanges(new JSONObject(Util.getJSONFileContents(userFile))));
+          }
         }
       }
     }
@@ -193,7 +196,8 @@ public class Application {
   }
 
   /**
-   * Logs out the current user, removing the user's custom POIs and saving any changes such as
+   * Logs out the current user, removing the user's custom POIs and saving any
+   * changes such as
    * favourites, and custom POIs to the user's file
    */
   private UserType logout() {
@@ -235,7 +239,8 @@ public class Application {
   }
 
   /**
-   * Searches for POIs with buildingName, floorName, or POIName/POINum containing the searchText
+   * Searches for POIs with buildingName, floorName, or POIName/POINum containing
+   * the searchText
    *
    * @param searchText the text to search for a POI
    * @return all poi location objects with partial match
