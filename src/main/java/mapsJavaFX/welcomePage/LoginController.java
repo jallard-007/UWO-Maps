@@ -2,9 +2,7 @@ package mapsJavaFX.welcomePage;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -13,8 +11,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import maps.Application;
 import mapsJavaFX.ControllerMediator;
-import mapsJavaFX.MainController;
-import mapsJavaFX.Util;
+import mapsJavaFX.SceneHolder;
 
 import java.io.IOException;
 
@@ -49,9 +46,9 @@ public class LoginController {
   @FXML
   private Text loginFeedBackText;
 
-
   /**
-   * Method called when the user clicks the log in button; checks the validity of their username and
+   * Method called when the user clicks the log in button; checks the validity of
+   * their username and
    * password, and takes the user to the main view of the application
    *
    * @throws IOException if the fxml file is missing
@@ -76,16 +73,16 @@ public class LoginController {
       return;
     }
     stage.close();
-    FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/mainView.fxml"));
-    Scene scene = new Scene(fxmlLoader.load());
-    MainController controller = fxmlLoader.getController();
-    Util.setControllers(controller, app);
+    SceneHolder.mainController.setPerms(app.getUser().getUserType());
+    ControllerMediator.getInstance()
+        .registerFavouritesController(SceneHolder.mainController.getFavouritesController());
+    SceneHolder.mainController.getFavouritesController().setApp(app);
 
     stage.setHeight(700);
     stage.setWidth(1200);
     stage.setResizable(true);
     stage.centerOnScreen();
-    stage.setScene(scene);
+    stage.setScene(SceneHolder.mainScene);
     stage.show();
   }
 
@@ -96,10 +93,8 @@ public class LoginController {
    * @throws IOException if signup.fxml does not exist
    */
   public void goToSignUp(ActionEvent event) throws IOException {
-    FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/signup.fxml"));
-    Scene scene = new Scene(fxmlLoader.load());
     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    stage.setScene(scene);
+    stage.setScene(SceneHolder.signupScene);
     stage.show();
   }
 }

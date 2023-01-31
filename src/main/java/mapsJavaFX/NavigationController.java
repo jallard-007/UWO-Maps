@@ -2,7 +2,6 @@ package mapsJavaFX;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -27,9 +26,7 @@ public class NavigationController {
    * @throws IOException if help.fxml file does not exist
    */
   public void goToHelp(ActionEvent event) throws IOException {
-    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/help.fxml"));
-    Scene scene = new Scene(fxmlLoader.load());
-    changeScene(scene, event);
+    changeScene(SceneHolder.helpScene, event);
   }
 
   /**
@@ -39,11 +36,7 @@ public class NavigationController {
    * @throws IOException if mainView.fxml does not exist
    */
   public void goBack(ActionEvent event) throws IOException {
-    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/mainView.fxml"));
-    Scene scene = new Scene(fxmlLoader.load());
-    MainController controller = fxmlLoader.getController();
-    Util.setControllers(controller, ControllerMediator.getInstance().getApplication());
-    changeScene(scene, event);
+    changeScene(SceneHolder.mainScene, event);
   }
 
   /**
@@ -67,13 +60,11 @@ public class NavigationController {
     }
 
     // go back to login page if user successfully logs out
-    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/login.fxml"));
-    Scene scene = new Scene(fxmlLoader.load());
     stage.setWidth(600);
     stage.setHeight(330);
     stage.setResizable(false);
     ControllerMediator.getInstance().getApplication().save();
-    changeScene(scene, event);
+    changeScene(SceneHolder.loginScene, event);
   }
 
   /**

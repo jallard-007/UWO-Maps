@@ -6,8 +6,10 @@ import maps.*;
 import java.util.List;
 
 /**
- * Allows interaction between different controllers without having to store a reference to a
- * controller within another controller. Also holds a reference to the Application object so that
+ * Allows interaction between different controllers without having to store a
+ * reference to a
+ * controller within another controller. Also holds a reference to the
+ * Application object so that
  * data does not need to be reloaded when changing scenes
  */
 public class ControllerMediator {
@@ -40,7 +42,7 @@ public class ControllerMediator {
    *
    * @param controller the controller to register
    */
-  void registerFavouritesController(FavouritesController controller) {
+  public void registerFavouritesController(FavouritesController controller) {
     favouritesController = controller;
   }
 
@@ -130,7 +132,8 @@ public class ControllerMediator {
   }
 
   /**
-   * Tells the registered MapviewController to remove the POIButton associated with poiLocation
+   * Tells the registered MapviewController to remove the POIButton associated
+   * with poiLocation
    *
    * @param poiLocation the poi to remove
    */
@@ -151,7 +154,8 @@ public class ControllerMediator {
   }
 
   /**
-   * Tells the registered MapViewController to add poiButton to it's approriate floor
+   * Tells the registered MapViewController to add poiButton to it's approriate
+   * floor
    *
    * @param poiButton the button to add
    */

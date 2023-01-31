@@ -1,15 +1,12 @@
 package mapsJavaFX.welcomePage;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import maps.Application;
 import mapsJavaFX.ControllerMediator;
-import mapsJavaFX.MainController;
-import mapsJavaFX.Util;
+import mapsJavaFX.SceneHolder;
 
 import java.io.IOException;
 
@@ -46,19 +43,19 @@ public class SignupController {
     if (!app.signup(username.getText(), password.getText())) {
       return;
     }
+    SceneHolder.mainController.setPerms(app.getUser().getUserType());
+    ControllerMediator.getInstance()
+        .registerFavouritesController(SceneHolder.mainController.getFavouritesController());
+    SceneHolder.mainController.getFavouritesController().setApp(app);
 
     Stage stage = (Stage) username.getScene().getWindow();
     stage.close();
-    FXMLLoader fxmlLoader = new FXMLLoader(SignupController.class.getResource("/mainView.fxml"));
-    Scene scene = new Scene(fxmlLoader.load());
-    MainController controller = fxmlLoader.getController();
-    Util.setControllers(controller, app);
 
     stage.setHeight(700);
     stage.setWidth(1200);
     stage.setResizable(true);
     stage.centerOnScreen();
-    stage.setScene(scene);
+    stage.setScene(SceneHolder.mainScene);
     stage.show();
   }
 }

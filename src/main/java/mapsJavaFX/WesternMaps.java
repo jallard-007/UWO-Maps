@@ -11,17 +11,19 @@ import mapsJavaFX.editFeatures.EditHelper;
 import java.io.IOException;
 
 /**
- * The WesternMaps class is dedicated to setting up the stage, corresponding scenes, and handling
+ * The WesternMaps class is dedicated to setting up the stage, corresponding
+ * scenes, and handling
  * start up and closure of the application
  */
 public class WesternMaps extends javafx.application.Application {
 
-  public static void main(String[] args) {
+  public static void starter(String[] args) {
     launch(args);
   }
 
   /**
-   * starts up the application by setting up the appropriate stage and scene as well as handling the
+   * starts up the application by setting up the appropriate stage and scene as
+   * well as handling the
    * event in which the user closes the application
    *
    * @param stage the stage which will be used to display the scene to the user
@@ -30,17 +32,33 @@ public class WesternMaps extends javafx.application.Application {
   @Override
   public void start(Stage stage) throws IOException {
     // load the login UI from the fxml file, load the scene, and set the title
-    FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/login.fxml"));
-    Scene scene = new Scene(loginLoader.load());
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
+    Scene scene = new Scene(loader.load());
+    SceneHolder.loginScene = scene;
+    stage.setScene(scene);
+
+    loader = new FXMLLoader(getClass().getResource("/mainView.fxml"));
+    scene = new Scene(loader.load());
+    SceneHolder.mainScene = scene;
+    MainController controller = loader.getController();
+    SceneHolder.mainController = controller;
+    Application app = new Application();
+    app.loadData();
+    ControllerMediator.getInstance().registerApplication(app);
+    Util.setControllers(controller, app);
+
+    loader = new FXMLLoader(getClass().getResource("/signup.fxml"));
+    scene = new Scene(loader.load());
+    SceneHolder.signupScene = scene;
+
+    loader = new FXMLLoader(getClass().getResource("/help.fxml"));
+    scene = new Scene(loader.load());
+    SceneHolder.helpScene = scene;
     stage.setTitle("Western Maps");
 
     // make it so the stage cannot be resized by the user and set the scene
     stage.setResizable(false);
-    stage.setScene(scene);
 
-    Application app = new Application();
-    app.loadData();
-    ControllerMediator.getInstance().registerApplication(app);
     stage.show();
 
     stage.setOnCloseRequest(event -> {
@@ -50,10 +68,12 @@ public class WesternMaps extends javafx.application.Application {
   }
 
   /**
-   * Method that prompts the user with a confirmation message when the user wants to exit the
+   * Method that prompts the user with a confirmation message when the user wants
+   * to exit the
    * application.
    *
-   * @param stage the stage that the user is currently on when they click the exit button.
+   * @param stage the stage that the user is currently on when they click the exit
+   *              button.
    */
   public void exit(Stage stage) {
     stage.setFullScreen(false);
